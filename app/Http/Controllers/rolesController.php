@@ -43,7 +43,7 @@ class rolesController extends Controller
         role::create($request->input());
 
         //dd($request->input());
-        return redirect('role')->with('message','Se ha añadido un nuevo rol');
+        return redirect('roles')->with('message','Se ha añadido un nuevo rol');
     }
 
     /**

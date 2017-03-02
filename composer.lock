@@ -4,8 +4,61 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "31d9260b1ede977627abbda3a20b77f7",
+    "content-hash": "3641750567c49c3e812020a14f5884ba",
     "packages": [
+        {
+            "name": "caffeinated/shinobi",
+            "version": "v3.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/caffeinated/shinobi.git",
+                "reference": "3ead7bb285b3f264d7084f844d9b71ef3aa89a92"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/caffeinated/shinobi/zipball/3ead7bb285b3f264d7084f844d9b71ef3aa89a92",
+                "reference": "3ead7bb285b3f264d7084f844d9b71ef3aa89a92",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "5.3.*|5.4.*",
+                "illuminate/database": "5.3.*|5.4.*",
+                "illuminate/filesystem": "5.3.*|5.4.*",
+                "illuminate/support": "5.3.*|5.4.*",
+                "php": ">=5.6.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Caffeinated\\Shinobi\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shea Lewis",
+                    "email": "shea.lewis89@gmail.com"
+                }
+            ],
+            "description": "Laravel 5 Roles and Permissions",
+            "keywords": [
+                "auth",
+                "caffeinated",
+                "laravel",
+                "permissions",
+                "roles",
+                "shinobi"
+            ],
+            "time": "2017-02-06T17:36:23+00:00"
+        },
         {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "0.1",
