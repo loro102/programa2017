@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.4.6 on 2017-03-02.
+ * Generated for Laravel 5.4.6 on 2017-03-03.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -13122,6 +13122,44 @@ namespace {
          */
         public static function componentCall($method, $parameters){
             return \Collective\Html\HtmlBuilder::componentCall($method, $parameters);
+        }
+        
+    }
+
+
+    class Shinobi extends \Caffeinated\Shinobi\Facades\Shinobi{
+        
+        /**
+         * Checks if user has the given permissions.
+         *
+         * @param array|string $permissions
+         * @return bool 
+         * @static 
+         */
+        public static function can($permissions){
+            return \Caffeinated\Shinobi\Shinobi::can($permissions);
+        }
+        
+        /**
+         * Checks if user has at least one of the given permissions.
+         *
+         * @param array $permissions
+         * @return bool 
+         * @static 
+         */
+        public static function canAtLeast($permissions){
+            return \Caffeinated\Shinobi\Shinobi::canAtLeast($permissions);
+        }
+        
+        /**
+         * Checks if user is assigned the given role.
+         *
+         * @param string $slug
+         * @return bool 
+         * @static 
+         */
+        public static function isRole($role){
+            return \Caffeinated\Shinobi\Shinobi::isRole($role);
         }
         
     }

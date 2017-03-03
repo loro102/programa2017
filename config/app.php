@@ -178,7 +178,9 @@ return [
         App\Providers\RouteServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        Caffeinated\Shinobi\ShinobiServiceProvider::class
+        Caffeinated\Shinobi\ShinobiServiceProvider::class,
+        Intervention\Validation\ValidationServiceProvider::class,
+        Pixelpeter\IsoCodesValidation\IsoCodesValidationServiceProvider::class,
 
     ],
 

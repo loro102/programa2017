@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\models\agent;
 
+
 class agenteController extends Controller
 {
     /**
@@ -38,7 +39,7 @@ class agenteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(\App\Http\Requests\agent $request)
     {
         //
         agent::create($request->input());

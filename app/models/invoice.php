@@ -11,4 +11,8 @@ class invoice extends Model
         'id',
         'timestamps',
     ];
+    public function cliente()
+    {
+        return $this->belongsToMany('App\Models\file')->withPivot('customer_id','customers');
+    }
 }

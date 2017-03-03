@@ -15,6 +15,7 @@ class invoicesController extends Controller
     public function index()
     {
         //
+
         $factura=invoice::paginate(10);
         return view('invoices.index',['facturas'=>$factura]);
     }
@@ -27,6 +28,14 @@ class invoicesController extends Controller
     public function create()
     {
         //
+        $factura=new invoice;
+        $profesional=professional::orderBy('nombre','asc')->pluck('nombre','id');
+
+        return view('invoices.create',[
+            'factura'=>$factura,
+            'profesional'=>$profesional
+        ]);
+
     }
 
     /**
@@ -38,6 +47,10 @@ class invoicesController extends Controller
     public function store(Request $request)
     {
         //
+        invoice::create($request->input());
+
+        //dd($request->input());
+        return redirect('invoices')->with('message','Se ha añadido una nueva factura');
     }
 
     /**
@@ -49,6 +62,16 @@ class invoicesController extends Controller
     public function show($id)
     {
         //
+        $factura=invoice::findorFail($id);
+        //$agente=customer::findorfail($id)->agent;
+        //$expedientes=file::where('customer_id',$id)->get();
+        $expedientes=$cliente->files()->get();
+        //dd($expedientes);
+        return view('clientes.show',[
+            'cliente'=> $cliente,
+            //'agente'=>$agente,
+            'expedientes'=>$expedientes
+        ]);
     }
 
     /**
