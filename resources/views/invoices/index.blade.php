@@ -4,8 +4,8 @@
     <div class="container">
         @include('partials.flash')
         <p>
-            {{ link_to_action('facturaController@create','Añadir un nuevo factura',[],[]) }} |
-            {{ link_to_action('facturaController@index','facturas',[],[]) }}
+            {{ link_to_action('invoicesController@create','Añadir un nuevo factura',[],[]) }} |
+            {{ link_to_action('invoicesController@index','facturas',[],[]) }}
         </p>
         <table class="table-bordered table-striped table-hover col-md-12">
             <tr>
@@ -14,7 +14,7 @@
                 <th class="col-md-2">Descripcion</th>
                 <th class="col-md-1">Importe Cliente</th>
                 <th class="col-md-1">Importe Empresa</th>
-                <th class="col-md-2">Cliente</th>
+                <th class="col-md-2">Importe Factura</th>
 
                 <th class="col-md-1">Actividad</th>
             </tr>
@@ -25,8 +25,17 @@
                     <td class="col-md-1">{{link_to_action('invoicesController@show',$factura->descripcion,['id'=> $factura->id],[])}}</td>
                     <td class="col-md-1">{{link_to_action('invoicesController@show',$factura->cuantia_cliente,['id'=> $factura->id],[])}}</td>
                     <td class="col-md-1">{{link_to_action('invoicesController@show',$factura->cuantia_empresa,['id'=> $factura->id],[])}}</td>
-                    <td class="col-md-1">{{link_to_action('invoicesController@show',$factura->,['id'=> $factura->id],[])}}</td>
+                    <td class="col-md-1">{{link_to_action('invoicesController@show',$factura->cuantia_factura,['id'=> $factura->id],[])}}</td>
                     <td class="col-md-1">{{$factura->profesion}}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-2"></td>
+                    <td class="col-md-3"></td>
+                    <td class="col-md-1"></td>
+                    <td class="col-md-1"></td>
+                    <td class="col-md-1"></td>
+                    <td class="col-md-1"></td>
+                    <td class="col-md-1"></td>
                 </tr>
             @empty
                 <tr>

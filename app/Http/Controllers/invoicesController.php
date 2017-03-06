@@ -16,8 +16,18 @@ class invoicesController extends Controller
     {
         //
 
-        $factura=invoice::paginate(10);
-        return view('invoices.index',['facturas'=>$factura]);
+        $factura=invoice::all();
+        $cuantia_factura=$factura->sum('cuantia_factura');
+        $cuantia_cliente=$factura->sum('cuantia_cliente');
+        $cuantia_empresa=$factura->sum('cuantia_empresa');
+        $beneficio=$cuantia_factura-$cuantia_empresa;
+        return view('invoices.index',[
+            'facturas'=>$factura,
+            'total_fact'=>$cuantia_factura,
+            'total_cliente'=>$cuantia_cliente,
+            'total_empresa'=>$cuantia_empresa,
+            'beneficio'=>$beneficio,
+        ]);
     }
 
     /**
@@ -68,7 +78,7 @@ class invoicesController extends Controller
         $expedientes=$cliente->files()->get();
         //dd($expedientes);
         return view('clientes.show',[
-            'cliente'=> $cliente,
+            'cliente'=> $factura,
             //'agente'=>$agente,
             'expedientes'=>$expedientes
         ]);
@@ -83,6 +93,10 @@ class invoicesController extends Controller
     public function edit($id)
     {
         //
+        $factura=factura::findorFail($id);
+        return view('invoices.edit',[
+            'factura'=>$factura
+        ]);
     }
 
     /**
@@ -95,6 +109,9 @@ class invoicesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $factura=invoice::findorFail($id);
+        $factura->fill($request->all())->save();
+        return redirect()->action('invoicesController@index',['id'=>$id])->with('message','Factura actualizada');
     }
 
     /**
@@ -106,5 +123,7 @@ class invoicesController extends Controller
     public function destroy($id)
     {
         //
+        invoice::destroy($id);
+        return redirect('invoices')->with('message','Factura eliminada');
     }
 }
