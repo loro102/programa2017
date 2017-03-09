@@ -12,5 +12,10 @@ class short extends Seeder
     public function run()
     {
         //
+        DB::table('sorts')->insert([
+            'nombre' => str_random(10),
+            'por_defecto'=>1,
+
+        ]);
     }
 }

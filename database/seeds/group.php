@@ -12,5 +12,8 @@ class group extends Seeder
     public function run()
     {
         //
+        DB::table('groups')->insert([
+            'nombre' => str_random(10),
+        ]);
     }
 }
