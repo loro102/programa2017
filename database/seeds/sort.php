@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class short extends Seeder
+class sort extends Seeder
 {
     /**
      * Run the database seeds.

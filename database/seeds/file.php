@@ -13,7 +13,7 @@ class file extends Seeder
     public function run()
     {
         //
-        DB::table('customers')->insert([
+        DB::table('files')->insert([
             'customer_id' =>1,
             'solicitor_id' =>1,
             'fechaapertura' => Carbon::now(),
@@ -24,7 +24,7 @@ class file extends Seeder
             'fechaarchivo' => Carbon::now(),
             'caso_tipo' => 1,
             'fecha_accidente' => Carbon::now(),
-            'hora accidente' => Carbon::now()->toTimeString(),
+            'hora_accidente' => Carbon::now(),
             'fecha_baja_laboral' => Carbon::now(),
             'fecha_alta_laboral' => Carbon::now(),
             'fecha_ingreso_hospital' => Carbon::now(),
@@ -66,7 +66,8 @@ class file extends Seeder
             'sort_id'=>1,
             'formality_id'=>1,
             'insurer_id'=>1,
-            'processor_id'=>str_random(10),
+            'processor_id'=>1,
+
 
         ]);
     }

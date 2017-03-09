@@ -20,6 +20,8 @@ class processor extends Seeder
             'email' => (str_random(10).'@gmail.com'),
             'notas' => str_random(10),
             'cargo'=>str_random(10),
+            'insurer_id'=>1,
+
 
         ]);
     }

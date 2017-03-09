@@ -30,7 +30,7 @@ class professional extends Seeder
             'email' => (str_random(10).'@gmail.com'),
             'iban' => str_random(10),
             'notas' => str_random(10),
-            'acuerdo_pago' => str_random(10),
+            'acuerdo_pago' => 1,
             'indemnizacion' => 1,
             'homologado' => 1,
             'activo'=>1,
