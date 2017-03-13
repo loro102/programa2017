@@ -31,6 +31,7 @@ class ProfessionalsCreateTable extends Migration
             $table->string('movil');
             $table->string('fax');
             $table->string('email');
+            $table->string('iban');
             $table->text('notas');
             $table->integer('acuerdo_pago');
             $table->boolean('indemnizacion');

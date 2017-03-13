@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class short extends Seeder
+class sort extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,5 +12,10 @@ class short extends Seeder
     public function run()
     {
         //
+        DB::table('sorts')->insert([
+            'nombre' => str_random(10),
+            'por_defecto'=>1,
+
+        ]);
     }
 }

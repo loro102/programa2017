@@ -4,50 +4,60 @@
     <div class="container">
         @include('partials.flash')
         <p>
-            {{ link_to_action('agenteController@index','Volver al listado de agentes',[],[]) }}
-            {{ link_to(url()->previous(),'Regresar') }}
-            <span class="pull-right">
-                {!! Form::open(['method'=>'DELETE','route'=>['agente.destroy',$agente->id]],['class'=>'form-inline']) !!}
-                {!! Form::submit('Borrar agente', array('class' => 'btn btn-sm btn-danger pull-right ','id'=>'deletebtn', 'onclick' => 'return confirm("¿Estas seguro de querer eliminar este agente?");')) !!}
-                {{ link_to_action('agenteController@edit','Editar agente',['id'=>$agente->id],['class'=>'btn btn-sm btn-warning pull-right ']) }}
-                {!! Form::close()!!}
-            </span>
+            {{ link_to_action('invoicesController@create','Añadir un nuevo factura',[],[]) }} |
+            {{ link_to_action('invoicesController@index','facturas',[],[]) }}
         </p>
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3>{{ $agente->nombre }}</h3></div>
-            <div class="panel-body">
-                <div class="col-md-3"><strong>DNI/NIF:</strong>{{ $agente->nif }}</div>
-                <div class="col-md-6"><strong>Dirección:</strong>{{ $agente->direccion }}</div>
-                <div class="col-md-3"><strong>Localidad:</strong>{{ $agente->localidad }}</div>
-                <div class="col-md-3"><strong>Provincia:</strong>{{ $agente->provincia }}</div>
-                <div class="col-md-3"><strong>Código Postal:</strong>{{ $agente->codigopostal }}</div>
-                <div class="col-md-3"><strong>Profesión:</strong>{{ $agente->profesion }}</div>
-                <div class="col-md-3"><strong>Teléfono 1:</strong>{{ $agente->telefono1 }}</div>
-                <div class="col-md-3"><strong>Teléfono 2:</strong>{{ $agente->telefono2 }}</div>
-                <div class="col-md-3"><strong>Móvil:</strong>{{ $agente->movil }}</div>
-                <div class="col-md-3"><strong>Fax:</strong>{{ $agente->fax }}</div>
-                <div class="col-md-3"><strong>E-Mail:</strong>{{ $agente->email }}</div>
-                <div class="col-md-3"><strong>Comercial:</strong>{{ $agente->commercial_id }}</div>
-                @if ($agente->placa == 1)
-                    <div class="col-md-3"><strong>Placa:</strong>Si</div>
-                @else
-                    <div class="col-md-3"><strong>Placa:</strong>No</div>
-                @endif
-                @if ($agente->pegatina == 1)
-                    <div class="col-md-3"><strong>Pegatina:</strong>Si</div>
-                @else
-                    <div class="col-md-3"><strong>Pegatina:</strong>No</div>
-                @endif
-                @if ($agente->portatriptico == 1)
-                    <div class="col-md-3"><strong>Portatriptico:</strong>Si</div>
-                @else
-                    <div class="col-md-3"><strong>Portatriptico:</strong>No</div>
-                @endif
-                <div class="col-md-3"><strong>Iban:</strong>{{ $agente->iban }}</div>
+        <table class="table-bordered table-striped table-hover col-md-12">
+            <tr>
+                <th class="col-md-2">Fecha</th>
+                <th class="col-md-3">Nº</th>
+                <th class="col-md-2">Abonado</th>
+                <th class="col-md-2">Profesional</th>
+                <th class="col-md-2">Descripcion</th>
+                <th class="col-md-1">Importe Cliente</th>
+                <th class="col-md-1">Importe Empresa</th>
+                <th class="col-md-2">Importe Factura</th>
 
-                <div class="col-md-12 well"><strong>Notas:</strong>{{ $agente->notas }}</div>
-            </div>
+                <th class="col-md-1">Actividad</th>
+            </tr>
+            @forelse($facturas as $factura)
+                <tr>
+                    <td class="col-md-2">{{link_to_action('invoicesController@show',$factura->fechafact,['id'=> $factura->id],[])}}</td>
+                    <td class="col-md-3">{{link_to_action('invoicesController@show',$factura->numfactura,['id'=> $factura->id],[])}}</td>
+                    <td class="col-md-1">{{link_to_action('invoicesController@show',$factura->file->id,['id'=> $factura->id],[])}}</td>
+                    <td class="col-md-1">{{link_to_action('invoicesController@show',$factura->professional_id,['id'=> $factura->id],[])}}</td>
+                    <td class="col-md-1">{{link_to_action('invoicesController@show',$factura->descripcion,['id'=> $factura->id],[])}}</td>
+                    <td class="col-md-1">{{link_to_action('invoicesController@show',$factura->cuantia_cliente,['id'=> $factura->id],[])}} <span class="glyphicon glyphicon glyphicon-eur" aria-hidden="true"></span></td>
+                    <td class="col-md-1">{{link_to_action('invoicesController@show',$factura->cuantia_empresa,['id'=> $factura->id],[])}} <span class="glyphicon glyphicon glyphicon-eur" aria-hidden="true"></span></td>
+                    <td class="col-md-1">{{link_to_action('invoicesController@show',$factura->cuantia_factura,['id'=> $factura->id],[])}} <span class="glyphicon glyphicon glyphicon-eur" aria-hidden="true"></span></td>
+                    <td class="col-md-1">{{$factura->profesion}}</td>
+                </tr>
 
-        </div>
+            @empty
+                <tr>
+                    <td class="danger" colspan="12">No hay facturas introducidos</td>
+                </tr>
+            @endforelse
+            <tr>
+                <td class="col-md-2"></td>
+                <td class="col-md-3"></td>
+                <td class="col-md-1"></td>
+                <td class="col-md-1"></td>
+                <td class="col-md-1">Total:</td>
+                <td class="col-md-1">{{array_get($total,'cliente')}} <span class="glyphicon glyphicon glyphicon-eur" aria-hidden="true"></span></td>
+                <td class="col-md-1">{{array_get($total,'empresa')}} <span class="glyphicon glyphicon glyphicon-eur" aria-hidden="true"></span></td>
+                <td class="col-md-1">{{array_get($total,'factura')}} <span class="glyphicon glyphicon glyphicon-eur" aria-hidden="true"></span></td>
+            </tr>
+            <tr>
+                <td class="col-md-2"></td>
+                <td class="col-md-3"></td>
+                <td class="col-md-1"></td>
+                <td class="col-md-1"></td>
+                <td class="col-md-1">Beneficio:</td>
+                <td class="col-md-1">{{$beneficio}} <span class="glyphicon glyphicon-eur" aria-hidden="true"></span></td>
+                <td class="col-md-1"></td>
+                <td class="col-md-1"></td>
+            </tr>
+        </table>
     </div>
-@endsection
+    @endsection

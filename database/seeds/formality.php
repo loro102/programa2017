@@ -12,5 +12,10 @@ class formality extends Seeder
     public function run()
     {
         //
+        DB::table('formalities')->insert([
+        'nombre' => str_random(10),
+        'categoria' => str_random(10),
+    ]);
+
     }
 }

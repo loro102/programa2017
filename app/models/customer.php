@@ -30,5 +30,9 @@ class customer extends Model
     {
         return $this->belongsToMany('App\Models\file');
     }
+    public function invoice()
+    {
+        return $this->belongsToMany('App\Models\invoice');
+    }
 
 }

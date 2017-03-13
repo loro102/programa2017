@@ -5,83 +5,74 @@
     {!! Form::Model($factura,['action'=>'invoicesController@store','class'=>'form-inline']) !!}
     <div class="row">
         <div class="form-group">
-            {!! Form::label('nombre', 'Nombre:', ['class' => 'control-label']) !!}
-            {!! Form::text('nombre', '', ['class' => 'form-control']) !!}
+            {!! Form::label('fechafac', 'Fecha de Factura:', ['class' => 'control-label']) !!}
+            {!! Form::date('fechafact', '', ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('nif', 'NIF:', ['class' => 'control-label']) !!}
-            {!! Form::text('nif', '', ['class' => 'form-control']) !!}
+            {!! Form::label('file_id', 'Profesional:', ['class' => 'control-label']) !!}
+            {!! Form::text('file_id', '', ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('direccion', 'Direccion:', ['class' => 'control-label']) !!}
-            {!! Form::text('direccion', '', ['class' => 'form-control']) !!}
+            {!! Form::label('professional_id', 'Profesional:', ['class' => 'control-label']) !!}
+            {!! Form::text('professional_id', '', ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('localidad', 'Localidad:', ['class' => 'control-label']) !!}
-            {!! Form::text('localidad', '', ['class' => 'form-control']) !!}
+            {!! Form::label('numfactura', 'Número de Factura:', ['class' => 'control-label']) !!}
+            {!! Form::text('numfactura', '', ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('provincia', 'Provincia:', ['class' => 'control-label']) !!}
-            {!! Form::text('provincia', '', ['class' => 'form-control']) !!}
+            {!! Form::label('descripcion', 'Localidad:', ['class' => 'control-label']) !!}
+            {!! Form::textarea('descripcion', '', ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('codigo_postal', 'Codigo Postal:', ['class' => 'control-label']) !!}
-            {!! Form::text('codigo_postal', '', ['class' => 'form-control']) !!}
+            {!! Form::label('sinoriginal', 'Sin factura original', ['class' => 'control-label']) !!}
+            {!! Form::hidden('sinoriginal', '0', ['id' => 'placa']) !!}
+            {!! Form::checkbox('sinoriginal', '1', null,  ['id' => 'placa']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('telefono1', 'Telefono:', ['class' => 'control-label']) !!}
-            {!! Form::text('telefono1', '', ['class' => 'form-control']) !!}
+            {!! Form::label('cuantia_factura', 'Cuantia de factura:', ['class' => 'control-label']) !!}
+            {!! Form::text('cuantia_factura', '', ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('telefono2', 'Telefono2:', ['class' => 'control-label']) !!}
-            {!! Form::text('telefono2', '', ['class' => 'form-control']) !!}
+            {!! Form::label('cuantia_cliente', 'Cuantia cliente:', ['class' => 'control-label']) !!}
+            {!! Form::text('cuantia_cliente', '', ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('movil', 'Movil:', ['class' => 'control-label']) !!}
-            {!! Form::text('movil', '', ['class' => 'form-control']) !!}
+            {!! Form::label('cuantia_empresa', 'Cuantia empresa:', ['class' => 'control-label']) !!}
+            {!! Form::text('cuantia_empresa', '', ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('fax', 'Fax:', ['class' => 'control-label']) !!}
-            {!! Form::text('fax', '', ['class' => 'form-control']) !!}
+            {!! Form::label('cuantia_indemnizacion', 'Cuantia indemnizacion:', ['class' => 'control-label']) !!}
+            {!! Form::text('cuantia_indemnizacion', '', ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('email', 'Email:', ['class' => 'control-label']) !!}
-            {!! Form::text('email', '', ['class' => 'form-control']) !!}
+            {!! Form::label('emitirfactcomision', 'Emitir factura por comision', ['class' => 'control-label']) !!}
+            {!! Form::hidden('emitirfactcomision', '0', ['id' => 'placa']) !!}
+            {!! Form::checkbox('emitirfactcomision', '1', null,  ['id' => 'placa']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('iban', 'Iban:', ['class' => 'control-label']) !!}
-            {!! Form::text('iban', '', ['class' => 'form-control']) !!}
+            {!! Form::label('estadopago', 'Estado de pago:', ['class' => 'control-label']) !!}
+            {!! Form::text('estadopago', '', ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('profesion', 'profesion', ['class' => 'control-label']) !!}
-            {!! Form::text('profesion', '', ['class' => 'form-control']) !!}
+            {!! Form::label('estadocobro', 'Estado de cobro:', ['class' => 'control-label']) !!}
+            {!! Form::text('estadocobro', '', ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('commercial_id', 'Comercial', ['class' => 'control-label']) !!}
-            {!! Form::select('commercial_id', ['1'=>'Pepe','2'=>'Paco'] , null , ['class' => 'form-control']) !!}
+            {!! Form::label('numpagare', 'Nº de pagaré:', ['class' => 'control-label']) !!}
+            {!! Form::text('numpagare', '', ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('placa', 'Placa', ['class' => 'control-label']) !!}
-            {!! Form::hidden('placa', '0', ['id' => 'placa']) !!}
-            {!! Form::checkbox('placa', '1', null,  ['id' => 'placa']) !!}
+            {!! Form::label('fechapago', 'Fecha de pago:', ['class' => 'control-label']) !!}
+            {!! Form::date('fechapago', '', ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('pegatina', 'Pegatina', ['class' => 'control-label']) !!}
-            {!! Form::hidden('pegatina', '0', ['id' => 'pegatina']) !!}
-            {!! Form::checkbox('pegatina', '1', null,  ['id' => 'pegatina']) !!}
+            {!! Form::label('fechacobro', 'Fecha de cobro', ['class' => 'control-label']) !!}
+            {!! Form::date('fechacobro', '', ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('portatriptico', 'Portatriptico', ['class' => 'control-label']) !!}
-            {!! Form::hidden('portatriptico', '0', ['id' => 'portatriptico']) !!}
-            {!! Form::checkbox('portatriptico', '1', null,  ['id' => 'portatriptico']) !!}
-        </div>
-        <div class="form-group">
-            {!! Form::label('notas', 'Notas:', ['class' => 'control-label']) !!}
-            {!! Form::textarea('notas', '',['class'=>'form-control']) !!}
-        </div>
-
-        <div class="form-group">
-            {!! Form::hidden('fecha_alta', \Carbon\Carbon::now()->toDateString(), ['id' => 'id']) !!}
+            {!! Form::label('nota', 'Notas:', ['class' => 'control-label']) !!}
+            {!! Form::textarea('nota', '',['class'=>'form-control']) !!}
         </div>
     </div>
     <div class="row">
