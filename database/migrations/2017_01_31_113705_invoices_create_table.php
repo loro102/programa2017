@@ -24,10 +24,10 @@ class InvoicesCreateTable extends Migration
             $table->string('numfactura');
             $table->string('descripcion');
             $table->boolean('sinoriginal');
-            $table->string('cuantia_factura');
-            $table->string('cuantia_cliente');
-            $table->string('cuantia_empresa');
-            $table->string('cuantia_indemnizacion');
+            $table->string('cuantia_factura')->default('0');
+            $table->string('cuantia_cliente')->default('0');
+            $table->string('cuantia_empresa')->default('0');
+            $table->string('cuantia_indemnizacion')->default('0');
             $table->boolean('emitirfactcomision');
             $table->boolean('nofactporhonorarios');
             $table->integer('estadopago');

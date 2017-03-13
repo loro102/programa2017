@@ -4,15 +4,15 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class invoice extends Model
+class role extends Model
 {
     //
     protected $guarded = [
         'id',
         'timestamps',
     ];
-    public function cliente()
+    public function users()
     {
-        return $this->belongsToMany('App\Models\file')->withPivot('customer_id','customers');
+        return $this->hasMany('App\User');
     }
 }

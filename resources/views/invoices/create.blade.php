@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    {!! Form::Model($agente,['action'=>'agenteController@store','class'=>'form-inline']) !!}
+    {!! Form::Model($factura,['action'=>'invoicesController@store','class'=>'form-inline']) !!}
     <div class="row">
         <div class="form-group">
             {!! Form::label('nombre', 'Nombre:', ['class' => 'control-label']) !!}

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\models\role;
 use Illuminate\Http\Request;
-use App\models\agent;
 
-
-class agenteController extends Controller
+class rolesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class agenteController extends Controller
     public function index()
     {
         //
-        $agente=agent::paginate(10);
-        return view('agentes.index',['agentes'=>$agente]);
+        $role=role::paginate(10);
+        return view('users.roles.index',['roles'=>$role]);
     }
 
     /**
@@ -28,9 +27,8 @@ class agenteController extends Controller
     public function create()
     {
         //
-        $agente=new agent;
-        return view('agentes.create',['agente'=>$agente]);
-
+        $role=new role;
+        return view('users.roles.create',['role'=>$role]);
     }
 
     /**
@@ -39,13 +37,13 @@ class agenteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(\App\Http\Requests\agent $request)
+    public function store(Request $request)
     {
         //
-        agent::create($request->input());
+        role::create($request->input());
 
         //dd($request->input());
-        return redirect('agente')->with('message','Se ha añadido un nuevo agente');
+        return redirect('roles')->with('message','Se ha añadido un nuevo rol');
     }
 
     /**
@@ -56,11 +54,7 @@ class agenteController extends Controller
      */
     public function show($id)
     {
-        $agente=agent::findorFail($id);
-        //dd($agent);
-        return view('agentes.show',[
-            'agente'=> $agente
-        ]);
+        //
     }
 
     /**
@@ -72,9 +66,9 @@ class agenteController extends Controller
     public function edit($id)
     {
         //
-        $agente=agent::findorFail($id);
-        return view('agentes.edit',[
-            'agente'=>$agente
+        $role=role::findorFail($id);
+        return view('users.roles.edit',[
+            'role'=>$role
         ]);
     }
 
@@ -88,9 +82,9 @@ class agenteController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $agente=agent::findorFail($id);
-        $agente->fill($request->all())->save();
-        return redirect()->action('agenteController@show',['id'=>$id])->with('message','Agente actualizado');
+        $role=role::findorFail($id);
+        $role->fill($request->all())->save();
+        return redirect()->action('rolesController@index')->with('message','El rol se ha modificado correctamente');
     }
 
     /**
@@ -102,7 +96,7 @@ class agenteController extends Controller
     public function destroy($id)
     {
         //
-        agent::destroy($id);
-        return redirect('agente')->with('message','Agente eliminado');
+        role::destroy($id);
+        return redirect('role')->with('message','El rol se ha eliminado correctamente');
     }
 }
