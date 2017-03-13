@@ -4,6 +4,7 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class invoice extends Model
 {
     //
@@ -13,6 +14,10 @@ class invoice extends Model
     ];
     public function cliente()
     {
-        return $this->belongsToMany('App\Models\file')->withPivot('customer_id','customers');
+        return $this->belongsTo('App\Models\customer', 'id');
+    }
+    public function file()
+    {
+        return $this->HasOne('App\Models\file','id');
     }
 }

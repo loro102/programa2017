@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\models\invoice;
+use App\models\professional;
 use Illuminate\Http\Request;
 
 class invoicesController extends Controller
@@ -17,15 +18,20 @@ class invoicesController extends Controller
         //
 
         $factura=invoice::all();
-        $cuantia_factura=$factura->sum('cuantia_factura');
-        $cuantia_cliente=$factura->sum('cuantia_cliente');
-        $cuantia_empresa=$factura->sum('cuantia_empresa');
-        $beneficio=$cuantia_factura-$cuantia_empresa;
+        $total=collect(
+            [
+                'factura'=>$factura->sum('cuantia_factura'),
+                'cliente'=>$factura->sum('cuantia_cliente'),
+                'empresa'=>$factura->sum('cuantia_empresa'),
+                'indemnizacion'=>$factura->sum('cuantia_indemnizacion'),
+            ]
+        );
+        //$total=$total->toArray();
+        $beneficio=$factura->sum('cuantia_factura')-$factura->sum('cuantia_empresa');
+        //dd($total->toArray());
         return view('invoices.index',[
             'facturas'=>$factura,
-            'total_fact'=>$cuantia_factura,
-            'total_cliente'=>$cuantia_cliente,
-            'total_empresa'=>$cuantia_empresa,
+            'total'=>$total,
             'beneficio'=>$beneficio,
         ]);
     }
@@ -72,15 +78,27 @@ class invoicesController extends Controller
     public function show($id)
     {
         //
-        $factura=invoice::findorFail($id);
+        $factura=invoice::where('file_id',$id)->get();
+        $total=collect(
+            [
+                'factura'=>$factura->sum('cuantia_factura'),
+                'cliente'=>$factura->sum('cuantia_cliente'),
+                'empresa'=>$factura->sum('cuantia_empresa'),
+                'indemnizacion'=>$factura->sum('cuantia_indemnizacion'),
+            ]
+        );
+        //$total=$total->toArray();
+        $beneficio=$factura->sum('cuantia_factura')-$factura->sum('cuantia_empresa');
         //$agente=customer::findorfail($id)->agent;
         //$expedientes=file::where('customer_id',$id)->get();
-        $expedientes=$cliente->files()->get();
+        //$expedientes=$cliente->files()->get();
         //dd($expedientes);
-        return view('clientes.show',[
-            'cliente'=> $factura,
+        return view('invoices.show',[
+            //'cliente'=> $factura,
             //'agente'=>$agente,
-            'expedientes'=>$expedientes
+            'facturas'=>$factura,
+            'total'=>$total,
+            'beneficio'=>$beneficio,
         ]);
     }
 

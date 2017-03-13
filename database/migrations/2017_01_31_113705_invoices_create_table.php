@@ -15,6 +15,7 @@ class InvoicesCreateTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->increments('id');
+            $table->date('fechafact')->required();
             $table->integer('file_id')->unsigned();
             $table->foreign('file_id')->references('id')->on('files');
             $table->integer('professional_id')->unsigned();

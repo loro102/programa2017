@@ -15,6 +15,7 @@ class file extends Model
     {
         return $this->belongsTo('App\Models\customer','customer_id');
     }
+    
 
     /*public function solicitor()
     {

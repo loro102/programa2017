@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(insurer::class);
         $this->call(processor::class);
         $this->call(file::class);
+        $this->call(invoice::class);
     }
 }
