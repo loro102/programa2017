@@ -33,7 +33,7 @@ class professionalController extends Controller
         $profesional=new professional;
         //$agente=agent::orderBy('nombre','asc')->pluck('nombre','id');
 
-        return view('clientes.create',[
+        return view('professional.create',[
             'profesional'=>$profesional,
             //'agente'=>$agente
         ]);
@@ -51,7 +51,7 @@ class professionalController extends Controller
         professional::create($request->input());
 
         //dd($request->input());
-        return redirect('cliente')->with('message','Se ha añadido un nuevo cliente');
+        return redirect('profesionals')->with('message','Se ha añadido un nuevo cliente');
     }
 
     /**
@@ -68,7 +68,7 @@ class professionalController extends Controller
         //$expedientes=file::where('customer_id',$id)->get();
         //$expedientes=$cliente->files()->get();
         //dd($expedientes);
-        return view('clientes.show',[
+        return view('professional.show',[
             'profesional'=> $profesional,
             //'agente'=>$agente,
             //'expedientes'=>$expedientes
@@ -86,7 +86,7 @@ class professionalController extends Controller
         //
         $profesional=professional::findorFail($id);
         //$agente=agent::orderBy('nombre','asc')->pluck('nombre','id');
-        return view('clientes.edit',[
+        return view('professional.edit',[
             'profesional'=>$profesional,
             //'agente'=>$agente
         ]);
@@ -104,7 +104,7 @@ class professionalController extends Controller
         //
         $profesional=professional::findorFail($id);
         $profesional->fill($request->all())->save();
-        return redirect()->action('clientes@show',['id'=>$id])->with('message','Cliente actualizado');
+        return redirect()->action('professionalController@show',['id'=>$id])->with('message','Cliente actualizado');
     }
 
     /**
