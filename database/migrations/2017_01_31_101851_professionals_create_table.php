@@ -33,7 +33,7 @@ class ProfessionalsCreateTable extends Migration
             $table->string('email');
             $table->string('iban');
             $table->text('notas');
-            $table->integer('acuerdo_pago');
+            $table->text('acuerdo_pago');
             $table->boolean('indemnizacion');
             $table->boolean('homologado');
             $table->boolean('activo');

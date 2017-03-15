@@ -27,6 +27,7 @@ Route::resource('/insurers','insurersController');
 Route::resource('/processor','processorController');
 Route::resource('/roles','rolesController');
 Route::resource('/invoices','invoicesController');
+Route::resource('/professionals','professionalController');
 
 
 //Consultas

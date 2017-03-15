@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\models\file;
+use App\models\professional;
 use Illuminate\Http\Request;
-use App\models\customer;
-use App\models\agent;
 
-class clientes extends Controller
+class professionalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +15,10 @@ class clientes extends Controller
     public function index()
     {
         //
-        $cliente=customer::paginate(10);
+        $profesional=professional::paginate(10);
         //dd($cliente);
-        return view('clientes.index',[
-            'clientes'=> $cliente
+        return view('professional.index',[
+            'profesionales'=> $profesional,
         ]);
     }
 
@@ -31,16 +29,14 @@ class clientes extends Controller
      */
     public function create()
     {
-        //Crea un nuevo registro en la tabla de customers
-        $cliente=new customer;
-        $agente=agent::orderBy('nombre','asc')->pluck('nombre','id');
+        //
+        $profesional=new professional;
+        //$agente=agent::orderBy('nombre','asc')->pluck('nombre','id');
 
-        return view('clientes.create',[
-            'cliente'=>$cliente,
-            'agente'=>$agente
+        return view('professional.create',[
+            'profesional'=>$profesional,
+            //'agente'=>$agente
         ]);
-
-
     }
 
     /**
@@ -51,11 +47,11 @@ class clientes extends Controller
      */
     public function store(Request $request)
     {
-        //Crea un nuevo registro para el cliente
-        customer::create($request->input());
+        //
+        professional::create($request->input());
 
         //dd($request->input());
-        return redirect('cliente')->with('message','Se ha añadido un nuevo cliente');
+        return redirect('profesionals')->with('message','Se ha añadido un nuevo cliente');
     }
 
     /**
@@ -67,15 +63,15 @@ class clientes extends Controller
     public function show($id)
     {
         //
-        $cliente=customer::findorFail($id);
+        $profesional=professional::findorFail($id);
         //$agente=customer::findorfail($id)->agent;
         //$expedientes=file::where('customer_id',$id)->get();
-        $expedientes=$cliente->files()->get();
+        //$expedientes=$cliente->files()->get();
         //dd($expedientes);
-        return view('clientes.show',[
-            'cliente'=> $cliente,
+        return view('professional.show',[
+            'profesional'=> $profesional,
             //'agente'=>$agente,
-            'expedientes'=>$expedientes
+            //'expedientes'=>$expedientes
         ]);
     }
 
@@ -88,11 +84,11 @@ class clientes extends Controller
     public function edit($id)
     {
         //
-        $cliente=customer::findorFail($id);
-        $agente=agent::orderBy('nombre','asc')->pluck('nombre','id');
-        return view('clientes.edit',[
-            'cliente'=>$cliente,
-            'agente'=>$agente
+        $profesional=professional::findorFail($id);
+        //$agente=agent::orderBy('nombre','asc')->pluck('nombre','id');
+        return view('professional.edit',[
+            'profesional'=>$profesional,
+            //'agente'=>$agente
         ]);
     }
 
@@ -106,9 +102,9 @@ class clientes extends Controller
     public function update(Request $request, $id)
     {
         //
-        $cliente=customer::findorFail($id);
-        $cliente->fill($request->all())->save();
-        return redirect()->action('clientes@show',['id'=>$id])->with('message','Cliente actualizado');
+        $profesional=professional::findorFail($id);
+        $profesional->fill($request->all())->save();
+        return redirect()->action('professionalController@show',['id'=>$id])->with('message','Cliente actualizado');
     }
 
     /**
@@ -120,7 +116,7 @@ class clientes extends Controller
     public function destroy($id)
     {
         //
-        customer::destroy($id);
+        professional::destroy($id);
         return redirect('cliente')->with('message','Cliente eliminado');
     }
 }
