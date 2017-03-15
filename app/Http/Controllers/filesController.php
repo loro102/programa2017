@@ -6,9 +6,9 @@ use App\models\formality;
 use App\models\insurer;
 use App\models\sort;
 use Illuminate\Http\Request;
-use App\Models\file;
-use App\Models\customer;
-use App\Models\professional;
+use App\models\file;
+use App\models\customer;
+use App\models\professional;
 use Illuminate\Support\Facades\DB;
 
 class filesController extends Controller
@@ -72,6 +72,15 @@ class filesController extends Controller
     public function show($id)
     {
         //
+        $consulta=file::find($id);
+        $facturas=invoices::where('file_id',$id);
+        //dd($expedientes);
+        return view('invoices.show',[
+            //'cliente'=> $factura,
+            //'agente'=>$agente,
+            'facturas'=>$facturas,
+        ]);
+
     }
 
     /**

@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\models\file;
 use Illuminate\Http\Request;
-use App\Models\customer;
-use App\Models\agent;
+use App\models\customer;
+use App\models\agent;
 
 class clientes extends Controller
 {
