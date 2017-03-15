@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\formality;
 use App\models\insurer;
+use App\models\invoice;
 use App\models\sort;
 use Illuminate\Http\Request;
 use App\models\file;
@@ -73,11 +74,12 @@ class filesController extends Controller
     {
         //
         $consulta=file::find($id);
-        $facturas=invoices::where('file_id',$id);
+        $consulta2=customer::find($consulta->customer_id);
+        $facturas=invoice::where('file_id',$id);
         //dd($expedientes);
-        return view('invoices.show',[
-            //'cliente'=> $factura,
-            //'agente'=>$agente,
+        return view('files.show',[
+            'expediente'=> $consulta,
+            'cliente'=>$consulta2,
             'facturas'=>$facturas,
         ]);
 
