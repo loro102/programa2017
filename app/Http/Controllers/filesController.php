@@ -75,12 +75,32 @@ class filesController extends Controller
         //
         $consulta=file::find($id);
         $consulta2=customer::find($consulta->customer_id);
-        $facturas=invoice::where('file_id',$id);
+        $factxcomision=invoice::where('file_id',$id)
+            ->where('emitirfactcomision',true)
+            ->get();
+        $factscomision=invoice::where('file_id',$id)
+            ->where('emitirfactcomision',false)
+            ->get();
+        $facturas=invoice::where('file_id',$id)->get();
+        //dd($facturas);
+        $total=collect(
+            [
+                'factura'=>$facturas->sum('cuantia_factura'),
+                'cliente'=>$facturas->sum('cuantia_cliente'),
+                'empresa'=>$facturas->sum('cuantia_empresa'),
+                'indemnizacion'=>$facturas->sum('cuantia_indemnizacion'),
+            ]
+        );
+
+        $beneficio=$facturas->sum('cuantia_factura')-$facturas->sum('cuantia_empresa');
+
         //dd($expedientes);
         return view('files.show',[
             'expediente'=> $consulta,
             'cliente'=>$consulta2,
             'facturas'=>$facturas,
+            'total'=>$total,
+            'beneficio'=>$beneficio,
         ]);
 
     }

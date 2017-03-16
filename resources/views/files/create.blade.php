@@ -186,7 +186,7 @@
                     {!! Form::date('fecha_denuncia', '', ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('fecha_demandaa', 'Fecha de Demanda:', ['class' => 'control-label']) !!}
+                    {!! Form::label('fecha_demanda', 'Fecha de Demanda:', ['class' => 'control-label']) !!}
                     {!! Form::date('fecha_demanda', '', ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
@@ -236,8 +236,8 @@
                     {!! Form::select('processor_id',['placeholder'=>'Selecciona'], null , ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('fecha_poliza', 'Fecha de Póliza:', ['class' => 'control-label']) !!}
-                    {!! Form::date('fecha_poliza', '', ['class' => 'form-control']) !!}
+                    {!! Form::label('fechapoliza', 'Fecha de Póliza:', ['class' => 'control-label']) !!}
+                    {!! Form::date('fechapoliza', '', ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('finfechapoliza', 'Fecha de Fin Póliza:', ['class' => 'control-label']) !!}
