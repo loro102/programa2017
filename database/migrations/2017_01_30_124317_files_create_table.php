@@ -37,6 +37,7 @@ class FilesCreateTable extends Migration
             $table->date('fecha_ingreso_hospital')->nullable();
             $table->date('fecha_alta_hospital')->nullable();
             $table->date('fecha_alta_direccion_medica')->nullable();
+            $table->date('fecha_alta_forense')->nullable();
             $table->string('desarrollo_suceso')->nullable();
             $table->string('lugar')->nullable();
             $table->string('localidad')->nullable();

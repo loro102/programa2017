@@ -38,7 +38,7 @@
                                         <div class="col-md-2 "><strong>Caso tipo:</strong> {{$expediente->caso_tipo}}</div>
                                         <div class="col-md-5 "><strong>Tipo de expediente:</strong> {{$expediente->sort_file_id}}</div>
                                         @if($expediente->firma_carta_abogado == 1)
-                                            <div class="col-md-8 text-success"><strong>El cliente ha firmado la designacion de abogado</strong></div>
+                                            <div class="col-md-12 text-success"><strong>El cliente ha firmado la designacion de abogado</strong></div>
                                             <div class="col-md-4"><strong>Fecha de designación:</strong> {{$expediente->fecha_designacion}}</div>
                                             @if (is_null($expediente->fecha_reclamacion_aj))
                                                 <div class="col-md-4 text-danger"><strong>Asistencia jurídica sin reclamar</strong></div>
@@ -57,18 +57,20 @@
 
                                         <div class="col-md-4"><strong>Fecha de apertura:</strong> {{$expediente->fechaapertura}}</div>
                                         <div class="col-md-4"><strong>Fecha de cierre:</strong> {{$expediente->fechacierre}}</div>
+                                        <div class="col-md-4"><strong>Fecha de archivo:</strong> {{$expediente->fechaarchivo}}</div>
+                                        <div class="col-md-4"><strong>Fecha de llegada de talón:</strong> {{$expediente->fechallegadatalon}}</div>
                                         <div class="col-md-4"><strong>Fecha de cobro Cliente:</strong> {{$expediente->fechacobrocliente}}</div>
                                         <div class="col-md-4"><strong>Fecha de cobro Empresa:</strong> {{$expediente->fechacobroempresa}}</div>
-                                        <div class="col-md-4"><strong>Fecha de llegada de talón:</strong> {{$expediente->fechallegadatalon}}</div>
-                                        <div class="col-md-4"><strong>Fecha de archivo:</strong> {{$expediente->fechaarchivo}}</div>
+
+
                                         @if (notNullValue($expediente->fechaofertamotivada))
-                                        <div class="col-md-4"><strong>Fecha de Oferta Motivada:</strong> {{$expediente->fechaofertamotivada}}</div>
+                                        <div class="col-md-4"><strong>Fecha de Reclamacion Previa:</strong> {{$expediente->fechaofertamotivada}}</div>
                                         @endif
                                         @if (notNullValue($expediente->fechaofertamotivada))
                                         @if($expediente->respuestamotivadaaceptada == true)
-                                        <div class="col-md-4 bg-success"><strong>Fecha de Respuesta Motivada:</strong> {{$expediente->fecharespuestamotivada}}</div>
+                                        <div class="col-md-4 bg-success"><strong>Fecha de Oferta Motivada:</strong> {{$expediente->fecharespuestamotivada}}</div>
                                             @else
-                                            <div class="col-md-4 bg-danger"><strong>Fecha de Respuesta Motivada:</strong> {{$expediente->fecharespuestamotivada}}</div>
+                                            <div class="col-md-4 bg-danger"><strong>Fecha de Oferta Motivada:</strong> {{$expediente->fecharespuestamotivada}}</div>
                                             @endif
                                         @endif
                                         <div class="col-md-4"><strong>Estimación de indemnización:</strong> {{$expediente->estimacon}}</div>
@@ -237,15 +239,37 @@
                                 </tr>
                                 @forelse($facturas as $factura)
                                     <tr>
-                                        <td class="col-md-2">{{link_to_action('invoicesController@show',$factura->fechafact,['id'=> $factura->id],[])}}</td>
-                                        <td class="col-md-3">{{link_to_action('invoicesController@show',$factura->numfactura,['id'=> $factura->id],[])}}</td>
-                                        <td class="col-md-1">{{link_to_action('invoicesController@show',$factura->file->id,['id'=> $factura->id],[])}}</td>
-                                        <td class="col-md-1">{{link_to_action('invoicesController@show',$factura->professional_id,['id'=> $factura->id],[])}}</td>
-                                        <td class="col-md-1">{{link_to_action('invoicesController@show',$factura->descripcion,['id'=> $factura->id],[])}}</td>
-                                        <td class="col-md-1">{{link_to_action('invoicesController@show',$factura->cuantia_cliente,['id'=> $factura->id],[])}} <span class="glyphicon glyphicon glyphicon-eur" aria-hidden="true"></span></td>
-                                        <td class="col-md-1">{{link_to_action('invoicesController@show',$factura->cuantia_empresa,['id'=> $factura->id],[])}} <span class="glyphicon glyphicon glyphicon-eur" aria-hidden="true"></span></td>
-                                        <td class="col-md-1">{{link_to_action('invoicesController@show',$factura->cuantia_factura,['id'=> $factura->id],[])}} <span class="glyphicon glyphicon glyphicon-eur" aria-hidden="true"></span></td>
-                                        <td class="col-md-1">{{$factura->profesion}}</td>
+                                        <td class="col-md-2">{{link_to_action('invoicesController@edit',$factura->fechafact,['id'=> $factura->id],[])}}</td>
+                                        <td class="col-md-3">{{link_to_action('invoicesController@edit',$factura->numfactura,['id'=> $factura->id],[])}}</td>
+                                        <td class="col-md-1">{{link_to_action('invoicesController@edit',$factura->file->id,['id'=> $factura->id],[])}}</td>
+                                        <td class="col-md-1">{{link_to_action('invoicesController@edit',$factura->professional_id,['id'=> $factura->id],[])}}</td>
+                                        <td class="col-md-1">{{link_to_action('invoicesController@edit',$factura->descripcion,['id'=> $factura->id],[])}}</td>
+                                        <td class="col-md-1">{{link_to_action('invoicesController@edit',$factura->cuantia_cliente,['id'=> $factura->id],[])}} <span class="glyphicon glyphicon glyphicon-eur" aria-hidden="true"></span></td>
+                                        <td class="col-md-1">{{link_to_action('invoicesController@edit',$factura->cuantia_empresa,['id'=> $factura->id],[])}} <span class="glyphicon glyphicon glyphicon-eur" aria-hidden="true"></span></td>
+                                        <td class="col-md-1">{{link_to_action('invoicesController@edit',$factura->cuantia_factura,['id'=> $factura->id],[])}} <span class="glyphicon glyphicon glyphicon-eur" aria-hidden="true"></span></td>
+                                        <td class="col-md-1"><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#{{$factura->id}}">
+                                                editar factura
+                                            </button>
+
+                                            <!-- Modal de lista de tramitadores-->
+                                            <div class="modal fade " id="{{$factura->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$factura->id}}">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                            <h4 class="modal-title" id="$factura->id"></h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="embed-responsive embed-responsive-4by3">
+                                                                <iframe class="embed-responsive-item" src="/invoices/{{$factura->id}}/edit"></iframe>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="document.location.reload();">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div></td>
                                     </tr>
 
                                 @empty
@@ -310,6 +334,3 @@
             </div>
     </div>
 @endsection
-
-@section('javascript')
-    @endsection

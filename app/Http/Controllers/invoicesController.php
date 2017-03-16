@@ -66,7 +66,7 @@ class invoicesController extends Controller
         invoice::create($request->input());
 
         //dd($request->input());
-        return redirect('invoices')->with('message','Se ha añadido una nueva factura');
+        return redirect('expediente')->with('message','Se ha añadido una nueva factura');
     }
 
     /**
@@ -111,9 +111,9 @@ class invoicesController extends Controller
     public function edit($id)
     {
         //
-        $factura=factura::findorFail($id);
+        $factura=invoice::findorFail($id);
         return view('invoices.edit',[
-            'factura'=>$factura
+            'factura'=>$factura,
         ]);
     }
 
@@ -129,7 +129,9 @@ class invoicesController extends Controller
         //
         $factura=invoice::findorFail($id);
         $factura->fill($request->all())->save();
-        return redirect()->action('invoicesController@index',['id'=>$id])->with('message','Factura actualizada');
+        return redirect()->action('filesController@show',['id'=>$factura->file_id])->with('message','Factura actualizada');
+        //return redirect()->action('invoicesController@edit',['id'=>$id])->with('message','Factura actualizada');
+
     }
 
     /**
