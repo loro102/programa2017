@@ -72,33 +72,89 @@ class filesController extends Controller
      */
     public function show($id)
     {
-        //
+        /*
+        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        ::                                                                ::
+        ::              Pestaña Datos del expediente                      ::
+        ::                                                                ::
+        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        */
+
         $consulta=file::find($id);
         $consulta2=customer::find($consulta->customer_id);
+
+
+        /*
+       ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+       ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+       ::                                                                ::
+       ::              Pestaña de profesionales                          ::
+       ::                                                                ::
+       ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+       ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+       */
+
+
+
+        /*
+       ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+       ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+       ::                                                                ::
+       ::            Pestaña de facturas del expediente                  ::
+       ::                                                                ::
+       ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+       ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+       */
+
+        //Obtener facturas por comision
         $factxcomision=invoice::where('file_id',$id)
             ->where('emitirfactcomision',true)
             ->get();
-        $factscomision=invoice::where('file_id',$id)
-            ->where('emitirfactcomision',false)
+
+        //Obtener facturas por honorarios
+        $factsxhonorarios=invoice::where('file_id',$id)
+            ->where('nofactporhonorarios',true)
             ->get();
-        $facturas=invoice::where('file_id',$id)->get();
+
+        //Obtener el resto de las facturas
+        $facturas=invoice::where('file_id',$id)
+            ->where('emitirfactcomision',false)
+            ->where('nofactporhonorarios',false)
+            ->get();
+
+        //obtener todas las facturas
+        $factura=invoice::where('file_id',$id)->get();
         //dd($facturas);
+
+        //array con los totales calculados
         $total=collect(
             [
-                'factura'=>$facturas->sum('cuantia_factura'),
-                'cliente'=>$facturas->sum('cuantia_cliente'),
-                'empresa'=>$facturas->sum('cuantia_empresa'),
-                'indemnizacion'=>$facturas->sum('cuantia_indemnizacion'),
+                'factura'=>$factura->sum('cuantia_factura'),
+                'cliente'=>$factura->sum('cuantia_cliente'),
+                'empresa'=>$factura->sum('cuantia_empresa'),
+                'indemnizacion'=>$factura->sum('cuantia_indemnizacion'),
             ]
         );
 
-        $beneficio=$facturas->sum('cuantia_factura')-$facturas->sum('cuantia_empresa');
+        //Cálculo para obtener el beneficio
+        $beneficio1=round(($facturas->sum('cuantia_factura')-$facturas->sum('cuantia_empresa')),2);
+
+        //Cáculo para obtener el beneficio de facturas por comisión
+        $beneficio2=round(($factxcomision->sum('cuantia_factura')-$factxcomision->sum('cuantia_empresa')-((($factxcomision->sum('cuantia_factura')-$factxcomision->sum('cuantia_empresa'))*21)/100)),2);
+
+        //Cálculo para obtener el beneficio de las facturas por honorarios
+        $beneficio3=round(($factsxhonorarios->sum('cuantia_factura')+(($factsxhonorarios->sum('cuantia_factura')*21)/100)),2);
+
+        $beneficio=$beneficio1+$beneficio2+$beneficio3;
+        //dd($beneficio1,$beneficio2,$beneficio3,$beneficio);
 
         //dd($expedientes);
         return view('files.show',[
             'expediente'=> $consulta,
             'cliente'=>$consulta2,
-            'facturas'=>$facturas,
+            'facturas'=>$factura,
             'total'=>$total,
             'beneficio'=>$beneficio,
         ]);

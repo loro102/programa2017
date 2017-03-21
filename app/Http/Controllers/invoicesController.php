@@ -87,12 +87,13 @@ class invoicesController extends Controller
                 'indemnizacion'=>$factura->sum('cuantia_indemnizacion'),
             ]
         );
+        //$comision=$factura->where('emitirfactcomision',1)->get();
         //$total=$total->toArray();
         $beneficio=$factura->sum('cuantia_factura')-$factura->sum('cuantia_empresa');
         //$agente=customer::findorfail($id)->agent;
         //$expedientes=file::where('customer_id',$id)->get();
         //$expedientes=$cliente->files()->get();
-        //dd($expedientes);
+        //dd($comision);
         return view('invoices.show',[
             //'cliente'=> $factura,
             //'agente'=>$agente,
