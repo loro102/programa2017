@@ -198,6 +198,15 @@
                 <div role="tabpanel" class="tab-pane panel-primary" id="profesionales">
                     <div class="panel panel-default">
                         <div class="panel-body">
+                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#profesional" aria-expanded="false" aria-controls="profesional">
+                                Agregar un profesional al expediente
+                            </button>
+                            <div class="collapse" id="profesional">
+                                <div class="well">
+                                    formulario de creacion
+                                </div>
+                            </div>
+
                             <div>123456</div>
                             <div>12345</div>
                             <div>123456789</div>
@@ -221,7 +230,7 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <p>
-                                {{ link_to_action('invoicesController@create','Añadir un nuevo factura',[],[]) }} |
+                                {{ link_to_action('invoicesController@create','Añadir un nuevo factura',['id'=> $expediente->id],[]) }} |
                                 {{ link_to_action('invoicesController@index','facturas',[],[]) }}
                             </p>
                             <table class="table-bordered table-striped table-hover col-md-12">

@@ -9,7 +9,7 @@
                 {!! Form::date('fechafact', null, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('file_id', 'Profesional:', ['class' => 'control-label']) !!}
+                {!! Form::label('file_id', 'file_id:', ['class' => 'control-label']) !!}
                 {!! Form::text('file_id', null, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
@@ -47,8 +47,13 @@
             </div>
             <div class="form-group">
                 {!! Form::label('emitirfactcomision', 'Emitir factura por comision', ['class' => 'control-label']) !!}
-                {!! Form::hidden('emitirfactcomision', '0', ['id' => 'placa']) !!}
-                {!! Form::checkbox('emitirfactcomision', '1', null,  ['id' => 'placa']) !!}
+                {!! Form::hidden('emitirfactcomision', '0', ['id' => 'emitirfactcomision']) !!}
+                {!! Form::checkbox('emitirfactcomision', '1', null,  ['id' => 'emitirfactcomision']) !!}
+            </div>
+            <div class="form-group">
+                {!! Form::label('nofactporhonorarios', 'No emitir factura por honorarios', ['class' => 'control-label']) !!}
+                {!! Form::hidden('nofactporhonorarios', '0', ['id' => 'placa']) !!}
+                {!! Form::checkbox('nofactporhonorarios', '1', null,  ['id' => 'placa']) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('estadopago', 'Estado de pago:', ['class' => 'control-label']) !!}

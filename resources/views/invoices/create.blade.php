@@ -9,8 +9,8 @@
             {!! Form::date('fechafact', '', ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('file_id', 'Profesional:', ['class' => 'control-label']) !!}
-            {!! Form::text('file_id', '', ['class' => 'form-control']) !!}
+            {!! Form::label('file_id', 'file_id:', ['class' => 'control-label']) !!}
+            {!! Form::text('file_id',Request::get('id'), ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('professional_id', 'Profesional:', ['class' => 'control-label']) !!}
