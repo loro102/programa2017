@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\models\file_professional;
 use App\models\formality;
 use App\models\insurer;
 use App\models\invoice;
@@ -35,7 +36,7 @@ class filesController extends Controller
     {
 
         $expediente=new file;
-        $cliente=customer::all()->pluck('fullname','id')->prepend('Ninguno','');
+        //$cliente=customer::all()->pluck('fullname','id')->prepend('Ninguno','');
         $sort=sort::all()->pluck('nombre','id')->prepend('Ninguno','');
         $categoria=formality::all()->unique('categoria')->pluck('categoria','categoria')->prepend('Ninguno','');
         $aseguradora=insurer::all()->pluck('nombre','id')->prepend('Ninguno','');
@@ -45,7 +46,7 @@ class filesController extends Controller
         //dd($cliente);
         return view('files.create',[
             'expediente'=>$expediente,
-            'cliente'=>$cliente,
+            //'cliente'=>$cliente,
             'sort'=>$sort,
             'categoria'=>$categoria,
             'aseguradora'=>$aseguradora,
@@ -95,6 +96,7 @@ class filesController extends Controller
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
        */
+        $prof=file_professional::where('file_id',$id)->get();
 
 
 
@@ -155,6 +157,7 @@ class filesController extends Controller
         return view('files.show',[
             'expediente'=> $consulta,
             'cliente'=>$consulta2,
+            'profesionales'=>$prof,
             'facturas'=>$factura,
             'total'=>$total,
             'beneficio'=>$beneficio,

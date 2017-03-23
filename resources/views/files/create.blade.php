@@ -17,8 +17,7 @@
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="expediente">
                 <div class="form-group">
-                    {!! Form::label('customer_id', 'Cliente:', ['class' => 'control-label']) !!}
-                    {!! Form::select('customer_id', $cliente , null , ['class' => 'form-control']) !!}
+                    {!! Form::hidden('customer_id',Request::get('customer') , ['id' => 'id']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('solicitor_id', 'Abogado:', ['class' => 'control-label']) !!}

@@ -198,31 +198,48 @@
                 <div role="tabpanel" class="tab-pane panel-primary" id="profesionales">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#profesional" aria-expanded="false" aria-controls="profesional">
-                                Agregar un profesional al expediente
+                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#filepro">
+                                agregar profesional
                             </button>
-                            <div class="collapse" id="profesional">
-                                <div class="well">
-                                    formulario de creacion
+
+                            <!-- Modal de lista de tramitadores-->
+                            <div class="modal fade " id="filepro" tabindex="-1" role="dialog" aria-labelledby="filepro">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" onclick="document.location.reload();" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="$factura->id"></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="embed-responsive embed-responsive-4by3">
+                                                <iframe class="embed-responsive-item" src="/filepro/create?file={{$expediente->id}}"></iframe>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="document.location.reload();">Close</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div>123456</div>
-                            <div>12345</div>
-                            <div>123456789</div>
-                            <div>123456789</div>
-                            <div>123456789</div>
-                            <div>123456789</div>
-                            <div>123456789</div>
-                            <div>123456789</div>
-                            <div>123456789</div>
-                            <div>123456789</div>
-                            <div>123456789</div>
-                            <div>123456789</div>
-                            <div>123456789</div>
-                            <div>123456789</div>
-                            <div>123456789</div>
-                            Basic panel example
+                            <table class="table-bordered table-striped table-hover col-md-12">
+                                <tr>
+                                    <th class="col-md-7">Profesional</th>
+                                    <th class="col-md-5">Opciones</th>
+                                </tr>
+                                @forelse($profesionales as $profesional)
+                                    <tr>
+                                        <td class="col-md-7">{{$profesional->professional_id}}</td>
+                                        <td class="col-md-5"></td>
+
+                                    </tr>
+
+                                @empty
+                                    <tr>
+                                        <td class="danger" colspan="12">Este cliente no tiene profesionales asignados</td>
+                                    </tr>
+                                @endforelse
+                            </table>
                         </div>
                     </div>
                 </div>

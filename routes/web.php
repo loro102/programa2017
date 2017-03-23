@@ -36,3 +36,4 @@ Route::resource('/filepro','file_professionalController');
 
 Route::get('/getformality/{id}','formalitiesController@getformality');
 Route::get('/getprocessor/{id}','processorController@getprocessor');
+Route::get('/getprofessional/{id}','professionalController@getprofessional');

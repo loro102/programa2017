@@ -30,6 +30,7 @@
                 <div class="col-md-12 well"><strong>Notas:</strong>{{ $cliente->notas }}</div>
             </div>
             <div class="panel-footer">
+                {{ link_to_action('filesController@create','',['customer'=>$cliente->id],['class'=>'btn btn-lg btn-success pull-right glyphicon glyphicon-plus']) }}
                 Expedientes trafico
                 <table class="table table-bordered table table-striped">
                     <tr>

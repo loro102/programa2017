@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\models\file_professional;
+use App\models\group;
+use App\models\professional;
 use Illuminate\Http\Request;
 
 class file_professionalController extends Controller
@@ -14,6 +17,8 @@ class file_professionalController extends Controller
     public function index()
     {
         //
+        $profcli=file_professional::paginate(10);
+        return view('formalities.index',['formalities'=>$formalities]);
     }
 
     /**
@@ -24,6 +29,9 @@ class file_professionalController extends Controller
     public function create()
     {
         //
+        $prof=new file_professional();
+        $grupo=group::all()->pluck('nombre','id')->prepend('Seleccione la clase de professional');
+        return view('files.professional_tab.create',['prof'=>$prof,'grupo'=>$grupo]);
     }
 
     /**
@@ -35,6 +43,10 @@ class file_professionalController extends Controller
     public function store(Request $request)
     {
         //
+        $file=$request->input('file_id');
+        file_professional::create($request->input());
+        return redirect()->action('file_professionalController@create',['file'=>$file])->with('message','profesional agregado correctamente');
+
     }
 
     /**
@@ -80,5 +92,12 @@ class file_professionalController extends Controller
     public function destroy($id)
     {
         //
+        $f=file_professional::findorfail($id);
+        $fil=$f->file_id;
+        file_professional::destroy($id);
+        return redirect()->action('filesController@show',['file'=>$fil])->with('message','profesional removido correctamente');
+
     }
+
+
 }

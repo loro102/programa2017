@@ -119,4 +119,15 @@ class professionalController extends Controller
         professional::destroy($id);
         return redirect('cliente')->with('message','Cliente eliminado');
     }
+
+    public function getprofessional(Request $request,$id)
+    {
+        //
+        $data=professional::where('group_id',$id)
+            ->select('id','Nombre')
+            ->get();
+        //dd($data);
+        return response()->json($data);
+        //return view('files.create')->with('data',$data);
+    }
 }
