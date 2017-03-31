@@ -12,12 +12,12 @@ class invoice extends Model
         'id',
         'timestamps',
     ];
-    public function cliente()
+    public function professional()
     {
-        return $this->belongsTo('App\Models\customer', 'id');
+        return $this->belongsTo('App\models\professional','professional_id');
     }
     public function file()
     {
-        return $this->HasOne('App\Models\file','id');
+        return $this->HasOne('App\models\file','id');
     }
 }

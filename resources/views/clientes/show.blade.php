@@ -42,7 +42,7 @@
                     </tr>
                     @forelse($expedientes as $expediente)
                     <tr>
-                        <td class="col-md-1">{{$expediente->fechaapertura}}</td>
+                        <td class="col-md-1">{{link_to_action('filesController@show',$expediente->fechaapertura,['id'=> $expediente->id],[])}}</td>
                         <td class="col-md-1">{{$expediente->fechacierre}}</td>
                         <td class="col-md-1">{{$expediente->fecha_accidente}} {{$expediente->hora}}</td>
                         <td class="col-md-1">{{$expediente->lugar}}</td>

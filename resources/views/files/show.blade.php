@@ -32,7 +32,9 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">Datos expediente</div>
+                                    <div class="panel-heading">Datos expediente
+                                        {{ link_to_action('filesController@edit','Editar expediente',['id'=>$expediente->id],['class'=>'btn btn-sm btn-warning pull-right ']) }}
+                                    </div>
                                     <div class="panel-body">
                                         <div class="col-md-5 bg-info"><strong>Abogado:</strong> {{$expediente->id_solicitor}}</div>
                                         <div class="col-md-2 "><strong>Caso tipo:</strong> {{$expediente->caso_tipo}}</div>
@@ -229,7 +231,10 @@
                                 </tr>
                                 @forelse($profesionales as $profesional)
                                     <tr>
-                                        <td class="col-md-7">{{$profesional->professional_id}}</td>
+                                        <td class="col-md-7">@forelse(($profesional->professional()->get()) as $prof)
+                                            {{$prof->Nombre}}
+                                                                 @empty
+                                        @endforelse</td>
                                         <td class="col-md-5"></td>
 
                                     </tr>

@@ -19,20 +19,21 @@ class customer extends Model
 
     public function agent()
     {
-        return $this->belongsTo('App\Models\agent','agent_id');
+        return $this->belongsTo('App\models\agent','agent_id');
     }
     public function files()
     {
-        return $this->hasMany('App\Models\file');
+        return $this->hasMany('App\models\file');
     }
 
     public function file()
     {
-        return $this->belongsToMany('App\Models\file');
+        return $this->belongsToMany('App\models\file');
     }
     public function invoice()
     {
-        return $this->belongsToMany('App\Models\invoice');
+        return $this->hasMany('App\models\invoice');
     }
+
 
 }

@@ -13,22 +13,22 @@ class file extends Model
 
     public function customer()
     {
-        return $this->belongsTo('App\Models\customer','customer_id');
+        return $this->belongsTo('App\models\customer','customer_id');
     }
     
 
     /*public function solicitor()
     {
-        return $this->belongsTo('App\Models\solicitor','solicitor_id');
+        return $this->belongsTo('App\models\solicitor','solicitor_id');
     }
 
     public function insurer()
     {
-        return $this->belongsTo('App\Models\insurer','insurer_id');
+        return $this->belongsTo('App\models\insurer','insurer_id');
     }
 
     public function agent()
     {
-        return $this->belongsTo('App\Models\agent','agent_id');
+        return $this->belongsTo('App\models\agent','agent_id');
     }*/
 }

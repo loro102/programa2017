@@ -99,8 +99,6 @@ class filesController extends Controller
         $prof=file_professional::where('file_id',$id)->get();
 
 
-
-
         /*
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -174,6 +172,23 @@ class filesController extends Controller
     public function edit($id)
     {
         //
+        $expediente=file::findorFail($id);
+        //$cliente=customer::all()->pluck('fullname','id')->prepend('Ninguno','');
+        $sort=sort::all()->pluck('nombre','id')->prepend('Ninguno','');
+        $categoria=formality::all()->unique('categoria')->pluck('categoria','categoria')->prepend('Ninguno','');
+        $aseguradora=insurer::all()->pluck('nombre','id')->prepend('Ninguno','');
+        //$abogado=professional::all()->pluck('nombre','id')->prepend('Ninguno','');
+
+        //$client=$cliente->pluck('fullname','id');
+        //dd($cliente);
+        return view('files.edit',[
+            'expediente'=>$expediente,
+            //'cliente'=>$cliente,
+            'sort'=>$sort,
+            'categoria'=>$categoria,
+            'aseguradora'=>$aseguradora,
+            //'abogado'=>$abogado
+        ]);
     }
 
     /**
@@ -186,6 +201,9 @@ class filesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $expediente=file::findorFail($id);
+        $expediente->fill($request->all())->save();
+        return redirect()->action('fileController@show',['id'=>$id])->with('message','Expediente actualizado');
     }
 
     /**
@@ -197,5 +215,7 @@ class filesController extends Controller
     public function destroy($id)
     {
         //
+        file::destroy($id);
+        return redirect('cliente')->with('message','Expediente eliminado');
     }
 }

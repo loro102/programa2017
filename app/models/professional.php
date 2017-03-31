@@ -11,4 +11,14 @@ class professional extends Model
         'id',
         'timestamps',
     ];
+
+
+    public function file_professional()
+    {
+        return $this->hasMany('App\models\file_professional');
+    }
+    public function invoice()
+    {
+        return $this->hasMany('App\models\invoice');
+    }
 }

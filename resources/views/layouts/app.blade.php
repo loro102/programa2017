@@ -36,14 +36,19 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name', 'Rumbo') }}
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        &nbsp;<li><a href="{{ url('/cliente') }}">Cliente</a></li>
+                        <li><a href="{{ url('/agente') }}">Agente</a></li>
+                        <li><a href="{{ url('/formality') }}">Formalidad</a></li>
+                        <li><a href="{{ url('/insurers') }}">Aseguradoras</a></li>
+                        <li><a href="{{ url('/professionals') }}">Profesionales</a></li>
+                        <li><a href="{{ url('/sort') }}">grupos</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

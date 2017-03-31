@@ -4,10 +4,9 @@
 <div class="container">
     {!! Form::Model($expediente,['action'=>'filesController@store','class'=>'form-inline']) !!}
     <div>
-
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#expediente" aria-controls="expediente" role="tab" data-toggle="tab">Datos expediente</a></li>
+            <li role="presentation"><a href="#inicio" aria-controls="inicio" role="tab" data-toggle="tab">Datos expediente</a></li>
             <li role="presentation"><a href="#suceso" aria-controls="suceso" role="tab" data-toggle="tab">Datos del suceso</a></li>
             <li role="presentation"><a href="#juridico" aria-controls="juridico" role="tab" data-toggle="tab">Datos jurídicos</a></li>
             <li role="presentation"><a href="#extra" aria-controls="extra" role="tab" data-toggle="tab">Otros datos</a></li>
@@ -15,7 +14,7 @@
 
         <!-- Tab panes -->
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="expediente">
+            <div role="tabpanel" class="tab-pane active" id="inicio">
                 <div class="form-group">
                     {!! Form::hidden('customer_id',Request::get('customer') , ['id' => 'id']) !!}
                 </div>
