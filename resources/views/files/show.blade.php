@@ -360,7 +360,20 @@
             </button>
             <div class="collapse" id="Notas">
                 <div class="well">
-                    ...
+                    @forelse($notas as $nota)
+                        <div class="row">
+                        <div class="col-md-4">
+                            {{Carbon\Carbon::parse($nota->fecha)->format('d-m-Y H:i:s')}}
+                        </div>
+                        <div class="col-md-6">{{$nota->nota}}</div>
+                        </div>
+                    @empty
+                        <div class="row">
+                        <div class="col-md-12">
+                            Este expediente no tiene notas
+                        </div>
+                        </div>
+                    @endforelse
                 </div>
             </div>
     </div>

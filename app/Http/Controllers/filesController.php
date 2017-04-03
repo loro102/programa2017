@@ -6,6 +6,7 @@ use App\models\file_professional;
 use App\models\formality;
 use App\models\insurer;
 use App\models\invoice;
+use App\models\note;
 use App\models\sort;
 use Illuminate\Http\Request;
 use App\models\file;
@@ -152,6 +153,19 @@ class filesController extends Controller
         //dd($beneficio1,$beneficio2,$beneficio3,$beneficio);
 
         //dd($expedientes);
+
+        /*
+       ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+       ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+       ::                                                                ::
+       ::            Boton notas del expediente                          ::
+       ::                                                                ::
+       ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+       ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+       */
+        $notas=note::where('file_id',$id)->get();
+
+
         return view('files.show',[
             'expediente'=> $consulta,
             'cliente'=>$consulta2,
@@ -159,6 +173,7 @@ class filesController extends Controller
             'facturas'=>$factura,
             'total'=>$total,
             'beneficio'=>$beneficio,
+            'notas'=>$notas,
         ]);
 
     }
