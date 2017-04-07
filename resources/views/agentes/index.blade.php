@@ -4,8 +4,7 @@
     <div class="container">
         @include('partials.flash')
         <p>
-            {{ link_to_action('agenteController@create','Añadir un nuevo agente',[],[]) }} |
-            {{ link_to_action('agenteController@index','Agentes',[],[]) }}
+            {{ link_to_action('agenteController@create','Añadir un nuevo agente',[],['class' => 'btn btn-sm btn-primary']) }}
         </p>
         <table class="table-bordered table-striped table-hover col-md-12">
             <tr>

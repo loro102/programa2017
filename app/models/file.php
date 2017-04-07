@@ -15,6 +15,11 @@ class file extends Model
     {
         return $this->belongsTo('App\models\customer','customer_id');
     }
+
+    public function sort()
+    {
+        return $this->hasOne('App\models\sort', 'id');
+    }
     
 
     /*public function solicitor()

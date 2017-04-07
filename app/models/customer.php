@@ -16,6 +16,10 @@ class customer extends Model
     {
         return $this->nombre . ' ' . $this->apellidos;
     }
+    public function Apellidonombre($value)
+    {
+        return $this->apellidos . ' , ' . $this->nombre;
+    }
 
     public function agent()
     {

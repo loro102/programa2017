@@ -13,9 +13,13 @@ class professional extends Model
     ];
 
 
+    /*public function file_professional()
+    {
+        return $this->hasMany('App\models\file_professional',professional_id);
+    }*/
     public function file_professional()
     {
-        return $this->hasMany('App\models\file_professional');
+        return $this->belongsTo('App\models\file_professional',professional_id);
     }
     public function invoice()
     {

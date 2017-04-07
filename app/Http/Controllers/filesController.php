@@ -85,8 +85,6 @@ class filesController extends Controller
         */
 
         $consulta=file::find($id);
-        $consulta2=customer::find($consulta->customer_id);
-
 
         /*
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -98,7 +96,6 @@ class filesController extends Controller
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
        */
         $prof=file_professional::where('file_id',$id)->get();
-
 
         /*
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -127,7 +124,13 @@ class filesController extends Controller
             ->get();
 
         //obtener todas las facturas
-        $factura=invoice::where('file_id',$id)->get();
+        $factura=invoice::where('file_id',$id)
+            ->where('honorario',false)
+            ->get();
+        //obtener todos los honorarios
+        $honorario=invoice::where('file_id',$id)
+            ->where('honorario',true)
+            ->get();
         //dd($facturas);
 
         //array con los totales calculados
@@ -168,9 +171,9 @@ class filesController extends Controller
 
         return view('files.show',[
             'expediente'=> $consulta,
-            'cliente'=>$consulta2,
             'profesionales'=>$prof,
             'facturas'=>$factura,
+            'honorarios'=>$honorario,
             'total'=>$total,
             'beneficio'=>$beneficio,
             'notas'=>$notas,

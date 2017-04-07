@@ -4,8 +4,8 @@
     <div class="container">
         @include('partials.flash')
         <p>
-            {{ link_to_action('clientes@index','Volver al listado de Clientes',[],[]) }}
-            {{ link_to(url()->previous(),'Regresar') }}
+            {{ link_to_action('clientes@index','Volver al listado de Clientes',[],['class' => 'btn btn-sm btn-default']) }}
+            {{--{{ link_to(url()->previous(),'Regresar') }}--}}
             <span class="pull-right">
                 {!! Form::open(['method'=>'DELETE','route'=>['cliente.destroy',$cliente->id]],['class'=>'form-inline']) !!}
                 {!! Form::submit('Borrar cliente', array('class' => 'btn btn-sm btn-danger pull-right ','id'=>'deletebtn', 'onclick' => 'return confirm("¿Estas seguro de querer eliminar este cliente?");')) !!}
@@ -21,7 +21,7 @@
                 <div class="col-md-3"><strong>Localidad:</strong>{{ $cliente->localidad }}</div>
                 <div class="col-md-3"><strong>Provincia:</strong>{{ $cliente->provincia }}</div>
                 <div class="col-md-3"><strong>Código Postal:</strong>{{ $cliente->codigopostal }}</div>
-                <div class="col-md-3"><strong>Fecha de nacimiento:</strong>{{ $cliente->fechanacimiento }}</div>
+                <div class="col-md-3"><strong>Fecha de nacimiento:</strong>{{Carbon\Carbon::parse($cliente->fechanacimiento)->format('d-m-Y')}}</div>
                 <div class="col-md-3"><strong>Teléfono 1:</strong>{{ $cliente->telefono1 }}</div>
                 <div class="col-md-3"><strong>Teléfono 2:</strong>{{ $cliente->telefono2 }}</div>
                 <div class="col-md-3"><strong>Móvil:</strong>{{ $cliente->movil }}</div>
@@ -34,21 +34,24 @@
                 Expedientes trafico
                 <table class="table table-bordered table table-striped">
                     <tr>
-                        <th class="col-md-1">Fecha de apertura</th>
-                        <th class="col-md-1">Fase</th>
-                        <th class="col-md-1">Fecha de siniestro</th>
-                        <th class="col-md-1">lugar</th>
-                        <th class="col-md-8">Descripcion del suceso</th>
+                        <th class="col-md-2">Fecha de apertura</th>
+                        <th class="col-md-2">Fase</th>
+                        <th class="col-md-2">Fecha de siniestro</th>
+                        <th class="col-md-2">lugar</th>
+                        <th class="col-md-4">Descripcion del suceso</th>
                     </tr>
-                    @forelse($expedientes as $expediente)
+                    @forelse($expedientestraf as $expedientetraf)
                     <tr>
-                        <td class="col-md-1">{{link_to_action('filesController@show',$expediente->fechaapertura,['id'=> $expediente->id],[])}}</td>
-                        <td class="col-md-1">{{$expediente->fechacierre}}</td>
-                        <td class="col-md-1">{{$expediente->fecha_accidente}} {{$expediente->hora}}</td>
-                        <td class="col-md-1">{{$expediente->lugar}}</td>
-                        <td class="col-md-8">{{$expediente->desarrollo_suceso}}</td>
+                        <td class="col-md-2">{{link_to_action('filesController@show',Carbon\Carbon::parse($expedientetraf->fechaapertura)->format('d-m-Y'),['id'=> $expedientetraf->id],[])}}</td>
+                        <td class="col-md-2">{{$expedientetraf->fechacierre}}</td>
+                        <td class="col-md-2">{{Carbon\Carbon::parse($expedientetraf->fecha_accidente)->format('d-m-Y')}} {{$expedientetraf->hora_accidente}}</td>
+                        <td class="col-md-2">{{$expedientetraf->lugar}}</td>
+                        <td class="col-md-4">{{$expedientetraf->desarrollo_suceso}}</td>
                     </tr>
                         @empty
+                        <tr>
+                            <td class="col-md-12" colspan="12">No tiene expedientes de trafico</td>
+                        </tr>
                         @endforelse
                 </table>
                 Expedientes otros
@@ -62,13 +65,16 @@
                     </tr>
                     @forelse($expedientes as $expediente)
                         <tr>
-                            <td class="col-md-1">{{$expediente->fechaapertura}}</td>
-                            <td class="col-md-1">{{$expediente->fechacierre}}</td>
-                            <td class="col-md-1">{{$expediente->fecha_accidente}} {{$expediente->hora}}</td>
-                            <td class="col-md-2">{{$expediente->sort_file_id}}</td>
-                            <td class="col-md-6">{{$expediente->descripcion_expediente}}</td>
+                            <td class="col-md-2">{{$expediente->fechaapertura}}</td>
+                            <td class="col-md-2">{{$expediente->fechacierre}}</td>
+                            <td class="col-md-2">{{$expediente->fecha_accidente}} {{$expediente->hora}}</td>
+                            <td class="col-md-2">{{$expediente->sort->nombre}}</td>
+                            <td class="col-md-4">{{$expediente->descripcion_expediente}}</td>
                         </tr>
                     @empty
+                        <tr>
+                            <td class="col-md-12" colspan="12">No tiene otros expedientes</td>
+                        </tr>
                     @endforelse
                 </table>
             </div>

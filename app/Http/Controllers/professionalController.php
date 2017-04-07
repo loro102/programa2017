@@ -51,7 +51,7 @@ class professionalController extends Controller
         professional::create($request->input());
 
         //dd($request->input());
-        return redirect('profesionals')->with('message','Se ha añadido un nuevo cliente');
+        return redirect('profesionals')->with('message','Se ha añadido un nuevo profesional');
     }
 
     /**
@@ -104,7 +104,7 @@ class professionalController extends Controller
         //
         $profesional=professional::findorFail($id);
         $profesional->fill($request->all())->save();
-        return redirect()->action('professionalController@show',['id'=>$id])->with('message','Cliente actualizado');
+        return redirect()->action('professionalController@show',['id'=>$id])->with('message','Profesional actualizado');
     }
 
     /**
@@ -117,7 +117,7 @@ class professionalController extends Controller
     {
         //
         professional::destroy($id);
-        return redirect('cliente')->with('message','Cliente eliminado');
+        return redirect('cliente')->with('message','Profesional eliminado');
     }
 
     public function getprofessional(Request $request,$id)

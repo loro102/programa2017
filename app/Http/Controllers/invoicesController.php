@@ -130,7 +130,7 @@ class invoicesController extends Controller
         //
         $factura=invoice::findorFail($id);
         $factura->fill($request->all())->save();
-        return redirect()->action('filesController@show',['id'=>$factura->file_id])->with('message','Factura actualizada');
+        return redirect()->action('invoicesController@edit',['id'=>$factura->file_id])->with('message','Factura actualizada');
         //return redirect()->action('invoicesController@edit',['id'=>$id])->with('message','Factura actualizada');
 
     }

@@ -3,10 +3,6 @@
 @section('content')
     <div class="container">
         @include('partials.flash')
-        <p>
-            {{ link_to_action('invoicesController@create','Añadir un nuevo factura',[],[]) }} |
-            {{ link_to_action('invoicesController@index','facturas',[],[]) }}
-        </p>
         <table class="table-bordered table-striped table-hover col-md-12">
             <tr>
                 <th class="col-md-2">Fecha</th>

@@ -18,6 +18,7 @@ class InvoicesCreateTable extends Migration
             $table->date('fechafact')->required();
             $table->integer('file_id')->unsigned();
             $table->foreign('file_id')->references('id')->on('files');
+            $table->boolean('honorario')->default(false);
             $table->integer('professional_id')->unsigned();
             $table->foreign('professional_id')->references('id')->on('professionals');
             //$table->integer('group_id')->unsigned();

@@ -13,7 +13,7 @@ class sort extends Seeder
     {
         //
         DB::table('sorts')->insert([
-            'nombre' => str_random(10),
+            'nombre' => 'accidente de trafico',
             'por_defecto'=>1,
 
         ]);

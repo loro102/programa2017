@@ -30,7 +30,10 @@
         @forelse($processors as $processor)
             <tr>
                 <td class="col-md-2">{{link_to_action('processorController@edit',$processor->nombre,['id'=> $processor->id],[])}}</td>
-                <td class="col-md-2">{{$processor->telefono}} || {{$processor->telefono2}}</td>
+                <td class="col-md-2"><div>
+                        <div class="row">{{$processor->telefono}}</div>
+                        <div class="row">{{$processor->telefono2}}</div>
+                    </div></td>
                 <td class="col-md-2">{{$processor->fax}}</td>
                 <td class="col-md-2">{{$processor->email}}</td>
                 <td class="col-md-1">{{$processor->cargo}}</td>

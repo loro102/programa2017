@@ -5,6 +5,11 @@
     {!! Form::Model($factura,['action'=>'invoicesController@store','class'=>'form-inline']) !!}
     <div class="row">
         <div class="form-group">
+            {!! Form::label('honorario', 'Es un Honorario', ['class' => 'control-label']) !!}
+            {!! Form::hidden('honorario', '0', ['id' => 'placa']) !!}
+            {!! Form::checkbox('honorario', '1', null,  ['id' => 'placa']) !!}
+        </div>
+        <div class="form-group">
             {!! Form::label('fechafac', 'Fecha de Factura:', ['class' => 'control-label']) !!}
             {!! Form::date('fechafact', '', ['class' => 'form-control']) !!}
         </div>

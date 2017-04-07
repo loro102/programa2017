@@ -4,8 +4,7 @@
     <div class="container">
         @include('partials.flash')
         <p>
-            {{ link_to_action('professionalController@create','Añadir un nuevo profesional',[],[]) }} |
-            {{ link_to_action('professionalController@index','profesionales',[],[]) }}
+            {{ link_to_action('professionalController@create','Añadir un nuevo profesional',[],['class' => 'btn btn-sm btn-primary']) }}
         </p>
         <table class="table-bordered table-striped table-hover col-md-12">
             <tr>

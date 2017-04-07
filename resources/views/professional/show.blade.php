@@ -7,8 +7,6 @@
             <div class="alert alert-danger" role="alert">Este profesional no está activo actualmente</div>
         @endif
         <p>
-            {{ link_to_action('professionalController@index','Volver al listado de profesionales',[],[]) }}
-            {{ link_to(url()->previous(),'Regresar') }}
             <span class="pull-right">
                 {!! Form::open(['method'=>'DELETE','route'=>['professionals.destroy',$profesional->id]],['class'=>'form-inline']) !!}
                 {!! Form::submit('Borrar profesional', array('class' => 'btn btn-sm btn-danger pull-right ','id'=>'deletebtn', 'onclick' => 'return confirm("¿Estas seguro de querer eliminar este profesional?");')) !!}

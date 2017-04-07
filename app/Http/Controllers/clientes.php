@@ -70,12 +70,14 @@ class clientes extends Controller
         $cliente=customer::findorFail($id);
         //$agente=customer::findorfail($id)->agent;
         //$expedientes=file::where('customer_id',$id)->get();
-        $expedientes=$cliente->files()->get();
+        $expedientestraf=$cliente->files()->where('sort_id',1)->get();
+        $expedientesotros=$cliente->files()->where('sort_id','!=',1)->get();
         //dd($expedientes);
         return view('clientes.show',[
             'cliente'=> $cliente,
             //'agente'=>$agente,
-            'expedientes'=>$expedientes
+            'expedientestraf'=>$expedientestraf,
+            'expedientes'=>$expedientesotros
         ]);
     }
 

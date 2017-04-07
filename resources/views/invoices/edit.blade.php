@@ -5,6 +5,11 @@
         {!! Form::Model($factura,['route'=>['invoices.update',$factura->id],'class'=>'form-inline','method'=>'PUT','id'=>'factura']) !!}
         <div class="row">
             <div class="form-group">
+                {!! Form::label('honorario', 'Es un Honorario', ['class' => 'control-label']) !!}
+                {!! Form::hidden('honorario', '0', ['id' => 'placa']) !!}
+                {!! Form::checkbox('honorario', '1', null,  ['id' => 'placa']) !!}
+            </div>
+            <div class="form-group">
                 {!! Form::label('fechafac', 'Fecha de Factura:', ['class' => 'control-label']) !!}
                 {!! Form::date('fechafact', null, ['class' => 'form-control']) !!}
             </div>
