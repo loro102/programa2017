@@ -7,6 +7,7 @@ use App\models\formality;
 use App\models\insurer;
 use App\models\invoice;
 use App\models\note;
+use App\models\phase;
 use App\models\sort;
 use Illuminate\Http\Request;
 use App\models\file;
@@ -41,6 +42,7 @@ class filesController extends Controller
         $sort=sort::all()->pluck('nombre','id')->prepend('Ninguno','');
         $categoria=formality::all()->unique('categoria')->pluck('categoria','categoria')->prepend('Ninguno','');
         $aseguradora=insurer::all()->pluck('nombre','id')->prepend('Ninguno','');
+        $fase=phase::all()->pluck('nombre','id')->prepend('Ninguno','0');
         //$abogado=professional::all()->pluck('nombre','id')->prepend('Ninguno','');
 
         //$client=$cliente->pluck('fullname','id');
@@ -52,6 +54,7 @@ class filesController extends Controller
             'categoria'=>$categoria,
             'aseguradora'=>$aseguradora,
             //'abogado'=>$abogado
+            'fase'=>$fase,
         ]);
     }
 
@@ -85,6 +88,8 @@ class filesController extends Controller
         */
 
         $consulta=file::find($id);
+        $contrario=$consulta->opponent;
+        //dd($consulta->opponent);
 
         /*
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -196,6 +201,8 @@ class filesController extends Controller
         $categoria=formality::all()->unique('categoria')->pluck('categoria','categoria')->prepend('Ninguno','');
         $aseguradora=insurer::all()->pluck('nombre','id')->prepend('Ninguno','');
         //$abogado=professional::all()->pluck('nombre','id')->prepend('Ninguno','');
+        $fase=phase::all()->pluck('nombre','id')->prepend('Ninguno','0');
+
 
         //$client=$cliente->pluck('fullname','id');
         //dd($cliente);
@@ -205,7 +212,8 @@ class filesController extends Controller
             'sort'=>$sort,
             'categoria'=>$categoria,
             'aseguradora'=>$aseguradora,
-            //'abogado'=>$abogado
+            //'abogado'=>$abogado,
+            'fase'=>$fase,
         ]);
     }
 

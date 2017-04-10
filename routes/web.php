@@ -30,6 +30,7 @@ Route::resource('/invoices','invoicesController');
 Route::resource('/professionals','professionalController');
 Route::resource('/filepro','file_professionalController');
 Route::resource('/note','noteController');
+Route::resource('/opponent','opponentController');
 
 
 

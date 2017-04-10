@@ -20,7 +20,10 @@ class file extends Model
     {
         return $this->hasOne('App\models\sort', 'id');
     }
-    
+    public function opponent()
+    {
+        return $this->hasmany('App\models\opponent', 'file_id');
+    }
 
     /*public function solicitor()
     {

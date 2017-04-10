@@ -17,6 +17,11 @@
                     <div class="form-group">
                         {!! Form::hidden('customer_id',null , ['id' => 'id']) !!}
                     </div>
+
+                    <div class="form-group">
+                        {!! Form::label('phase_id', 'Fase:', ['class' => 'control-label']) !!}
+                        {!! Form::select('phase_id', $fase , null , ['class' => 'form-control']) !!}
+                    </div>
                     <div class="form-group">
                         {!! Form::label('solicitor_id', 'Abogado:', ['class' => 'control-label']) !!}
                         {!! Form::select('solicitor_id', ['1'=>'Trafico','2'=>'No Trafico'] , null , ['class' => 'form-control']) !!}

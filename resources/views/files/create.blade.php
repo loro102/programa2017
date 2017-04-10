@@ -51,6 +51,10 @@
                     {!! Form::text('caso_tipo', null, ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
+                    {!! Form::label('sort_file_id', 'Fase:', ['class' => 'control-label']) !!}
+                    {!! Form::select('sort_file_id', $fase , null , ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
                     {!! Form::label('sort_file_id', 'Tipo de expediente:', ['class' => 'control-label']) !!}
                     {!! Form::select('sort_file_id', $sort , null , ['class' => 'form-control']) !!}
                 </div>
