@@ -295,9 +295,26 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">Datos del contrario</div>
                                 <div class="panel-body">
+                                    <div class="center-block">
                                     @foreach($expediente->opponent as $contrario)
+                                        <div class="container col-md-6">
+                                        <div class="panel panel-default col-md-12 center-block">
                                         <div class="panel-heading">{{$contrario->nombre}}</div>
                                         <div class="panel-body">
+                                            <div class="col-md-12"><address>
+                                                    <strong>Dirección:</strong><br>
+                                                    {{$contrario->direccion}}<br>
+                                                    {{$contrario->localidad}}({{$contrario->provincia}}),{{$contrario->codigo_postal}}
+                                                </address>
+                                            </div>
+                                            <div class="col-md-4"><strong>Teléfono:</strong> {{$contrario->telefono}}
+                                            </div>
+                                            <div class="col-md-4"><strong>Telefono 2:</strong> {{$contrario->telefono2}}
+                                            </div>
+                                            <div class="col-md-4"><strong>Móvil:</strong> {{$contrario->movil}}
+                                            </div>
+                                            <div class="col-md-4"><strong>Email:</strong> {{$contrario->email}}
+                                            </div>
 
                                             <div class="col-md-4"><strong>Vehículo:</strong> {{$contrario->vehiculo}}
                                             </div>
@@ -329,7 +346,11 @@
                                                     Tramitador de la Aseguradora:</strong>
                                                 {{$contrario->processor_id}}</div>
                                         </div>
+                                        </div>
+                                        </div>
+
                                     @endforeach
+                                    </div>
                                 </div>
                             </div>
 
