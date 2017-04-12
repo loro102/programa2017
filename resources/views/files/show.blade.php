@@ -302,48 +302,49 @@
                                         <div class="panel-heading">{{$contrario->nombre}}</div>
                                         <div class="panel-body">
                                             <div class="col-md-12"><address>
-                                                    <strong>Dirección:</strong><br>
-                                                    {{$contrario->direccion}}<br>
-                                                    {{$contrario->localidad}}({{$contrario->provincia}}),{{$contrario->codigo_postal}}
+                                                    <div class="col-md-6"><strong>Dirección:</strong>
+                                                    {{$contrario->direccion}} {{$contrario->localidad}}({{$contrario->provincia}}),{{$contrario->codigo_postal}}
+                                                    </div>
+                                                        <br>
+                                                    <div class="col-md-6"><strong>Teléfono:</strong> {{$contrario->telefono}}
+                                                    </div>
+                                                    <div class="col-md-6"><strong>Telefono 2:</strong> {{$contrario->telefono2}}
+                                                    </div>
+                                                    <div class="col-md-6"><strong>Móvil:</strong> {{$contrario->movil}}
+                                                    </div>
+                                                    <div class="col-md-6"><strong>Email:</strong><a href="mailto:#">{{$contrario->email}}</a>
+                                                    </div>
                                                 </address>
                                             </div>
-                                            <div class="col-md-4"><strong>Teléfono:</strong> {{$contrario->telefono}}
-                                            </div>
-                                            <div class="col-md-4"><strong>Telefono 2:</strong> {{$contrario->telefono2}}
-                                            </div>
-                                            <div class="col-md-4"><strong>Móvil:</strong> {{$contrario->movil}}
-                                            </div>
-                                            <div class="col-md-4"><strong>Email:</strong> {{$contrario->email}}
+
+
+                                            <div class="col-md-6"><strong>Vehículo:</strong> {{$contrario->vehiculo}}
                                             </div>
 
-                                            <div class="col-md-4"><strong>Vehículo:</strong> {{$contrario->vehiculo}}
+                                            <div class="col-md-6"><strong>Matrícula:</strong> {{$contrario->matricula}}
                                             </div>
 
-                                            <div class="col-md-4"><strong>Matrícula:</strong> {{$contrario->matricula}}
+                                            <div class="col-md-6"><strong>Conductor:</strong> {{$contrario->conductor}}
                                             </div>
 
-                                            <div class="col-md-4"><strong>Conductor:</strong> {{$contrario->conductor}}
+                                            <div class="col-md-6"><strong>Tomador:</strong> {{$contrario->tomador}}
                                             </div>
 
-                                            <div class="col-md-4"><strong>Tomador:</strong> {{$contrario->tomador}}
+                                            <div class="col-md-6"><strong>Nº póliza:</strong> {{$contrario->num_poliza}}
                                             </div>
-
-                                            <div class="col-md-4"><strong>Nº póliza:</strong> {{$contrario->num_poliza}}
-                                            </div>
-
-                                            <div class="col-md-4"><strong>
+                                            <div class="col-md-6"><strong>
                                                     Nº de referencia:
                                                 </strong>
                                                 {{$contrario->refexpediente}}
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <strong>
                                                     Aseguradora:
                                                 </strong>
                                                 {{$contrario->processor_id}}
                                             </div>
-                                            <div class="col-md-4"><strong>
-                                                    Tramitador de la Aseguradora:</strong>
+                                            <div class="col-md-6"><strong>
+                                                    Tramitador:</strong>
                                                 {{$contrario->processor_id}}</div>
                                         </div>
                                         </div>
