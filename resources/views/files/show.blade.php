@@ -298,7 +298,6 @@
                                             data-target="#newcontrario">
 
                                     </button>
-                                    </div>
 
                                     <!-- Modal de nuevo contrario en expedientes-->
                                     <div class="modal fade " id="newcontrario" tabindex="-1" role="dialog" aria-labelledby="newcontrario">
@@ -669,10 +668,10 @@
             Notas
         </button>
         <div class="collapse" id="Notas">
-            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#nota">
+            <button type="button" class="btn btn-md btn-success pull-right" data-toggle="modal" data-target="#nota">
                 Nueva nota
             </button>
-
+            <div class="row"></div>
             <!-- Modal de lista de tramitadores-->
             <div class="modal fade " id="nota" tabindex="-1" role="dialog" aria-labelledby="nota">
                 <div class="modal-dialog modal-lg" role="document">
