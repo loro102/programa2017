@@ -293,7 +293,39 @@
                                 </div>
                             </div>
                             <div class="panel panel-default">
-                                <div class="panel-heading">Datos del contrario</div>
+                                <div class="panel-heading">Datos del contrario
+                                    <button type="button" class="btn btn-lg btn-success glyphicon glyphicon-plus col-md-offset-10" data-toggle="modal"
+                                            data-target="#newcontrario">
+
+                                    </button>
+                                    </div>
+
+                                    <!-- Modal de nuevo contrario en expedientes-->
+                                    <div class="modal fade " id="newcontrario" tabindex="-1" role="dialog" aria-labelledby="newcontrario">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" onclick="document.location.reload();"
+                                                            data-dismiss="modal" aria-label="Close"><span
+                                                                aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    <h4 class="modal-title" id="newcontrario"></h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="embed-responsive embed-responsive-4by3">
+                                                        <iframe class="embed-responsive-item"
+                                                                src="/opponent/create?file={{$expediente->id}}"></iframe>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                                                            onclick="document.location.reload();">Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="panel-body">
                                     <div class="center-block">
                                     @foreach($expediente->opponent as $contrario)
