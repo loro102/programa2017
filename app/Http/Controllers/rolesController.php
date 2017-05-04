@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\models\role;
+
+use Caffeinated\Shinobi\Models\Permission;
+use Caffeinated\Shinobi\Models\Role;
 use Illuminate\Http\Request;
+
 
 class rolesController extends Controller
 {
@@ -15,8 +18,8 @@ class rolesController extends Controller
     public function index()
     {
         //
-        $role=role::paginate(10);
-        return view('users.roles.index',['roles'=>$role]);
+        $role=Role::paginate(10);
+        return view('admin.roles.index',['roles'=>$role]);
     }
 
     /**
@@ -27,8 +30,8 @@ class rolesController extends Controller
     public function create()
     {
         //
-        $role=new role;
-        return view('users.roles.create',['role'=>$role]);
+        $role=new Role;
+        return view('admin.roles.create',['role'=>$role]);
     }
 
     /**
@@ -40,10 +43,10 @@ class rolesController extends Controller
     public function store(Request $request)
     {
         //
-        role::create($request->input());
+        Role::create($request->input());
 
         //dd($request->input());
-        return redirect('roles')->with('message','Se ha añadido un nuevo rol');
+        return redirect('role')->with('message','Se ha añadido un nuevo rol');
     }
 
     /**
@@ -55,6 +58,16 @@ class rolesController extends Controller
     public function show($id)
     {
         //
+        $role=Role::findorFail($id);
+        $permiso=Permission::all()->pluck('slug','id')->prepend('Seleccione permiso','');
+        $permissions=$role->getPermissions();
+        //dd($permissions);
+        return view('admin.roles.show',[
+            'role'=>$role,
+            'select'=>$permiso,
+            'permisos'=>$permissions
+        ]);
+
     }
 
     /**
@@ -66,8 +79,8 @@ class rolesController extends Controller
     public function edit($id)
     {
         //
-        $role=role::findorFail($id);
-        return view('users.roles.edit',[
+        $role=Role::findorFail($id);
+        return view('admin.roles.edit',[
             'role'=>$role
         ]);
     }
@@ -82,7 +95,7 @@ class rolesController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $role=role::findorFail($id);
+        $role=Role::findorFail($id);
         $role->fill($request->all())->save();
         return redirect()->action('rolesController@index')->with('message','El rol se ha modificado correctamente');
     }
@@ -96,7 +109,7 @@ class rolesController extends Controller
     public function destroy($id)
     {
         //
-        role::destroy($id);
+        Role::destroy($id);
         return redirect('role')->with('message','El rol se ha eliminado correctamente');
     }
 }

@@ -17,8 +17,8 @@ class userController extends Controller
         //
         $user=User::paginate(10);
         //dd($cliente);
-        return view('admin.index',[
-            'usuarios'=> $user
+        return view('admin.usuario.index',[
+            'users'=> $user
         ]);
     }
 
@@ -30,6 +30,9 @@ class userController extends Controller
     public function create()
     {
         //
+        //$agente=new User;
+        //return view('admin.usuario.register',['agente'=>$agente]);
+
     }
 
     /**
@@ -41,6 +44,10 @@ class userController extends Controller
     public function store(Request $request)
     {
         //
+        //User::create($request->input());
+
+        //dd($request->input());
+       // return redirect('usuario')->with('message','Se ha añadido un nuevo usuario');
     }
 
     /**
@@ -52,6 +59,11 @@ class userController extends Controller
     public function show($id)
     {
         //
+        $user=User::findorFail($id);
+        //dd($user);
+        return view('admin.usuario.show',[
+            'user'=> $user
+        ]);
     }
 
     /**
@@ -63,6 +75,10 @@ class userController extends Controller
     public function edit($id)
     {
         //
+        $user=User::findorFail($id);
+        return view('admin.usuario.edit',[
+            'user'=>$user,
+            ]);
     }
 
     /**
@@ -75,6 +91,9 @@ class userController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $user=User::findorFail($id);
+        $user->fill($request->all())->save();
+        return redirect()->action('userController@show',['id'=>$id])->with('message','Usuari actualizado');
     }
 
     /**
@@ -86,5 +105,7 @@ class userController extends Controller
     public function destroy($id)
     {
         //
+        User::destroy($id);
+        return redirect('usuario')->with('message','Usuario eliminado');
     }
 }

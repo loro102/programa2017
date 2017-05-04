@@ -181,6 +181,7 @@ return [
         Caffeinated\Shinobi\ShinobiServiceProvider::class,
         Intervention\Validation\ValidationServiceProvider::class,
         Pixelpeter\IsoCodesValidation\IsoCodesValidationServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 
@@ -233,6 +234,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Shinobi' => Caffeinated\Shinobi\Facades\Shinobi::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 
