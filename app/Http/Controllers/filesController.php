@@ -8,7 +8,9 @@ use App\models\insurer;
 use App\models\invoice;
 use App\models\note;
 use App\models\phase;
+use App\models\processor;
 use App\models\sort;
+use App\User;
 use Illuminate\Http\Request;
 use App\models\file;
 use App\models\customer;
@@ -41,6 +43,7 @@ class filesController extends Controller
         //$cliente=customer::all()->pluck('fullname','id')->prepend('Ninguno','');
         $sort=sort::all()->pluck('nombre','id')->prepend('Ninguno','');
         $categoria=formality::all()->unique('categoria')->pluck('categoria','categoria')->prepend('Ninguno','');
+        $abogado=professional::where('group_id',1)->where('activo',true)->pluck('Nombre','id');
         $aseguradora=insurer::all()->pluck('nombre','id')->prepend('Ninguno','');
         $fase=phase::all()->pluck('nombre','id')->prepend('Ninguno','0');
         //$abogado=professional::all()->pluck('nombre','id')->prepend('Ninguno','');
@@ -53,7 +56,7 @@ class filesController extends Controller
             'sort'=>$sort,
             'categoria'=>$categoria,
             'aseguradora'=>$aseguradora,
-            //'abogado'=>$abogado
+            'abogado'=>$abogado,
             'fase'=>$fase,
         ]);
     }
@@ -197,23 +200,33 @@ class filesController extends Controller
         //
         $expediente=file::findorFail($id);
         //$cliente=customer::all()->pluck('fullname','id')->prepend('Ninguno','');
-        $sort=sort::all()->pluck('nombre','id')->prepend('Ninguno','');
+        $sort=sort::all()->pluck('nombre','id')->prepend('Ninguno','0');
+        //Recogiendo datos de los select de formalidad
         $categoria=formality::all()->unique('categoria')->pluck('categoria','categoria')->prepend('Ninguno','');
+        $a=formality::find($expediente->formality_id);
+        $procedimiento= formality::all()->unique('categoria')->pluck('nombre','id')->prepend('Ninguno','');
+        //recogiendo datos de aseguradora
         $aseguradora=insurer::all()->pluck('nombre','id')->prepend('Ninguno','');
+        $tramiciasel=processor::all()->pluck('nombre','id')->prepend('Ninguno','');
+        $tramicia=processor::findorfail($expediente->processor_id);
         //$abogado=professional::all()->pluck('nombre','id')->prepend('Ninguno','');
-        $fase=phase::all()->pluck('nombre','id')->prepend('Ninguno','0');
-
+        $fase=phase::all()->pluck('nombre','id')->prepend('Conociendo el caso','0');
+        $abogado=professional::where('group_id',1)->pluck('Nombre','id');
 
         //$client=$cliente->pluck('fullname','id');
-        //dd($cliente);
+        //dd($abogado);
         return view('files.edit',[
             'expediente'=>$expediente,
             //'cliente'=>$cliente,
             'sort'=>$sort,
             'categoria'=>$categoria,
             'aseguradora'=>$aseguradora,
-            //'abogado'=>$abogado,
+            'procedimiento'=>$procedimiento,
+            'abogado'=>$abogado,
             'fase'=>$fase,
+            'cat'=>$a,
+            'tramicia'=>$tramicia,
+            'tramiciasel'=>$tramiciasel,
         ]);
     }
 
@@ -228,8 +241,8 @@ class filesController extends Controller
     {
         //
         $expediente=file::findorFail($id);
-        $expediente->fill($request->all())->save();
-        return redirect()->action('fileController@show',['id'=>$id])->with('message','Expediente actualizado');
+        $expediente->fill($request->except(['formalidad']))->save();
+        return redirect()->action('filesController@show',['id'=>$id])->with('message','Expediente actualizado');
     }
 
     /**

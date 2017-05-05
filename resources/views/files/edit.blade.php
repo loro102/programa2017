@@ -6,14 +6,14 @@
         <div>
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#expediente" aria-controls="expediente" role="tab" data-toggle="tab">Datos expediente</a></li>                <li role="presentation"><a href="#suceso" aria-controls="suceso" role="tab" data-toggle="tab">Datos del suceso</a></li>
+                <li role="presentation" class="active"><a href="#inicio" aria-controls="inicio" role="tab" data-toggle="tab">Datos expediente</a></li>                <li role="presentation"><a href="#suceso" aria-controls="suceso" role="tab" data-toggle="tab">Datos del suceso</a></li>
                 <li role="presentation"><a href="#juridico" aria-controls="juridico" role="tab" data-toggle="tab">Datos jurídicos</a></li>
                 <li role="presentation"><a href="#extra" aria-controls="extra" role="tab" data-toggle="tab">Otros datos</a></li>
             </ul>
 
             <!-- Tab panes -->
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="expediente">
+                <div role="tabpanel" class="tab-pane active" id="inicio">
                     <div class="form-group">
                         {!! Form::hidden('customer_id',null , ['id' => 'id']) !!}
                     </div>
@@ -24,7 +24,7 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('solicitor_id', 'Abogado:', ['class' => 'control-label']) !!}
-                        {!! Form::select('solicitor_id', ['1'=>'Trafico','2'=>'No Trafico'] , null , ['class' => 'form-control']) !!}
+                        {!! Form::select('solicitor_id', $abogado , null , ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('fechaapertura', 'Fecha de Apertura:', ['class' => 'control-label']) !!}
@@ -55,8 +55,8 @@
                         {!! Form::text('caso_tipo', null, ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::label('sort_file_id', 'Tipo de expediente:', ['class' => 'control-label']) !!}
-                        {!! Form::select('sort_file_id', $sort , null , ['class' => 'form-control']) !!}
+                        {!! Form::label('sort_id', 'Tipo de expediente:', ['class' => 'control-label']) !!}
+                        {!! Form::select('sort_id', $sort , null , ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('firma_carta_abogado', 'Firma carta de designación:', ['class' => 'control-label']) !!}
@@ -168,11 +168,11 @@
                 <div role="tabpanel" class="tab-pane" id="juridico">
                     <div class="form-group">
                         {!! Form::label('formalidad', 'Formalidad:', ['class' => 'control-label']) !!}
-                        {!! Form::select('formalidad', $categoria , null , ['class' => 'form-control','id'=>'tipo_procedimiento']) !!}
+                        {!! Form::select('formalidad', $categoria ,$cat->categoria , ['class' => 'form-control','id'=>'tipo_procedimiento']) !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::label('formalities_id', 'Procedimiento:', ['class' => 'control-label']) !!}
-                        {!! Form::select('formalities_id', ['placeholder'=>'Selecciona'] , null , ['class' => 'form-control','id'=>'procedimientos']) !!}
+                        {!! Form::label('formality_id', 'Procedimiento:', ['class' => 'control-label']) !!}
+                        {!! Form::select('formality_id', $procedimiento , null , ['class' => 'form-control','id'=>'procedimientos']) !!}
                     </div>
 
                     <div class="form-group">
@@ -235,7 +235,7 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('processor_id', 'Tramitador de la aseguradora:', ['class' => 'control-label']) !!}
-                        {!! Form::select('processor_id',['placeholder'=>'Selecciona'], null , ['class' => 'form-control']) !!}
+                        {!! Form::select('processor_id',$tramiciasel, $tramicia->id , ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('fechapoliza', 'Fecha de Póliza:', ['class' => 'control-label']) !!}

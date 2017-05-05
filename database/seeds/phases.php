@@ -14,6 +14,11 @@ class phases extends Seeder
         //
         DB::table('phases')->insert(
             [
+                'id' =>0,
+                'nombre' =>'Conociendo el caso',
+            ]);
+        DB::table('phases')->insert(
+            [
                 'id' =>1,
                 'nombre' =>'Pendiente de Designación de Abogado',
             ]);

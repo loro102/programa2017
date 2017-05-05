@@ -20,7 +20,7 @@
                 </div>
                 <div class="form-group">
                     {!! Form::label('solicitor_id', 'Abogado:', ['class' => 'control-label']) !!}
-                    {!! Form::select('solicitor_id', ['1'=>'Trafico','2'=>'No Trafico'] , null , ['class' => 'form-control']) !!}
+                    {!! Form::select('solicitor_id', $abogado , 1 , ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('fechaapertura', 'Fecha de Apertura:', ['class' => 'control-label']) !!}
@@ -51,12 +51,12 @@
                     {!! Form::text('caso_tipo', null, ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('sort_file_id', 'Fase:', ['class' => 'control-label']) !!}
-                    {!! Form::select('sort_file_id', $fase , null , ['class' => 'form-control']) !!}
+                    {!! Form::label('phase', 'Fase:', ['class' => 'control-label']) !!}
+                    {!! Form::select('phase', $fase , null , ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('sort_file_id', 'Tipo de expediente:', ['class' => 'control-label']) !!}
-                    {!! Form::select('sort_file_id', $sort , null , ['class' => 'form-control']) !!}
+                    {!! Form::label('sort_id', 'Tipo de expediente:', ['class' => 'control-label']) !!}
+                    {!! Form::select('sort_id', $sort , null , ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('firma_carta_abogado', 'Firma carta de designación:', ['class' => 'control-label']) !!}
