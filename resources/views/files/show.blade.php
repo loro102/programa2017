@@ -330,7 +330,7 @@
                                     @foreach($expediente->opponent as $contrario)
                                         <div class="container col-md-6">
                                         <div class="panel panel-default col-md-12 center-block">
-                                        <div class="panel-heading">{{$contrario->nombre}}</div>
+                                        <div class="panel-heading">{{link_to_action('opponentController@show', $contrario->nombre , ['id'=>$contrario->id], [])}}</div>
                                         <div class="panel-body">
                                             <div class="col-md-12"><address>
                                                     <div class="col-md-6"><strong>Dirección:</strong>

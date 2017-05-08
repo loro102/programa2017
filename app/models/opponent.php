@@ -15,4 +15,10 @@ class opponent extends Model
     {
         return $this->belongsToMany('App\models\file','id');
     }
+    public function processor()
+    {
+        return $this->hasOne('App\models\processor','id','processor_id');
+    }
+    
+
 }

@@ -2,23 +2,19 @@
 
 @section('content')
     <div class="container">
-        {!! Form::Model($profesional,['route'=>['professionals.update',$profesional->id],'class'=>'form-inline','method'=>'PUT','id'=>'profesional']) !!}
+        {!! Form::Model($contrario,['route'=>['opponent.update',$contrario->id],'class'=>'form-inline','method'=>'PUT','id'=>'contario']) !!}
         <div class="row">
+            {{ Form::hidden('id', $contrario->id) }}
             <div class="form-group">
-                {!! Form::label('nombre', 'Nombre:', ['class' => 'control-label']) !!}
-                {!! Form::text('Nombre', null, ['class' => 'form-control']) !!}
+                {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('nif', 'NIF:', ['class' => 'control-label']) !!}
                 {!! Form::text('nif', null, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('group_id', 'Grupo:', ['class' => 'control-label']) !!}
-                {!! Form::text('group_id', null, ['class' => 'form-control']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('especialidad', 'Especialidad:', ['class' => 'control-label']) !!}
-                {!! Form::text('especialidad', null, ['class' => 'form-control']) !!}
+                {!! Form::label('fechanacimiento', 'Fecha de nacimiento:', ['class' => 'control-label']) !!}
+                {!! Form::date('fechanacimiento', null,['class'=>'form-control']) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('direccion', 'Direccion:', ['class' => 'control-label']) !!}
@@ -37,55 +33,66 @@
                 {!! Form::text('codigo_postal', null, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('telefono1', 'Telefono:', ['class' => 'control-label']) !!}
-                {!! Form::text('telefono1', null, ['class' => 'form-control']) !!}
+                {!! Form::label('telefono', 'Telefono:', ['class' => 'control-label']) !!}
+                {!! Form::text('telefono', null, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('telefono2', 'Telefono 2:', ['class' => 'control-label']) !!}
                 {!! Form::text('telefono2', null, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('telefono3', 'Telefono 3:', ['class' => 'control-label']) !!}
-                {!! Form::text('telefono3', null, ['class' => 'form-control']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('movil', 'Movil:', ['class' => 'control-label']) !!}
+                {!! Form::label('movil', 'Móvil:', ['class' => 'control-label']) !!}
                 {!! Form::text('movil', null, ['class' => 'form-control']) !!}
             </div>
+
             <div class="form-group">
-                {!! Form::label('fax', 'Fax:', ['class' => 'control-label']) !!}
-                {!! Form::text('fax', null, ['class' => 'form-control']) !!}
+                {!! Form::label('email', 'Correo Electrónico:', ['class' => 'control-label']) !!}
+                {!! Form::email('email', null, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('email', 'Email:', ['class' => 'control-label']) !!}
-                {!! Form::text('email', null, ['class' => 'form-control']) !!}
+                {!! Form::label('insurer_id', 'Compañia de seguros:', ['class' => 'control-label']) !!}
+                {!! Form::select('insurer_id', $aseguradora , null , ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('iban', 'Iban:', ['class' => 'control-label']) !!}
-                {!! Form::text('iban', null, ['class' => 'form-control']) !!}
+                {!! Form::label('processor_id', 'Tramitador de la aseguradora:', ['class' => 'control-label']) !!}
+                {!! Form::select('processor_id',$tramitador, null , ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('homologado', 'Homologado', ['class' => 'control-label']) !!}
-                {!! Form::hidden('homologado', '0', ['id' => 'homologado']) !!}
-                {!! Form::checkbox('homologado', '1', null,  ['id' => 'homologado']) !!}
+                {!! Form::label('vehiculo', 'Vehículo:', ['class' => 'control-label']) !!}
+                {!! Form::text('vehiculo', null, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('activo', 'Activo', ['class' => 'control-label']) !!}
-                {!! Form::hidden('activo', '0', ['id' => 'pegatina']) !!}
-                {!! Form::checkbox('activo', '1', null,  ['id' => 'pegatina']) !!}
+                {!! Form::label('conductor', 'Conductor:', ['class' => 'control-label']) !!}
+                {!! Form::text('conductor', null, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('indemnizacion', 'Las facturas de este profesional cuentan para la indemnizacion', ['class' => 'control-label']) !!}
-                {!! Form::hidden('indemnizacion', '0', ['id' => 'pegatina']) !!}
-                {!! Form::checkbox('indemnizacion', '1', null,  ['id' => 'pegatina']) !!}
+                {!! Form::label('num_poliza', 'Nº de Póliza:', ['class' => 'control-label']) !!}
+                {!! Form::text('num_poliza', null, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('acuerdo_pago', 'Acuerdo de pago:', ['class' => 'control-label']) !!}
-                {!! Form::textarea('acuerdo_pago', null,['class'=>'form-control']) !!}
+                {!! Form::label('refexpediente', 'Referencia del Expediente:', ['class' => 'control-label']) !!}
+                {!! Form::text('refexpediente', null, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('notas', 'Notas:', ['class' => 'control-label']) !!}
-                {!! Form::textarea('notas', null,['class'=>'form-control']) !!}
+                {!! Form::label('matricula', 'Matrícula:', ['class' => 'control-label']) !!}
+                {!! Form::text('matricula', null, ['class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">
+                {!! Form::label('propietario', 'Propietario:', ['class' => 'control-label']) !!}
+                {!! Form::text('propietario', null, ['class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">
+                {!! Form::label('tomador', 'Tomador:', ['class' => 'control-label']) !!}
+                {!! Form::text('tomador', null, ['class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">
+                {!! Form::label('apunte', 'Apunte:', ['class' => 'control-label']) !!}
+                {!! Form::textarea('apunte', null,['class'=>'form-control']) !!}
+            </div>
+            <div class="form-group">
+                {!! Form::label('posible_culpable', 'Posible Culpable', ['class' => 'control-label']) !!}
+                {!! Form::hidden('posible_culpable', '0', ['id' => 'posible_culpable']) !!}
+                {!! Form::checkbox('posible_culpable', '1', ['id' => 'posible_culpable']) !!}
             </div>
         </div>
         <div class="row">

@@ -11,4 +11,13 @@ class processor extends Model
         'id',
         'timestamps',
     ];
+    public function insurer()
+    {
+        return $this->belongsToMany('App\models\insurer','insurer_id');
+    }
+    public function opponent()
+    {
+        return $this->belongto('App\models\opponent','id');
+    }
+
 }

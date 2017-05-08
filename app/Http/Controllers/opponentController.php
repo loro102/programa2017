@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\insurer;
 use App\models\opponent;
+use App\models\processor;
 use Illuminate\Http\Request;
 
 class opponentController extends Controller
@@ -60,6 +61,15 @@ class opponentController extends Controller
     public function show($id)
     {
         //
+        $contrario=opponent::findorfail($id);
+        $aseguradora=insurer::findorfail($contrario->processor->insurer_id)->pluck('nombre');
+
+        return view('opponent.show',[
+            'contrario'=>$contrario,
+            'aseguradora'=>$aseguradora
+            //'aseguradora'=>$aseguradora,
+        ]);
+
     }
 
     /**
@@ -71,6 +81,14 @@ class opponentController extends Controller
     public function edit($id)
     {
         //
+        $processor=opponent::findorFail($id);
+        $aseguradora=insurer::all()->pluck('nombre','id');
+        $tramitador=processor::all()->pluck('nombre','id');
+        return view('opponent.edit',[
+            'contrario'=>$processor,
+            'aseguradora'=>$aseguradora,
+            'tramitador'=>$tramitador,
+        ]);
     }
 
     /**
@@ -83,6 +101,9 @@ class opponentController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $contrario=opponent::findorFail($id);
+        $contrario->fill($request->all())->save();
+        return redirect()->action('opponentController@show',['id'=>$contrario->id])->with('message','Tramitador actualizado');
     }
 
     /**

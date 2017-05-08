@@ -38,6 +38,7 @@ class OpponentsCreateTable extends Migration
             $table->text('apunte');
             $table->integer('file_id')->unsigned();
             $table->foreign('file_id')->references('id')->on('files');
+            $table->boolean('posible_culpable');
             $table->timestamps();
         });
     }

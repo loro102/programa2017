@@ -101,6 +101,11 @@
             {!! Form::label('apunte', 'Apunte:', ['class' => 'control-label']) !!}
             {!! Form::textarea('apunte', '',['class'=>'form-control']) !!}
         </div>
+        <div class="form-group">
+            {!! Form::label('posible_culpable', 'Posible Culpable', ['class' => 'control-label']) !!}
+            {!! Form::hidden('posible_culpable', '0', ['id' => 'posible_culpable']) !!}
+            {!! Form::checkbox('posible_culpable'', '1', null,  ['id' => 'posible_culpable']) !!}
+        </div>
 
     </div>
     <div class="row">

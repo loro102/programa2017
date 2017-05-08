@@ -3,53 +3,44 @@
 @section('content')
     <div class="container">
         @include('partials.flash')
-        @if ($profesional->activo == 0)
-            <div class="alert alert-danger" role="alert">Este profesional no está activo actualmente</div>
+        @if ($contrario->posible_culpable == true)
+            <div class="alert alert-danger" role="alert">Posible culpable</div>
         @endif
         <p>
             <span class="pull-right">
-                {!! Form::open(['method'=>'DELETE','route'=>['professionals.destroy',$profesional->id]],['class'=>'form-inline']) !!}
-                {!! Form::submit('Borrar profesional', array('class' => 'btn btn-sm btn-danger pull-right ','id'=>'deletebtn', 'onclick' => 'return confirm("¿Estas seguro de querer eliminar este profesional?");')) !!}
-                {{ link_to_action('professionalController@edit','Editar profesional',['id'=>$profesional->id],['class'=>'btn btn-sm btn-warning pull-right ']) }}
+                {!! Form::open(['method'=>'DELETE','route'=>['opponent.destroy',$contrario->id]],['class'=>'form-inline']) !!}
+                {!! Form::submit('Borrar contrario', array('class' => 'btn btn-sm btn-danger pull-right ','id'=>'deletebtn', 'onclick' => 'return confirm("¿Estas seguro de querer eliminar este contrario?");')) !!}
+                {{ link_to_action('opponentController@edit','Editar contrario',['id'=>$contrario->id],['class'=>'btn btn-sm btn-warning pull-right ']) }}
                 {!! Form::close()!!}
             </span>
         </p>
         <div class="panel panel-default">
-            <div class="panel-heading"><h3>{{ $profesional->Nombre }}</h3></div>
+            <div class="panel-heading"><h3>{{ $contrario->nombre }}</h3></div>
             <div class="panel-body">
-                <div class="col-md-3"><strong>DNI/NIF:</strong>{{ $profesional->nif }}</div>
-                <div class="col-md-6"><strong>Dirección:</strong>{{ $profesional->direccion }}</div>
-                <div class="col-md-3"><strong>Localidad:</strong>{{ $profesional->localidad }}</div>
-                <div class="col-md-3"><strong>Provincia:</strong>{{ $profesional->provincia }}</div>
-                <div class="col-md-3"><strong>Código Postal:</strong>{{ $profesional->codigo_postal }}</div>
-                <div class="col-md-3"><strong>Profesión:</strong>{{ $profesional->group_id }}</div>
-                <div class="col-md-3"><strong>Profesión:</strong>{{ $profesional->especialidad }}</div>
-                <div class="col-md-3"><strong>Teléfono 1:</strong>{{ $profesional->telefono1 }}</div>
-                <div class="col-md-3"><strong>Teléfono 2:</strong>{{ $profesional->telefono2 }}</div>
-                <div class="col-md-3"><strong>Teléfono 3:</strong>{{ $profesional->telefono3 }}</div>
-                <div class="col-md-3"><strong>Móvil:</strong>{{ $profesional->movil }}</div>
-                <div class="col-md-3"><strong>Fax:</strong>{{ $profesional->fax }}</div>
-                <div class="col-md-3"><strong>E-Mail:</strong>{{ $profesional->email }}</div>
+                <div class="col-md-3"><strong>DNI/NIF:</strong>{{ $contrario->nif }}</div>
+                <div class="col-md-6"><strong>Dirección:</strong>{{ $contrario->direccion }}</div>
+                <div class="col-md-3"><strong>Localidad:</strong>{{ $contrario->localidad }}</div>
+                <div class="col-md-3"><strong>Provincia:</strong>{{ $contrario->provincia }}</div>
+                <div class="col-md-3"><strong>Código Postal:</strong>{{ $contrario->codigo_postal }}</div>
+                <div class="col-md-3"><strong>Vehiculo:</strong>{{ $contrario->vehiculo }}</div>
+                <div class="col-md-3"><strong>Profesión:</strong>{{ $contrario->especialidad }}</div>
+                <div class="col-md-3"><strong>Teléfono 1:</strong>{{ $contrario->telefono }}</div>
+                <div class="col-md-3"><strong>Teléfono 2:</strong>{{ $contrario->telefono2 }}</div>
+                <div class="col-md-3"><strong>Móvil:</strong>{{ $contrario->movil }}</div>
+                <div class="col-md-3"><strong>E-Mail:</strong>{{ $contrario->email }}</div>
+                <div class="col-md-3"><strong>Vehículo:</strong>{{ $contrario->vehiculo }}</div>
+                <div class="col-md-3"><strong>Conductorl:</strong>{{ $contrario->conductor }}</div>
+                <div class="col-md-3"><strong>Nº de Póliza:</strong>{{ $contrario->num_poliza }}</div>
+                <div class="col-md-3"><strong>Ref de Expediente:</strong>{{ $contrario->refexpediente }}</div>
+                <div class="col-md-3"><strong>Matrícula:</strong>{{ $contrario->matricula }}</div>
+                <div class="col-md-3"><strong>Propietario:</strong>{{ $contrario->propietario }}</div>
+                <div class="col-md-3"><strong>Aseguradora:</strong>{{ $aseguradora }}</div>
+                <div class="col-md-3"><strong>Tramitador:</strong>{{ $contrario->processor->nombre }}</div>
+                <div class="col-md-3"><strong>Tomador:</strong>{{ $contrario->tomador }}</div>
+                <div class="col-md-12"><strong>Apunte:</strong>{{ $contrario->apunte }}</div>
 
-                @if ($profesional->homologado == 1)
-                    <div class="col-md-3"><strong>Homologado:</strong>Si</div>
-                @else
-                    <div class="col-md-3"><strong>Homologado:</strong>No</div>
-                @endif
-                @if ($profesional->activo == 1)
-                    <div class="col-md-3"><strong>Activo:</strong>Si</div>
-                @else
-                    <div class="col-md-3"><strong>Activo:</strong>No</div>
-                @endif
-                @if ($profesional->indemnizacion == 1)
-                    <div class="col-md-4"><strong>Sus facturas cuentan en la indemnizacion</strong></div>
-                @else
-                    <div class="col-md-4"><strong>Sus facturas no cuentan en la indemnizacion</strong></div>
-                @endif
-                <div class="col-md-3"><strong>Iban:</strong>{{ $profesional->iban }}</div>
-                <div class="col-md-12 well"><strong>Acuerdo de pago:</strong>{{ $profesional->acuerdo_pago }}</div>
 
-                <div class="col-md-12 well"><strong>Notas:</strong>{{ $profesional->notas }}</div>
+
             </div>
 
         </div>
