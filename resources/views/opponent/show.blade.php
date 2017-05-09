@@ -7,6 +7,7 @@
             <div class="alert alert-danger" role="alert">Posible culpable</div>
         @endif
         <p>
+            {{ link_to_action('filesController@show','Volver al expediente',['id'=>$contrario->file_id],[]) }}
             <span class="pull-right">
                 {!! Form::open(['method'=>'DELETE','route'=>['opponent.destroy',$contrario->id]],['class'=>'form-inline']) !!}
                 {!! Form::submit('Borrar contrario', array('class' => 'btn btn-sm btn-danger pull-right ','id'=>'deletebtn', 'onclick' => 'return confirm("¿Estas seguro de querer eliminar este contrario?");')) !!}

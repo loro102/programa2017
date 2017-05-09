@@ -12,6 +12,9 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "5.4.x-dev",
+        "phpoffice/common": "0.2.5",
+        "phpoffice/phpexcel": "1.8.1",
+        "phpoffice/phpword": "0.12.0",
         "pixelpeter/laravel5-isocodes-validation": "v1.2.0"
     },
     "require-dev": {

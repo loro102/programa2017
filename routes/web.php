@@ -33,6 +33,7 @@ Route::resource('/professionals','professionalController');
 Route::resource('/filepro','file_professionalController');
 Route::resource('/note','noteController');
 Route::resource('/opponent','opponentController');
+Route::resource('/generator','generator');
 
 //Pantalla de Administración
 Route::resource('/usuario','userController');
@@ -40,6 +41,7 @@ Route::resource('/role','rolesController');
 Route::resource('/permisos', 'permisosController');
 Route::post('revoke','permisosController@revoke');
 Route::post('assign','permisosController@assign');
+
 
 
 //Consultas
