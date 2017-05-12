@@ -1,0 +1,18 @@
+﻿Tags para la generación de documentos
+
+Tags hoja cliente
+${cliente.nombre}
+${cliente.nif'}
+${cliente.direccion}
+${cliente.localidad}
+${cliente.provincia}
+${cliente.codigopostal}
+${cliente.telefono}
+${cliente.telefono2}
+${cliente.movil}
+${cliente.email}
+${cliente.agente}
+
+
+
+
