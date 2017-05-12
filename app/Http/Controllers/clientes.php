@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\models\customer;
 use App\models\agent;
+use Illuminate\Support\Facades\Storage;
 
 class clientes extends Controller
 {
@@ -49,10 +50,12 @@ class clientes extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(\App\Http\Requests\customer $request)
     {
         //Crea un nuevo registro para el cliente
         customer::create($request->input());
+        $cliente=customer::all();
+        Storage::makeDirectory('storage/cliente/'.$cliente->last()->id);
 
         //dd($request->input());
         return redirect('cliente')->with('message','Se ha añadido un nuevo cliente');

@@ -49,3 +49,4 @@ Route::post('assign','permisosController@assign');
 Route::get('/getformality/{id}','formalitiesController@getformality');
 Route::get('/getprocessor/{id}','processorController@getprocessor');
 Route::get('/getprofessional/{id}','professionalController@getprofessional');
+Route::get('/hojanuevocliente/{id}','generator@hoja_nueva_consulta');
