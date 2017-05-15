@@ -45,7 +45,7 @@ class filesController extends Controller
         $categoria=formality::all()->unique('categoria')->pluck('categoria','categoria')->prepend('Ninguno','');
         $abogado=professional::where('group_id',1)->where('activo',true)->pluck('Nombre','id');
         $aseguradora=insurer::all()->pluck('nombre','id')->prepend('Ninguno','');
-        $fase=phase::all()->pluck('nombre','id')->prepend('Ninguno','0');
+        $fase=phase::all()->pluck('nombre','id')->prepend('Ninguno','');
         //$abogado=professional::all()->pluck('nombre','id')->prepend('Ninguno','');
 
         //$client=$cliente->pluck('fullname','id');
@@ -67,9 +67,15 @@ class filesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(\App\Http\Requests\file $request)
     {
         //
+        //dd($request);
+        $file=new file;
+        $file->fill($request->except(['formalidad','formalities_id','processor_id']))->save();
+
+
+        return redirect()->action('clientes@show',['id'=>$request->customer_id])->with('message','Se ha añadido un nuevo expediente');
     }
 
     /**

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\models\agent;
 use App\models\customer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\TemplateProcessor;
@@ -16,11 +18,11 @@ class generator extends Controller
     public function hoja_nueva_consulta(Request $request,$id)
     {
         //
-        $cliente=customer::findorfail(7);
+        $cliente=customer::findorfail($id);
         //clonar plantilla
         $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/RJ030_Hoja_consulta.docx'));
         //reemplazar tags por valores
-        $templateProcessor->setValue('userId#1', htmlspecialchars('1'));
+        $templateProcessor->setValue('cliente.id', htmlspecialchars($cliente->id));
         $templateProcessor->setValue('cliente.nombre', htmlspecialchars($cliente->getFullNameAttribute($cliente->id)));
         $templateProcessor->setValue('cliente.nif', htmlspecialchars($cliente->nif));
         $templateProcessor->setValue('cliente.direccion', htmlspecialchars($cliente->direccion));
@@ -49,9 +51,59 @@ class generator extends Controller
         ob_clean();
         flush();
         exit;
+        return redirect()->action('clientes@show@show',['id'=>$id]);
 
-        echo file_get_contents(storage_path('app/storage/cliente/').''.$cliente->id.'/RJ030_Hoja_consulta.docx');
+        //echo file_get_contents(storage_path('app/storage/cliente/').''.$cliente->id.'/RJ030_Hoja_consulta.docx');
 
+    }
+
+    //Procesar plantillas para la carta de agradecimiento
+
+    public function carta_agracedimiento_agente(Request $request,$id,$cliente)
+    {
+        //
+        //dd($request);
+        $agente=agent::findorfail($id);
+        $agente_cliente=customer::findorfail($cliente);
+        $hoy=carbon::now();
+        //clonar plantilla
+        $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/AgentesAgradecimiento.docx'));
+        //reemplazar tags por valores
+        $templateProcessor->setValue('empresa', htmlspecialchars('RumboJuridico'));
+        $templateProcessor->setValue('hoy', Carbon::Now()->format('d-m-Y'));
+        $templateProcessor->setValue('agente.id', htmlspecialchars($agente->id));
+        $templateProcessor->setValue('agente.nombre', htmlspecialchars($agente->nombre));
+        $templateProcessor->setValue('agente.nif', htmlspecialchars($agente->nif));
+        $templateProcessor->setValue('agente.direccion', htmlspecialchars($agente->direccion));
+        $templateProcessor->setValue('agente.localidad', htmlspecialchars($agente->localidad));
+        $templateProcessor->setValue('agente.provincia', htmlspecialchars($agente->provincia));
+        $templateProcessor->setValue('agente.codigopostal', htmlspecialchars($agente->codigo_postal));
+        $templateProcessor->setValue('agente.telefono', htmlspecialchars($agente->telefono1));
+        $templateProcessor->setValue('agente.telefono2', htmlspecialchars($agente->telefono2));
+        $templateProcessor->setValue('agente.movil', htmlspecialchars($agente->movil));
+        $templateProcessor->setValue('agente.email', htmlspecialchars($agente->email));
+        $templateProcessor->setValue('agente.fax', htmlspecialchars($agente->fax));
+        $templateProcessor->setValue('agente.cliente', htmlspecialchars($agente_cliente->getFullNameAttribute($cliente)));
+
+
+
+        //guardar en carpeta de cliente
+        $templateProcessor->saveAs(storage_path('app/storage/cliente/').''.$cliente.'/Hoja_agradecimiento_cliente.docx');
+
+        //descarga el documento automaticamente
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header("Content-Disposition: attachment; filename=Hoja_agradecimiento_cliente.docx");
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Pragma: public');
+        echo file_get_contents(storage_path('app/storage/cliente/').''.$cliente.'/Hoja_agradecimiento_cliente.docx');
+        ob_clean();
+        flush();
+        exit;
+        return redirect()->action('clientes@show@show',['id'=>$cliente]);
+        
     }
     /**
      * Display a listing of the resource.

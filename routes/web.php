@@ -49,4 +49,7 @@ Route::post('assign','permisosController@assign');
 Route::get('/getformality/{id}','formalitiesController@getformality');
 Route::get('/getprocessor/{id}','processorController@getprocessor');
 Route::get('/getprofessional/{id}','professionalController@getprofessional');
+
+//Rutas de procesamiento de plantillas
 Route::get('/hojanuevocliente/{id}','generator@hoja_nueva_consulta');
+    Route::get('/cartaagradecimientoagente/{id}/{cliente}','generator@carta_agracedimiento_agente');

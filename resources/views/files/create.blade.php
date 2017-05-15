@@ -2,6 +2,15 @@
 
 @section('content')
 <div class="container">
+    @if(count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     {!! Form::Model($expediente,['action'=>'filesController@store','class'=>'form-inline']) !!}
     <div>
         <!-- Nav tabs -->
@@ -51,8 +60,8 @@
                     {!! Form::text('caso_tipo', null, ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('phase', 'Fase:', ['class' => 'control-label']) !!}
-                    {!! Form::select('phase', $fase , null , ['class' => 'form-control']) !!}
+                    {!! Form::label('phase_id', 'Fase:', ['class' => 'control-label']) !!}
+                    {!! Form::select('phase_id', $fase , null , ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('sort_id', 'Tipo de expediente:', ['class' => 'control-label']) !!}
@@ -218,10 +227,6 @@
                     {!! Form::text('tomador', '',['class'=>'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('tomador', 'Tomador:', ['class' => 'control-label']) !!}
-                    {!! Form::text('tomador', '',['class'=>'form-control']) !!}
-                </div>
-                <div class="form-group">
                     {!! Form::label('numero_poliza', 'Numero de Póliza:', ['class' => 'control-label']) !!}
                     {!! Form::text('numero_poliza', '',['class'=>'form-control']) !!}
                 </div>
@@ -251,7 +256,7 @@
     </div>
     <div class="row">
         <div class="form-group">
-            {!! Form::hidden('fechadealta', \Carbon\Carbon::now()->toDateString(), ['id' => 'id']) !!}
+            
         </div>
     </div>
     <div class="row">

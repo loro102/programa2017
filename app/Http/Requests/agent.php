@@ -36,7 +36,7 @@ class agent extends FormRequest
         return [
             //
             'nombre'=>'Required',
-            'nif'=>'Required|Unique:agents,nif|cifnif',
+            'nif'=>'Required|Unique:agents,nif',
             'direccion'=>'nullable|max:255',
             'codigo_postal'=>'nullable|max:5|regex:^([1-9]{2}|[0-9][1-9]|[1-9][0-9])[0-9]{3}$',
             'localidad'=>'nullable|max:255',

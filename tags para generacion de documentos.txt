@@ -13,6 +13,21 @@ ${cliente.movil}
 ${cliente.email}
 ${cliente.agente}
 
+Tags hoja de agradecimiento agente
+
+${agente.nombre}
+${agente.nif'}
+${agente.direccion}
+${agente.localidad}
+${agente.provincia}
+${agente.codigopostal}
+${agente.telefono}
+${agente.telefono2}
+${agente.movil}
+${agente.email}
+${agente.fax}
+${agente.cliente}
+${hoy}
 
 
 

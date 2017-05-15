@@ -6,6 +6,7 @@
         <p>
             {{ link_to_action('clientes@index','Volver al listado de Clientes',[],['class' => 'btn btn-sm btn-default']) }}
             {{ link_to_action('generator@hoja_nueva_consulta','Hoja nuevo cliente',['id'=>$cliente->id],['class' => 'btn btn-sm btn-default']) }}
+            {{ link_to_action('generator@carta_agracedimiento_agente','Carta de agradecimiento al agente',['cliente'=>$cliente->id,'id'=>$cliente->agent_id],['class' => 'btn btn-sm btn-default']) }}
 
             {{--{{ link_to(url()->previous(),'Regresar') }}--}}
             <span class="pull-right">
