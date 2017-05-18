@@ -29,5 +29,23 @@ ${agente.fax}
 ${agente.cliente}
 ${hoy}
 
+Tags contrato prestacion de servicios
+
+${cliente.nombre}
+${cliente.nif'}
+${cliente.direccion}
+${cliente.localidad}
+${cliente.provincia}
+${cliente.codigopostal}
+${cliente.telefono}
+${cliente.telefono2}
+${cliente.movil}
+${cliente.email}
+${hoy}
+${hoy_largo}
+${expediente.fechasuceso}
+${cliente.horasuceso}
+
+
 
 
