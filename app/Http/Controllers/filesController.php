@@ -16,6 +16,7 @@ use App\models\file;
 use App\models\customer;
 use App\models\professional;
 use Illuminate\Support\Facades\DB;
+use Storage;
 
 class filesController extends Controller
 {
@@ -73,6 +74,11 @@ class filesController extends Controller
         //dd($request);
         $file=new file;
         $file->fill($request->except(['formalidad','formalities_id','processor_id']))->save();
+        $files=file::where('customer_id',$request->customer_id)->get();
+        
+        Storage::makeDirectory('storage/cliente/'.$request->customer_id.'/'.$files->last()->id);
+
+
 
 
         return redirect()->action('clientes@show',['id'=>$request->customer_id])->with('message','Se ha añadido un nuevo expediente');

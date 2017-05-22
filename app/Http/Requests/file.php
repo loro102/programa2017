@@ -25,6 +25,10 @@ class file extends FormRequest
     {
         return [
             //
+            //representado
+            'nombre'=>'nullable',
+            'fechanacimiento'=>'nullable',
+            'nif'=>'nullable',
             'customer_id'=>'required',
             'solicitor_id'=>'required',
             'fechaapertura'=>'required',
@@ -74,7 +78,7 @@ class file extends FormRequest
             'finfechapoliza'=>'nullable',
             'decripcion'=>'nullable',
             'estimacion'=>'nullable',
-            'short_id'=>'required',
+            'sort_id'=>'required',
             'formality_id'=>'nullable',
             'insurer_id'=>'nullable',
             'processor_id'=>'nullable',

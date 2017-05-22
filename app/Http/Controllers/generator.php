@@ -15,6 +15,14 @@ use function storage_path;
 
 class generator extends Controller
 {
+    public function __construct()
+    {
+        setlocale(LC_TIME, 'es_ES.utf8');
+        $this->largo=Carbon::now()->formatLocalized('%A %d %B %Y');
+        //$dt = Carbon::parse();
+        //$this->largo = largo;
+
+    }
 
     public function hoja_nueva_consulta(Request $request,$id)
     {
@@ -114,8 +122,8 @@ class generator extends Controller
        // $agente = agent::findorfail($id);
         $file = file::findorfail($file_id);
         //$cliente = customer::findorfail($file->customer_id);
-        setlocale(LC_TIME, 'es_ES.utf8');
-        $largo=Carbon::now()->formatLocalized('%A %d %B %Y');
+        //setlocale(LC_TIME, 'es_ES.utf8');
+        //$largo=Carbon::now()->formatLocalized('%A %d %B %Y');
         //$dd($hoy);
         //clonar plantilla
         $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/contrato_prestacion_servicios.docx'));
@@ -123,7 +131,7 @@ class generator extends Controller
         $templateProcessor->setValue('empresa', htmlspecialchars('RumboJuridico'));
         $templateProcessor->setValue('hoy', Carbon::Now()->format('d-m-Y'));
 
-        $templateProcessor->setValue('hoy_largo',$largo );
+        $templateProcessor->setValue('hoy_largo',$this->largo );
 
         $templateProcessor->setValue('cliente.id', htmlspecialchars($file->customer_id));
         $templateProcessor->setValue('cliente.nombre', htmlspecialchars($file->customer->getFullNameAttribute($file->customer_id)));
@@ -141,7 +149,7 @@ class generator extends Controller
 
 
         //guardar en carpeta de cliente
-        $templateProcessor->saveAs(storage_path('app/storage/cliente/').''.$file->customer_id.'/contrato_prestacion_servicios.docx');
+        $templateProcessor->saveAs(storage_path('app/storage/cliente/').''.$file->customer_id.'/'.$file_id.'/contrato_prestacion_servicios.docx');
 
         //descarga el documento automaticamente
         header('Content-Description: File Transfer');
@@ -152,6 +160,60 @@ class generator extends Controller
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Pragma: public');
         echo file_get_contents(storage_path('app/storage/cliente/').''.$file->customer_id.'/contrato_prestacion_servicios.docx');
+        ob_clean();
+        flush();
+        exit;
+        return redirect()->action('filesController@show',['id'=>$file->id]);
+
+    }
+    //Generación de contrato de prestación de servicios a representado
+    public function contrato_prestacion_servicios_representados(Request $request,$file_id)
+    {
+        //
+        //dd($request);
+        // $agente = agent::findorfail($id);
+        $file = file::findorfail($file_id);
+        //$cliente = customer::findorfail($file->customer_id);
+
+        //$dd($hoy);
+        //clonar plantilla
+        $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/contrato_prestacion_servicios_representado.docx'));
+        //reemplazar tags por valores
+        $templateProcessor->setValue('empresa', htmlspecialchars('RumboJuridico'));
+        $templateProcessor->setValue('hoy', Carbon::Now()->format('d-m-Y'));
+
+        $templateProcessor->setValue('hoy_largo',$largo );
+
+        $templateProcessor->setValue('cliente.id', htmlspecialchars($file->customer_id));
+        $templateProcessor->setValue('cliente.nombre', htmlspecialchars($file->customer->getFullNameAttribute($file->customer_id)));
+        $templateProcessor->setValue('cliente.nif', htmlspecialchars($file->customer->nif));
+        $templateProcessor->setValue('cliente.direccion', htmlspecialchars($file->customer->direccion));
+        $templateProcessor->setValue('cliente.localidad', htmlspecialchars($file->customer->localidad));
+        $templateProcessor->setValue('cliente.provincia', htmlspecialchars($file->customer->provincia));
+        $templateProcessor->setValue('cliente.codigopostal', htmlspecialchars($file->customer->codigopostal));
+        $templateProcessor->setValue('cliente.telefono', htmlspecialchars($file->customer->telefono1));
+        $templateProcessor->setValue('cliente.telefono2', htmlspecialchars($file->customer->telefono2));
+        $templateProcessor->setValue('cliente.movil', htmlspecialchars($file->customer->movil));
+        $templateProcessor->setValue('cliente.email', htmlspecialchars($file->customer->email));
+        $templateProcessor->setValue('representado.nombre', htmlspecialchars($file->nombre));
+        $templateProcessor->setValue('representado.fechanacimiento', htmlspecialchars($file->fechanacimiento));
+        $templateProcessor->setValue('representado.nif', htmlspecialchars($file->nif));
+        $templateProcessor->setValue('expediente.fechasuceso', htmlspecialchars($file->fecha_accidente));
+        $templateProcessor->setValue('expediente.horasuceso', htmlspecialchars($file->hora_accidente));
+
+
+        //guardar en carpeta de cliente
+        $templateProcessor->saveAs(storage_path('app/storage/cliente/').''.$file->customer_id.'/'.$file_id.'/contrato_prestacion_servicios_representado.docx');
+
+        //descarga el documento automaticamente
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header("Content-Disposition: attachment; filename=contrato_prestacion_servicios_representado.docx");
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Pragma: public');
+        echo file_get_contents(storage_path('app/storage/cliente/').''.$file->customer_id.'/contrato_prestacion_servicios_representado.docx');
         ob_clean();
         flush();
         exit;

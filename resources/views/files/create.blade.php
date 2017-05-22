@@ -15,7 +15,8 @@
     <div>
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation"><a href="#inicio" aria-controls="inicio" role="tab" data-toggle="tab">Datos expediente</a></li>
+            <li role="presentation" class="active"><a href="#inicio" aria-controls="inicio" role="tab" data-toggle="tab">Datos expediente</a></li>
+            <li role="presentation"><a href="#representado" aria-controls="representado" role="tab" data-toggle="tab">Datos del representado</a></li>
             <li role="presentation"><a href="#suceso" aria-controls="suceso" role="tab" data-toggle="tab">Datos del suceso</a></li>
             <li role="presentation"><a href="#juridico" aria-controls="juridico" role="tab" data-toggle="tab">Datos jurídicos</a></li>
             <li role="presentation"><a href="#extra" aria-controls="extra" role="tab" data-toggle="tab">Otros datos</a></li>
@@ -102,6 +103,21 @@
                     {!! Form::label('estimacion', 'Estimacion de indemnizacion:', ['class' => 'control-label']) !!}
                     {!! Form::text('estimacion', '',['class'=>'form-control']) !!}
                 </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="representado">
+                <div class="form-group">
+                    {!! Form::label('nombre', 'Representado:', ['class' => 'control-label']) !!}
+                    {!! Form::text('nombre', '', ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('fechanacimiento', 'Fecha de Nacimiento:', ['class' => 'control-label']) !!}
+                    {!! Form::date('fechanacimiento', '', ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('nif', 'NIF:', ['class' => 'control-label']) !!}
+                    {!! Form::text('nif', '', ['class' => 'form-control']) !!}
+                </div>
+
             </div>
             <div role="tabpanel" class="tab-pane" id="suceso">
                 <div class="form-group">

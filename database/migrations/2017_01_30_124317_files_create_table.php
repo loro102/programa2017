@@ -18,6 +18,9 @@ class FilesCreateTable extends Migration
             $table->integer('customer_id')->unsigned();
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->integer('solicitor_id')->nullable();
+            $table->string('nombre')->nullable();
+            $table->string('nif')->nullable();
+            $table->date()->nullable('fechanacimiento');
             //$table->foreign('solicitor_id')->references('id')->on('users');
             //Datos expediente
             $table->date('fechaapertura');
