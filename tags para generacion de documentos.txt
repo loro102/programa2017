@@ -12,6 +12,20 @@ ${cliente.telefono2}
 ${cliente.movil}
 ${cliente.email}
 ${cliente.agente}
+${hoy}
+${hoy_largo}
+${empresa.nombre}
+${empresa.cif'}
+${empresa.direccion}
+${empresa.localidad}
+${empresa.telefono}
+${empresa.telefono2}
+${empresa.fax}
+${empresa.movil}
+${empresa.email}
+${empresa.web}
+${empresa.gerente}
+${empresa.nifgerente}
 
 Tags hoja de agradecimiento agente
 
@@ -28,6 +42,19 @@ ${agente.email}
 ${agente.fax}
 ${agente.cliente}
 ${hoy}
+${hoy_largo}
+${empresa.nombre}
+${empresa.cif'}
+${empresa.direccion}
+${empresa.localidad}
+${empresa.telefono}
+${empresa.telefono2}
+${empresa.fax}
+${empresa.movil}
+${empresa.email}
+${empresa.web}
+${empresa.gerente}
+${empresa.nifgerente}
 
 Tags contrato prestacion de servicios
 
@@ -41,11 +68,88 @@ ${cliente.telefono}
 ${cliente.telefono2}
 ${cliente.movil}
 ${cliente.email}
+${expediente.fechasuceso}
+${expediente.horasuceso}
 ${hoy}
 ${hoy_largo}
+${empresa.nombre}
+${empresa.cif'}
+${empresa.direccion}
+${empresa.localidad}
+${empresa.telefono}
+${empresa.telefono2}
+${empresa.fax}
+${empresa.movil}
+${empresa.email}
+${empresa.web}
+${empresa.gerente}
+${empresa.nifgerente}
+
+
+Tags contrato de prestacion de servicios representado
+
+${cliente.nombre}
+${cliente.nif'}
+${cliente.direccion}
+${cliente.localidad}
+${cliente.provincia}
+${cliente.codigopostal}
+${cliente.telefono}
+${cliente.telefono2}
+${cliente.movil}
+${cliente.email}
 ${expediente.fechasuceso}
-${cliente.horasuceso}
+${expediente.horasuceso}
+${representado.nombre}
+${representado.nif}
+${representado.fechanacimiento}
+${hoy}
+${hoy_largo}
+${empresa.nombre}
+${empresa.cif'}
+${empresa.direccion}
+${empresa.localidad}
+${empresa.telefono}
+${empresa.telefono2}
+${empresa.fax}
+${empresa.movil}
+${empresa.email}
+${empresa.web}
+${empresa.gerente}
+${empresa.nifgerente}
 
+Tags contrato de asuncion direccion tecnica y contrato de asuncion de direccion tecnica representado
 
-
+${cliente.nombre}
+${cliente.nif'}
+${cliente.direccion}
+${cliente.localidad}
+${cliente.provincia}
+${cliente.codigopostal}
+${cliente.telefono}
+${cliente.telefono2}
+${cliente.movil}
+${cliente.email}
+${expediente.fechasuceso}
+${expediente.horasuceso}
+${representado.nombre}
+${representado.nif}
+${representado.fechanacimiento}
+${profesional.nombre}
+${profesional.nif}
+${profesional.colegiado}
+${hoy}
+${hoy_largo}
+${empresa.nombre}
+${empresa.cif'}
+${empresa.direccion}
+${empresa.localidad}
+${empresa.telefono}
+${empresa.telefono2}
+${empresa.fax}
+${empresa.movil}
+${empresa.email}
+${empresa.web}
+${empresa.gerente}
+${empresa.nifgerente}
 

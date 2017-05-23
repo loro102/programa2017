@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\models\agent;
 use App\models\customer;
 use App\models\file;
+use App\models\professional;
 use Carbon\Carbon;
+use function emptyArray;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\TemplateProcessor;
@@ -19,6 +21,21 @@ class generator extends Controller
     {
         setlocale(LC_TIME, 'es_ES.utf8');
         $this->largo=Carbon::now()->formatLocalized('%A %d %B %Y');
+        $this->hoy= Carbon::Now()->format('d-m-Y');
+        //datos empresa
+        $this->empresa='nombre de empresa';
+        $this->empresa_cif='CIF de la empresa';
+        $this->gerente_empresa='Nombre y apellidos del gerente';
+        $this->gerente_nif_empresa='nif del gerente';
+        $this->direccion_empresa='direccion de la empresa';
+        $this->localidad_empresa='localidad de la empresa';
+        $this->email_empresa='E-Mail de la empresa';
+        $this->web_empresa='Página Web de la empresa';
+        $this->telefono1='telefono 1 empresa';
+        $this->telefono2='telefono 2 empresa';
+        $this->fax='fax empresa';
+        $this->movil='telefono movil empresa';
+
         //$dt = Carbon::parse();
         //$this->largo = largo;
 
@@ -43,6 +60,22 @@ class generator extends Controller
         $templateProcessor->setValue('cliente.movil', htmlspecialchars($cliente->movil));
         $templateProcessor->setValue('cliente.email', htmlspecialchars($cliente->email));
         $templateProcessor->setValue('cliente.agente', htmlspecialchars($cliente->agent->nombre));
+
+        $templateProcessor->setValue('empresa.nombre', htmlspecialchars($this->empresa));
+        $templateProcessor->setValue('empresa.cif', htmlspecialchars($this->empresa_cif));
+        $templateProcessor->setValue('empresa.direccion', htmlspecialchars($this->direccion_empresa));
+        $templateProcessor->setValue('empresa.localidad', htmlspecialchars($this->localidad_empresa));
+        $templateProcessor->setValue('empresa.telefono', htmlspecialchars($this->telefono1));
+        $templateProcessor->setValue('empresa.telefono2', htmlspecialchars($this->telefono2));
+        $templateProcessor->setValue('empresa.fax', htmlspecialchars($this->fax));
+        $templateProcessor->setValue('empresa.movil', htmlspecialchars($this->movil));
+        $templateProcessor->setValue('empresa.email', htmlspecialchars($this->email_empresa));
+        $templateProcessor->setValue('empresa.web', htmlspecialchars($this->web_empresa));
+        $templateProcessor->setValue('empresa.gerente', htmlspecialchars($this->gerente_empresa));
+        $templateProcessor->setValue('empresa.nifgerente', htmlspecialchars($this->gerente_nif_empresa));
+
+        $templateProcessor->setValue('hoy', $this->hoy);
+        $templateProcessor->setValue('hoy_largo',$this->largo );
 
 
          //guardar en carpeta de cliente
@@ -77,8 +110,6 @@ class generator extends Controller
         //clonar plantilla
         $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/AgentesAgradecimiento.docx'));
         //reemplazar tags por valores
-        $templateProcessor->setValue('empresa', htmlspecialchars('RumboJuridico'));
-        $templateProcessor->setValue('hoy', Carbon::Now()->format('d-m-Y'));
         $templateProcessor->setValue('agente.id', htmlspecialchars($agente->id));
         $templateProcessor->setValue('agente.nombre', htmlspecialchars($agente->nombre));
         $templateProcessor->setValue('agente.nif', htmlspecialchars($agente->nif));
@@ -92,6 +123,22 @@ class generator extends Controller
         $templateProcessor->setValue('agente.email', htmlspecialchars($agente->email));
         $templateProcessor->setValue('agente.fax', htmlspecialchars($agente->fax));
         $templateProcessor->setValue('agente.cliente', htmlspecialchars($agente_cliente->getFullNameAttribute($cliente)));
+
+        $templateProcessor->setValue('empresa.nombre', htmlspecialchars($this->empresa));
+        $templateProcessor->setValue('empresa.cif', htmlspecialchars($this->empresa_cif));
+        $templateProcessor->setValue('empresa.direccion', htmlspecialchars($this->direccion_empresa));
+        $templateProcessor->setValue('empresa.localidad', htmlspecialchars($this->localidad_empresa));
+        $templateProcessor->setValue('empresa.telefono', htmlspecialchars($this->telefono1));
+        $templateProcessor->setValue('empresa.telefono2', htmlspecialchars($this->telefono2));
+        $templateProcessor->setValue('empresa.fax', htmlspecialchars($this->fax));
+        $templateProcessor->setValue('empresa.movil', htmlspecialchars($this->movil));
+        $templateProcessor->setValue('empresa.email', htmlspecialchars($this->email_empresa));
+        $templateProcessor->setValue('empresa.web', htmlspecialchars($this->web_empresa));
+        $templateProcessor->setValue('empresa.gerente', htmlspecialchars($this->gerente_empresa));
+        $templateProcessor->setValue('empresa.nifgerente', htmlspecialchars($this->gerente_nif_empresa));
+
+        $templateProcessor->setValue('hoy', $this->hoy);
+        $templateProcessor->setValue('hoy_largo',$this->largo );
 
 
 
@@ -128,11 +175,6 @@ class generator extends Controller
         //clonar plantilla
         $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/contrato_prestacion_servicios.docx'));
         //reemplazar tags por valores
-        $templateProcessor->setValue('empresa', htmlspecialchars('RumboJuridico'));
-        $templateProcessor->setValue('hoy', Carbon::Now()->format('d-m-Y'));
-
-        $templateProcessor->setValue('hoy_largo',$this->largo );
-
         $templateProcessor->setValue('cliente.id', htmlspecialchars($file->customer_id));
         $templateProcessor->setValue('cliente.nombre', htmlspecialchars($file->customer->getFullNameAttribute($file->customer_id)));
         $templateProcessor->setValue('cliente.nif', htmlspecialchars($file->customer->nif));
@@ -146,6 +188,22 @@ class generator extends Controller
         $templateProcessor->setValue('cliente.email', htmlspecialchars($file->customer->email));
         $templateProcessor->setValue('expediente.fechasuceso', htmlspecialchars($file->fecha_accidente));
         $templateProcessor->setValue('expediente.horasuceso', htmlspecialchars($file->hora_accidente));
+        //tags extras
+        $templateProcessor->setValue('empresa.nombre', htmlspecialchars($this->empresa));
+        $templateProcessor->setValue('empresa.cif', htmlspecialchars($this->empresa_cif));
+        $templateProcessor->setValue('empresa.direccion', htmlspecialchars($this->direccion_empresa));
+        $templateProcessor->setValue('empresa.localidad', htmlspecialchars($this->localidad_empresa));
+        $templateProcessor->setValue('empresa.telefono', htmlspecialchars($this->telefono1));
+        $templateProcessor->setValue('empresa.telefono2', htmlspecialchars($this->telefono2));
+        $templateProcessor->setValue('empresa.fax', htmlspecialchars($this->fax));
+        $templateProcessor->setValue('empresa.movil', htmlspecialchars($this->movil));
+        $templateProcessor->setValue('empresa.email', htmlspecialchars($this->email_empresa));
+        $templateProcessor->setValue('empresa.web', htmlspecialchars($this->web_empresa));
+        $templateProcessor->setValue('empresa.gerente', htmlspecialchars($this->gerente_empresa));
+        $templateProcessor->setValue('empresa.nifgerente', htmlspecialchars($this->gerente_nif_empresa));
+
+        $templateProcessor->setValue('hoy', $this->hoy);
+        $templateProcessor->setValue('hoy_largo',$this->largo );
 
 
         //guardar en carpeta de cliente
@@ -179,11 +237,6 @@ class generator extends Controller
         //clonar plantilla
         $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/contrato_prestacion_servicios_representado.docx'));
         //reemplazar tags por valores
-        $templateProcessor->setValue('empresa', htmlspecialchars('RumboJuridico'));
-        $templateProcessor->setValue('hoy', Carbon::Now()->format('d-m-Y'));
-
-        $templateProcessor->setValue('hoy_largo',$largo );
-
         $templateProcessor->setValue('cliente.id', htmlspecialchars($file->customer_id));
         $templateProcessor->setValue('cliente.nombre', htmlspecialchars($file->customer->getFullNameAttribute($file->customer_id)));
         $templateProcessor->setValue('cliente.nif', htmlspecialchars($file->customer->nif));
@@ -200,6 +253,22 @@ class generator extends Controller
         $templateProcessor->setValue('representado.nif', htmlspecialchars($file->nif));
         $templateProcessor->setValue('expediente.fechasuceso', htmlspecialchars($file->fecha_accidente));
         $templateProcessor->setValue('expediente.horasuceso', htmlspecialchars($file->hora_accidente));
+
+        $templateProcessor->setValue('empresa.nombre', htmlspecialchars($this->empresa));
+        $templateProcessor->setValue('empresa.cif', htmlspecialchars($this->empresa_cif));
+        $templateProcessor->setValue('empresa.direccion', htmlspecialchars($this->direccion_empresa));
+        $templateProcessor->setValue('empresa.localidad', htmlspecialchars($this->localidad_empresa));
+        $templateProcessor->setValue('empresa.telefono', htmlspecialchars($this->telefono1));
+        $templateProcessor->setValue('empresa.telefono2', htmlspecialchars($this->telefono2));
+        $templateProcessor->setValue('empresa.fax', htmlspecialchars($this->fax));
+        $templateProcessor->setValue('empresa.movil', htmlspecialchars($this->movil));
+        $templateProcessor->setValue('empresa.email', htmlspecialchars($this->email_empresa));
+        $templateProcessor->setValue('empresa.web', htmlspecialchars($this->web_empresa));
+        $templateProcessor->setValue('empresa.gerente', htmlspecialchars($this->gerente_empresa));
+        $templateProcessor->setValue('empresa.nifgerente', htmlspecialchars($this->gerente_nif_empresa));
+
+        $templateProcessor->setValue('hoy', $this->hoy);
+        $templateProcessor->setValue('hoy_largo',$this->largo );
 
 
         //guardar en carpeta de cliente
@@ -220,6 +289,85 @@ class generator extends Controller
         return redirect()->action('filesController@show',['id'=>$file->id]);
 
     }
+
+    //Generacion de asunción de dirección técnica
+    public function contrato_asuncion_direccion_tecnica(Request $request,$file_id,$profesional_id)
+    {
+        //
+        //dd($request);
+        // $agente = agent::findorfail($id);
+        $file = file::findorfail($file_id);
+        $profesional=professional::findorfail($profesional_id);
+        //$cliente = customer::findorfail($file->customer_id);
+
+        //$dd($hoy);
+        //clonar plantilla
+        if (empty($file->nombre)){
+        $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/asuncion_direccion_tecnica.docx'));
+            }
+        else
+        {
+            $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/asuncion_direccion_tecnica_representado.docx'));
+        };
+        
+        //reemplazar tags por valores
+        $templateProcessor->setValue('cliente.id', htmlspecialchars($file->customer_id));
+        $templateProcessor->setValue('cliente.nombre', htmlspecialchars($file->customer->getFullNameAttribute($file->customer_id)));
+        $templateProcessor->setValue('cliente.nif', htmlspecialchars($file->customer->nif));
+        $templateProcessor->setValue('cliente.direccion', htmlspecialchars($file->customer->direccion));
+        $templateProcessor->setValue('cliente.localidad', htmlspecialchars($file->customer->localidad));
+        $templateProcessor->setValue('cliente.provincia', htmlspecialchars($file->customer->provincia));
+        $templateProcessor->setValue('cliente.codigopostal', htmlspecialchars($file->customer->codigopostal));
+        $templateProcessor->setValue('cliente.telefono', htmlspecialchars($file->customer->telefono1));
+        $templateProcessor->setValue('cliente.telefono2', htmlspecialchars($file->customer->telefono2));
+        $templateProcessor->setValue('cliente.movil', htmlspecialchars($file->customer->movil));
+        $templateProcessor->setValue('cliente.email', htmlspecialchars($file->customer->email));
+        $templateProcessor->setValue('representado.nombre', htmlspecialchars($file->nombre));
+        $templateProcessor->setValue('representado.fechanacimiento', htmlspecialchars($file->fechanacimiento));
+        $templateProcessor->setValue('representado.nif', htmlspecialchars($file->nif));
+        $templateProcessor->setValue('expediente.fechasuceso', htmlspecialchars($file->fecha_accidente));
+        $templateProcessor->setValue('expediente.horasuceso', htmlspecialchars($file->hora_accidente));
+        $templateProcessor->setValue('profesional.nombre', htmlspecialchars($profesional->Nombre));
+        $templateProcessor->setValue('profesional.nif', htmlspecialchars($profesional->nif));
+        $templateProcessor->setValue('profesional.colegiado', htmlspecialchars($profesional->num_colegiado));
+
+        $templateProcessor->setValue('empresa.nombre', htmlspecialchars($this->empresa));
+        $templateProcessor->setValue('empresa.cif', htmlspecialchars($this->empresa_cif));
+        $templateProcessor->setValue('empresa.direccion', htmlspecialchars($this->direccion_empresa));
+        $templateProcessor->setValue('empresa.localidad', htmlspecialchars($this->localidad_empresa));
+        $templateProcessor->setValue('empresa.telefono', htmlspecialchars($this->telefono1));
+        $templateProcessor->setValue('empresa.telefono2', htmlspecialchars($this->telefono2));
+        $templateProcessor->setValue('empresa.fax', htmlspecialchars($this->fax));
+        $templateProcessor->setValue('empresa.movil', htmlspecialchars($this->movil));
+        $templateProcessor->setValue('empresa.email', htmlspecialchars($this->email_empresa));
+        $templateProcessor->setValue('empresa.web', htmlspecialchars($this->web_empresa));
+        $templateProcessor->setValue('empresa.gerente', htmlspecialchars($this->gerente_empresa));
+        $templateProcessor->setValue('empresa.nifgerente', htmlspecialchars($this->gerente_nif_empresa));
+
+        $templateProcessor->setValue('hoy', $this->hoy);
+        $templateProcessor->setValue('hoy_largo',$this->largo );
+
+
+        //guardar en carpeta de cliente
+        $templateProcessor->saveAs(storage_path('app/storage/cliente/').''.$file->customer_id.'/'.$file_id.'/asuncion_direccion_tecnica.docx');
+
+        //descarga el documento automaticamente
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header("Content-Disposition: attachment; filename=asuncion_direccion_tecnica.docx");
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Pragma: public');
+        echo file_get_contents(storage_path('app/storage/cliente/').''.$file->customer_id.'/asuncion_direccion_tecnica.docx');
+        ob_clean();
+        flush();
+        exit;
+        return redirect()->action('filesController@show',['id'=>$file->id]);
+
+    }
+
+
     /**
      * Display a listing of the resource.
      *

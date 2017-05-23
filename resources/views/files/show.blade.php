@@ -21,7 +21,8 @@
                 <div class="col-md-4"><strong>Teléfono 2:</strong> {{$expediente->customer->telefono2}}</div>
                 <div class="col-md-4"><strong>Movil:</strong> {{$expediente->customer->movil}}</div>
                 <div class="col-md-6"><strong>Correo Electrónico:</strong> {{$expediente->customer->email}}</div>
-                @if ($expediente->nombre)
+                @if (empty($expediente->nombre))
+                    @else
                 <div class="col-md-12"><strong>Representado:</strong> {{$expediente->nombre}}</div>
                 <div class="col-md-6"><strong>Nif:</strong> {{$expediente->nif}}</div>
                 <div class="col-md-6"><strong>Fecha de Nacimiento:</strong> {{$expediente->fechanacimiento}}</div>
@@ -30,7 +31,11 @@
 
             </div>
             <div class="panel-footer">
+                @if (empty($expediente->nombre) )
                 {{ link_to_action('generator@contrato_prestacion_servicios','Contrato Prestacion de servicios',['file_id'=>$expediente->id],['class' => 'btn btn-sm btn-default']) }}
+                @else
+                {{ link_to_action('generator@contrato_prestacion_servicios_representados','Contrato Prestacion de servicios',['file_id'=>$expediente->id],['class' => 'btn btn-sm btn-default']) }}
+                    @endif
             </div>
         </div>
         <!-- Nav tabs -->

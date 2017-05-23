@@ -54,3 +54,5 @@ Route::get('/getprofessional/{id}','professionalController@getprofessional');
 Route::get('/hojanuevocliente/{id}','generator@hoja_nueva_consulta');
 Route::get('/cartaagradecimientoagente/{id}/{cliente}','generator@carta_agracedimiento_agente');
 Route::get('/contratoprestacionservicios/{file_id}','generator@contrato_prestacion_servicios');
+Route::get('/contratoprestacionserviciosrepresentado/{file_id}','generator@contrato_prestacion_servicios_representados');
+Route::get('/asunciondirecciontecnica/{file_id}/{profesional_id}','generator@contrato_asuncion_direccion_tecnica');
