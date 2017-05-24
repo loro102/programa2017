@@ -24,6 +24,7 @@ class generator extends Controller
         $this->hoy= Carbon::Now()->format('d-m-Y');
         //datos empresa
         $this->empresa='nombre de empresa';
+        $this->empresa_mercantil='nombre mercantil .SL';
         $this->empresa_cif='CIF de la empresa';
         $this->gerente_empresa='Nombre y apellidos del gerente';
         $this->gerente_nif_empresa='nif del gerente';
@@ -35,6 +36,7 @@ class generator extends Controller
         $this->telefono2='telefono 2 empresa';
         $this->fax='fax empresa';
         $this->movil='telefono movil empresa';
+
 
         //$dt = Carbon::parse();
         //$this->largo = largo;
@@ -62,6 +64,7 @@ class generator extends Controller
         $templateProcessor->setValue('cliente.agente', htmlspecialchars($cliente->agent->nombre));
 
         $templateProcessor->setValue('empresa.nombre', htmlspecialchars($this->empresa));
+        $templateProcessor->setValue('empresa.nombremercantil', htmlspecialchars($this->empresa_mercantil));
         $templateProcessor->setValue('empresa.cif', htmlspecialchars($this->empresa_cif));
         $templateProcessor->setValue('empresa.direccion', htmlspecialchars($this->direccion_empresa));
         $templateProcessor->setValue('empresa.localidad', htmlspecialchars($this->localidad_empresa));
@@ -125,6 +128,7 @@ class generator extends Controller
         $templateProcessor->setValue('agente.cliente', htmlspecialchars($agente_cliente->getFullNameAttribute($cliente)));
 
         $templateProcessor->setValue('empresa.nombre', htmlspecialchars($this->empresa));
+        $templateProcessor->setValue('empresa.nombremercantil', htmlspecialchars($this->empresa_mercantil));
         $templateProcessor->setValue('empresa.cif', htmlspecialchars($this->empresa_cif));
         $templateProcessor->setValue('empresa.direccion', htmlspecialchars($this->direccion_empresa));
         $templateProcessor->setValue('empresa.localidad', htmlspecialchars($this->localidad_empresa));
@@ -190,6 +194,7 @@ class generator extends Controller
         $templateProcessor->setValue('expediente.horasuceso', htmlspecialchars($file->hora_accidente));
         //tags extras
         $templateProcessor->setValue('empresa.nombre', htmlspecialchars($this->empresa));
+        $templateProcessor->setValue('empresa.nombremercantil', htmlspecialchars($this->empresa_mercantil));
         $templateProcessor->setValue('empresa.cif', htmlspecialchars($this->empresa_cif));
         $templateProcessor->setValue('empresa.direccion', htmlspecialchars($this->direccion_empresa));
         $templateProcessor->setValue('empresa.localidad', htmlspecialchars($this->localidad_empresa));
@@ -255,6 +260,7 @@ class generator extends Controller
         $templateProcessor->setValue('expediente.horasuceso', htmlspecialchars($file->hora_accidente));
 
         $templateProcessor->setValue('empresa.nombre', htmlspecialchars($this->empresa));
+        $templateProcessor->setValue('empresa.nombremercantil', htmlspecialchars($this->empresa_mercantil));
         $templateProcessor->setValue('empresa.cif', htmlspecialchars($this->empresa_cif));
         $templateProcessor->setValue('empresa.direccion', htmlspecialchars($this->direccion_empresa));
         $templateProcessor->setValue('empresa.localidad', htmlspecialchars($this->localidad_empresa));
@@ -300,16 +306,16 @@ class generator extends Controller
         $profesional=professional::findorfail($profesional_id);
         //$cliente = customer::findorfail($file->customer_id);
 
-        //$dd($hoy);
+        //dd($file);
         //clonar plantilla
         if (empty($file->nombre)){
-        $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/asuncion_direccion_tecnica.docx'));
-            }
+            $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/asuncion_direccion_tecnica.docx'));
+        }
         else
         {
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/asuncion_direccion_tecnica_representado.docx'));
         };
-        
+
         //reemplazar tags por valores
         $templateProcessor->setValue('cliente.id', htmlspecialchars($file->customer_id));
         $templateProcessor->setValue('cliente.nombre', htmlspecialchars($file->customer->getFullNameAttribute($file->customer_id)));
@@ -322,9 +328,9 @@ class generator extends Controller
         $templateProcessor->setValue('cliente.telefono2', htmlspecialchars($file->customer->telefono2));
         $templateProcessor->setValue('cliente.movil', htmlspecialchars($file->customer->movil));
         $templateProcessor->setValue('cliente.email', htmlspecialchars($file->customer->email));
-        $templateProcessor->setValue('representado.nombre', htmlspecialchars($file->nombre));
-        $templateProcessor->setValue('representado.fechanacimiento', htmlspecialchars($file->fechanacimiento));
-        $templateProcessor->setValue('representado.nif', htmlspecialchars($file->nif));
+        //$templateProcessor->setValue('representado.nombre', htmlspecialchars($file->nombre));
+        //$templateProcessor->setValue('representado.fechanacimiento', htmlspecialchars($file->fechanacimiento));
+        //$templateProcessor->setValue('representado.nif', htmlspecialchars($file->nif));
         $templateProcessor->setValue('expediente.fechasuceso', htmlspecialchars($file->fecha_accidente));
         $templateProcessor->setValue('expediente.horasuceso', htmlspecialchars($file->hora_accidente));
         $templateProcessor->setValue('profesional.nombre', htmlspecialchars($profesional->Nombre));
@@ -332,6 +338,7 @@ class generator extends Controller
         $templateProcessor->setValue('profesional.colegiado', htmlspecialchars($profesional->num_colegiado));
 
         $templateProcessor->setValue('empresa.nombre', htmlspecialchars($this->empresa));
+        $templateProcessor->setValue('empresa.nombremercantil', htmlspecialchars($this->empresa_mercantil));
         $templateProcessor->setValue('empresa.cif', htmlspecialchars($this->empresa_cif));
         $templateProcessor->setValue('empresa.direccion', htmlspecialchars($this->direccion_empresa));
         $templateProcessor->setValue('empresa.localidad', htmlspecialchars($this->localidad_empresa));
@@ -359,7 +366,96 @@ class generator extends Controller
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Pragma: public');
-        echo file_get_contents(storage_path('app/storage/cliente/').''.$file->customer_id.'/asuncion_direccion_tecnica.docx');
+        echo file_get_contents(storage_path('app/storage/cliente/').''.$file->customer_id.'/'.$file_id.'/asuncion_direccion_tecnica.docx');
+        ob_clean();
+        flush();
+        exit;
+        return redirect()->action('filesController@show',['id'=>$file_id]);
+
+    }
+
+    //Generacion de autorización y compromiso de pago
+    public function autorización_servicio_profesionales(Request $request,$file_id,$profesional_id)
+    {
+        //
+        //dd($request);
+        // $agente = agent::findorfail($id);
+        $file = file::findorfail($file_id);
+        $profesional=professional::findorfail($profesional_id);
+
+        //$cliente = customer::findorfail($file->customer_id);
+
+        //$dd($hoy);
+        //clonar plantilla
+        if (empty($file->nombre)){
+            $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/autorización_servicio_profesionales.docx'));
+        }
+        else
+        {
+            $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/autorización_servicio_profesionales_representado.docx'));
+        };
+
+        //reemplazar tags por valores
+        $templateProcessor->setValue('cliente.id', htmlspecialchars($file->customer_id));
+        $templateProcessor->setValue('cliente.nombre', htmlspecialchars($file->customer->getFullNameAttribute($file->customer_id)));
+        $templateProcessor->setValue('cliente.nif', htmlspecialchars($file->customer->nif));
+        $templateProcessor->setValue('cliente.direccion', htmlspecialchars($file->customer->direccion));
+        $templateProcessor->setValue('cliente.localidad', htmlspecialchars($file->customer->localidad));
+        $templateProcessor->setValue('cliente.provincia', htmlspecialchars($file->customer->provincia));
+        $templateProcessor->setValue('cliente.codigopostal', htmlspecialchars($file->customer->codigopostal));
+        $templateProcessor->setValue('cliente.telefono', htmlspecialchars($file->customer->telefono1));
+        $templateProcessor->setValue('cliente.telefono2', htmlspecialchars($file->customer->telefono2));
+        $templateProcessor->setValue('cliente.movil', htmlspecialchars($file->customer->movil));
+        $templateProcessor->setValue('cliente.email', htmlspecialchars($file->customer->email));
+        $templateProcessor->setValue('representado.nombre', htmlspecialchars($file->nombre));
+        $templateProcessor->setValue('representado.fechanacimiento', htmlspecialchars($file->fechanacimiento));
+        $templateProcessor->setValue('representado.nif', htmlspecialchars($file->nif));
+        $templateProcessor->setValue('expediente.fechasuceso', htmlspecialchars($file->fecha_accidente));
+        $templateProcessor->setValue('expediente.horasuceso', htmlspecialchars($file->hora_accidente));
+        $templateProcessor->setValue('profesional.nombre', htmlspecialchars($profesional->Nombre));
+        $templateProcessor->setValue('profesional.nif', htmlspecialchars($profesional->nif));
+        $templateProcessor->setValue('profesional.colegiado', htmlspecialchars($profesional->num_colegiado));
+        $templateProcessor->setValue('profesional.especialidad', htmlspecialchars($profesional->especialidad));
+        $templateProcessor->setValue('profesional.direccion', htmlspecialchars($profesional->direccion));
+        $templateProcessor->setValue('profesional.localidad', htmlspecialchars($profesional->localidad));
+        $templateProcessor->setValue('profesional.codigopostal', htmlspecialchars($profesional->codigo_postal));
+        $templateProcessor->setValue('profesional.provincia', htmlspecialchars($profesional->provincia));
+        $templateProcessor->setValue('profesional.telefono', htmlspecialchars($profesional->telefono1));
+        $templateProcessor->setValue('profesional.telefono2', htmlspecialchars($profesional->telefono2));
+        $templateProcessor->setValue('profesional.telefono3', htmlspecialchars($profesional->telefono3));
+        $templateProcessor->setValue('profesional.movil', htmlspecialchars($profesional->movil));
+        $templateProcessor->setValue('profesional.email', htmlspecialchars($profesional->email));
+
+        $templateProcessor->setValue('empresa.nombre', htmlspecialchars($this->empresa));
+        $templateProcessor->setValue('empresa.nombremercantil', htmlspecialchars($this->empresa_mercantil));
+        $templateProcessor->setValue('empresa.cif', htmlspecialchars($this->empresa_cif));
+        $templateProcessor->setValue('empresa.direccion', htmlspecialchars($this->direccion_empresa));
+        $templateProcessor->setValue('empresa.localidad', htmlspecialchars($this->localidad_empresa));
+        $templateProcessor->setValue('empresa.telefono', htmlspecialchars($this->telefono1));
+        $templateProcessor->setValue('empresa.telefono2', htmlspecialchars($this->telefono2));
+        $templateProcessor->setValue('empresa.fax', htmlspecialchars($this->fax));
+        $templateProcessor->setValue('empresa.movil', htmlspecialchars($this->movil));
+        $templateProcessor->setValue('empresa.email', htmlspecialchars($this->email_empresa));
+        $templateProcessor->setValue('empresa.web', htmlspecialchars($this->web_empresa));
+        $templateProcessor->setValue('empresa.gerente', htmlspecialchars($this->gerente_empresa));
+        $templateProcessor->setValue('empresa.nifgerente', htmlspecialchars($this->gerente_nif_empresa));
+
+        $templateProcessor->setValue('hoy', $this->hoy);
+        $templateProcessor->setValue('hoy_largo',$this->largo );
+
+
+        //guardar en carpeta de cliente
+        $templateProcessor->saveAs(storage_path('app/storage/cliente/').''.$file->customer_id.'/'.$file_id.'/autorización_servicio_profesionales.docx');
+
+        //descarga el documento automaticamente
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header("Content-Disposition: attachment; filename=autorización_servicio_profesionales.docx");
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Pragma: public');
+        echo file_get_contents(storage_path('app/storage/cliente/').''.$file->customer_id.'/autorización_servicio_profesionales.docx');
         ob_clean();
         flush();
         exit;
@@ -367,6 +463,95 @@ class generator extends Controller
 
     }
 
+    //Generacion de autorización y compromiso de pago
+    public function designacion_abogado(Request $request,$file_id,$profesional_id,$aseguradora_id)
+    {
+        //
+        //dd($request);
+        // $agente = agent::findorfail($id);
+        $file = file::findorfail($file_id);
+        $profesional=professional::findorfail($profesional_id);
+        
+
+        //$cliente = customer::findorfail($file->customer_id);
+
+        //$dd($hoy);
+        //clonar plantilla
+        if (empty($file->nombre)){
+            $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/autorización_servicio_profesionales.docx'));
+        }
+        else
+        {
+            $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/autorización_servicio_profesionales_representado.docx'));
+        };
+
+        //reemplazar tags por valores
+        $templateProcessor->setValue('cliente.id', htmlspecialchars($file->customer_id));
+        $templateProcessor->setValue('cliente.nombre', htmlspecialchars($file->customer->getFullNameAttribute($file->customer_id)));
+        $templateProcessor->setValue('cliente.nif', htmlspecialchars($file->customer->nif));
+        $templateProcessor->setValue('cliente.direccion', htmlspecialchars($file->customer->direccion));
+        $templateProcessor->setValue('cliente.localidad', htmlspecialchars($file->customer->localidad));
+        $templateProcessor->setValue('cliente.provincia', htmlspecialchars($file->customer->provincia));
+        $templateProcessor->setValue('cliente.codigopostal', htmlspecialchars($file->customer->codigopostal));
+        $templateProcessor->setValue('cliente.telefono', htmlspecialchars($file->customer->telefono1));
+        $templateProcessor->setValue('cliente.telefono2', htmlspecialchars($file->customer->telefono2));
+        $templateProcessor->setValue('cliente.movil', htmlspecialchars($file->customer->movil));
+        $templateProcessor->setValue('cliente.email', htmlspecialchars($file->customer->email));
+        $templateProcessor->setValue('representado.nombre', htmlspecialchars($file->nombre));
+        $templateProcessor->setValue('representado.fechanacimiento', htmlspecialchars($file->fechanacimiento));
+        $templateProcessor->setValue('representado.nif', htmlspecialchars($file->nif));
+        $templateProcessor->setValue('expediente.fechasuceso', htmlspecialchars($file->fecha_accidente));
+        $templateProcessor->setValue('expediente.horasuceso', htmlspecialchars($file->hora_accidente));
+        $templateProcessor->setValue('profesional.nombre', htmlspecialchars($profesional->Nombre));
+        $templateProcessor->setValue('profesional.nif', htmlspecialchars($profesional->nif));
+        $templateProcessor->setValue('profesional.colegiado', htmlspecialchars($profesional->num_colegiado));
+        $templateProcessor->setValue('profesional.especialidad', htmlspecialchars($profesional->especialidad));
+        $templateProcessor->setValue('profesional.direccion', htmlspecialchars($profesional->direccion));
+        $templateProcessor->setValue('profesional.localidad', htmlspecialchars($profesional->localidad));
+        $templateProcessor->setValue('profesional.codigopostal', htmlspecialchars($profesional->codigo_postal));
+        $templateProcessor->setValue('profesional.provincia', htmlspecialchars($profesional->provincia));
+        $templateProcessor->setValue('profesional.telefono', htmlspecialchars($profesional->telefono1));
+        $templateProcessor->setValue('profesional.telefono2', htmlspecialchars($profesional->telefono2));
+        $templateProcessor->setValue('profesional.telefono3', htmlspecialchars($profesional->telefono3));
+        $templateProcessor->setValue('profesional.movil', htmlspecialchars($profesional->movil));
+        $templateProcessor->setValue('profesional.email', htmlspecialchars($profesional->email));
+
+        $templateProcessor->setValue('empresa.nombre', htmlspecialchars($this->empresa));
+        $templateProcessor->setValue('empresa.nombremercantil', htmlspecialchars($this->empresa_mercantil));
+        $templateProcessor->setValue('empresa.cif', htmlspecialchars($this->empresa_cif));
+        $templateProcessor->setValue('empresa.direccion', htmlspecialchars($this->direccion_empresa));
+        $templateProcessor->setValue('empresa.localidad', htmlspecialchars($this->localidad_empresa));
+        $templateProcessor->setValue('empresa.telefono', htmlspecialchars($this->telefono1));
+        $templateProcessor->setValue('empresa.telefono2', htmlspecialchars($this->telefono2));
+        $templateProcessor->setValue('empresa.fax', htmlspecialchars($this->fax));
+        $templateProcessor->setValue('empresa.movil', htmlspecialchars($this->movil));
+        $templateProcessor->setValue('empresa.email', htmlspecialchars($this->email_empresa));
+        $templateProcessor->setValue('empresa.web', htmlspecialchars($this->web_empresa));
+        $templateProcessor->setValue('empresa.gerente', htmlspecialchars($this->gerente_empresa));
+        $templateProcessor->setValue('empresa.nifgerente', htmlspecialchars($this->gerente_nif_empresa));
+
+        $templateProcessor->setValue('hoy', $this->hoy);
+        $templateProcessor->setValue('hoy_largo',$this->largo );
+
+
+        //guardar en carpeta de cliente
+        $templateProcessor->saveAs(storage_path('app/storage/cliente/').''.$file->customer_id.'/'.$file_id.'/autorización_servicio_profesionales.docx');
+
+        //descarga el documento automaticamente
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header("Content-Disposition: attachment; filename=autorización_servicio_profesionales.docx");
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Pragma: public');
+        echo file_get_contents(storage_path('app/storage/cliente/').''.$file->customer_id.'/autorización_servicio_profesionales.docx');
+        ob_clean();
+        flush();
+        exit;
+        return redirect()->action('filesController@show',['id'=>$file->id]);
+
+    }
 
     /**
      * Display a listing of the resource.

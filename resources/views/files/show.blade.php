@@ -22,20 +22,20 @@
                 <div class="col-md-4"><strong>Movil:</strong> {{$expediente->customer->movil}}</div>
                 <div class="col-md-6"><strong>Correo Electrónico:</strong> {{$expediente->customer->email}}</div>
                 @if (empty($expediente->nombre))
-                    @else
-                <div class="col-md-12"><strong>Representado:</strong> {{$expediente->nombre}}</div>
-                <div class="col-md-6"><strong>Nif:</strong> {{$expediente->nif}}</div>
-                <div class="col-md-6"><strong>Fecha de Nacimiento:</strong> {{$expediente->fechanacimiento}}</div>
-                    @endif
-                
+                @else
+                    <div class="col-md-12"><strong>Representado:</strong> {{$expediente->nombre}}</div>
+                    <div class="col-md-6"><strong>Nif:</strong> {{$expediente->nif}}</div>
+                    <div class="col-md-6"><strong>Fecha de Nacimiento:</strong> {{$expediente->fechanacimiento}}</div>
+                @endif
+
 
             </div>
             <div class="panel-footer">
                 @if (empty($expediente->nombre) )
-                {{ link_to_action('generator@contrato_prestacion_servicios','Contrato Prestacion de servicios',['file_id'=>$expediente->id],['class' => 'btn btn-sm btn-default']) }}
+                    {{ link_to_action('generator@contrato_prestacion_servicios','Contrato Prestacion de servicios',['file_id'=>$expediente->id],['class' => 'btn btn-sm btn-default']) }}
                 @else
-                {{ link_to_action('generator@contrato_prestacion_servicios_representados','Contrato Prestacion de servicios',['file_id'=>$expediente->id],['class' => 'btn btn-sm btn-default']) }}
-                    @endif
+                    {{ link_to_action('generator@contrato_prestacion_servicios_representados','Contrato Prestacion de servicios',['file_id'=>$expediente->id],['class' => 'btn btn-sm btn-default']) }}
+                @endif
             </div>
         </div>
         <!-- Nav tabs -->
@@ -308,17 +308,21 @@
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-heading">Datos del contrario
-                                    <button type="button" class="btn btn-lg btn-success glyphicon glyphicon-plus col-md-offset-10" data-toggle="modal"
+                                    <button type="button"
+                                            class="btn btn-lg btn-success glyphicon glyphicon-plus col-md-offset-10"
+                                            data-toggle="modal"
                                             data-target="#newcontrario">
 
                                     </button>
 
                                     <!-- Modal de nuevo contrario en expedientes-->
-                                    <div class="modal fade " id="newcontrario" tabindex="-1" role="dialog" aria-labelledby="newcontrario">
+                                    <div class="modal fade " id="newcontrario" tabindex="-1" role="dialog"
+                                         aria-labelledby="newcontrario">
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <button type="button" class="close" onclick="document.location.reload();"
+                                                    <button type="button" class="close"
+                                                            onclick="document.location.reload();"
                                                             data-dismiss="modal" aria-label="Close"><span
                                                                 aria-hidden="true">&times;</span>
                                                     </button>
@@ -341,61 +345,73 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="center-block">
-                                    @foreach($expediente->opponent as $contrario)
-                                        <div class="container col-md-6">
-                                        <div class="panel panel-default col-md-12 center-block">
-                                        <div class="panel-heading">{{link_to_action('opponentController@show', $contrario->nombre , ['id'=>$contrario->id], [])}}</div>
-                                        <div class="panel-body">
-                                            <div class="col-md-12"><address>
-                                                    <div class="col-md-6"><strong>Dirección:</strong>
-                                                    {{$contrario->direccion}} {{$contrario->localidad}}({{$contrario->provincia}}),{{$contrario->codigo_postal}}
+                                        @foreach($expediente->opponent as $contrario)
+                                            <div class="container col-md-6">
+                                                <div class="panel panel-default col-md-12 center-block">
+                                                    <div class="panel-heading">{{link_to_action('opponentController@show', $contrario->nombre , ['id'=>$contrario->id], [])}}</div>
+                                                    <div class="panel-body">
+                                                        <div class="col-md-12">
+                                                            <address>
+                                                                <div class="col-md-6"><strong>Dirección:</strong>
+                                                                    {{$contrario->direccion}} {{$contrario->localidad}}
+                                                                    ({{$contrario->provincia}}
+                                                                    ),{{$contrario->codigo_postal}}
+                                                                </div>
+                                                                <br>
+                                                                <div class="col-md-6">
+                                                                    <strong>Teléfono:</strong> {{$contrario->telefono}}
+                                                                </div>
+                                                                <div class="col-md-6"><strong>Telefono
+                                                                        2:</strong> {{$contrario->telefono2}}
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <strong>Móvil:</strong> {{$contrario->movil}}
+                                                                </div>
+                                                                <div class="col-md-6"><strong>Email:</strong><a
+                                                                            href="mailto:#">{{$contrario->email}}</a>
+                                                                </div>
+                                                            </address>
+                                                        </div>
+
+
+                                                        <div class="col-md-6">
+                                                            <strong>Vehículo:</strong> {{$contrario->vehiculo}}
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <strong>Matrícula:</strong> {{$contrario->matricula}}
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <strong>Conductor:</strong> {{$contrario->conductor}}
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <strong>Tomador:</strong> {{$contrario->tomador}}
+                                                        </div>
+
+                                                        <div class="col-md-6"><strong>Nº
+                                                                póliza:</strong> {{$contrario->num_poliza}}
+                                                        </div>
+                                                        <div class="col-md-6"><strong>
+                                                                Nº de referencia:
+                                                            </strong>
+                                                            {{$contrario->refexpediente}}
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <strong>
+                                                                Aseguradora:
+                                                            </strong>
+                                                            {{$contrario->processor_id}}
+                                                        </div>
+                                                        <div class="col-md-6"><strong>
+                                                                Tramitador:</strong>
+                                                            {{$contrario->processor_id}}</div>
                                                     </div>
-                                                        <br>
-                                                    <div class="col-md-6"><strong>Teléfono:</strong> {{$contrario->telefono}}
-                                                    </div>
-                                                    <div class="col-md-6"><strong>Telefono 2:</strong> {{$contrario->telefono2}}
-                                                    </div>
-                                                    <div class="col-md-6"><strong>Móvil:</strong> {{$contrario->movil}}
-                                                    </div>
-                                                    <div class="col-md-6"><strong>Email:</strong><a href="mailto:#">{{$contrario->email}}</a>
-                                                    </div>
-                                                </address>
+                                                </div>
                                             </div>
 
-
-                                            <div class="col-md-6"><strong>Vehículo:</strong> {{$contrario->vehiculo}}
-                                            </div>
-
-                                            <div class="col-md-6"><strong>Matrícula:</strong> {{$contrario->matricula}}
-                                            </div>
-
-                                            <div class="col-md-6"><strong>Conductor:</strong> {{$contrario->conductor}}
-                                            </div>
-
-                                            <div class="col-md-6"><strong>Tomador:</strong> {{$contrario->tomador}}
-                                            </div>
-
-                                            <div class="col-md-6"><strong>Nº póliza:</strong> {{$contrario->num_poliza}}
-                                            </div>
-                                            <div class="col-md-6"><strong>
-                                                    Nº de referencia:
-                                                </strong>
-                                                {{$contrario->refexpediente}}
-                                            </div>
-                                            <div class="col-md-6">
-                                                <strong>
-                                                    Aseguradora:
-                                                </strong>
-                                                {{$contrario->processor_id}}
-                                            </div>
-                                            <div class="col-md-6"><strong>
-                                                    Tramitador:</strong>
-                                                {{$contrario->processor_id}}</div>
-                                        </div>
-                                        </div>
-                                        </div>
-
-                                    @endforeach
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -446,11 +462,19 @@
                             </tr>
                             @forelse($profesionales as $profesional)
                                 <tr>
-                                    <td class="col-md-7">@forelse(($profesional->professional()->get()) as $prof)
+                                    @forelse(($profesional->professional()->get()) as $prof)
+                                    <td class="col-md-7">
                                             {{$prof->Nombre}}
-                                        @empty
-                                        @endforelse</td>
-                                    <td class="col-md-5"></td>
+                                    </td>
+                                    <td class="col-md-5">
+                                        @if ($prof->group_id)
+                                            {{ link_to_action('generator@contrato_asuncion_direccion_tecnica',' Asunción Dirección Técnica',['file_id'=>$expediente->id,'profesional_id'=>$prof->id],['class' => 'btn btn-sm btn-default']) }}
+                                        @elseif ($prof->group_id)
+                                            {{ link_to_action('generator@autorización_servicio_profesionales','Autorizacion y compromiso de pago',['file_id'=>$expediente->id,'profesional_id'=>$prof->group_id],['class' => 'btn btn-sm btn-default']) }}
+                                        @endif
+                                    </td>
+                                    @empty
+                                    @endforelse
 
                                 </tr>
 

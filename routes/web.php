@@ -56,3 +56,4 @@ Route::get('/cartaagradecimientoagente/{id}/{cliente}','generator@carta_agracedi
 Route::get('/contratoprestacionservicios/{file_id}','generator@contrato_prestacion_servicios');
 Route::get('/contratoprestacionserviciosrepresentado/{file_id}','generator@contrato_prestacion_servicios_representados');
 Route::get('/asunciondirecciontecnica/{file_id}/{profesional_id}','generator@contrato_asuncion_direccion_tecnica');
+Route::get('/autorizacionycompromisodepago/{file_id}/{profesional_id}','generator@autorización_servicio_profesionales');
