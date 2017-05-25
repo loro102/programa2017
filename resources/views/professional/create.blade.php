@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('group_id', 'Grupo:', ['class' => 'control-label']) !!}
-            {!! Form::text('group_id', '', ['class' => 'form-control']) !!}
+            {!! Form::select('group_id', $grupo,'', ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('especialidad', 'Especialidad:', ['class' => 'control-label']) !!}

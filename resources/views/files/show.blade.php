@@ -469,6 +469,8 @@
                                     <td class="col-md-5">
                                         @if ($prof->group_id)
                                             {{ link_to_action('generator@contrato_asuncion_direccion_tecnica',' Asunción Dirección Técnica',['file_id'=>$expediente->id,'profesional_id'=>$prof->id],['class' => 'btn btn-sm btn-default']) }}
+                                            {{ link_to_action('generator@designacion_abogado','Designación de Abogado',['file_id'=>$expediente->id,'profesional_id'=>$prof->id],['class' => 'btn btn-sm btn-default']) }}
+                                            {{ link_to_action('generator@reciboasisteciajuridica','R Asistencia Juridica',['file_id'=>$expediente->id,'profesional_id'=>$prof->id],['class' => 'btn btn-sm btn-default']) }}
                                         @elseif ($prof->group_id)
                                             {{ link_to_action('generator@autorización_servicio_profesionales','Autorizacion y compromiso de pago',['file_id'=>$expediente->id,'profesional_id'=>$prof->group_id],['class' => 'btn btn-sm btn-default']) }}
                                         @endif

@@ -22,8 +22,8 @@
                 <div class="col-md-3"><strong>Localidad:</strong>{{ $profesional->localidad }}</div>
                 <div class="col-md-3"><strong>Provincia:</strong>{{ $profesional->provincia }}</div>
                 <div class="col-md-3"><strong>Código Postal:</strong>{{ $profesional->codigo_postal }}</div>
-                <div class="col-md-3"><strong>Profesión:</strong>{{ $profesional->group_id }}</div>
-                <div class="col-md-3"><strong>Profesión:</strong>{{ $profesional->especialidad }}</div>
+                <div class="col-md-3"><strong>Grupo:</strong>{{ $profesional->group->nombre }}</div>
+                <div class="col-md-3"><strong>Especialidad:</strong>{{ $profesional->especialidad }}</div>
                 <div class="col-md-3"><strong>Teléfono 1:</strong>{{ $profesional->telefono1 }}</div>
                 <div class="col-md-3"><strong>Teléfono 2:</strong>{{ $profesional->telefono2 }}</div>
                 <div class="col-md-3"><strong>Teléfono 3:</strong>{{ $profesional->telefono3 }}</div>

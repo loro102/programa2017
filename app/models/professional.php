@@ -25,4 +25,8 @@ class professional extends Model
     {
         return $this->hasMany('App\models\invoice');
     }
+    public function group()
+    {
+        return $this->hasOne('App\models\group', 'id');
+    }
 }

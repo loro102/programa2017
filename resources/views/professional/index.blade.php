@@ -19,7 +19,7 @@
             @forelse($profesionales as $profesional)
                 <tr>
                     <td class="col-md-2">{{link_to_action('professionalController@show',$profesional->Nombre,['id'=> $profesional->id],[])}}</td>
-                    <td class="col-md-3">{{$profesional->group_id}}</td>
+                    <td class="col-md-3">{{$profesional->group->nombre}}</td>
                     <td class="col-md-1">{{$profesional->especialidad}}</td>
                     <td class="col-md-1">{{$profesional->localidad}}</td>
                     <td class="col-md-1">{{$profesional->telefono1}}</td>

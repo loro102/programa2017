@@ -57,3 +57,5 @@ Route::get('/contratoprestacionservicios/{file_id}','generator@contrato_prestaci
 Route::get('/contratoprestacionserviciosrepresentado/{file_id}','generator@contrato_prestacion_servicios_representados');
 Route::get('/asunciondirecciontecnica/{file_id}/{profesional_id}','generator@contrato_asuncion_direccion_tecnica');
 Route::get('/autorizacionycompromisodepago/{file_id}/{profesional_id}','generator@autorización_servicio_profesionales');
+Route::get('/designacionabogado/{file_id}/{profesional_id}','generator@designacion_abogado');
+Route::get('/reciboasistenciajuridica/{file_id}/{profesional_id}','generator@reciboasisteciajuridica');

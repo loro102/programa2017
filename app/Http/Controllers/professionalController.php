@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\models\group;
 use App\models\professional;
 use Illuminate\Http\Request;
 
@@ -31,11 +32,12 @@ class professionalController extends Controller
     {
         //
         $profesional=new professional;
+        $grupo=group::all()->pluck('nombre','id')->prepend('Seleccione grupo profesional');
         //$agente=agent::orderBy('nombre','asc')->pluck('nombre','id');
 
         return view('professional.create',[
             'profesional'=>$profesional,
-            //'agente'=>$agente
+            'grupo'=>$grupo
         ]);
     }
 
@@ -85,10 +87,10 @@ class professionalController extends Controller
     {
         //
         $profesional=professional::findorFail($id);
-        //$agente=agent::orderBy('nombre','asc')->pluck('nombre','id');
-        return view('professional.edit',[
+        $grupo=group::all()->pluck('nombre','id')->prepend('Seleccione grupo profesional');
+                return view('professional.edit',[
             'profesional'=>$profesional,
-            //'agente'=>$agente
+            'grupo'=>$grupo
         ]);
     }
 

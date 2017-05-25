@@ -13,7 +13,31 @@ class group extends Seeder
     {
         //
         DB::table('groups')->insert([
-            'nombre' => str_random(10),
+            'nombre' => 'Abogados',
         ]);
+        DB::table('groups')->insert([
+                                        'nombre' => 'Médicos',
+                                    ]);
+        DB::table('groups')->insert([
+                                        'nombre' => 'Fisioterapia',
+                                    ]);
+        DB::table('groups')->insert([
+                                        'nombre' => 'Clínica/Hospital',
+                                    ]);
+        DB::table('groups')->insert([
+                                        'nombre' => 'Perito Ingeniero',
+                                    ]);
+        DB::table('groups')->insert([
+                                        'nombre' => 'Perito Médico',
+                                    ]);
+        DB::table('groups')->insert([
+                                        'nombre' => 'Procurador',
+                                    ]);
+        DB::table('groups')->insert([
+                                        'nombre' => 'Taxi',
+                                    ]);
+        DB::table('groups')->insert([
+                                        'nombre' => 'Ambulancia',
+                                    ]);
     }
 }
