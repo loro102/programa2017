@@ -13,8 +13,8 @@ class formality extends Seeder
     {
         //
         DB::table('formalities')->insert([
-        'nombre' => str_random(10),
-        'categoria' => str_random(10),
+        'nombre' => 'ninguno',
+        'categoria' => 'ninguno',
     ]);
 
     }

@@ -83,7 +83,7 @@ class generator extends Controller
 
 
          //guardar en carpeta de cliente
-        $templateProcessor->saveAs(storage_path('app/storage/cliente/').''.$cliente->id.'/RJ030_Hoja_consulta.docx');
+        $templateProcessor->saveAs(storage_path('app/storage/temp/RJ030_Hoja_consulta.docx');
 
         //descarga el documento automaticamente
         header('Content-Description: File Transfer');
@@ -93,7 +93,7 @@ class generator extends Controller
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Pragma: public');
-        echo file_get_contents(storage_path('app/storage/cliente/').''.$cliente->id.'/RJ030_Hoja_consulta.docx');
+        echo file_get_contents(storage_path('app/storage/temp/RJ030_Hoja_consulta.docx');
         ob_clean();
         flush();
         exit;
@@ -148,7 +148,7 @@ class generator extends Controller
 
 
         //guardar en carpeta de cliente
-        $templateProcessor->saveAs(storage_path('app/storage/cliente/').''.$cliente.'/Hoja_agradecimiento_cliente.docx');
+        $templateProcessor->saveAs(storage_path('app/storage/temp/Hoja_agradecimiento_cliente.docx');
 
         //descarga el documento automaticamente
         header('Content-Description: File Transfer');
@@ -158,7 +158,7 @@ class generator extends Controller
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Pragma: public');
-        echo file_get_contents(storage_path('app/storage/cliente/').''.$cliente.'/Hoja_agradecimiento_cliente.docx');
+        echo file_get_contents(storage_path('app/storage/temp/Hoja_agradecimiento_cliente.docx');
         ob_clean();
         flush();
         exit;
@@ -213,7 +213,7 @@ class generator extends Controller
 
 
         //guardar en carpeta de cliente
-        $templateProcessor->saveAs(storage_path('app/storage/cliente/').''.$file->customer_id.'/'.$file_id.'/contrato_prestacion_servicios.docx');
+        $templateProcessor->saveAs(storage_path('app/storage/temp/contrato_prestacion_servicios.docx');
 
         //descarga el documento automaticamente
         header('Content-Description: File Transfer');
@@ -223,7 +223,7 @@ class generator extends Controller
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Pragma: public');
-        echo file_get_contents(storage_path('app/storage/cliente/').''.$file->customer_id.'/contrato_prestacion_servicios.docx');
+        echo file_get_contents(storage_path('app/storage/temp/contrato_prestacion_servicios.docx');
         ob_clean();
         flush();
         exit;
@@ -279,7 +279,7 @@ class generator extends Controller
 
 
         //guardar en carpeta de cliente
-        $templateProcessor->saveAs(storage_path('app/storage/cliente/').''.$file->customer_id.'/'.$file_id.'/contrato_prestacion_servicios_representado.docx');
+        $templateProcessor->saveAs(storage_path('app/storage/temp/contrato_prestacion_servicios_representado.docx');
 
         //descarga el documento automaticamente
         header('Content-Description: File Transfer');
@@ -289,7 +289,7 @@ class generator extends Controller
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Pragma: public');
-        echo file_get_contents(storage_path('app/storage/cliente/').''.$file->customer_id.'/contrato_prestacion_servicios_representado.docx');
+        echo file_get_contents(storage_path('app/storage/temp/contrato_prestacion_servicios_representado.docx');
         ob_clean();
         flush();
         exit;
@@ -357,7 +357,7 @@ class generator extends Controller
 
 
         //guardar en carpeta de cliente
-        $templateProcessor->saveAs(storage_path('app/storage/cliente/').''.$file->customer_id.'/'.$file_id.'/asuncion_direccion_tecnica.docx');
+        $templateProcessor->saveAs(storage_path('app/storage/temp/asuncion_direccion_tecnica.docx');
 
         //descarga el documento automaticamente
         header('Content-Description: File Transfer');
@@ -367,7 +367,7 @@ class generator extends Controller
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Pragma: public');
-        echo file_get_contents(storage_path('app/storage/cliente/').''.$file->customer_id.'/'.$file_id.'/asuncion_direccion_tecnica.docx');
+        echo file_get_contents(storage_path('app/storage/temp/asuncion_direccion_tecnica.docx');
         ob_clean();
         flush();
         exit;
@@ -446,7 +446,7 @@ class generator extends Controller
 
 
         //guardar en carpeta de cliente
-        $templateProcessor->saveAs(storage_path('app/storage/cliente/').''.$file->customer_id.'/'.$file_id.'/autorización_servicio_profesionales.docx');
+        $templateProcessor->saveAs(storage_path('app/storage/temp/autorización_servicio_profesionales.docx');
 
         //descarga el documento automaticamente
         header('Content-Description: File Transfer');
@@ -456,7 +456,7 @@ class generator extends Controller
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Pragma: public');
-        echo file_get_contents(storage_path('app/storage/cliente/').''.$file->customer_id.'/autorización_servicio_profesionales.docx');
+        echo file_get_contents(storage_path('app/storage/temp/autorización_servicio_profesionales.docx');
         ob_clean();
         flush();
         exit;
@@ -545,7 +545,7 @@ class generator extends Controller
 
 
         //guardar en carpeta de cliente
-        $templateProcessor->saveAs(storage_path('app/storage/cliente/').''.$file->customer_id.'/'.$file_id.'/designacion_abogado.docx');
+        $templateProcessor->saveAs(storage_path('app/storage/temp/designacion_abogado.docx');
 
         //descarga el documento automaticamente
         header('Content-Description: File Transfer');
@@ -555,7 +555,7 @@ class generator extends Controller
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Pragma: public');
-        echo file_get_contents(storage_path('app/storage/cliente/').''.$file->customer_id.'/designacion_abogado.docx');
+        echo file_get_contents(storage_path('app/storage/temp/designacion_abogado.docx');
         ob_clean();
         flush();
         exit;
@@ -643,7 +643,7 @@ class generator extends Controller
 
 
         //guardar en carpeta de cliente
-        $templateProcessor->saveAs(storage_path('app/storage/cliente/').''.$file->customer_id.'/'.$file_id.'/designacion_abogado.docx');
+        $templateProcessor->saveAs(storage_path('app/storage/temp/designacion_abogado.docx');
 
         //descarga el documento automaticamente
         header('Content-Description: File Transfer');
@@ -653,7 +653,7 @@ class generator extends Controller
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Pragma: public');
-        echo file_get_contents(storage_path('app/storage/cliente/').''.$file->customer_id.'/designacion_abogado.docx');
+        echo file_get_contents(storage_path('app/storage/temp/designacion_abogado.docx');
         ob_clean();
         flush();
         exit;

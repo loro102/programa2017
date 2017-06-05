@@ -186,7 +186,7 @@
                 <div role="tabpanel" class="tab-pane" id="juridico">
                     <div class="form-group">
                         {!! Form::label('formalidad', 'Formalidad:', ['class' => 'control-label']) !!}
-                        {!! Form::select('formalidad', $categoria ,$cat->categoria , ['class' => 'form-control','id'=>'tipo_procedimiento']) !!}
+                        {!! Form::select('formalidad', $categoria ,null , ['class' => 'form-control','id'=>'tipo_procedimiento']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('formality_id', 'Procedimiento:', ['class' => 'control-label']) !!}

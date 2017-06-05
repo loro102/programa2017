@@ -103,8 +103,9 @@
         </div>
         <div class="form-group">
             {!! Form::label('posible_culpable', 'Posible Culpable', ['class' => 'control-label']) !!}
+
             {!! Form::hidden('posible_culpable', '0', ['id' => 'posible_culpable']) !!}
-            {!! Form::checkbox('posible_culpable'', '1', null,  ['id' => 'posible_culpable']) !!}
+            {!! Form::checkbox('posible_culpable','1',['id'=>'posible_culpable']) !!}
         </div>
 
     </div>

@@ -98,7 +98,7 @@
         <div class="row">
 
             <div class="form-group">
-                {!! Form::submit('Editar agente', ['class' => 'form-control btn btn-primary btn-block']) !!}
+                {!! Form::submit('Editar contrario', ['class' => 'form-control btn btn-primary btn-block']) !!}
             </div>
         </div>
 

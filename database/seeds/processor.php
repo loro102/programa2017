@@ -13,13 +13,13 @@ class processor extends Seeder
     {
         //
         DB::table('processors')->insert([
-            'nombre' => str_random(10),
-            'telefono' => str_random(10),
-            'telefono2' => str_random(10),
-            'fax' => str_random(10),
-            'email' => (str_random(10).'@gmail.com'),
-            'notas' => str_random(10),
-            'cargo'=>str_random(10),
+            'nombre' => 'ninguno',
+            'telefono' => 'ninguno',
+            'telefono2' => 'ninguno',
+            'fax' => 'ninguno',
+            'email' => 'ninguno',
+            'notas' => 'ninguno',
+            'cargo'=>'ninguno',
             'insurer_id'=>1,
 
 

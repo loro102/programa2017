@@ -45,7 +45,7 @@ class file_professionalController extends Controller
         //
         $file=$request->input('file_id');
         file_professional::create($request->input());
-        return redirect()->action('file_professionalController@create',['file'=>$file])->with('message','profesional agregado correctamente');
+        return redirect()->action('filesController@show',['file'=>$file])->with('message','profesional agregado correctamente');
 
     }
 

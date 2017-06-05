@@ -17,11 +17,12 @@ class DatabaseSeeder extends Seeder
         $this->call(professional::class);
         //$this->call(customer::class);
         $this->call(sort::class);
-        //$this->call(formality::class);
-        //$this->call(insurer::class);
-        //$this->call(processor::class);
+        $this->call(formality::class);
+        $this->call(insurer::class);
+        $this->call(processor::class);
         //$this->call(file::class);
         //$this->call(invoice::class);
         $this->call(phases::class);
+
     }
 }

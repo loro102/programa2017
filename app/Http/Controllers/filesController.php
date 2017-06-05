@@ -16,7 +16,10 @@ use App\models\file;
 use App\models\customer;
 use App\models\professional;
 use Illuminate\Support\Facades\DB;
+use function isNull;
+use const null;
 use Storage;
+use function storage_path;
 
 class filesController extends Controller
 {
@@ -42,20 +45,23 @@ class filesController extends Controller
 
         $expediente=new file;
         //$cliente=customer::all()->pluck('fullname','id')->prepend('Ninguno','');
-        $sort=sort::all()->pluck('nombre','id')->prepend('Ninguno','');
-        $categoria=formality::all()->unique('categoria')->pluck('categoria','categoria')->prepend('Ninguno','');
+        $sort=sort::all()->pluck('nombre','id')->prepend('Ninguno','1');
+        $categoria=formality::all()->unique('categoria')->pluck('categoria','categoria')->prepend('Ninguno','1');
         $abogado=professional::where('group_id',1)->where('activo',true)->pluck('Nombre','id');
-        $aseguradora=insurer::all()->pluck('nombre','id')->prepend('Ninguno','');
-        $fase=phase::all()->pluck('nombre','id')->prepend('Ninguno','');
+        $aseguradora=insurer::all()->pluck('nombre','id')->prepend('Seleccione','1');
+        $processor=processor::where('insurer_id',1)->pluck('nombre','id');
+        $formalidad=formality::findorfail(1)->pluck('nombre','id');
+        $fase=phase::all()->pluck('nombre','id')->prepend('Ninguno','1');
         //$abogado=professional::all()->pluck('nombre','id')->prepend('Ninguno','');
 
         //$client=$cliente->pluck('fullname','id');
         //dd($cliente);
         return view('files.create',[
             'expediente'=>$expediente,
-            //'cliente'=>$cliente,
+            'processor'=>$processor,
             'sort'=>$sort,
             'categoria'=>$categoria,
+            'formalidad'=>$formalidad,
             'aseguradora'=>$aseguradora,
             'abogado'=>$abogado,
             'fase'=>$fase,
@@ -73,10 +79,10 @@ class filesController extends Controller
         //
         //dd($request);
         $file=new file;
-        $file->fill($request->except(['formalidad','formalities_id','processor_id']))->save();
+        $file->fill($request->except(['formalidad','formalities_id']))->save();
         $files=file::where('customer_id',$request->customer_id)->get();
         
-        Storage::makeDirectory('storage/cliente/'.$request->customer_id.'/'.$files->last()->id);
+        //Storage::makeDirectory('storage/cliente/'.$request->customer_id.'/'.$files->last()->id);
 
 
 
@@ -177,6 +183,22 @@ class filesController extends Controller
 
         //dd($expedientes);
 
+
+        /*
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::                                                                ::
+::            Pestaña de documentos                               ::
+::                                                                ::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+*/
+        //$documentos= Storage::disk('cliente')->Files($consulta->customer_id.'/'.$consulta->id);
+        //Storage::disk('cliente')->url($documentos);
+
+        //dd($url);
+
+
         /*
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -197,6 +219,7 @@ class filesController extends Controller
             'total'=>$total,
             'beneficio'=>$beneficio,
             'notas'=>$notas,
+            'documentos'=>$documentos,
         ]);
 
     }
@@ -211,18 +234,19 @@ class filesController extends Controller
     {
         //
         $expediente=file::findorFail($id);
+
         //$cliente=customer::all()->pluck('fullname','id')->prepend('Ninguno','');
         $sort=sort::all()->pluck('nombre','id')->prepend('Ninguno','0');
         //Recogiendo datos de los select de formalidad
         $categoria=formality::all()->unique('categoria')->pluck('categoria','categoria')->prepend('Ninguno','');
-        $a=formality::find($expediente->formality_id);
-        $procedimiento= formality::all()->unique('categoria')->pluck('nombre','id')->prepend('Ninguno','');
+        //$a=formality::findorfail($expediente->formality_id);
+        $procedimiento= formality::all()->pluck('nombre','id');
         //recogiendo datos de aseguradora
-        $aseguradora=insurer::all()->pluck('nombre','id')->prepend('Ninguno','');
-        $tramiciasel=processor::all()->pluck('nombre','id')->prepend('Ninguno','');
+        $aseguradora=insurer::all()->pluck('nombre','id');
+        $tramiciasel=processor::all()->pluck('nombre','id');
         $tramicia=processor::findorfail($expediente->processor_id);
         //$abogado=professional::all()->pluck('nombre','id')->prepend('Ninguno','');
-        $fase=phase::all()->pluck('nombre','id')->prepend('Conociendo el caso','0');
+        $fase=phase::all()->pluck('nombre','id');
         $abogado=professional::where('group_id',1)->pluck('Nombre','id');
 
         //$client=$cliente->pluck('fullname','id');
@@ -236,7 +260,7 @@ class filesController extends Controller
             'procedimiento'=>$procedimiento,
             'abogado'=>$abogado,
             'fase'=>$fase,
-            'cat'=>$a,
+            //'cat'=>$a,
             'tramicia'=>$tramicia,
             'tramiciasel'=>$tramiciasel,
         ]);
@@ -249,7 +273,7 @@ class filesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(\App\Http\Requests\file $request, $id)
     {
         //
         $expediente=file::findorFail($id);

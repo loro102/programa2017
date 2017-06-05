@@ -83,6 +83,9 @@ class file extends FormRequest
             'insurer_id'=>'nullable',
             'processor_id'=>'nullable',
             'phase_id'=>'nullable',
+            'nombre'=>'nullable',
+            'nif'=>'nullable',
+            'fechanacimiento'=>'nullable',
                         
         ];
     }

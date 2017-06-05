@@ -57,8 +57,8 @@ return [
         'cliente' => [
             'driver' => 'local',
             'root' => storage_path('app/storage/cliente'),
-            'url' => env('APP_URL').'/cliente',
-            'visibility' => 'cliente',
+            'url' => env('APP_URL').'/clientes',
+            'visibility' => 'public',
         ],
 
         's3' => [

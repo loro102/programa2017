@@ -347,7 +347,11 @@
                                     <div class="center-block">
                                         @foreach($expediente->opponent as $contrario)
                                             <div class="container col-md-6">
-                                                <div class="panel panel-default col-md-12 center-block">
+                                                @if ($contrario->posible_culpable == true)
+                                                    <div class="panel panel-warning col-md-12 center-block">
+                                                        @else
+                                                            <div class="panel panel-default col-md-12 center-block">
+                                                        @endif
                                                     <div class="panel-heading">{{link_to_action('opponentController@show', $contrario->nombre , ['id'=>$contrario->id], [])}}</div>
                                                     <div class="panel-body">
                                                         <div class="col-md-12">
@@ -424,6 +428,7 @@
             <div role="tabpanel" class="tab-pane panel-primary" id="profesionales">
                 <div class="panel panel-default">
                     <div class="panel-body">
+                        {{ link_to_action('file_professionalController@create','Asignar un profesional',['file'=> $expediente->id,'prof'=>0],['class' => 'btn btn-sm btn-default']) }}
                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
                                 data-target="#filepro">
                             agregar profesional
@@ -474,6 +479,7 @@
                                         @elseif ($prof->group_id)
                                             {{ link_to_action('generator@autorización_servicio_profesionales','Autorizacion y compromiso de pago',['file_id'=>$expediente->id,'profesional_id'=>$prof->group_id],['class' => 'btn btn-sm btn-default']) }}
                                         @endif
+                                            {{ link_to_action('invoicesController@create','Añadir una nueva factura',['id'=> $expediente->id,'prof'=>$prof->id ],['class' => 'btn btn-sm btn-default']) }}
                                     </td>
                                     @empty
                                     @endforelse
@@ -494,7 +500,7 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <p>
-                            {{ link_to_action('invoicesController@create','Añadir un nuevo factura',['id'=> $expediente->id],[]) }}
+                            {{ link_to_action('invoicesController@create','Añadir una nueva factura',['id'=> $expediente->id,'prof'=>0],['class' => 'btn btn-sm btn-primary']) }}
                             |
                         </p>
                         <table class="table-bordered table-striped table-hover col-md-12">
@@ -664,6 +670,10 @@
             <div role="tabpanel" class="tab-pane panel-primary" id="indemnizacion">
                 <div class="panel panel-default">
                     <div class="panel-body">
+                        @forelse($documentos as $documento)
+                            {{link_to(Storage::disk('cliente')->url('cliente/'.$documento))}}
+                            @empty()
+                            @endforelse
                         <div>123456789</div>
                         <div>
                             <table class="table-bordered table-striped table-hover col-md-12">

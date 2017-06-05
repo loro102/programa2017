@@ -13,15 +13,15 @@ class insurer extends Seeder
     {
         //
         DB::table('insurers')->insert([
-            'nombre' => str_random(10),
-            'telefonos' => str_random(10),
-            'faxes' => str_random(10),
-            'emails' => (str_random(10).'@gmail.com'),
-            'direccion' => str_random(10),
-            'codigo_postal' => str_random(10),
-            'localidad' => str_random(10),
-            'provincia' => str_random(10),
-            'notas' => str_random(10),
+            'nombre' => 'Ninguno',
+            'telefonos' => 'Ninguno',
+            'faxes' => 'Ninguno',
+            'emails' => 'Ninguno',
+            'direccion' => 'Ninguno',
+            'codigo_postal' => 'Ninguno',
+            'localidad' => 'Ninguno',
+            'provincia' => 'Ninguno',
+            'notas' => 'Ninguno',
 
 
         ]);

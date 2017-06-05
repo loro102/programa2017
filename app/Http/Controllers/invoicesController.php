@@ -2,12 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\models\group;
 use App\models\invoice;
 use App\models\professional;
 use Illuminate\Http\Request;
 
 class invoicesController extends Controller
 {
+    public function __construct()
+    {
+        //datos empresa
+        $this->metodos=collect([
+                                   [
+                                       'id' => '1',
+                                       'nombre' => 'Sin pagar',
+                                   ],
+                                   [
+                                       'id' => '2',
+                                       'nombre' => 'En Metalico',
+                                   ],
+                                   [
+                                       'id' => '3',
+                                       'nombre' => 'Transferencia Bancaria',
+                                   ],
+                                   [
+                                       'id' => '4',
+                                       'nombre' => 'Tarjeta',
+                                   ],
+                                   [
+                                       'id' => '5',
+                                       'nombre' => 'Talón/Pagaré',
+                                   ],
+                               ]);
+
+
+
+        //$dt = Carbon::parse();
+        //$this->largo = largo;
+
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -45,10 +80,14 @@ class invoicesController extends Controller
     {
         //
         $factura=new invoice;
+        $sector=group::all()->pluck('nombre','id')->prepend('Seleccione sector');
         $profesional=professional::orderBy('nombre','asc')->pluck('nombre','id');
+        $metodos=$this->metodos->pluck('nombre','id');
 
         return view('invoices.create',[
             'factura'=>$factura,
+            'sector'=>$sector,
+            'metodos'=>$metodos,
             'profesional'=>$profesional
         ]);
 

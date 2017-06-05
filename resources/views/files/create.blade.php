@@ -193,11 +193,11 @@
             <div role="tabpanel" class="tab-pane" id="juridico">
                 <div class="form-group">
                     {!! Form::label('formalidad', 'Formalidad:', ['class' => 'control-label']) !!}
-                    {!! Form::select('formalidad', $categoria , null , ['class' => 'form-control','id'=>'tipo_procedimiento']) !!}
+                    {!! Form::select('formalidad', $categoria , 1 , ['class' => 'form-control','id'=>'tipo_procedimiento']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('formalities_id', 'Procedimiento:', ['class' => 'control-label']) !!}
-                    {!! Form::select('formalities_id', ['placeholder'=>'Selecciona'] , null , ['class' => 'form-control','id'=>'procedimientos']) !!}
+                    {!! Form::select('formalities_id', $formalidad , null, ['class' => 'form-control','id'=>'procedimientos']) !!}
                 </div>
 
                 <div class="form-group">
@@ -252,11 +252,11 @@
                 </div>
                 <div class="form-group">
                     {!! Form::label('insurer_id', 'Compañia de seguros:', ['class' => 'control-label']) !!}
-                    {!! Form::select('insurer_id', $aseguradora , null , ['class' => 'form-control']) !!}
+                    {!! Form::select('insurer_id', $aseguradora , 1 , ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('processor_id', 'Tramitador de la aseguradora:', ['class' => 'control-label']) !!}
-                    {!! Form::select('processor_id',['placeholder'=>'Selecciona'], null , ['class' => 'form-control']) !!}
+                    {!! Form::select('processor_id',$processor, 1 , ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('fechapoliza', 'Fecha de Póliza:', ['class' => 'control-label']) !!}
