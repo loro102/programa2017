@@ -733,12 +733,6 @@ class generator extends Controller
         $templateProcessor->saveAs(storage_path('app/storage/cliente/').''.$cliente->id.'/Sample_07_TemplateCloneRow.docx');
        // Storage::move('storage/Sample_07_TemplateCloneRow.docx', 'storage/cliente/ejemplo.docx');
 
-
-
-
-
-
-
     }
 
     /**

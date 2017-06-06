@@ -287,7 +287,7 @@
                                                 expediente:</strong> {{$expediente->ref_expediente}}</div>
                                     @endif
                                     @if(notNullValue($expediente->insurer_id))
-                                        <div class="col-md-4"><strong>Aseguradora:</strong> {{$expediente->insurer_id}}
+                                        <div class="col-md-4"><strong>Aseguradora:</strong> {{$expediente->insurer->nombre}}
                                         </div>
                                     @endif
                                     @if(notNullValue($expediente->processor_id))
@@ -348,9 +348,9 @@
                                         @foreach($expediente->opponent as $contrario)
                                             <div class="container col-md-6">
                                                 @if ($contrario->posible_culpable == true)
-                                                    <div class="panel panel-warning col-md-12 center-block">
+                                                    <div class="panel panel-warning  center-block">
                                                         @else
-                                                            <div class="panel panel-default col-md-12 center-block">
+                                                            <div class="panel panel-default  center-block">
                                                         @endif
                                                     <div class="panel-heading">{{link_to_action('opponentController@show', $contrario->nombre , ['id'=>$contrario->id], [])}}</div>
                                                     <div class="panel-body">
@@ -670,11 +670,8 @@
             <div role="tabpanel" class="tab-pane panel-primary" id="indemnizacion">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        @forelse($documentos as $documento)
-                            {{link_to(Storage::disk('cliente')->url('cliente/'.$documento))}}
-                            @empty()
-                            @endforelse
-                        <div>123456789</div>
+
+                        <div>Aqui va la calculadora que esta pendiente</div>
                         <div>
                             <table class="table-bordered table-striped table-hover col-md-12">
                                 <tr>

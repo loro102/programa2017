@@ -219,7 +219,7 @@ class filesController extends Controller
             'total'=>$total,
             'beneficio'=>$beneficio,
             'notas'=>$notas,
-            'documentos'=>$documentos,
+            //'documentos'=>$documentos,
         ]);
 
     }

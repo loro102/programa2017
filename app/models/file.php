@@ -29,14 +29,14 @@ class file extends Model
     {
         return $this->belongsTo('App\models\solicitor','solicitor_id');
     }
-
+     */
     public function insurer()
     {
-        return $this->belongsTo('App\models\insurer','insurer_id');
+        return $this->hasOne('App\models\insurer','id','insurer_id');
     }
 
-    public function agent()
-    {
-        return $this->belongsTo('App\models\agent','agent_id');
-    }*/
+    /* public function agent()
+     {
+         return $this->belongsTo('App\models\agent','agent_id');
+     }*/
 }
