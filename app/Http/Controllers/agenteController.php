@@ -17,6 +17,7 @@ class agenteController extends Controller
     {
         //
         $agente=agent::paginate(10);
+        //dd($agente)
         return view('agentes.index',['agentes'=>$agente]);
     }
 
