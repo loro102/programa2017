@@ -2,12 +2,21 @@
 
 @section('content')
 <div class="container">
+    @if(count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     {!! Form::Model($expediente,['action'=>'filesController@store','class'=>'form-inline']) !!}
     <div>
-
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#expediente" aria-controls="expediente" role="tab" data-toggle="tab">Datos expediente</a></li>
+            <li role="presentation" class="active"><a href="#inicio" aria-controls="inicio" role="tab" data-toggle="tab">Datos expediente</a></li>
+            <li role="presentation"><a href="#representado" aria-controls="representado" role="tab" data-toggle="tab">Datos del representado</a></li>
             <li role="presentation"><a href="#suceso" aria-controls="suceso" role="tab" data-toggle="tab">Datos del suceso</a></li>
             <li role="presentation"><a href="#juridico" aria-controls="juridico" role="tab" data-toggle="tab">Datos jurídicos</a></li>
             <li role="presentation"><a href="#extra" aria-controls="extra" role="tab" data-toggle="tab">Otros datos</a></li>
@@ -15,18 +24,17 @@
 
         <!-- Tab panes -->
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="expediente">
+            <div role="tabpanel" class="tab-pane active" id="inicio">
                 <div class="form-group">
-                    {!! Form::label('customer_id', 'Cliente:', ['class' => 'control-label']) !!}
-                    {!! Form::select('customer_id', $cliente , null , ['class' => 'form-control']) !!}
+                    {!! Form::hidden('customer_id',Request::get('customer') , ['id' => 'id']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('solicitor_id', 'Abogado:', ['class' => 'control-label']) !!}
-                    {!! Form::select('solicitor_id', ['1'=>'Trafico','2'=>'No Trafico'] , null , ['class' => 'form-control']) !!}
+                    {!! Form::select('solicitor_id', $abogado , 1 , ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('fechaapertura', 'Fecha de Apertura:', ['class' => 'control-label']) !!}
-                    {!! Form::date('fechaapertura', null, ['class' => 'form-control']) !!}
+                    {!! Form::date('fechaapertura', \Carbon\Carbon::now()->toDateString() , ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('fechacierre', 'Fecha de Cierre:', ['class' => 'control-label']) !!}
@@ -53,8 +61,12 @@
                     {!! Form::text('caso_tipo', null, ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('sort_file_id', 'Tipo de expediente:', ['class' => 'control-label']) !!}
-                    {!! Form::select('sort_file_id', $sort , null , ['class' => 'form-control']) !!}
+                    {!! Form::label('phase_id', 'Fase:', ['class' => 'control-label']) !!}
+                    {!! Form::select('phase_id', $fase , null , ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('sort_id', 'Tipo de expediente:', ['class' => 'control-label']) !!}
+                    {!! Form::select('sort_id', $sort , null , ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('firma_carta_abogado', 'Firma carta de designación:', ['class' => 'control-label']) !!}
@@ -91,6 +103,21 @@
                     {!! Form::label('estimacion', 'Estimacion de indemnizacion:', ['class' => 'control-label']) !!}
                     {!! Form::text('estimacion', '',['class'=>'form-control']) !!}
                 </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="representado">
+                <div class="form-group">
+                    {!! Form::label('nombre', 'Representado:', ['class' => 'control-label']) !!}
+                    {!! Form::text('nombre', '', ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('fechanacimiento', 'Fecha de Nacimiento:', ['class' => 'control-label']) !!}
+                    {!! Form::date('fechanacimiento', '', ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('nif', 'NIF:', ['class' => 'control-label']) !!}
+                    {!! Form::text('nif', '', ['class' => 'form-control']) !!}
+                </div>
+
             </div>
             <div role="tabpanel" class="tab-pane" id="suceso">
                 <div class="form-group">
@@ -166,11 +193,11 @@
             <div role="tabpanel" class="tab-pane" id="juridico">
                 <div class="form-group">
                     {!! Form::label('formalidad', 'Formalidad:', ['class' => 'control-label']) !!}
-                    {!! Form::select('formalidad', $categoria , null , ['class' => 'form-control','id'=>'tipo_procedimiento']) !!}
+                    {!! Form::select('formalidad', $categoria , 1 , ['class' => 'form-control','id'=>'tipo_procedimiento']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('formalities_id', 'Procedimiento:', ['class' => 'control-label']) !!}
-                    {!! Form::select('formalities_id', ['placeholder'=>'Selecciona'] , null , ['class' => 'form-control','id'=>'procedimientos']) !!}
+                    {!! Form::select('formalities_id', $formalidad , null, ['class' => 'form-control','id'=>'procedimientos']) !!}
                 </div>
 
                 <div class="form-group">
@@ -186,7 +213,7 @@
                     {!! Form::date('fecha_denuncia', '', ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('fecha_demandaa', 'Fecha de Demanda:', ['class' => 'control-label']) !!}
+                    {!! Form::label('fecha_demanda', 'Fecha de Demanda:', ['class' => 'control-label']) !!}
                     {!! Form::date('fecha_demanda', '', ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
@@ -216,10 +243,6 @@
                     {!! Form::text('tomador', '',['class'=>'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('tomador', 'Tomador:', ['class' => 'control-label']) !!}
-                    {!! Form::text('tomador', '',['class'=>'form-control']) !!}
-                </div>
-                <div class="form-group">
                     {!! Form::label('numero_poliza', 'Numero de Póliza:', ['class' => 'control-label']) !!}
                     {!! Form::text('numero_poliza', '',['class'=>'form-control']) !!}
                 </div>
@@ -229,15 +252,15 @@
                 </div>
                 <div class="form-group">
                     {!! Form::label('insurer_id', 'Compañia de seguros:', ['class' => 'control-label']) !!}
-                    {!! Form::select('insurer_id', $aseguradora , null , ['class' => 'form-control']) !!}
+                    {!! Form::select('insurer_id', $aseguradora , 1 , ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('processor_id', 'Tramitador de la aseguradora:', ['class' => 'control-label']) !!}
-                    {!! Form::select('processor_id',['placeholder'=>'Selecciona'], null , ['class' => 'form-control']) !!}
+                    {!! Form::select('processor_id',$processor, 1 , ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('fecha_poliza', 'Fecha de Póliza:', ['class' => 'control-label']) !!}
-                    {!! Form::date('fecha_poliza', '', ['class' => 'form-control']) !!}
+                    {!! Form::label('fechapoliza', 'Fecha de Póliza:', ['class' => 'control-label']) !!}
+                    {!! Form::date('fechapoliza', '', ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('finfechapoliza', 'Fecha de Fin Póliza:', ['class' => 'control-label']) !!}
@@ -249,7 +272,7 @@
     </div>
     <div class="row">
         <div class="form-group">
-            {!! Form::hidden('fechadealta', \Carbon\Carbon::now()->toDateString(), ['id' => 'id']) !!}
+            
         </div>
     </div>
     <div class="row">

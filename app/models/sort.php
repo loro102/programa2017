@@ -11,4 +11,8 @@ class sort extends Model
         'id',
         'timestamps',
     ];
+    public function file()
+    {
+        return $this->belongsTo('App\models\file', 'sort_id','id');
+    }
 }

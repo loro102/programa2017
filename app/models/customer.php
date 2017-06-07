@@ -16,19 +16,28 @@ class customer extends Model
     {
         return $this->nombre . ' ' . $this->apellidos;
     }
+    public function Apellidonombre($value)
+    {
+        return $this->apellidos . ' , ' . $this->nombre;
+    }
 
     public function agent()
     {
-        return $this->belongsTo('App\Models\agent','agent_id');
+        return $this->belongsTo('App\models\agent','agent_id');
     }
     public function files()
     {
-        return $this->hasMany('App\Models\file');
+        return $this->hasMany('App\models\file');
     }
 
     public function file()
     {
-        return $this->belongsToMany('App\Models\file');
+        return $this->belongsToMany('App\models\file');
     }
+    public function invoice()
+    {
+        return $this->hasMany('App\models\invoice');
+    }
+
 
 }

@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laravel',
+    'name' => 'Rumbo Jurídico',
 
     /*
     |--------------------------------------------------------------------------
@@ -77,7 +77,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -178,6 +178,10 @@ return [
         App\Providers\RouteServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Caffeinated\Shinobi\ShinobiServiceProvider::class,
+        Intervention\Validation\ValidationServiceProvider::class,
+        Pixelpeter\IsoCodesValidation\IsoCodesValidationServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 
@@ -229,6 +233,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Shinobi' => Caffeinated\Shinobi\Facades\Shinobi::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

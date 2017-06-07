@@ -5,7 +5,6 @@
         @include('partials.flash')
         <p>
             {{ link_to_action('agenteController@index','Volver al listado de agentes',[],[]) }}
-            {{ link_to(url()->previous(),'Regresar') }}
             <span class="pull-right">
                 {!! Form::open(['method'=>'DELETE','route'=>['agente.destroy',$agente->id]],['class'=>'form-inline']) !!}
                 {!! Form::submit('Borrar agente', array('class' => 'btn btn-sm btn-danger pull-right ','id'=>'deletebtn', 'onclick' => 'return confirm("¿Estas seguro de querer eliminar este agente?");')) !!}

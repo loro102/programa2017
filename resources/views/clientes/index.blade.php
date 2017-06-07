@@ -4,8 +4,7 @@
     <div class="container">
         @include('partials.flash')
         <p>
-            {{ link_to_action('clientes@create','Añadir un nuevo cliente',[],[]) }} |
-            {{ link_to_action('clientes@index','Clientes',[],[]) }}
+            {{ link_to_action('clientes@create','Añadir un nuevo cliente',[],['class' => 'btn btn-sm btn-primary']) }}
         </p>
         <table class="table-bordered table-striped table-hover col-md-12">
             <tr>
@@ -14,7 +13,7 @@
             </tr>
             @forelse($clientes as $cliente)
                 <tr>
-                    <td class="col-md-8">{{link_to_action('clientes@show',$cliente->apellidos,['id'=> $cliente->id],[])}} , {{link_to_action('clientes@show',$cliente->nombre,['id'=> $cliente->id],[])}}</td>
+                    <td class="col-md-8">{{link_to_action('clientes@show',$cliente->Apellidonombre($cliente->id),['id'=> $cliente->id],[])}}</td>
                     <td class="col-md-4">{{link_to_action('clientes@show',$cliente->nif,['id'=> $cliente->id],[])}}</td>
                 </tr>
             @empty

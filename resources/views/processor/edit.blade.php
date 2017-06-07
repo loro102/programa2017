@@ -43,7 +43,7 @@
         <div class="row">
 
             <div class="form-group">
-                {!! Form::submit('Editar Procedimiento', ['class' => 'form-control btn btn-primary btn-block']) !!}
+                {!! Form::submit('Editar Tramitador', ['class' => 'form-control btn btn-primary btn-block']) !!}
             </div>
         </div>
 

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\models\file;
+//use App\models\file;
 use Illuminate\Http\Request;
-use App\Models\customer;
-use App\Models\agent;
+use App\models\customer;
+use App\models\agent;
+use Illuminate\Support\Facades\Storage;
 
 class clientes extends Controller
 {
@@ -49,10 +50,12 @@ class clientes extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(\App\Http\Requests\customer $request)
     {
         //Crea un nuevo registro para el cliente
         customer::create($request->input());
+        $cliente=customer::all();
+        //Storage::makeDirectory('storage/cliente/'.$cliente->last()->id);
 
         //dd($request->input());
         return redirect('cliente')->with('message','Se ha añadido un nuevo cliente');
@@ -70,12 +73,14 @@ class clientes extends Controller
         $cliente=customer::findorFail($id);
         //$agente=customer::findorfail($id)->agent;
         //$expedientes=file::where('customer_id',$id)->get();
-        $expedientes=$cliente->files()->get();
+        $expedientestraf=$cliente->files()->where('sort_id',1)->get();
+        $expedientesotros=$cliente->files()->where('sort_id','!=',1)->get();
         //dd($expedientes);
         return view('clientes.show',[
             'cliente'=> $cliente,
             //'agente'=>$agente,
-            'expedientes'=>$expedientes
+            'expedientestraf'=>$expedientestraf,
+            'expedientes'=>$expedientesotros
         ]);
     }
 
