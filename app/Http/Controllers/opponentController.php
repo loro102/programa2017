@@ -28,11 +28,13 @@ class opponentController extends Controller
     {
         //
         $contrario=new opponent;
-        $aseguradora=insurer::all()->pluck('nombre','id')->prepend('Ninguno','');
+        $aseguradora=insurer::all()->pluck('nombre','id');
+        $tramitador=processor::all()->pluck('nombre','id');
 
         return view('opponent.create',[
             'contrario'=>$contrario,
             'aseguradora'=>$aseguradora,
+            'tramitador'=>$tramitador,
         ]);
     }
 

@@ -31,7 +31,7 @@
 
             </div>
             <div class="panel-footer">
-                @if (empty($expediente->nombre) )
+                @if (isset($expediente->nombre) )
                     {{ link_to_action('generator@contrato_prestacion_servicios','Contrato Prestacion de servicios',['file_id'=>$expediente->id],['class' => 'btn btn-sm btn-default']) }}
                 @else
                     {{ link_to_action('generator@contrato_prestacion_servicios_representados','Contrato Prestacion de servicios',['file_id'=>$expediente->id],['class' => 'btn btn-sm btn-default']) }}
@@ -67,20 +67,24 @@
                                                 caso</strong></div>
                                     @else
                                         <div class="col-md-12 bg-warning text-center h3">
-                                            <strong>{{$expediente->phase_id}}</strong></div>
+                                            <strong>{{$expediente->phase->nombre}}</strong></div>
                                     @endif
                                     <div class="col-md-5 bg-info">
-                                        <strong>Abogado:</strong> {{$expediente->id_solicitor}}</div>
+                                        <strong>Abogado:</strong> {{$expediente->professional->Nombre}}</div>
+                                        @if (isset($expediente->caso_tipo))
                                     <div class="col-md-2 "><strong>Caso tipo:</strong> {{$expediente->caso_tipo}}</div>
+                                        @endif
                                     <div class="col-md-5 "><strong>Tipo de
-                                            expediente:</strong> {{$expediente->sort_file_id}}</div>
+                                            expediente:</strong> {{$expediente->sort->nombre}}</div>
                                     @if($expediente->firma_carta_abogado == 1)
                                         <div class="col-md-12 text-success"><strong>El cliente ha firmado la designacion
                                                 de abogado</strong></div>
+                                            @if (isset($expediente->fecha_designacion))
                                         <div class="col-md-4"><strong>Fecha de
                                                 designación:</strong> {{Carbon\Carbon::parse($expediente->fecha_designacion)->format('d-m-Y')}}
                                         </div>
-                                        @if (is_null($expediente->fecha_reclamacion_aj))
+                                            @endif
+                                        @if (isset($expediente->fecha_reclamacion_aj))
                                             <div class="col-md-4 text-danger"><strong>Asistencia jurídica sin
                                                     reclamar</strong></div>
                                         @else
@@ -102,32 +106,44 @@
 
                                     @endif
 
+                                        @if (isset($expediente->fechaapertura))
                                     <div class="col-md-4"><strong>Fecha de
                                             apertura:</strong> {{Carbon\Carbon::parse($expediente->fechaapertura)->format('d-m-Y')}}
                                     </div>
+                                        @endif
+                                        @if (isset($expediente->fechacierre))
                                     <div class="col-md-4"><strong>Fecha de
                                             cierre:</strong> {{Carbon\Carbon::parse($expediente->fechacierre)->format('d-m-Y')}}
                                     </div>
+                                        @endif
+                                        @if (isset($expediente->fechaarchivo))
                                     <div class="col-md-4"><strong>Fecha de
                                             archivo:</strong> {{Carbon\Carbon::parse($expediente->fechaarchivo)->format('d-m-Y')}}
                                     </div>
+                                        @endif
+                                            @if (isset($expediente->fechallegadatalon))
                                     <div class="col-md-4"><strong>Fecha de llegada de
                                             talón:</strong> {{Carbon\Carbon::parse($expediente->fechallegadatalon)->format('d-m-Y')}}
                                     </div>
+                                        @endif
+                                        @if (isset($expediente->fechacobrocliente))
                                     <div class="col-md-4"><strong>Fecha de cobro
                                             Cliente:</strong> {{Carbon\Carbon::parse($expediente->fechacobrocliente)->format('d-m-Y')}}
                                     </div>
+                                        @endif
+                                            @if (isset($expediente->fechacobroempresa))
                                     <div class="col-md-4"><strong>Fecha de cobro
                                             Empresa:</strong> {{Carbon\Carbon::parse($expediente->fechacobroempresa)->format('d-m-Y')}}
                                     </div>
+                                        @endif
 
 
-                                    @if (notNullValue($expediente->fechaofertamotivada))
+                                    @if (isset($expediente->fechaofertamotivada))
                                         <div class="col-md-4"><strong>Fecha de Reclamacion
                                                 Previa:</strong> {{Carbon\Carbon::parse($expediente->fechaofertamotivada)->format('d-m-Y')}}
                                         </div>
                                     @endif
-                                    @if (notNullValue($expediente->fechaofertamotivada))
+                                    @if (isset($expediente->fechaofertamotivada))
                                         @if($expediente->respuestamotivadaaceptada == true)
                                             <div class="col-md-4 bg-success"><strong>Fecha de Oferta
                                                     Motivada:</strong> {{Carbon\Carbon::parse($expediente->fecharespuestamotivada)->format('d-m-Y')}}
@@ -138,9 +154,11 @@
                                             </div>
                                         @endif
                                     @endif
+                                        @if(isset($expediente->estimacion))
                                     <div class="col-md-4"><strong>Estimación de
-                                            indemnización:</strong> {{$expediente->estimacon}}</div>
-                                    @if(notNullValue($expediente->descripcion))
+                                            indemnización:</strong> {{$expediente->estimacion}}</div>
+                                        @endif
+                                    @if(isset($expediente->descripcion))
                                         <div class="col-md-12"><strong>Descripción del expediente:</strong>
                                             <div class="well well-sm">{{$expediente->descripcion}}</div>
                                         </div>
@@ -155,66 +173,68 @@
                                     <h3 class="panel-title">Datos del suceso</h3>
                                 </div>
                                 <div class="panel-body">
+                                    @if (isset($expediente->fecha_accidente))
                                     <div class="col-md-4"><strong>Fecha del
                                             suceso:</strong> {{Carbon\Carbon::parse($expediente->fecha_accidente)->format('d-m-Y')}}
                                     </div>
+                                    @endif
                                     <div class="col-md-4"><strong>Hora:</strong> {{$expediente->hora_accidente}}</div>
-                                    @if(notNullValue($expediente->fecha_baja_laboral))
+                                    @if(isset($expediente->fecha_baja_laboral))
                                         <div class="col-md-4"><strong>Fecha de baja
                                                 laboral:</strong> {{Carbon\Carbon::parse($expediente->fecha_baja_laboral)->format('d-m-Y')}}
                                         </div>
                                     @endif
-                                    @if(notNullValue($expediente->fecha_alta_laboral))
+                                    @if(isset($expediente->fecha_alta_laboral))
                                         <div class="col-md-4"><strong>Fecha de alta
                                                 laboral:</strong> {{Carbon\Carbon::parse($expediente->fecha_alta_laboral)->format('d-m-Y')}}
                                         </div>
                                     @endif
-                                    @if(notNullValue($expediente->fecha_ingreso_hospital))
+                                    @if(isset($expediente->fecha_ingreso_hospital))
                                         <div class="col-md-4"><strong>Fecha de ingreso
                                                 hospitalario:</strong> {{Carbon\Carbon::parse($expediente->fecha_ingreso_hospital)->format('d-m-Y')}}
                                         </div>
                                     @endif
-                                    @if(notNullValue($expediente->fecha_alta_hospital))
+                                    @if(isset($expediente->fecha_alta_hospital))
                                         <div class="col-md-4"><strong>Fecha de alta
                                                 hospitalario:</strong> {{Carbon\Carbon::parse($expediente->fecha_alta_hospital)->format('d-m-Y')}}
                                         </div>
                                     @endif
-                                    @if(notNullValue($expediente->fecha_alta_direccion_medica))
+                                    @if(isset($expediente->fecha_alta_direccion_medica))
                                         <div class="col-md-4"><strong>Fecha de alta por dirección
                                                 médica:</strong> {{Carbon\Carbon::parse($expediente->fecha_alta_direccion_medica)->format('d-m-Y')}}
                                         </div>
                                     @endif
-                                    @if(notNullValue($expediente->desarrollo_suceso))
+                                    @if(isset($expediente->desarrollo_suceso))
                                         <div class="col-md-12"><strong>Desarrollo del suceso:</strong>
                                             <div class="well well-sm"> {{$expediente->desarrollo_suceso}}</div>
                                         </div>
                                     @endif
-                                    @if(notNullValue($expediente->danos_vehiculo))
+                                    @if(isset($expediente->danos_vehiculo))
                                         <div class="col-md-12"><strong>Daños del vehículo:</strong>
                                             <div class="well well-sm">{{$expediente->danos_vehiculo}}</div>
                                         </div>
                                     @endif
-                                    @if(notNullValue($expediente->danos_materiales))
+                                    @if(isset($expediente->danos_materiales))
                                         <div class="col-md-12"><strong>Daños materiales:</strong>
                                             <div class="well well-sm">{{$expediente->danos_materiales}}</div>
                                         </div>
                                     @endif
-                                    @if(notNullValue($expediente->danos_personales))
+                                    @if(isset($expediente->danos_personales))
                                         <div class="col-md-12"><strong>Daños personales:</strong>
                                             <div class="well well-sm">{{$expediente->danos_personales}}</div>
                                         </div>
                                     @endif
-                                    @if(notNullValue($expediente->condicion))
+                                    @if(isset($expediente->condicion))
                                         <div class="col-md-4"><strong>Condición:</strong>{{$expediente->condicion}}
                                         </div>
                                     @endif
-                                    @if(notNullValue($expediente->cuantia_asistencia_juridica))
+                                    @if(isset($expediente->cuantia_asistencia_juridica))
                                         <div class="col-md-4"><strong>Cuantía de Asistencia
                                                 Jurídica:</strong>{{$expediente->cuantia_asistencia_juridica}}
                                             <div class="glyphicon glyphicon-euro"></div>
                                         </div>
                                     @endif
-                                    @if(notNullValue($expediente->cuantia_asistencia_sanitaria))
+                                    @if(isset($expediente->cuantia_asistencia_sanitaria))
                                         <div class="col-md-4"><strong>Cuantía de Asistencia
                                                 Sanitaria:</strong>{{$expediente->cuantia_asistencia_sanitaria}}
                                             <div class="glyphicon glyphicon-euro"></div>
@@ -222,90 +242,96 @@
                                     @endif
                                 </div>
                             </div>
+                            @if(isset($expediente->diligencias_previas))
                             <div class="panel panel-default">
                                 <div class="panel-heading">Datos Jurídicos</div>
                                 <div class="panel-body">
-                                    @if(notNullValue($expediente->formalidad))
+                                    @if(isset($expediente->formalidad))
                                         <div class="col-md-4"><strong>Tipo de
                                                 procedimiento:</strong> {{$expediente->formalidad}}</div>
                                         <div class="col-md-4">
                                             <strong>Procedimiento:</strong> {{$expediente->formalities_id}}</div>
                                     @endif
-                                    @if(notNullValue($expediente->numero_procedimiento))
+                                    @if(isset($expediente->numero_procedimiento))
                                         <div class="col-md-4"><strong>Número de
                                                 procedimiento:</strong> {{$expediente->numero_procedimiento}}</div>
                                     @endif
-                                    @if(notNullValue($expediente->diligencias_previas))
+                                    @if(isset($expediente->diligencias_previas))
                                         <div class="col-md-4"><strong>Diligencias
                                                 Previas:</strong> {{$expediente->diligencias_previas}}</div>
                                     @endif
-                                    @if(notNullValue($expediente->fecha_denuncia))
+                                    @if(isset($expediente->fecha_denuncia))
                                         <div class="col-md-4"><strong>Fecha de
                                                 denuncia:</strong> {{Carbon\Carbon::parse($expediente->fecha_denuncia)->format('d-m-Y')}}
                                         </div>
                                     @endif
-                                    @if(notNullValue($expediente->fecha_demanda))
+                                    @if(isset($expediente->fecha_demanda))
                                         <div class="col-md-4"><strong>Fecha de
                                                 demanda:</strong> {{Carbon\Carbon::parse($expediente->fecha_demanda)->format('d-m-Y')}}
                                         </div>
                                     @endif
-                                    @if(notNullValue($expediente->fecha_audienciaprevia))
+                                    @if(isset($expediente->fecha_audienciaprevia))
                                         <div class="col-md-4"><strong>Fecha de audiencia
                                                 previa:</strong> {{Carbon\Carbon::parse($expediente->fecha_audienciaprevia)->format('d-m-Y')}}
                                         </div>
                                     @endif
-                                    @if(notNullValue($expediente->fecha_juicio))
+                                    @if(isset($expediente->fecha_juicio))
                                         <div class="col-md-4"><strong>Fecha de
                                                 Juicio:</strong> {{Carbon\Carbon::parse($expediente->fecha_juicio)->format('d-m-Y')}}
                                         </div>
                                     @endif
                                 </div>
                             </div>
+                            @endif
+                            @if (isset($expediente->numero_poliza))
                             <div class="panel panel-default">
                                 <div class="panel-heading">Datos del vehículo accidentado</div>
                                 <div class="panel-body">
-                                    @if(notNullValue($expediente->vehiculo))
+                                    @if(isset($expediente->vehiculo))
                                         <div class="col-md-4"><strong>Vehículo:</strong> {{$expediente->vehiculo}}</div>
                                     @endif
-                                    @if(notNullValue($expediente->matricula))
+                                    @if(isset($expediente->matricula))
                                         <div class="col-md-4"><strong>Matrícula:</strong> {{$expediente->matricula}}
                                         </div>
                                     @endif
-                                    @if(notNullValue($expediente->conductor))
+                                    @if(isset($expediente->conductor))
                                         <div class="col-md-4"><strong>Conductor:</strong> {{$expediente->conductor}}
                                         </div>
                                     @endif
-                                    @if(notNullValue($expediente->tomador))
+                                    @if(isset($expediente->tomador))
                                         <div class="col-md-4"><strong>Tomador:</strong> {{$expediente->tomador}}</div>
                                     @endif
-                                    @if(notNullValue($expediente->numero_poliza))
+                                    @if(isset($expediente->numero_poliza))
                                         <div class="col-md-4"><strong>Número de
                                                 póliza:</strong> {{$expediente->numero_poliza}}</div>
                                     @endif
-                                    @if(notNullValue($expediente->ref_expediente))
+                                    @if(isset($expediente->ref_expediente))
                                         <div class="col-md-4"><strong>Número de referencia de
                                                 expediente:</strong> {{$expediente->ref_expediente}}</div>
                                     @endif
-                                    @if(notNullValue($expediente->insurer_id))
+                                    @if($expediente->insurer_id!=1)
                                         <div class="col-md-4"><strong>Aseguradora:</strong> {{$expediente->insurer->nombre}}
                                         </div>
                                     @endif
-                                    @if(notNullValue($expediente->processor_id))
+                                    @if($expediente->processor_id!=1)
                                         <div class="col-md-4"><strong>Tramitador de la
                                                 Aseguradora:</strong> {{$expediente->processor_id}}</div>
                                     @endif
-                                    @if(notNullValue($expediente->fechapoliza))
+                                    @if(isset($expediente->fechapoliza))
                                         <div class="col-md-4"><strong>Fecha de
                                                 póliza:</strong> {{Carbon\Carbon::parse($expediente->fechapoliza)->format('d-m-Y')}}
                                         </div>
                                     @endif
-                                    @if(notNullValue($expediente->finfechapoliza))
+                                    @if(isset($expediente->finfechapoliza))
                                         <div class="col-md-4"><strong>Fecha de Fin de
                                                 Póliza:</strong> {{Carbon\Carbon::parse($expediente->finfechapoliza)->format('d-m-Y')}}
                                         </div>
                                     @endif
+
                                 </div>
+
                             </div>
+                            @endif
                             <div class="panel panel-default">
                                 <div class="panel-heading">Datos del contrario
                                     <button type="button"
@@ -428,38 +454,7 @@
             <div role="tabpanel" class="tab-pane panel-primary" id="profesionales">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        {{ link_to_action('file_professionalController@create','Asignar un profesional',['file'=> $expediente->id,'prof'=>0],['class' => 'btn btn-sm btn-default']) }}
-                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
-                                data-target="#filepro">
-                            agregar profesional
-                        </button>
-
-                        <!-- Modal de lista de profesionales en expedientes-->
-                        <div class="modal fade " id="filepro" tabindex="-1" role="dialog" aria-labelledby="filepro">
-                            <div class="modal-dialog modal-lg" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" onclick="document.location.reload();"
-                                                data-dismiss="modal" aria-label="Close"><span
-                                                    aria-hidden="true">&times;</span>
-                                        </button>
-                                        <h4 class="modal-title" id="$factura->id"></h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="embed-responsive embed-responsive-4by3">
-                                            <iframe class="embed-responsive-item"
-                                                    src="/filepro/create?file={{$expediente->id}}"></iframe>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal"
-                                                onclick="document.location.reload();">Close
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                        {{ link_to_action('file_professionalController@create','Asignar un profesional',['file'=> $expediente->id,'prof'=>0],['class' => 'btn btn-sm btn-primary']) }}
                         <table class="table-bordered table-striped table-hover col-md-12">
                             <tr>
                                 <th class="col-md-7">Profesional</th>

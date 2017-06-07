@@ -18,7 +18,7 @@ class file extends Model
 
     public function sort()
     {
-        return $this->hasOne('App\models\sort', 'id');
+        return $this->hasOne('App\models\sort', 'id','sort_id');
     }
     public function opponent()
     {
@@ -34,6 +34,15 @@ class file extends Model
     {
         return $this->hasOne('App\models\insurer','id','insurer_id');
     }
+    public function phase()
+    {
+        return $this->hasOne('App\models\phase','id','phase_id');
+    }
+    public function professional()
+    {
+        return $this->hasOne('App\models\professional','id','solicitor_id');
+    }
+
 
     /* public function agent()
      {

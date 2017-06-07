@@ -19,7 +19,7 @@ class professional extends Model
     }*/
     public function file_professional()
     {
-        return $this->belongsTo('App\models\file_professional',professional_id);
+        return $this->belongsTo('App\models\file_professional','professional_id');
     }
     public function invoice()
     {
@@ -28,5 +28,9 @@ class professional extends Model
     public function group()
     {
         return $this->hasOne('App\models\group', 'id');
+    }
+    public function file()
+    {
+        return $this->belongsTo('App\models\file','solicitor_id','id');
     }
 }

@@ -45,13 +45,13 @@ class filesController extends Controller
 
         $expediente=new file;
         //$cliente=customer::all()->pluck('fullname','id')->prepend('Ninguno','');
-        $sort=sort::all()->pluck('nombre','id')->prepend('Ninguno','1');
+        $sort=sort::all()->pluck('nombre','id');
         $categoria=formality::all()->unique('categoria')->pluck('categoria','categoria')->prepend('Ninguno','1');
         $abogado=professional::where('group_id',1)->where('activo',true)->pluck('Nombre','id');
-        $aseguradora=insurer::all()->pluck('nombre','id')->prepend('Seleccione','1');
+        $aseguradora=insurer::all()->pluck('nombre','id')->prepend('Ninguno','1');
         $processor=processor::where('insurer_id',1)->pluck('nombre','id');
         $formalidad=formality::findorfail(1)->pluck('nombre','id');
-        $fase=phase::all()->pluck('nombre','id')->prepend('Ninguno','1');
+        $fase=phase::all()->pluck('nombre','id');
         //$abogado=professional::all()->pluck('nombre','id')->prepend('Ninguno','');
 
         //$client=$cliente->pluck('fullname','id');
@@ -140,13 +140,13 @@ class filesController extends Controller
 
         //Obtener facturas por honorarios
         $factsxhonorarios=invoice::where('file_id',$id)
-            ->where('nofactporhonorarios',true)
+            ->where('emitirfactporhonorarios',true)
             ->get();
 
         //Obtener el resto de las facturas
         $facturas=invoice::where('file_id',$id)
             ->where('emitirfactcomision',false)
-            ->where('nofactporhonorarios',false)
+            ->where('emitirfactporhonorarios',false)
             ->get();
 
         //obtener todas las facturas
@@ -157,7 +157,7 @@ class filesController extends Controller
         $honorario=invoice::where('file_id',$id)
             ->where('honorario',true)
             ->get();
-        //dd($facturas);
+        //dd($factura);
 
         //array con los totales calculados
         $total=collect(
@@ -181,7 +181,7 @@ class filesController extends Controller
         $beneficio=$beneficio1+$beneficio2+$beneficio3;
         //dd($beneficio1,$beneficio2,$beneficio3,$beneficio);
 
-        //dd($expedientes);
+        //dd($facturas);
 
 
         /*

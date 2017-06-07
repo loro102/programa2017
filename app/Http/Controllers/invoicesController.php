@@ -102,10 +102,11 @@ class invoicesController extends Controller
     public function store(Request $request)
     {
         //
-        invoice::create($request->input());
+        $invoice=new invoice;
+        $invoice->fill($request->except('grupo'))->save();
 
         //dd($request->input());
-        return redirect('expediente')->with('message','Se ha añadido una nueva factura');
+        return redirect()->action('filesController@show',['file'=>$request->input('file_id')])->with('message','Factura agregada correctamente');
     }
 
     /**

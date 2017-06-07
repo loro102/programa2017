@@ -63,11 +63,11 @@
         </div>
         <div class="form-group">
             {!! Form::label('insurer_id', 'Compañia de seguros:', ['class' => 'control-label']) !!}
-            {!! Form::select('insurer_id', $aseguradora , null , ['class' => 'form-control']) !!}
+            {!! Form::select('insurer_id', $aseguradora , 1 , ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('processor_id', 'Tramitador de la aseguradora:', ['class' => 'control-label']) !!}
-            {!! Form::select('processor_id',['placeholder'=>'Selecciona'], null , ['class' => 'form-control']) !!}
+            {!! Form::select('processor_id',$tramitador, 1 , ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('vehiculo', 'Vehículo:', ['class' => 'control-label']) !!}

@@ -30,7 +30,9 @@
                 <div class="col-md-3"><strong>Móvil:</strong>{{ $cliente->movil }}</div>
                 <div class="col-md-3"><strong>E-Mail:</strong>{{ $cliente->email }}</div>
                 <div class="col-md-3"><strong>Agente:</strong>{{ $cliente->agent->nombre}}</div>
+                @if (isset($cliente->notas))
                 <div class="col-md-12 well"><strong>Notas:</strong>{{ $cliente->notas }}</div>
+                    @endif
             </div>
             <div class="panel-footer">
                 {{ link_to_action('filesController@create','',['customer'=>$cliente->id],['class'=>'btn btn-lg btn-success pull-right glyphicon glyphicon-plus']) }}

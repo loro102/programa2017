@@ -11,4 +11,8 @@ class phase extends Model
         'id',
         'timestamps',
     ];
+    public function insurer()
+    {
+        return $this->belongsTo('App\models\file','phase_id','id');
+    }
 }

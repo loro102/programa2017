@@ -13,6 +13,6 @@ class sort extends Model
     ];
     public function file()
     {
-        return $this->belongsTo('App\models\file', 'sort_id');
+        return $this->belongsTo('App\models\file', 'sort_id','id');
     }
 }

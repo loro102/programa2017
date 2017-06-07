@@ -34,7 +34,7 @@
                 </div>
                 <div class="form-group">
                     {!! Form::label('fechaapertura', 'Fecha de Apertura:', ['class' => 'control-label']) !!}
-                    {!! Form::date('fechaapertura', null, ['class' => 'form-control']) !!}
+                    {!! Form::date('fechaapertura', \Carbon\Carbon::now()->toDateString() , ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('fechacierre', 'Fecha de Cierre:', ['class' => 'control-label']) !!}
