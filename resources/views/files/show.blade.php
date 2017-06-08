@@ -672,21 +672,16 @@
                                 <tr>
                                     <th class="col-md-2">Fecha</th>
                                     <th class="col-md-3">Nº</th>
-                                    <th class="col-md-2">Abonado</th>
                                     <th class="col-md-2">Profesional</th>
                                     <th class="col-md-2">Descripcion</th>
                                     <th class="col-md-2">Importe Factura</th>
 
                                 </tr>
-                                <tr>
-                                    <td class="danger" colspan="12">Facturas</td>
-                                </tr>
                                 @forelse($facturas as $factura)
                                     <tr>
                                         <td class="col-md-2">{{Carbon\Carbon::parse($factura->fechafact)->format('d-m-Y')}}</td>
                                         <td class="col-md-3">{{$factura->numfactura}}</td>
-                                        <td class="col-md-1">{{$factura->file_id}}</td>
-                                        <td class="col-md-1">{{$factura->professional_id}}</td>
+                                        <td class="col-md-1">{{$factura->profesional->Nombre}}</td>
                                         <td class="col-md-1">{{$factura->descripcion}}</td>
                                         <td class="col-md-1">{{$factura->cuantia_factura}} <span
                                                     class="glyphicon glyphicon glyphicon-eur"
@@ -695,7 +690,7 @@
 
                                 @empty
                                     <tr>
-                                        <td class="danger" colspan="12">No hay facturas introducidos</td>
+                                        <td class="danger" colspan="12">Este cliente no tiene facturas</td>
                                     </tr>
                                 @endforelse
                             </table>

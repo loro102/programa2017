@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\invoices;
 use App\models\group;
 use App\models\invoice;
 use App\models\professional;
 use Illuminate\Http\Request;
+
 
 class invoicesController extends Controller
 {
@@ -99,7 +101,7 @@ class invoicesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(invoices $request)
     {
         //
         $invoice=new invoice;
@@ -153,8 +155,16 @@ class invoicesController extends Controller
     {
         //
         $factura=invoice::findorFail($id);
+        $sector=group::all()->pluck('nombre','id');
+        $profesional=professional::orderBy('nombre','asc')->pluck('nombre','id');
+        $metodos=$this->metodos->pluck('nombre','id');
+        $sector_id=$factura->profesional->group_id;
         return view('invoices.edit',[
             'factura'=>$factura,
+            'sector'=>$sector,
+            'sectoredit'=>$sector_id,
+            'metodos'=>$metodos,
+            'profesional'=>$profesional
         ]);
     }
 
@@ -169,8 +179,8 @@ class invoicesController extends Controller
     {
         //
         $factura=invoice::findorFail($id);
-        $factura->fill($request->all())->save();
-        return redirect()->action('invoicesController@edit',['id'=>$factura->file_id])->with('message','Factura actualizada');
+        $factura->fill($request->except('grupo'))->save();
+        return redirect()->action('filesController@show',['id'=>$factura->file_id])->with('message','Factura actualizada');
         //return redirect()->action('invoicesController@edit',['id'=>$id])->with('message','Factura actualizada');
 
     }
