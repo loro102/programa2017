@@ -18,7 +18,7 @@ class NotesCreateTable extends Migration
             $table->increments('id');
             $table->integer('file_id')->unsigned();
             $table->foreign('file_id')->references('id')->on('files');
-            $table->string('nota');
+            $table->string('nota')->nullable();
             $table->dateTime('fecha');
             $table->timestamps();
 

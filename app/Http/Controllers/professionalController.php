@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\profesional;
 use App\models\group;
 use App\models\professional;
 use Illuminate\Http\Request;
@@ -47,7 +48,7 @@ class professionalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(profesional $request)
     {
         //
         professional::create($request->input());
@@ -101,7 +102,7 @@ class professionalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(profesional $request, $id)
     {
         //
         $profesional=professional::findorFail($id);

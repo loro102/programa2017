@@ -17,13 +17,13 @@ class ProcessorsCreateTable extends Migration
             $table->increments('id');
             //$table->integer('insurer_id')->unsigned();
             //$table->foreign('insurer_id')->references('id')->on('insurers');
-            $table->string('nombre');
-            $table->string('telefono');
-            $table->string('telefono2');
-            $table->string('fax');
-            $table->string('email');
-            $table->text('notas');
-            $table->string('cargo');
+            $table->string('nombre')->nullable();
+            $table->string('telefono')->nullable();
+            $table->string('telefono2')->nullable();
+            $table->string('fax')->nullable();
+            $table->string('email')->nullable();
+            $table->text('notas')->nullable();
+            $table->string('cargo')->nullable();
             $table->timestamps();
         });
     }

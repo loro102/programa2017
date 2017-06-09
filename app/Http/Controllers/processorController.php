@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 
+use App\Http\Requests\tramicia;
 use App\models\processor;
 use Illuminate\Http\Request;
 
@@ -44,7 +45,7 @@ class processorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(tramicia $request)
     {
         //
         $data=$request->input('insurer_id');
@@ -90,7 +91,7 @@ class processorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(tramicia $request, $id)
     {
         //
         $processor=processor::findorFail($id);

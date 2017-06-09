@@ -2,6 +2,15 @@
 
 @section('content')
     <div class="container">
+        @if(count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         {!! Form::Model($formality,['route'=>['formality.update',$formality->id],'class'=>'form-inline','method'=>'PUT','id'=>'formality']) !!}
         <div class="row">
             <div class="form-group">

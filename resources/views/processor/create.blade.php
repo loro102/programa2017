@@ -1,7 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.modal')
 
 @section('content')
 <div class="container">
+    @include('partials.flash')
     {!! Form::Model($tramitador,['action'=>'processorController@store','class'=>'form-inline']) !!}
     <div class="row">
 
@@ -11,22 +12,22 @@
         </div>
         <div class="form-group">
             {!! Form::label('telefono', 'Telefono:', ['class' => 'control-label']) !!}
-            {!! Form::text('telefono', '') !!}
+            {!! Form::text('telefono', '', ['class' => 'form-control']) !!}
 
         </div>
         <div class="form-group">
             {!! Form::label('telefono2', 'Telefono 2:', ['class' => 'control-label']) !!}
-            {!! Form::text('telefono2', '') !!}
+            {!! Form::text('telefono2', '', ['class' => 'form-control']) !!}
 
         </div>
         <div class="form-group">
             {!! Form::label('fax', 'Fax:', ['class' => 'control-label']) !!}
-            {!! Form::text('fax', '') !!}
+            {!! Form::text('fax', '', ['class' => 'form-control']) !!}
 
         </div>
         <div class="form-group">
             {!! Form::label('email', 'Correo Electronico:', ['class' => 'control-label']) !!}
-            {!! Form::text('email', '') !!}
+            {!! Form::text('email', '', ['class' => 'form-control']) !!}
 
         </div>
         <div class="form-group">
