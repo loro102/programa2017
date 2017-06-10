@@ -10,6 +10,6 @@ class group extends Model
 
     public function professional()
     {
-        return $this->belongsTo('App\models\professional',group_id);
+        return $this->belongsTo('App\models\professional','group_id','id');
     }
 }

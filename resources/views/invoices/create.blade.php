@@ -2,6 +2,15 @@
 
 @section('content')
 <div class="container">
+    @if(count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     {!! Form::Model($factura,['action'=>'invoicesController@store','class'=>'form-inline']) !!}
     <div class="row">
         <div class="panel panel-default">
@@ -43,7 +52,7 @@
                         {!! Form::label('grupo', 'Sector:', ['class' => 'control-label']) !!}
                         {!! Form::select('grupo', $sector,[''] , ['class' => 'form-control'], ['class' => 'form-control']) !!}
                         {!! Form::label('professional_id', 'Profesional:', ['class' => 'control-label']) !!}
-                        {!! Form::select('professional_id',['No has seleccionado sector'],[''] , ['class' => 'form-control']) !!}
+                        {!! Form::select('professional_id',['No has seleccionado sector'],['0'] , ['class' => 'form-control']) !!}
                     </div>
                 @endif
             </div>

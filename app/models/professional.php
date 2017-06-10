@@ -23,14 +23,15 @@ class professional extends Model
     }
     public function invoice()
     {
-        return $this->hasMany('App\models\invoice');
+        return $this->belongsTo('App\models\invoice','id','professional_id');
     }
     public function group()
     {
-        return $this->hasOne('App\models\group', 'id');
+        return $this->hasOne('App\models\group', 'id','group_id');
     }
     public function file()
     {
         return $this->belongsTo('App\models\file','solicitor_id','id');
     }
+
 }

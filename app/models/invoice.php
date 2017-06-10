@@ -19,7 +19,7 @@ class invoice extends Model
     //Obtener datos
     public function profesional()
     {
-        return $this->HasOne('App\models\professional','id','professional_id');
+        return $this->hasOne('App\models\professional','id','professional_id');
     }
     public function file()
     {
