@@ -11,4 +11,8 @@ class note extends Model
         'id',
         'timestamps',
     ];
+    public function user()
+    {
+        return $this->HasOne('App\User','id','user_id');
+    }
 }

@@ -17,9 +17,14 @@ function cuantias()
 
 /*--------------------------------------------------------------------------------------------------------------------
  | @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -
- | @ Los valores de las cuantias del cliente y de la indemnizacion se rellenan automaticamente                       @ -
+ | @ Cuando en la url aparece # para enlazar una url a una pestaña esto lo hace correctamente                        @ -
  | @  cuando se escribe en la cuantía de factura                                                                     @ -
  | @                                                                                                                 @ -
  | @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -
  -----------------------------------------------------------------------------------------------------------------------
  */
+(function activateTabFromHash() { if (location.hash) { var tabLink = document.querySelector('a[href="' + location.hash + '"]'); if (!tabLink) { return false; } tabLink.click(); if (location.hash) {
+    setTimeout(function() {
+        window.scrollTo(0, 0);
+    }, 1);
+} } })();

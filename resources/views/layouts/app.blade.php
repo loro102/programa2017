@@ -44,10 +44,16 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;<li><a href="{{ url('/cliente') }}">Cliente</a></li>
+                        @role('admin','direccion','administracion')
                         <li><a href="{{ url('/agente') }}">Agente</a></li>
+                        @endrole()
+                        @role('abogado','direccion','admin')
                         <li><a href="{{ url('/formality') }}">Formalidad</a></li>
+                        @endrole()
                         <li><a href="{{ url('/insurers') }}">Aseguradoras</a></li>
+                        @role('admin','direccion')
                         <li><a href="{{ url('/professionals') }}">Profesionales</a></li>
+                        @endrole()
                         <li><a href="{{ url('/sort') }}">Clases de expediente</a></li>
                     </ul>
 
@@ -91,5 +97,6 @@
     <script src="/js/jquery-3.1.1.min.js"></script>
     <script src="/js/dropdown.js"></script>
     <script src="/js/funciones.js"></script>
+
 </body>
 </html>

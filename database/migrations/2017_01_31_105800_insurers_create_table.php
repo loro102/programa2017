@@ -15,15 +15,15 @@ class InsurersCreateTable extends Migration
     {
         Schema::create('insurers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
-            $table->text('telefonos');
-            $table->text('faxes');
-            $table->text('emails');
-            $table->string('direccion');
-            $table->string('codigo_postal');
-            $table->string('localidad');
-            $table->string('provincia');
-            $table->text('notas');
+            $table->string('nombre')->nullable();
+            $table->text('telefonos')->nullable();
+            $table->text('faxes')->nullable();
+            $table->text('emails')->nullable();
+            $table->string('direccion')->nullable();
+            $table->string('codigo_postal')->nullable();
+            $table->string('localidad')->nullable();
+            $table->string('provincia')->nullable();
+            $table->text('notas')->nullable();
             $table->timestamps();
         });
     }

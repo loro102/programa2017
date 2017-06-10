@@ -15,7 +15,7 @@ class SortsCreateTable extends Migration
     {
         Schema::create('sorts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
+            $table->string('nombre')->nullable();
             $table->boolean('por_defecto')->default('0');
             $table->timestamps();
         });

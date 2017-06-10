@@ -37,7 +37,7 @@ class invoicesController extends Controller
                                    ],
                                ]);
 
-
+        $this->middleware('auth');
 
         //$dt = Carbon::parse();
         //$this->largo = largo;
@@ -108,7 +108,7 @@ class invoicesController extends Controller
         $invoice->fill($request->except('grupo'))->save();
 
         //dd($request->input());
-        return redirect()->action('filesController@show',['file'=>$request->input('file_id')])->with('message','Factura agregada correctamente');
+        return redirect()->action('filesController@show',['file'=>$request->input('file_id').'#facturas'])->with('message','Factura agregada correctamente');
     }
 
     /**
@@ -180,7 +180,7 @@ class invoicesController extends Controller
         //
         $factura=invoice::findorFail($id);
         $factura->fill($request->except('grupo'))->save();
-        return redirect()->action('filesController@show',['id'=>$factura->file_id])->with('message','Factura actualizada');
+        return redirect()->action('filesController@show',['id'=>$factura->file_id.'#facturas'])->with('message','Factura actualizada');
         //return redirect()->action('invoicesController@edit',['id'=>$id])->with('message','Factura actualizada');
 
     }

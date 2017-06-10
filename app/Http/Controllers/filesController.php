@@ -23,6 +23,10 @@ use function storage_path;
 
 class filesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -203,12 +207,12 @@ class filesController extends Controller
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
        ::                                                                ::
-       ::            Boton notas del expediente                          ::
+       ::           pestaña notas del expediente                         ::
        ::                                                                ::
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
        */
-        $notas=note::where('file_id',$id)->get();
+        $notas=note::where('file_id',$id)->orderBy('fecha', 'desc')->get();
 
 
         return view('files.show',[

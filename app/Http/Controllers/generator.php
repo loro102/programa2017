@@ -37,8 +37,7 @@ class generator extends Controller
         $this->telefono2='telefono 2 empresa';
         $this->fax='fax empresa';
         $this->movil='telefono movil empresa';
-
-
+        $this->middleware('auth');
         //$dt = Carbon::parse();
         //$this->largo = largo;
 

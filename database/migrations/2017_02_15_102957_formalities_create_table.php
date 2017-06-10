@@ -15,8 +15,8 @@ class FormalitiesCreateTable extends Migration
     {
         Schema::create('formalities', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
-            $table->string('categoria');
+            $table->string('nombre')->nullable();
+            $table->string('categoria')->nullable();
             $table->timestamps();
         });
     }
