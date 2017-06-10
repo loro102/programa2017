@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         //$this->call(file::class);
         //$this->call(invoice::class);
         $this->call(phases::class);
+        $this->call(roles_y_permisos::class);
 
     }
 }

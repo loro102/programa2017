@@ -6,10 +6,15 @@ namespace App\Http\Controllers;
 use Caffeinated\Shinobi\Models\Permission;
 use Caffeinated\Shinobi\Models\Role;
 use Illuminate\Http\Request;
+Use App\User;
 
 
 class rolesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -111,5 +116,23 @@ class rolesController extends Controller
         //
         Role::destroy($id);
         return redirect('role')->with('message','El rol se ha eliminado correctamente');
+    }
+    public function assign(Request $request)
+    {
+        //
+        //dd($request);
+        $role = User::find($request->user);
+        $role->assignRole($request->role);
+        $role->save();;
+        return redirect()->action('userController@show',['id'=>$role->id])->with('message','Se ha asignado un permiso correctamente');
+    }
+    public function revoke(Request $request)
+    {
+        //
+        //dd($request) ;
+        $role = User::find($request->user);
+        $role->revokeRole($request->role);
+        $role->save();;
+        return redirect()->action('userController@show',['id'=>$role->id])->with('message','Se ha asignado un permiso correctamente');
     }
 }

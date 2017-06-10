@@ -48,7 +48,7 @@
                     @forelse($expedientestraf as $expedientetraf)
                     <tr>
                         <td class="col-md-2">{{link_to_action('filesController@show',Carbon\Carbon::parse($expedientetraf->fechaapertura)->format('d-m-Y'),['id'=> $expedientetraf->id],[])}}</td>
-                        <td class="col-md-2">{{$expedientetraf->fechacierre}}</td>
+                        <td class="col-md-2">{{$expedientetraf->phase->nombre}}</td>
                         <td class="col-md-2">{{Carbon\Carbon::parse($expedientetraf->fecha_accidente)->format('d-m-Y')}} {{$expedientetraf->hora_accidente}}</td>
                         <td class="col-md-2">{{$expedientetraf->lugar}}</td>
                         <td class="col-md-4">{{$expedientetraf->desarrollo_suceso}}</td>

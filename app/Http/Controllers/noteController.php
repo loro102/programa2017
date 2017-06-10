@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class noteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +45,7 @@ class noteController extends Controller
     {
         $file=$request->input('file_id');
         note::create($request->input());
-        return redirect()->action('noteController@create',['file'=>$file])->with('message','nota agregada correctamente');
+        return redirect()->action('filesController@show',['file'=>$file.'#notas'])->with('message','nota agregada correctamente');
 
 
     }

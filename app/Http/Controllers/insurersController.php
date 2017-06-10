@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\models\insurer;
 use App\models\processor;
 use Illuminate\Http\Request;
+use App\Http\Requests\aseguradora;
 
 class insurersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +45,7 @@ class insurersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(aseguradora $request)
     {
         //
         //dd($request->input());
@@ -80,7 +85,7 @@ class insurersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(aseguradora $request, $id)
     {
         //
     }

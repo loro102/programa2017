@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\formalidad;
 use App\models\formality;
 use Illuminate\Http\Request;
 
 class formalitiesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -38,7 +43,7 @@ class formalitiesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(formalidad $request)
     {
         //
         formality::create($request->input());
@@ -82,7 +87,7 @@ class formalitiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(formalidad $request, $id)
     {
         //
         $formality=formality::findorFail($id);

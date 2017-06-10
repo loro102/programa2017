@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    @include('partials.flash')
     {!! Form::Model($formality,['action'=>'formalitiesController@store','class'=>'form-inline']) !!}
     <div class="row">
         <div class="form-group">

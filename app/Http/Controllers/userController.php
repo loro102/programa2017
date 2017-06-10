@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Caffeinated\Shinobi\Models\Role;
 use Illuminate\Http\Request;
 use App\User;
 
 class userController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -60,9 +65,13 @@ class userController extends Controller
     {
         //
         $user=User::findorFail($id);
+        $Rol=Role::all()->pluck('slug','id')->prepend('Seleccione Rol','');
+        $roles=$user->getRoles();
         //dd($user);
         return view('admin.usuario.show',[
-            'user'=> $user
+            'user'=> $user,
+            'select'=>$Rol,
+            'roles'=>$roles,
         ]);
     }
 
