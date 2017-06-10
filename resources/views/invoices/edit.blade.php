@@ -1,97 +1,178 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="container">
-        {!! Form::Model($agente,['route'=>['agente.update',$agente->id],'class'=>'form-inline','method'=>'PUT','id'=>'agente']) !!}
+        @if(count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        {!! Form::Model($factura,['route'=>['invoices.update',$factura->id],'class'=>'form-inline','method'=>'PUT','id'=>'factura']) !!}
         <div class="row">
-            {{ Form::hidden('id', $agente->id) }}
-            <div class="form-group">
-                {!! Form::label('nombre', 'Nombre:', ['class' => 'control-label']) !!}
-                {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
+            <div class="panel panel-default">
+                <div class="panel-heading">Datos de la factura</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        {!! Form::label('numfactura', 'Número de Factura:', ['class' => 'control-label']) !!}
+                        {!! Form::text('numfactura', null, ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('fechafac', 'Fecha de Factura:', ['class' => 'control-label']) !!}
+                        {!! Form::date('fechafact', null, ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('numsuplido', 'Número de Suplido:', ['class' => 'control-label']) !!}
+                        {!! Form::text('numsuplido', null, ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('fechasupl', 'Fecha de Suplido:', ['class' => 'control-label']) !!}
+                        {!! Form::date('fechasupl', null, ['class' => 'form-control']) !!}
+                    </div>
+
+                    <div class="form-group">
+                        {!! Form::label('numcontrafactura', 'Número de ContraFactura:', ['class' => 'control-label']) !!}
+                        {!! Form::text('numcontrafactura', null, ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('fechacontrafac', 'Fecha de ContraFactura:', ['class' => 'control-label']) !!}
+                        {!! Form::date('fechacontrafact', null, ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('descripcion', 'Descripcion:', ['class' => 'control-label']) !!}
+                        {!! Form::textarea('descripcion', null, ['class' => 'form-control','rows'=>'4']) !!}
+                    </div>
+                    @if(Request::get('prof')!=0)
+                        {!! Form::hidden('professional_id',null, ['class' => 'form-control']) !!}
+                    @else
+                        <div class="form-group">
+                            {!! Form::label('grupo', 'Sector:', ['class' => 'control-label']) !!}
+                            {!! Form::select('grupo',$sector,$sectoredit , ['class' => 'form-control']) !!}
+                            {!! Form::label('professional_id', 'Profesional:', ['class' => 'control-label']) !!}
+                            {!! Form::select('professional_id',$profesional,null , ['class' => 'form-control']) !!}
+                        </div>
+                    @endif
+                </div>
             </div>
-            <div class="form-group">
-                {!! Form::label('nif', 'NIF:', ['class' => 'control-label']) !!}
-                {!! Form::text('nif', null, ['class' => 'form-control']) !!}
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Cuantías</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        {!! Form::label('cuantia_factura', 'Factura:', ['class' => 'control-label']) !!}
+                        {!! Form::number('cuantia_factura', null, ['class' => 'form-control ','onkeyup'=>'cuantias();',]) !!}
+
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('cuantia_cliente', 'Cliente:', ['class' => 'control-label']) !!}
+                        {!! Form::number('cuantia_cliente', null, ['class' => 'form-control','aria-describedby'=>'euros']) !!}
+
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('cuantia_empresa', 'Empresa:', ['class' => 'control-label']) !!}
+                        {!! Form::number('cuantia_empresa', null, ['class' => 'form-control']) !!}
+
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('cuantia_indemnizacion', 'Indemnizacion:', ['class' => 'control-label']) !!}
+                        {!! Form::number('cuantia_indemnizacion',null, ['class' => 'form-control']) !!}
+
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                {!! Form::label('direccion', 'Direccion:', ['class' => 'control-label']) !!}
-                {!! Form::text('direccion', null, ['class' => 'form-control']) !!}
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Datos del pago</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        {!! Form::label('estadopago', 'Estado de pago:', ['class' => 'control-label']) !!}
+                        {!! Form::select('estadopago', $metodos,null, ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('estadocobro', 'Estado de cobro:', ['class' => 'control-label']) !!}
+                        {!! Form::select('estadocobro', $metodos,null, ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('numpagare', 'Nº de pagaré:', ['class' => 'control-label']) !!}
+                        {!! Form::text('numpagare', null, ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('fechapago', 'Fecha de pago:', ['class' => 'control-label']) !!}
+                        {!! Form::date('fechapago', null, ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('fechacobro', 'Fecha de cobro', ['class' => 'control-label']) !!}
+                        {!! Form::date('fechacobro', null, ['class' => 'form-control']) !!}
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                {!! Form::label('localidad', 'Localidad:', ['class' => 'control-label']) !!}
-                {!! Form::text('localidad', null, ['class' => 'form-control']) !!}
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Otros datos</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        {!! Form::label('emitirfact
+                        .honorario', 'Emitir factura por honorarios', ['class' => 'control-label']) !!}
+                        {!! Form::hidden('honorario', '0', []) !!}
+                        {!! Form::checkbox('honorario', '1', null,  ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('emitirfactcomision', 'Emitir factura por comision', ['class' => 'control-label']) !!}
+                        {!! Form::hidden('emitirfactcomision', '0', []) !!}
+                        {!! Form::checkbox('emitirfactcomision', '1', null,  ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('sinoriginal', 'Falta la factura original', ['class' => 'control-label']) !!}
+                        {!! Form::hidden('sinoriginal', '0', []) !!}
+                        {!! Form::checkbox('sinoriginal', '1', null,  ['class' => 'form-control']) !!}
+                    </div>
+
+                </div>
             </div>
-            <div class="form-group">
-                {!! Form::label('provincia', 'Provincia:', ['class' => 'control-label']) !!}
-                {!! Form::text('provincia', null, ['class' => 'form-control']) !!}
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        {!! Form::label('nota', 'Notas:', ['class' => 'control-label']) !!}
+                        {!! Form::textarea('nota', null,['class'=>'form-control']) !!}
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                {!! Form::label('codigo_postal', 'Codigo Postal:', ['class' => 'control-label']) !!}
-                {!! Form::text('codigo_postal', null, ['class' => 'form-control']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('telefono1', 'Telefono:', ['class' => 'control-label']) !!}
-                {!! Form::text('telefono1', null, ['class' => 'form-control']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('telefono2', 'Telefono2:', ['class' => 'control-label']) !!}
-                {!! Form::text('telefono2', null, ['class' => 'form-control']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('movil', 'Movil:', ['class' => 'control-label']) !!}
-                {!! Form::text('movil', null, ['class' => 'form-control']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('fax', 'Fax:', ['class' => 'control-label']) !!}
-                {!! Form::text('fax', null, ['class' => 'form-control']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('email', 'Email:', ['class' => 'control-label']) !!}
-                {!! Form::text('email', null, ['class' => 'form-control']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('iban', 'Iban:', ['class' => 'control-label']) !!}
-                {!! Form::text('iban', null, ['class' => 'form-control']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('profesion', 'profesion', ['class' => 'control-label']) !!}
-                {!! Form::text('profesion', null, ['class' => 'form-control']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('commercial_id', 'Comercial', ['class' => 'control-label']) !!}
-                {!! Form::select('commercial_id', ['1'=>'Pepe','2'=>'Paco'] , null , ['class' => 'form-control']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('placa', 'Placa', ['class' => 'control-label']) !!}
-                {!! Form::hidden('placa', '0', ['id' => 'placa']) !!}
-                {!! Form::checkbox('placa', '1', null,  ['id' => 'placa']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('pegatina', 'Pegatina', ['class' => 'control-label']) !!}
-                {!! Form::hidden('pegatina', '0', ['id' => 'pegatina']) !!}
-                {!! Form::checkbox('pegatina', '1', null,  ['id' => 'pegatina']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('portatriptico', 'Portatriptico', ['class' => 'control-label']) !!}
-                {!! Form::hidden('portatriptico', '0', ['id' => 'portatriptico']) !!}
-                {!! Form::checkbox('portatriptico', '1', null,  ['id' => 'portatriptico']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('notas', 'Notas:', ['class' => 'control-label']) !!}
-                {!! Form::textarea('notas', null,['class'=>'form-control']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::hidden('fecha_alta',null , ['id' => 'fecha_alta']) !!}
-            </div>
+
+
+
+
+
+
+            {!! Form::hidden('file_id',null, ['class' => 'form-control']) !!}
+
+
+
+
+
+
+
         </div>
         <div class="row">
 
             <div class="form-group">
-                {!! Form::submit('Editar agente', ['class' => 'form-control btn btn-primary btn-block']) !!}
+                {!! Form::submit('Editar factura', ['class' => 'form-control btn btn-primary btn-block']) !!}
+
             </div>
+
         </div>
+
 
         {!! Form::Close() !!}
+        <div class="form-group">
+            {!! Form::open(['method'=>'DELETE','route'=>['invoices.destroy',$factura->id]],['class'=>'form-inline']) !!}
+            {!! Form::submit('Borrar Factura', array('class' => 'btn btn-danger pull-right ','id'=>'deletebtn', 'onclick' => 'return confirm("¿Estas seguro de querer eliminar este cliente?");')) !!}
+            {!! Form::close()!!}
+        </div>
+
     </div>
 
 @endsection

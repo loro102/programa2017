@@ -95,7 +95,7 @@ class processorController extends Controller
         //
         $processor=processor::findorFail($id);
         $processor->fill($request->all())->save();
-        return redirect()->action('processorController@show',['id'=>$processor->insurer_id])->with('message','Cliente actualizado');
+        return redirect()->action('processorController@show',['id'=>$processor->insurer_id])->with('message','Tramitador actualizado');
 
 
 }

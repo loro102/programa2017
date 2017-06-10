@@ -11,4 +11,9 @@ class insurer extends Model
         'id',
         'timestamps',
     ];
+    public function file()
+    {
+        return $this->belongsTo('App\models\file','insurer_id','id');
+    }
 }
+

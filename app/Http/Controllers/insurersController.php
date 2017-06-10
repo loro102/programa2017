@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\models\insurer;
-use App\models\proccesor;
+use App\models\processor;
 use Illuminate\Http\Request;
 
 class insurersController extends Controller
@@ -58,6 +58,8 @@ class insurersController extends Controller
     public function show($id)
     {
         //
+
+
     }
 
     /**

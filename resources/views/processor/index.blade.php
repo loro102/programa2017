@@ -4,8 +4,7 @@
     <div class="container">
         @include('partials.flash')
         <p>
-            {{ link_to_action('insurersController@create','Añadir una nueva aseguradora',[],[]) }} |
-            {{ link_to_action('insurersController@index','Procedimientos',[],[]) }}
+            {{ link_to_action('insurersController@create','Añadir una nuevo tramitador',[],['class' => 'btn btn-sm btn-primary']) }}
         </p>
         <table class="table-bordered table-striped table-hover col-md-12">
             <tr>
@@ -18,7 +17,12 @@
             @forelse($processors as $processor)
                 <tr>
                     <td class="col-md-2">{{link_to_action('formalitiesController@edit',$processor->nombre,['id'=> $processor->id],[])}}</td>
-                    <td class="col-md-2">{{$processor->telefono}} || {{$processor->telefono2}} </td>
+                    <td class="col-md-2">
+                        <div>
+                            <div class="row">{{$processor->telefono}}</div>
+                            <div class="row">{{$processor->telefono2}}</div>
+                        </div>
+                          </td>
                     <td class="col-md-2">{{$processor->fax}}</td>
                     <td class="col-md-2">{{$processor->email}}</td>
                     <td class="col-md-2">{{$processor->cargo}}</td>

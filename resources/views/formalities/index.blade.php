@@ -4,8 +4,7 @@
     <div class="container">
         @include('partials.flash')
         <p>
-            {{ link_to_action('formalitiesController@create','Añadir un nuevo procedimiento',[],[]) }} |
-            {{ link_to_action('formalitiesController@index','Procedimientos',[],[]) }}
+            {{ link_to_action('formalitiesController@create','Añadir un nuevo procedimiento',[],['class' => 'btn btn-sm btn-primary']) }}
         </p>
         <table class="table-bordered table-striped table-hover col-md-12">
             <tr>

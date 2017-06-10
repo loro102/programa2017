@@ -4,6 +4,7 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class invoice extends Model
 {
     //
@@ -11,4 +12,17 @@ class invoice extends Model
         'id',
         'timestamps',
     ];
+    /*public function professional()
+    {
+        return $this->belongsTo('App\models\professional','id');
+    }*/
+    //Obtener datos
+    public function profesional()
+    {
+        return $this->hasOne('App\models\professional','id','professional_id');
+    }
+    public function file()
+    {
+        return $this->HasOne('App\models\file','id','file_id');
+    }
 }

@@ -76,4 +76,27 @@ $('#insurer_id').change(function(){
         $("#procedimientos").empty();
     }
 });
+$('#grupo').change(function(){
+    var tipo = $(this).val();
+    if(tipo){
+        $.ajax({
+            type:"GET",
+            url:"/getprofessional/"+tipo,
+            success:function(res){
+                if(res){
+                    $("#professional_id").empty();
+                    $("#professional_id").append('<option>Seleccione un profesional</option>');
+                    $.each(res,function(key,value){
+                        $("#professional_id").append('<option value="'+value.id+'">'+value.Nombre+'</option>');
+
+                    });
+                }else{
+                    $("#professional_id").empty();
+                }
+            }
+        });
+    }else{
+        $("#clase").empty();
+    }
+});
 
