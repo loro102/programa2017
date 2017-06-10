@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class file_professionalController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -45,7 +49,7 @@ class file_professionalController extends Controller
         //
         $file=$request->input('file_id');
         file_professional::create($request->input());
-        return redirect()->action('filesController@show',['file'=>$file])->with('message','profesional agregado correctamente');
+        return redirect()->action('filesController@show',['file'=>$file.'#profesionales'])->with('message','profesional agregado correctamente');
 
     }
 
@@ -95,7 +99,7 @@ class file_professionalController extends Controller
         $f=file_professional::findorfail($id);
         $fil=$f->file_id;
         file_professional::destroy($id);
-        return redirect()->action('filesController@show',['file'=>$fil])->with('message','profesional removido correctamente');
+        return redirect()->action('filesController@show',['file'=>$fil.'#profesionales'])->with('message','profesional removido correctamente');
 
     }
 

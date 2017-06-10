@@ -39,7 +39,10 @@
             </div>
         </div>
         <!-- Nav tabs -->
+
         <ul class="nav nav-tabs" role="tablist">
+
+
             <li role="presentation" class="active panel-primary"><a href="#expediente" aria-controls="expediente"
                                                                     role="tab" data-toggle="tab">Datos expediente</a>
             </li>
@@ -47,7 +50,11 @@
             </li>
             <li role="presentation"><a href="#facturas" aria-controls="facturas" role="tab"
                                        data-toggle="tab">facturas</a></li>
+            @role('abogado','admin','direccion')
             <li role="presentation"><a href="#indemnizacion" aria-controls="indemnizacion" role="tab" data-toggle="tab">indemnización</a>
+            </li>
+            @endrole
+            <li role="presentation"><a href="#notas" aria-controls="notas" role="tab" data-toggle="tab">Notas</a>
             </li>
         </ul>
 
@@ -467,6 +474,7 @@
                                             {{$prof->Nombre}}
                                     </td>
                                     <td class="col-md-5">
+                                        {!! Form::open(['method'=>'DELETE','route'=>['filepro.destroy',$prof->id]],['class'=>'form-inline']) !!}
                                         @if ($prof->group_id)
                                             {{ link_to_action('generator@contrato_asuncion_direccion_tecnica',' Asunción Dirección Técnica',['file_id'=>$expediente->id,'profesional_id'=>$prof->id],['class' => 'btn btn-sm btn-default']) }}
                                             {{ link_to_action('generator@designacion_abogado','Designación de Abogado',['file_id'=>$expediente->id,'profesional_id'=>$prof->id],['class' => 'btn btn-sm btn-default']) }}
@@ -474,7 +482,11 @@
                                         @elseif ($prof->group_id)
                                             {{ link_to_action('generator@autorización_servicio_profesionales','Autorizacion y compromiso de pago',['file_id'=>$expediente->id,'profesional_id'=>$prof->group_id],['class' => 'btn btn-sm btn-default']) }}
                                         @endif
-                                            {{ link_to_action('invoicesController@create','Añadir una nueva factura',['id'=> $expediente->id,'prof'=>$prof->id ],['class' => 'btn btn-sm btn-default']) }}
+                                        {{ link_to_action('invoicesController@create','Añadir una nueva factura',['id'=> $expediente->id,'prof'=>$prof->id ],['class' => 'btn btn-sm btn-default']) }}
+
+                                        {!! Form::submit('quitar profesional', array('class' => 'btn btn-sm btn-danger pull-right ','id'=>'deletebtn', 'onclick' => 'return confirm("¿Estas seguro de querer quitar este profesiona?");')) !!}
+                                        {!! Form::close()!!}
+
                                     </td>
                                     @empty
                                     @endforelse
@@ -531,38 +543,7 @@
                                         <span class="glyphicon glyphicon glyphicon-eur" aria-hidden="true"></span>
                                     </td>
                                     <td class="col-md-1">
-                                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
-                                                data-target="#{{$factura->id}}">
-                                            editar factura
-                                        </button>
-
-                                        <!-- Modal de lista de tramitadores-->
-                                        <div class="modal fade " id="{{$factura->id}}" tabindex="-1" role="dialog"
-                                             aria-labelledby="{{$factura->id}}">
-                                            <div class="modal-dialog modal-lg" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close"
-                                                                onclick="document.location.reload();"
-                                                                data-dismiss="modal" aria-label="Close"><span
-                                                                    aria-hidden="true">&times;</span></button>
-                                                        <h4 class="modal-title" id="$factura->id"></h4>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="embed-responsive embed-responsive-4by3">
-                                                            <iframe class="embed-responsive-item"
-                                                                    src="/invoices/{{$factura->id}}/edit"></iframe>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default"
-                                                                data-dismiss="modal"
-                                                                onclick="document.location.reload();">Close
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {{link_to_action('invoicesController@edit','editar factura',['id'=> $factura->id],['class'=>'btn btn-sm btn-primary'])}}
                                     </td>
                                 </tr>
 
@@ -699,56 +680,69 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#Notas"
-                aria-expanded="false" aria-controls="Notas">
-            Notas
-        </button>
-        <div class="collapse" id="Notas">
-            <button type="button" class="btn btn-md btn-success pull-right" data-toggle="modal" data-target="#nota">
-                Nueva nota
-            </button>
-            <div class="row"></div>
-            <!-- Modal de lista de tramitadores-->
-            <div class="modal fade " id="nota" tabindex="-1" role="dialog" aria-labelledby="nota">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" onclick="document.location.reload();"
-                                    data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                <div role="tabpanel" class="tab-pane panel-primary" id="notas">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <button class="btn btn-primary btn-block" type="button" data-toggle="collapse" data-target="#Notas"
+                                    aria-expanded="false" aria-controls="Notas">
+                                Añadir una nota nueva
                             </button>
-                            <h4 class="modal-title" id="$nota"></h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="embed-responsive embed-responsive-4by3">
-                                <iframe class="embed-responsive-item"
-                                        src="/note/create?file={{$expediente->id}}"></iframe>
+                            <div class="row"></div>
+                            <div class="collapse" id="Notas">
+                                <div class="container col-md-12">
+                                {!! Form::Model($notas,['action'=>'noteController@store','class'=>'horizontal']) !!}
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        {!! Form::hidden('fecha',Carbon\Carbon::Now()) !!}
+                                        {!! Form::hidden('file_id', $expediente->id) !!}
+                                        {!! Form::hidden('user_id', Auth::user()->id) !!}
+                                    </div>
+                                    <div class="form-group">
+                                        {!! Form::label('', 'Nota:', ['class' => 'control-label']) !!}
+                                        {!! Form::textarea('nota',null,['class' => 'form-control input-lg','rows'=>'6']) !!}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        {!! Form::submit('Nueva nota', ['class' => 'btn btn-md btn-success']) !!}
+                                    </div>
+                                </div>
+                                    {!! Form::Close() !!}</div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal"
-                                    onclick="document.location.reload();">Close
-                            </button>
+
+                                <!-- Modal de lista de tramitadores-->
+                            <div class="row"></div>
+
+                                <div class="well">
+                                    @forelse($notas as $nota)
+
+                                        <div class="row">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div class="col-md-4">
+                                                        {{Carbon\Carbon::parse($nota->fecha)->format('d-m-Y H:i:s')}}
+                                                        ({{$nota->user->name}})
+                                                    </div>
+                                                    <div class="col-md-6">{{$nota->nota}}</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    @empty
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                Este expediente no tiene notas
+                                            </div>
+                                        </div>
+                                    @endforelse
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
+
             </div>
-            <div class="well">
-                @forelse($notas as $nota)
-                    <div class="row">
-                        <div class="col-md-4">
-                            {{Carbon\Carbon::parse($nota->fecha)->format('d-m-Y H:i:s')}}
-                        </div>
-                        <div class="col-md-6">{{$nota->nota}}</div>
-                    </div>
-                @empty
-                    <div class="row">
-                        <div class="col-md-12">
-                            Este expediente no tiene notas
-                        </div>
-                    </div>
-                @endforelse
-            </div>
-        </div>
+
     </div>
 @endsection

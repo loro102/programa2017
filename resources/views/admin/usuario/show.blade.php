@@ -17,6 +17,35 @@
             <div class="panel-body">
                 <div class="col-md-3"><strong>Correo Electrónico:</strong>{{ $user->email }}</div>
             </div>
+            <div class="panel-footer">
+                <div class="container">
+                    <div class="col-md-11">
+                        <h3>Roles</h3></div>
+                    <div class="col-md-6">
+                        {!! Form::Open(['action'=>['rolesController@assign'],'class'=>'form-inline','method'=>'POST','id'=>'role']) !!}
+                        {!! Form::hidden('user', $user->id , null , ['class' => 'form-control']) !!}
+                        {!! Form::label('role', 'Roles a Añadir:', ['class' => 'control-label']) !!}
+                        {!! Form::select('role', $select , null , ['class' => 'form-control']) !!}
+                        {!! Form::submit('Asignar rol', ['class' => 'form-control btn btn-primary']) !!}
+                        {!! Form::close() !!}
+
+                    </div>
+                    <div class="col-md-6">
+                        {!! Form::Open(['action'=>['rolesController@revoke'],'class'=>'form-inline','method'=>'POST','id'=>'role']) !!}
+                        {!! Form::hidden('user', $user->id , null , ['class' => 'form-control']) !!}
+                        {!! Form::label('role', 'Rol a Revocar:', ['class' => 'control-label']) !!}
+                        {!! Form::select('role', $select , null , ['class' => 'form-control']) !!}
+                        {!! Form::submit('quitar rol', ['class' => 'form-control btn btn-primary']) !!}
+                        {!! Form::close() !!}
+                    </div>
+                    @forelse($roles as $role)
+                        <div class="col-md-3">{{ $role }}</div>
+                    @empty
+                        no hay
+                    @endforelse
+
+                </div>
+            </div>
 
         </div>
     </div>

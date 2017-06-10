@@ -18,7 +18,6 @@
 });
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index');
 Route::resource('/cliente','clientes');
 Route::resource('/agente','agenteController');
@@ -41,6 +40,8 @@ Route::resource('/role','rolesController');
 Route::resource('/permisos', 'permisosController');
 Route::post('revoke','permisosController@revoke');
 Route::post('assign','permisosController@assign');
+Route::post('revokerol','rolesController@revoke');
+Route::post('assignrol','rolesController@assign');
 
 
 

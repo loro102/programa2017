@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class processorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -29,6 +33,7 @@ class processorController extends Controller
      */
     public function create(Request $request)
     {
+
         //
         $data=$request->aseguradora;
         //dd($data);

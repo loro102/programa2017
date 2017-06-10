@@ -29,4 +29,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function note()
+    {
+        return $this->belongsTo('App\models\note','note_id','id');
+    }
+
 }
