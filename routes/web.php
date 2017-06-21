@@ -33,6 +33,7 @@ Route::resource('/filepro','file_professionalController');
 Route::resource('/note','noteController');
 Route::resource('/opponent','opponentController');
 Route::resource('/generator','generator');
+Route::resource('/documentos','documentoController');
 
 //Pantalla de Administración
 Route::resource('/usuario','userController');

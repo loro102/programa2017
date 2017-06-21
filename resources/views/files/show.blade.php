@@ -50,6 +50,8 @@
             </li>
             <li role="presentation"><a href="#facturas" aria-controls="facturas" role="tab"
                                        data-toggle="tab">facturas</a></li>
+            <li role="presentation"><a href="#documentos" aria-controls="doumentos" role="tab" data-toggle="tab">Notas</a>
+            </li>
             @role('abogado','admin','direccion')
             <li role="presentation"><a href="#indemnizacion" aria-controls="indemnizacion" role="tab" data-toggle="tab">indemnización</a>
             </li>
@@ -680,6 +682,7 @@
                     </div>
                 </div>
             </div>
+
                 <div role="tabpanel" class="tab-pane panel-primary" id="notas">
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -690,7 +693,69 @@
                             <div class="row"></div>
                             <div class="collapse" id="Notas">
                                 <div class="container col-md-12">
-                                {!! Form::Model($notas,['action'=>'noteController@store','class'=>'horizontal']) !!}
+                                    {!! Form::Model($notas,['action'=>'noteController@store','class'=>'horizontal']) !!}
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            {!! Form::hidden('fecha',Carbon\Carbon::Now()) !!}
+                                            {!! Form::hidden('file_id', $expediente->id) !!}
+                                            {!! Form::hidden('user_id', Auth::user()->id) !!}
+                                        </div>
+                                        <div class="form-group">
+                                            {!! Form::label('', 'Nota:', ['class' => 'control-label']) !!}
+                                            {!! Form::textarea('nota',null,['class' => 'form-control input-lg','rows'=>'6']) !!}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            {!! Form::submit('Nueva nota', ['class' => 'btn btn-md btn-success']) !!}
+                                        </div>
+                                    </div>
+                                    {!! Form::Close() !!}</div>
+                            </div>
+
+                            <!-- Modal de lista de tramitadores-->
+                            <div class="row"></div>
+
+                            <div class="well">
+                                @forelse($notas as $nota)
+
+                                    <div class="row">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="col-md-4">
+                                                    {{Carbon\Carbon::parse($nota->fecha)->format('d-m-Y H:i:s')}}
+                                                    ({{$nota->user->name}})
+                                                </div>
+                                                <div class="col-md-6">{{$nota->nota}}</div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                @empty
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            Este expediente no tiene notas
+                                        </div>
+                                    </div>
+                                @endforelse
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane panel-primary" id="documentos">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <button class="btn btn-primary btn-block" type="button" data-toggle="collapse" data-target="#documento"
+                                aria-expanded="false" aria-controls="documento">
+                            Añadir un documento nuevo
+                        </button>
+                        <div class="row"></div>
+                        <div class="collapse" id="Notas">
+                            <div class="container col-md-12">
+                                {!! Form::Model($documenton,['action'=>'noteController@store','class'=>'horizontal']) !!}
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         {!! Form::hidden('fecha',Carbon\Carbon::Now()) !!}
@@ -707,41 +772,39 @@
                                         {!! Form::submit('Nueva nota', ['class' => 'btn btn-md btn-success']) !!}
                                     </div>
                                 </div>
-                                    {!! Form::Close() !!}</div>
-                            </div>
-
-                                <!-- Modal de lista de tramitadores-->
-                            <div class="row"></div>
-
-                                <div class="well">
-                                    @forelse($notas as $nota)
-
-                                        <div class="row">
-                                            <div class="panel panel-default">
-                                                <div class="panel-body">
-                                                    <div class="col-md-4">
-                                                        {{Carbon\Carbon::parse($nota->fecha)->format('d-m-Y H:i:s')}}
-                                                        ({{$nota->user->name}})
-                                                    </div>
-                                                    <div class="col-md-6">{{$nota->nota}}</div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    @empty
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                Este expediente no tiene notas
-                                            </div>
-                                        </div>
-                                    @endforelse
-                            </div>
-
-
+                                {!! Form::Close() !!}</div>
                         </div>
+
+                        <!-- Modal de lista de tramitadores-->
+                        <div class="row"></div>
+
+                        <div class="well">
+                            @forelse($notas as $nota)
+
+                                <div class="row">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="col-md-4">
+                                                {{Carbon\Carbon::parse($nota->fecha)->format('d-m-Y H:i:s')}}
+                                                ({{$nota->user->name}})
+                                            </div>
+                                            <div class="col-md-6">{{$nota->nota}}</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            @empty
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        Este expediente no tiene notas
+                                    </div>
+                                </div>
+                            @endforelse
+                        </div>
+
+
                     </div>
                 </div>
-
             </div>
 
     </div>

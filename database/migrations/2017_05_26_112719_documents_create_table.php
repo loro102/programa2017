@@ -15,6 +15,15 @@ class DocumentsCreateTable extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->increments('id');
+            $table->date('fecha_documento')->nullable();
+            $table->date('fecha_entrada')->nullable();
+            $table->date('fecha_salida')->nullable();
+            $table->string('remitente')->nullable();
+            $table->string('destinatario')->nullable();
+            $table->string('asunto')->nullable();
+            $table->text('contenido')->nullable();
+            $table->unsigned('file_id')->nullable();
+            $table->foreign('file_id')->references('id')->on('files');
             $table->timestamps();
         });
     }
