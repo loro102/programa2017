@@ -16,6 +16,7 @@ class documentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    /** @noinspection PhpInconsistentReturnPointsInspection */
     /**
      * Display a listing of the resource.
      *
@@ -51,9 +52,9 @@ class documentController extends Controller
         //
         document::create($request->input());
 
-        return redirect()->action('filesController@show',['id'=>$file.'#documentos'])->with('message','Documento agregado correctamente');
+        return redirect()->action('filesController@show',['id'=>$request->file_id.'#documentos'])->with('message','Documento agregado correctamente');
 
-    }
+    }/** @noinspection PhpInconsistentReturnPointsInspection */
     /**
      * Display the specified resource.
      *
@@ -90,7 +91,7 @@ class documentController extends Controller
         //
         $documento=document::findorfail($id);
         $documento->fill($request->all())->save();
-        return redirect()->action('filesController@show',['id'=>$file.'#documentos'])->with('message','Documento actualizado correctamente');
+        return redirect()->action('filesController@show',['id'=>$request->file_id.'#documentos'])->with('message','Documento actualizado correctamente');
     }
 
     /**

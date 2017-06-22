@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\models\agent;
-
+use Illuminate\Http\Request;
 
 class agenteController extends Controller
 {
@@ -12,6 +11,7 @@ class agenteController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,9 +20,10 @@ class agenteController extends Controller
     public function index()
     {
         //
-        $agente=agent::paginate(10);
+        $agente = agent::paginate(10);
+
         //dd($agente)
-        return view('agentes.index',['agentes'=>$agente]);
+        return view('agentes.index', ['agentes' => $agente]);
     }
 
     /**
@@ -33,15 +34,15 @@ class agenteController extends Controller
     public function create()
     {
         //
-        $agente=new agent;
-        return view('agentes.create',['agente'=>$agente]);
+        $agente = new agent;
 
+        return view('agentes.create', ['agente' => $agente]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(\App\Http\Requests\agent $request)
@@ -50,64 +51,68 @@ class agenteController extends Controller
         agent::create($request->input());
 
         //dd($request->input());
-        return redirect('agente')->with('message','Se ha añadido un nuevo agente');
+        return redirect('agente')->with('message', 'Se ha añadido un nuevo agente');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $agente=agent::findorFail($id);
+        $agente = agent::findorFail($id);
+
         //dd($agent);
-        return view('agentes.show',[
-            'agente'=> $agente
+        return view('agentes.show', [
+            'agente' => $agente,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         //
-        $agente=agent::findorFail($id);
-        return view('agentes.edit',[
-            'agente'=>$agente
+        $agente = agent::findorFail($id);
+
+        return view('agentes.edit', [
+            'agente' => $agente,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         //
-        $agente=agent::findorFail($id);
+        $agente = agent::findorFail($id);
         $agente->fill($request->all())->save();
-        return redirect()->action('agenteController@show',['id'=>$id])->with('message','Agente actualizado');
+
+        return redirect()->action('agenteController@show', ['id' => $id])->with('message', 'Agente actualizado');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
         agent::destroy($id);
-        return redirect('agente')->with('message','Agente eliminado');
+
+        return redirect('agente')->with('message', 'Agente eliminado');
     }
 }

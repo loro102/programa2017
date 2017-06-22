@@ -17,7 +17,7 @@ use App\models\sort;
 //use Illuminate\Http\Request;
 //use App\models\customer;
 
-class filesController extends Controller
+Class filesController extends Controller
 {
     public function __construct()
     {
