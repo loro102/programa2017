@@ -10,16 +10,11 @@ use App\models\note;
 use App\models\phase;
 use App\models\processor;
 use App\models\sort;
-use App\User;
-use Illuminate\Http\Request;
+//use App\User;
+//use Illuminate\Http\Request;
 use App\models\file;
-use App\models\customer;
+//use App\models\customer;
 use App\models\professional;
-use Illuminate\Support\Facades\DB;
-use function isNull;
-use const null;
-use Storage;
-use function storage_path;
 
 class filesController extends Controller
 {
@@ -36,7 +31,7 @@ class filesController extends Controller
     {
         //
         $expediente=file::paginate(10);
-        return view('files.index',['expedientes'=>$expediente]);
+        return view('files.index', ['expedientes'=>$expediente]);
     }
 
     /**
@@ -46,21 +41,20 @@ class filesController extends Controller
      */
     public function create()
     {
-
         $expediente=new file;
         //$cliente=customer::all()->pluck('fullname','id')->prepend('Ninguno','');
-        $sort=sort::all()->pluck('nombre','id');
-        $categoria=formality::all()->unique('categoria')->pluck('categoria','categoria')->prepend('Ninguno','1');
-        $abogado=professional::where('group_id',1)->where('activo',true)->pluck('Nombre','id');
-        $aseguradora=insurer::all()->pluck('nombre','id')->prepend('Ninguno','1');
-        $processor=processor::where('insurer_id',1)->pluck('nombre','id');
-        $formalidad=formality::findorfail(1)->pluck('nombre','id');
-        $fase=phase::all()->pluck('nombre','id');
+        $sort=sort::all()->pluck('nombre', 'id');
+        $categoria=formality::all()->unique('categoria')->pluck('categoria', 'categoria')->prepend('Ninguno', '1');
+        $abogado=professional::where('group_id', 1)->where('activo', true)->pluck('Nombre', 'id');
+        $aseguradora=insurer::all()->pluck('nombre', 'id')->prepend('Ninguno', '1');
+        $processor=processor::where('insurer_id', 1)->pluck('nombre', 'id');
+        $formalidad=formality::findorfail(1)->pluck('nombre', 'id');
+        $fase=phase::all()->pluck('nombre', 'id');
         //$abogado=professional::all()->pluck('nombre','id')->prepend('Ninguno','');
 
         //$client=$cliente->pluck('fullname','id');
         //dd($cliente);
-        return view('files.create',[
+        return view('files.create', [
             'expediente'=>$expediente,
             'processor'=>$processor,
             'sort'=>$sort,
@@ -75,7 +69,7 @@ class filesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\file  $request
      * @return \Illuminate\Http\Response
      */
     public function store(\App\Http\Requests\file $request)
@@ -84,14 +78,14 @@ class filesController extends Controller
         //dd($request);
         $file=new file;
         $file->fill($request->except(['formalidad','formalities_id']))->save();
-        $files=file::where('customer_id',$request->customer_id)->get();
+        //$files=file::Where('customer_id', $request->customer_id)->get();
         
         //Storage::makeDirectory('storage/cliente/'.$request->customer_id.'/'.$files->last()->id);
 
 
 
 
-        return redirect()->action('clientes@show',['id'=>$request->customer_id])->with('message','Se ha añadido un nuevo expediente');
+        return redirect()->action('clientes@show', ['id'=>$request->customer_id])->with('message', 'Se ha añadido un nuevo expediente');
     }
 
     /**
@@ -113,7 +107,7 @@ class filesController extends Controller
         */
 
         $consulta=file::find($id);
-        $contrario=$consulta->opponent;
+        //$contrario=$consulta->opponent;
         //dd($consulta->opponent);
 
         /*
@@ -125,7 +119,7 @@ class filesController extends Controller
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
        */
-        $prof=file_professional::where('file_id',$id)->get();
+        $prof=file_professional::where('file_id', $id)->get();
 
         /*
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -138,28 +132,28 @@ class filesController extends Controller
        */
 
         //Obtener facturas por comision
-        $factxcomision=invoice::where('file_id',$id)
-            ->where('emitirfactcomision',true)
+        $factxcomision=invoice::where('file_id', $id)
+            ->where('emitirfactcomision', true)
             ->get();
 
         //Obtener facturas por honorarios
-        $factsxhonorarios=invoice::where('file_id',$id)
-            ->where('emitirfactporhonorarios',true)
+        $factsxhonorarios=invoice::where('file_id', $id)
+            ->where('emitirfactporhonorarios', true)
             ->get();
 
         //Obtener el resto de las facturas
-        $facturas=invoice::where('file_id',$id)
-            ->where('emitirfactcomision',false)
-            ->where('emitirfactporhonorarios',false)
+        $facturas=invoice::where('file_id', $id)
+            ->where('emitirfactcomision', false)
+            ->where('emitirfactporhonorarios', false)
             ->get();
 
         //obtener todas las facturas
-        $factura=invoice::where('file_id',$id)
-            ->where('honorario',false)
+        $factura=invoice::where('file_id', $id)
+            ->where('honorario', false)
             ->get();
         //obtener todos los honorarios
-        $honorario=invoice::where('file_id',$id)
-            ->where('honorario',true)
+        $honorario=invoice::where('file_id', $id)
+            ->where('honorario', true)
             ->get();
         //dd($factura);
 
@@ -174,13 +168,13 @@ class filesController extends Controller
         );
 
         //Cálculo para obtener el beneficio
-        $beneficio1=round(($facturas->sum('cuantia_factura')-$facturas->sum('cuantia_empresa')),2);
+        $beneficio1=round(($facturas->sum('cuantia_factura')-$facturas->sum('cuantia_empresa')), 2);
 
         //Cáculo para obtener el beneficio de facturas por comisión
-        $beneficio2=round(($factxcomision->sum('cuantia_factura')-$factxcomision->sum('cuantia_empresa')-((($factxcomision->sum('cuantia_factura')-$factxcomision->sum('cuantia_empresa'))*21)/100)),2);
+        $beneficio2=round(($factxcomision->sum('cuantia_factura')-$factxcomision->sum('cuantia_empresa')-((($factxcomision->sum('cuantia_factura')-$factxcomision->sum('cuantia_empresa'))*21)/100)), 2);
 
         //Cálculo para obtener el beneficio de las facturas por honorarios
-        $beneficio3=round(($factsxhonorarios->sum('cuantia_factura')+(($factsxhonorarios->sum('cuantia_factura')*21)/100)),2);
+        $beneficio3=round(($factsxhonorarios->sum('cuantia_factura')+(($factsxhonorarios->sum('cuantia_factura')*21)/100)), 2);
 
         $beneficio=$beneficio1+$beneficio2+$beneficio3;
         //dd($beneficio1,$beneficio2,$beneficio3,$beneficio);
@@ -212,10 +206,10 @@ class filesController extends Controller
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
        */
-        $notas=note::where('file_id',$id)->orderBy('fecha', 'desc')->get();
+        $notas=note::where('file_id', $id)->orderBy('fecha', 'desc')->get();
 
 
-        return view('files.show',[
+        return view('files.show', [
             'expediente'=> $consulta,
             'profesionales'=>$prof,
             'facturas'=>$factura,
@@ -225,7 +219,6 @@ class filesController extends Controller
             'notas'=>$notas,
             //'documentos'=>$documentos,
         ]);
-
     }
 
     /**
@@ -240,22 +233,22 @@ class filesController extends Controller
         $expediente=file::findorFail($id);
 
         //$cliente=customer::all()->pluck('fullname','id')->prepend('Ninguno','');
-        $sort=sort::all()->pluck('nombre','id')->prepend('Ninguno','0');
+        $sort=sort::all()->pluck('nombre', 'id')->prepend('Ninguno', '0');
         //Recogiendo datos de los select de formalidad
-        $categoria=formality::all()->unique('categoria')->pluck('categoria','categoria')->prepend('Ninguno','');
+        $categoria=formality::all()->unique('categoria')->pluck('categoria', 'categoria')->prepend('Ninguno', '');
         //$a=formality::findorfail($expediente->formality_id);
-        $procedimiento= formality::all()->pluck('nombre','id');
+        $procedimiento= formality::all()->pluck('nombre', 'id');
         //recogiendo datos de aseguradora
-        $aseguradora=insurer::all()->pluck('nombre','id');
-        $tramiciasel=processor::all()->pluck('nombre','id');
+        $aseguradora=insurer::all()->pluck('nombre', 'id');
+        $tramiciasel=processor::all()->pluck('nombre', 'id');
         $tramicia=processor::findorfail($expediente->processor_id);
         //$abogado=professional::all()->pluck('nombre','id')->prepend('Ninguno','');
-        $fase=phase::all()->pluck('nombre','id');
-        $abogado=professional::where('group_id',1)->pluck('Nombre','id');
+        $fase=phase::all()->pluck('nombre', 'id');
+        $abogado=professional::where('group_id', 1)->pluck('Nombre', 'id');
 
         //$client=$cliente->pluck('fullname','id');
         //dd($abogado);
-        return view('files.edit',[
+        return view('files.edit', [
             'expediente'=>$expediente,
             //'cliente'=>$cliente,
             'sort'=>$sort,
@@ -273,7 +266,7 @@ class filesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\file  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -282,7 +275,7 @@ class filesController extends Controller
         //
         $expediente=file::findorFail($id);
         $expediente->fill($request->except(['formalidad']))->save();
-        return redirect()->action('filesController@show',['id'=>$id])->with('message','Expediente actualizado');
+        return redirect()->action('filesController@show', ['id'=>$id])->with('message', 'Expediente actualizado');
     }
 
     /**
@@ -295,6 +288,6 @@ class filesController extends Controller
     {
         //
         file::destroy($id);
-        return redirect('cliente')->with('message','Expediente eliminado');
+        return redirect('cliente')->with('message', 'Expediente eliminado');
     }
 }
