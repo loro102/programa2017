@@ -90,7 +90,7 @@ class documentController extends Controller
         //
         $documento=document::findorfail($id);
         $documento->fill($request->all())->save();
-        return redirect()->action('filesController@show',['id'=>$file.'#documentos'])->with('message','Documento actualizado correctamente')
+        return redirect()->action('filesController@show',['id'=>$file.'#documentos'])->with('message','Documento actualizado correctamente');
     }
 
     /**
