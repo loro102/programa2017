@@ -21,8 +21,6 @@ Class agenteController extends Controller
     {
         //
         $agente = agent::paginate(10);
-
-        //dd($agente)
         return view('agentes.index', ['agentes' => $agente]);
     }
 
@@ -33,9 +31,7 @@ Class agenteController extends Controller
      */
     public function create()
     {
-        //
         $agente = new agent;
-
         return view('agentes.create', ['agente' => $agente]);
     }
 
@@ -47,10 +43,7 @@ Class agenteController extends Controller
      */
     public function store(\App\Http\Requests\agent $request)
     {
-        //
         agent::create($request->input());
-
-        //dd($request->input());
         return redirect('agente')->with('message', 'Se ha añadido un nuevo agente');
     }
 
@@ -63,8 +56,6 @@ Class agenteController extends Controller
     public function show($id)
     {
         $agente = agent::findorFail($id);
-
-        //dd($agent);
         return view('agentes.show', [
             'agente' => $agente,
         ]);
@@ -78,9 +69,7 @@ Class agenteController extends Controller
      */
     public function edit($id)
     {
-        //
         $agente = agent::findorFail($id);
-
         return view('agentes.edit', [
             'agente' => $agente,
         ]);
@@ -95,10 +84,8 @@ Class agenteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $agente = agent::findorFail($id);
         $agente->fill($request->all())->save();
-
         return redirect()->action('agenteController@show', ['id' => $id])->with('message', 'Agente actualizado');
     }
 
@@ -110,9 +97,7 @@ Class agenteController extends Controller
      */
     public function destroy($id)
     {
-        //
         agent::destroy($id);
-
         return redirect('agente')->with('message', 'Agente eliminado');
     }
 }
