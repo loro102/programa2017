@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-//use App\models\file;
+
 use Illuminate\Http\Request;
 use App\models\customer;
 use App\models\agent;
-//use Illuminate\Support\Facades\Storage;
+
 
 Class Clientes Extends Controller
 {
