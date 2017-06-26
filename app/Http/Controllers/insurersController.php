@@ -7,7 +7,7 @@ use App\models\processor;
 use Illuminate\Http\Request;
 use App\Http\Requests\aseguradora;
 
-class insurersController extends Controller
+Class insurersController extends Controller
 {
     public function __construct()
     {
@@ -48,7 +48,6 @@ class insurersController extends Controller
     public function store(aseguradora $request)
     {
         //
-        //dd($request->input());
         insurer::create($request->input());
 
         return redirect('insurers')->with('message','Se ha añadido una nueva compañia de seguros');
