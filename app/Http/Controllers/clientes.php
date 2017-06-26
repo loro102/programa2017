@@ -21,9 +21,7 @@ Class clientes extends Controller
      */
     public function index()
     {
-        //
         $cliente=customer::paginate(10);
-        //dd($cliente);
         return view('clientes.index', [
             'clientes'=> $cliente
         ]);
@@ -39,7 +37,6 @@ Class clientes extends Controller
         //Crea un nuevo registro en la tabla de customers
         $cliente=new customer;
         $agente=agent::orderBy('nombre', 'asc')->pluck('nombre', 'id');
-
         return view('clientes.create', [
             'cliente'=>$cliente,
             'agente'=>$agente
@@ -56,10 +53,8 @@ Class clientes extends Controller
     {
         //Crea un nuevo registro para el cliente
         customer::create($request->input());
-        $cliente=customer::all();
+        //$cliente=customer::all();
         //Storage::makeDirectory('storage/cliente/'.$cliente->last()->id);
-
-        //dd($request->input());
         return redirect('cliente')->with('message', 'Se ha añadido un nuevo cliente');
     }
 
@@ -71,16 +66,11 @@ Class clientes extends Controller
      */
     public function show($id)
     {
-        //
         $cliente=customer::findorFail($id);
-        //$agente=customer::findorfail($id)->agent;
-        //$expedientes=file::where('customer_id',$id)->get();
         $expedientestraf=$cliente->files()->where('sort_id', 1)->get();
         $expedientesotros=$cliente->files()->where('sort_id', '!=', 1)->get();
-        //dd($expedientes);
         return view('clientes.show', [
             'cliente'=> $cliente,
-            //'agente'=>$agente,
             'expedientestraf'=>$expedientestraf,
             'expedientes'=>$expedientesotros
         ]);
@@ -94,7 +84,6 @@ Class clientes extends Controller
      */
     public function edit($id)
     {
-        //
         $cliente=customer::findorFail($id);
         $agente=agent::orderBy('nombre', 'asc')->pluck('nombre', 'id');
         return view('clientes.edit', [
@@ -112,7 +101,6 @@ Class clientes extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $cliente=customer::findorFail($id);
         $cliente->fill($request->all())->save();
         return redirect()->action('clientes@show', ['id'=>$id])->with('message', 'Cliente actualizado');
@@ -126,7 +114,6 @@ Class clientes extends Controller
      */
     public function destroy($id)
     {
-        //
         customer::destroy($id);
         return redirect('cliente')->with('message', 'Cliente eliminado');
     }
