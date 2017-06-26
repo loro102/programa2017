@@ -4,6 +4,12 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\models\sort
+ *
+ * @property-read \App\models\file $file
+ * @mixin \Eloquent
+ */
 class sort extends Model
 {
     //

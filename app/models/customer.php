@@ -4,6 +4,16 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\models\customer
+ *
+ * @property-read \App\models\agent $agent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\file[] $file
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\file[] $files
+ * @property-read mixed $fullName
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\invoice[] $invoice
+ * @mixin \Eloquent
+ */
 class customer extends Model
 {
     //

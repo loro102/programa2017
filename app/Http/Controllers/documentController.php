@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\documento;
 use App\models\document;
-use Illuminate\Http\Request;
 
 class documentController extends Controller
 {
@@ -35,30 +35,27 @@ class documentController extends Controller
     public function create()
     {
         //
-        $documento=new document;
-        return view('documentos.create',['documentos'=>$documento]);
-
 
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(documento $request)
     {
         //
         document::create($request->input());
 
-        return redirect()->action('filesController@show',['id'=>$request->file_id.'#documentos'])->with('message','Documento agregado correctamente');
-
+        return redirect()->action('filesController@show', ['id' => $request->file_id.'#documentos'])->with('message',
+            'Documento agregado correctamente');
     }/** @noinspection PhpInconsistentReturnPointsInspection */
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -69,44 +66,48 @@ class documentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         //
-        $documento=document::findorfail($id);
-        return view('documentos.edit',['documento'=>$documento]);
+        $documento = document::findorfail($id);
+
+        return view('files.documentos.edit', ['documento' => $documento]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(documento $request, $id)
     {
         //
-        $documento=document::findorfail($id);
+        $documento = document::findorfail($id);
         $documento->fill($request->all())->save();
-        return redirect()->action('filesController@show',['id'=>$request->file_id.'#documentos'])->with('message','Documento actualizado correctamente');
+
+        return redirect()->action('filesController@show', ['id' => $request->file_id.'#documentos'])->with('message',
+            'Documento actualizado correctamente');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
-        $documento=document::findorfail($id);
-        $file=$documento->file_id;
+        $documento = document::findorfail($id);
+        $file = $documento->file_id;
         document::destroy($id);
-        return redirect()->action('filesController@show',['id'=>$file.'#documentos'])->with('message','Documento Borrado correctamente');
 
+        return redirect()->action('filesController@show', ['id' => $file.'#documentos'])->with('message',
+            'Documento Borrado correctamente');
     }
 }

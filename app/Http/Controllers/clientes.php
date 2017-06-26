@@ -6,9 +6,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\models\customer;
 use App\models\agent;
-use Illuminate\Support\Facades\Storage;
+//use Illuminate\Support\Facades\Storage;
 
-class clientes extends Controller
+Class clientes extends Controller
 {
     public function __construct()
     {
@@ -24,7 +24,7 @@ class clientes extends Controller
         //
         $cliente=customer::paginate(10);
         //dd($cliente);
-        return view('clientes.index',[
+        return view('clientes.index', [
             'clientes'=> $cliente
         ]);
     }
@@ -38,14 +38,12 @@ class clientes extends Controller
     {
         //Crea un nuevo registro en la tabla de customers
         $cliente=new customer;
-        $agente=agent::orderBy('nombre','asc')->pluck('nombre','id');
+        $agente=agent::orderBy('nombre', 'asc')->pluck('nombre', 'id');
 
-        return view('clientes.create',[
+        return view('clientes.create', [
             'cliente'=>$cliente,
             'agente'=>$agente
         ]);
-
-
     }
 
     /**
@@ -62,7 +60,7 @@ class clientes extends Controller
         //Storage::makeDirectory('storage/cliente/'.$cliente->last()->id);
 
         //dd($request->input());
-        return redirect('cliente')->with('message','Se ha añadido un nuevo cliente');
+        return redirect('cliente')->with('message', 'Se ha añadido un nuevo cliente');
     }
 
     /**
@@ -77,10 +75,10 @@ class clientes extends Controller
         $cliente=customer::findorFail($id);
         //$agente=customer::findorfail($id)->agent;
         //$expedientes=file::where('customer_id',$id)->get();
-        $expedientestraf=$cliente->files()->where('sort_id',1)->get();
-        $expedientesotros=$cliente->files()->where('sort_id','!=',1)->get();
+        $expedientestraf=$cliente->files()->where('sort_id', 1)->get();
+        $expedientesotros=$cliente->files()->where('sort_id', '!=', 1)->get();
         //dd($expedientes);
-        return view('clientes.show',[
+        return view('clientes.show', [
             'cliente'=> $cliente,
             //'agente'=>$agente,
             'expedientestraf'=>$expedientestraf,
@@ -98,8 +96,8 @@ class clientes extends Controller
     {
         //
         $cliente=customer::findorFail($id);
-        $agente=agent::orderBy('nombre','asc')->pluck('nombre','id');
-        return view('clientes.edit',[
+        $agente=agent::orderBy('nombre', 'asc')->pluck('nombre', 'id');
+        return view('clientes.edit', [
             'cliente'=>$cliente,
             'agente'=>$agente
         ]);
@@ -117,7 +115,7 @@ class clientes extends Controller
         //
         $cliente=customer::findorFail($id);
         $cliente->fill($request->all())->save();
-        return redirect()->action('clientes@show',['id'=>$id])->with('message','Cliente actualizado');
+        return redirect()->action('clientes@show', ['id'=>$id])->with('message', 'Cliente actualizado');
     }
 
     /**
@@ -130,6 +128,6 @@ class clientes extends Controller
     {
         //
         customer::destroy($id);
-        return redirect('cliente')->with('message','Cliente eliminado');
+        return redirect('cliente')->with('message', 'Cliente eliminado');
     }
 }

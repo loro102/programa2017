@@ -4,6 +4,12 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\models\processor
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\insurer[] $insurer
+ * @mixin \Eloquent
+ */
 class processor extends Model
 {
     //

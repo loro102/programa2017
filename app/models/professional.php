@@ -4,6 +4,15 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\models\professional
+ *
+ * @property-read \App\models\file $file
+ * @property-read \App\models\file_professional $fileProfessional
+ * @property-read \App\models\group $group
+ * @property-read \App\models\invoice $invoice
+ * @mixin \Eloquent
+ */
 class professional extends Model
 {
     //

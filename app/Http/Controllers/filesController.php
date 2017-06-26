@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\models\document;
 use App\models\file;
 use App\models\file_professional;
 use App\models\formality;
@@ -181,6 +182,7 @@ Class filesController extends Controller
         //Storage::disk('cliente')->url($documentos);
 
         //dd($url);
+        $documentos=document::where('file_id',$id);
 
         /*
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -201,7 +203,7 @@ Class filesController extends Controller
             'total' => $total,
             'beneficio' => $beneficio,
             'notas' => $notas,
-            //'documentos'=>$documentos,
+            'documenton'=>$documentos,
         ]);
     }
 
@@ -244,6 +246,7 @@ Class filesController extends Controller
             //'cat'=>$a,
             'tramicia' => $tramicia,
             'tramiciasel' => $tramiciasel,
+
         ]);
     }
 

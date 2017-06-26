@@ -4,6 +4,12 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\models\insurer
+ *
+ * @property-read \App\models\file $file
+ * @mixin \Eloquent
+ */
 class insurer extends Model
 {
     //

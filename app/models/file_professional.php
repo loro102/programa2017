@@ -4,6 +4,12 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\models\file_professional
+ *
+ * @property-read \App\models\professional $professional
+ * @mixin \Eloquent
+ */
 class file_professional extends Model
 {
     //

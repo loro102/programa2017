@@ -5,6 +5,13 @@ namespace App\models;
 use Illuminate\Database\Eloquent\Model;
 
 
+/**
+ * App\models\invoice
+ *
+ * @property-read \App\models\file $file
+ * @property-read \App\models\professional $profesional
+ * @mixin \Eloquent
+ */
 class invoice extends Model
 {
     //

@@ -4,6 +4,12 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\models\phase
+ *
+ * @property-read \App\models\file $insurer
+ * @mixin \Eloquent
+ */
 class phase extends Model
 {
     //

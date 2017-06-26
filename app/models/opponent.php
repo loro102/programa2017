@@ -4,6 +4,13 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\models\opponent
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\file[] $file
+ * @property-read \App\models\processor $processor
+ * @mixin \Eloquent
+ */
 class opponent extends Model
 {
     //

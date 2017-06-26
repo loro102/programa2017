@@ -4,6 +4,12 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\models\group
+ *
+ * @property-read \App\models\professional $professional
+ * @mixin \Eloquent
+ */
 class group extends Model
 {
     //
