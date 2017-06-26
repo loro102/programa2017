@@ -5,18 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\documento;
 use App\models\document;
 
-class documentController extends Controller
+Class documentController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    /** @noinspection PhpInconsistentReturnPointsInspection */
+
     /**
      * Display a listing of the resource.
      *
@@ -25,8 +20,8 @@ class documentController extends Controller
     public function index()
     {
         //
+        return(null);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -35,13 +30,14 @@ class documentController extends Controller
     public function create()
     {
         //
+        return(null);
 
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Http\Requests\documento $request
      * @return \Illuminate\Http\Response
      */
     public function store(documento $request)
@@ -51,7 +47,7 @@ class documentController extends Controller
 
         return redirect()->action('filesController@show', ['id' => $request->file_id.'#documentos'])->with('message',
             'Documento agregado correctamente');
-    }/** @noinspection PhpInconsistentReturnPointsInspection */
+    }
     /**
      * Display the specified resource.
      *
@@ -61,6 +57,7 @@ class documentController extends Controller
     public function show($id)
     {
         //
+        return(null);
     }
 
     /**
@@ -80,7 +77,7 @@ class documentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Http\Requests\documento $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
