@@ -8,7 +8,7 @@ use App\models\file;
 use App\models\insurer;
 use App\models\professional;
 use Carbon\Carbon;
-use function emptyArray;
+
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\TemplateProcessor;
@@ -16,7 +16,7 @@ use Storage;
 use function storage_path;
 
 
-class generator extends Controller
+Class generator extends Controller
 {
     public function __construct()
     {
@@ -38,12 +38,10 @@ class generator extends Controller
         $this->fax='fax empresa';
         $this->movil='telefono movil empresa';
         $this->middleware('auth');
-        //$dt = Carbon::parse();
-        //$this->largo = largo;
 
     }
 
-    public function hoja_nueva_consulta(Request $request,$id)
+    public function Hoja_Nueva_Consulta(Request $request,$id)
     {
         //
         $cliente=customer::findorfail($id);
@@ -95,7 +93,7 @@ class generator extends Controller
         echo file_get_contents(storage_path('app/storage/temp/RJ030_Hoja_consulta.docx'));
         ob_clean();
         flush();
-        exit;
+        //exit;
         return redirect()->action('clientes@show@show',['id'=>$id]);
 
         //echo file_get_contents(storage_path('app/storage/cliente/').''.$cliente->id.'/RJ030_Hoja_consulta.docx');
@@ -104,10 +102,9 @@ class generator extends Controller
 
     //Procesar plantillas para la carta de agradecimiento
 
-    public function carta_agracedimiento_agente(Request $request,$id,$cliente)
+    public function Carta_Agracedimiento_Agente(Request $request,$id,$cliente)
     {
-        //
-        //dd($request);
+
         $agente=agent::findorfail($id);
         $agente_cliente=customer::findorfail($cliente);
         //clonar plantilla
@@ -160,22 +157,16 @@ class generator extends Controller
         echo file_get_contents(storage_path('app/storage/temp/Hoja_agradecimiento_cliente.docx'));
         ob_clean();
         flush();
-        exit;
+        //exit;
         return redirect()->action('clientes@show@show',['id'=>$cliente]);
         
     }
 
     //generador de documentos
-    public function contrato_prestacion_servicios(Request $request,$file_id)
+    public function Contrato_Prestacion_Servicios(Request $request,$file_id)
     {
-        //
-        //dd($request);
-       // $agente = agent::findorfail($id);
         $file = file::findorfail($file_id);
-        //$cliente = customer::findorfail($file->customer_id);
-        //setlocale(LC_TIME, 'es_ES.utf8');
-        //$largo=Carbon::now()->formatLocalized('%A %d %B %Y');
-        //$dd($hoy);
+
         //clonar plantilla
         $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/contrato_prestacion_servicios.docx'));
         //reemplazar tags por valores
@@ -225,20 +216,14 @@ class generator extends Controller
         echo file_get_contents(storage_path('app/storage/temp/contrato_prestacion_servicios.docx'));
         ob_clean();
         flush();
-        exit;
+       // exit;
         return redirect()->action('filesController@show',['id'=>$file->id]);
 
     }
     //Generación de contrato de prestación de servicios a representado
-    public function contrato_prestacion_servicios_representados(Request $request,$file_id)
+    public function Contrato_Prestacion_Servicios_Representados(Request $request,$file_id)
     {
-        //
-        //dd($request);
-        // $agente = agent::findorfail($id);
         $file = file::findorfail($file_id);
-        //$cliente = customer::findorfail($file->customer_id);
-
-        //$dd($hoy);
         //clonar plantilla
         $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/contrato_prestacion_servicios_representado.docx'));
         //reemplazar tags por valores
@@ -291,22 +276,16 @@ class generator extends Controller
         echo file_get_contents(storage_path('app/storage/temp/contrato_prestacion_servicios_representado.docx'));
         ob_clean();
         flush();
-        exit;
+       // exit;
         return redirect()->action('filesController@show',['id'=>$file->id]);
 
     }
 
     //Generacion de asunción de dirección técnica
-    public function contrato_asuncion_direccion_tecnica(Request $request,$file_id,$profesional_id)
+    public function Contrato_Asuncion_Direccion_Tecnica(Request $request,$file_id,$profesional_id)
     {
-        //
-        //dd($request);
-        // $agente = agent::findorfail($id);
         $file = file::findorfail($file_id);
         $profesional=professional::findorfail($profesional_id);
-        //$cliente = customer::findorfail($file->customer_id);
-
-        //dd($file);
         //clonar plantilla
         if (empty($file->nombre)){
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/asuncion_direccion_tecnica.docx'));
@@ -315,7 +294,6 @@ class generator extends Controller
         {
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/asuncion_direccion_tecnica_representado.docx'));
         };
-
         //reemplazar tags por valores
         $templateProcessor->setValue('cliente.id', htmlspecialchars($file->customer_id));
         $templateProcessor->setValue('cliente.nombre', htmlspecialchars($file->customer->getFullNameAttribute($file->customer_id)));
@@ -369,23 +347,17 @@ class generator extends Controller
         echo file_get_contents(storage_path('app/storage/temp/asuncion_direccion_tecnica.docx'));
         ob_clean();
         flush();
-        exit;
+        //exit;
         return redirect()->action('filesController@show',['id'=>$file_id]);
 
     }
 
     //Generacion de autorización y compromiso de pago
-    public function autorización_servicio_profesionales(Request $request,$file_id,$profesional_id)
+    public function Autorización_Servicio_Profesionales(Request $request,$file_id,$profesional_id)
     {
-        //
-        //dd($request);
-        // $agente = agent::findorfail($id);
+
         $file = file::findorfail($file_id);
         $profesional=professional::findorfail($profesional_id);
-
-        //$cliente = customer::findorfail($file->customer_id);
-
-        //$dd($hoy);
         //clonar plantilla
         if (empty($file->nombre)){
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/autorización_servicio_profesionales.docx'));
@@ -425,7 +397,6 @@ class generator extends Controller
         $templateProcessor->setValue('profesional.telefono3', htmlspecialchars($profesional->telefono3));
         $templateProcessor->setValue('profesional.movil', htmlspecialchars($profesional->movil));
         $templateProcessor->setValue('profesional.email', htmlspecialchars($profesional->email));
-
         $templateProcessor->setValue('empresa.nombre', htmlspecialchars($this->empresa));
         $templateProcessor->setValue('empresa.nombremercantil', htmlspecialchars($this->empresa_mercantil));
         $templateProcessor->setValue('empresa.cif', htmlspecialchars($this->empresa_cif));
@@ -439,7 +410,6 @@ class generator extends Controller
         $templateProcessor->setValue('empresa.web', htmlspecialchars($this->web_empresa));
         $templateProcessor->setValue('empresa.gerente', htmlspecialchars($this->gerente_empresa));
         $templateProcessor->setValue('empresa.nifgerente', htmlspecialchars($this->gerente_nif_empresa));
-
         $templateProcessor->setValue('hoy', $this->hoy);
         $templateProcessor->setValue('hoy_largo',$this->largo );
 
@@ -458,25 +428,17 @@ class generator extends Controller
         echo file_get_contents(storage_path('app/storage/temp/autorización_servicio_profesionales.docx'));
         ob_clean();
         flush();
-        exit;
+        //exit;
         return redirect()->action('filesController@show',['id'=>$file->id]);
 
     }
 
     //Generacion de autorización y compromiso de pago
-    public function designacion_abogado(Request $request,$file_id,$profesional_id)
+    public function Designacion_Abogado(Request $request,$file_id,$profesional_id)
     {
-        //
-        //dd($request);
-        // $agente = agent::findorfail($id);
         $file = file::findorfail($file_id);
         $profesional=professional::findorfail($profesional_id);
         $aseguradora=insurer::findorfail($file->insurer_id);
-        
-
-        //$cliente = customer::findorfail($file->customer_id);
-
-        //$dd($hoy);
         //clonar plantilla
         if (empty($file->nombre)){
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/designacion_abogados.docx'));
@@ -557,24 +519,17 @@ class generator extends Controller
         echo file_get_contents(storage_path('app/storage/temp/designacion_abogado.docx'));
         ob_clean();
         flush();
-        exit;
+        //exit;
         return redirect()->action('filesController@show',['id'=>$file->id]);
 
     }
      //Generacion de RAJ
     public function reciboasisteciajuridica(Request $request,$file_id,$profesional_id)
     {
-        //
-        //dd($request);
-        // $agente = agent::findorfail($id);
         $file = file::findorfail($file_id);
         $profesional=professional::findorfail($profesional_id);
         $aseguradora=insurer::findorfail($file->insurer_id);
 
-
-        //$cliente = customer::findorfail($file->customer_id);
-
-        //$dd($hoy);
         //clonar plantilla
         if (empty($file->nombre)){
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/designacion_abogados.docx'));
@@ -655,7 +610,7 @@ class generator extends Controller
         echo file_get_contents(storage_path('app/storage/temp/designacion_abogado.docx'));
         ob_clean();
         flush();
-        exit;
+        //exit;
         return redirect()->action('filesController@show',['id'=>$file->id]);
 
     }
@@ -666,16 +621,9 @@ class generator extends Controller
      */
     public function index()
     {
-        //
-        //$phpWord = new \PhpOffice\PhpWord\PhpWord();
-        //$phpWord=new TemplateProcessor('Sample_07.docx');
-       // $templateProcessor->setValue('Name', 'John Doe');
-       // $templateProcessor->setValue(array('City', 'Street'), array('Detroit', '12th Street'));
         $cliente=customer::findorfail(9);
         echo date('H:i:s'), ' Creating new TemplateProcessor instance...';
         $templateProcessor = new TemplateProcessor('storage/Sample_07.docx');
-
-
 // Variables on different parts of document
 
         $templateProcessor->setValue('weekday', htmlspecialchars(date('l'))); // On section/content
@@ -727,7 +675,6 @@ class generator extends Controller
         $templateProcessor->setValue('userPhone#3', htmlspecialchars('+1 428 889 775'));
 
         echo date('H:i:s'), ' Saving the result document...';
-
          //dd($disco->put('hola'));
         $templateProcessor->saveAs(storage_path('app/storage/cliente/').''.$cliente->id.'/Sample_07_TemplateCloneRow.docx');
        // Storage::move('storage/Sample_07_TemplateCloneRow.docx', 'storage/cliente/ejemplo.docx');
