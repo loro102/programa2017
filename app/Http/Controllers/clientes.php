@@ -8,7 +8,7 @@ use App\models\customer;
 use App\models\agent;
 //use Illuminate\Support\Facades\Storage;
 
-Class clientes extends Controller
+Class Clientes Extends Controller
 {
     public function __construct()
     {
