@@ -7,7 +7,7 @@ use App\models\processor;
 use Illuminate\Http\Request;
 use App\Http\Requests\aseguradora;
 
-Class insurersController extends Controller
+Class InsurersController extends Controller
 {
     public function __construct()
     {

@@ -9,7 +9,7 @@ use App\models\professional;
 use Illuminate\Http\Request;
 
 
-class invoicesController extends Controller
+Class InvoicesController extends Controller
 {
     public function __construct()
     {

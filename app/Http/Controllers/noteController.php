@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\models\note;
 use Illuminate\Http\Request;
 
-class noteController extends Controller
+Class noteController extends Controller
 {
     public function __construct()
     {

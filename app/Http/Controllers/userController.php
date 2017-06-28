@@ -6,7 +6,7 @@ use Caffeinated\Shinobi\Models\Role;
 use Illuminate\Http\Request;
 use App\User;
 
-class userController extends Controller
+Class userController extends Controller
 {
     public function __construct()
     {
