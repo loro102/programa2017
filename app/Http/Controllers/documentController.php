@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\documento;
 use App\models\document;
 
-Class documentController extends Controller
+Class DocumentController extends Controller
 {
     public function __construct()
     {

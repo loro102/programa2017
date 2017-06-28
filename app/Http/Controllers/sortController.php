@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\models\sort;
 use Illuminate\Http\Request;
 
-Class sortController extends Controller
+Class SortController extends Controller
 {
     public function __construct()
     {

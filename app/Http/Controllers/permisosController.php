@@ -6,7 +6,7 @@ use Caffeinated\Shinobi\Models\Role;
 use Illuminate\Http\Request;
 use Caffeinated\Shinobi\Models\Permission;
 
-Class permisosController extends Controller
+Class PermisosController extends Controller
 {
     public function __construct()
     {

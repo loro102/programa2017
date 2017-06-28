@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 Use App\User;
 
 
-Class rolesController extends Controller
+Class RolesController extends Controller
 {
     public function __construct()
     {

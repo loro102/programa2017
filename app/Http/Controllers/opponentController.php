@@ -7,7 +7,7 @@ use App\models\opponent;
 use App\models\processor;
 use Illuminate\Http\Request;
 
-Class opponentController extends Controller
+Class OpponentController extends Controller
 {
     public function __construct()
     {

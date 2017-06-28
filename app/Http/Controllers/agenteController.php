@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\models\agent;
 use Illuminate\Http\Request;
 
-Class agenteController extends Controller
+Class AgenteController extends Controller
 {
     public function __construct()
     {

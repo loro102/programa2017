@@ -6,7 +6,7 @@ use App\Http\Requests\formalidad;
 use App\models\formality;
 use Illuminate\Http\Request;
 
-Class formalitiesController extends Controller
+Class FormalitiesController extends Controller
 {
     public function __construct()
     {

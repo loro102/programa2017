@@ -8,7 +8,7 @@ use App\Http\Requests\tramicia;
 use App\models\processor;
 use Illuminate\Http\Request;
 
-Class processorController extends Controller
+Class ProcessorController extends Controller
 {
     public function __construct()
     {
