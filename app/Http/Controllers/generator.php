@@ -353,7 +353,7 @@ Class Generator extends Controller
     }
 
     //Generacion de autorización y compromiso de pago
-    Public Function Autorización_Servicio_Profesionales(Request $request,$file_id,$profesional_id)
+    Public function Autorización_Servicio_Profesionales(Request $request,$file_id,$profesional_id)
     {
 
         $file = file::findorfail($file_id);
@@ -434,7 +434,7 @@ Class Generator extends Controller
     }
 
     //Generacion de autorización y compromiso de pago
-    Public Function Designacion_Abogado(Request $request,$file_id,$profesional_id)
+    Public function Designacion_Abogado(Request $request,$file_id,$profesional_id)
     {
         $file = file::findorfail($file_id);
         $profesional=professional::findorfail($profesional_id);
@@ -524,7 +524,7 @@ Class Generator extends Controller
 
     }
      //Generacion de RAJ
-    Public Function ReciboAsisteciaJuridica(Request $request,$file_id,$profesional_id)
+    Public function ReciboAsisteciaJuridica(Request $request,$file_id,$profesional_id)
     {
         $file = file::findorfail($file_id);
         $profesional=professional::findorfail($profesional_id);
