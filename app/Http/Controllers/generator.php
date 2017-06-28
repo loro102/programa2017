@@ -8,13 +8,9 @@ use App\models\file;
 use App\models\insurer;
 use App\models\professional;
 use Carbon\Carbon;
-
 use Illuminate\Http\Request;
-use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\TemplateProcessor;
-use Storage;
 use function storage_path;
-
 
 Class Generator extends Controller
 {
@@ -41,7 +37,7 @@ Class Generator extends Controller
 
     }
 
-    Public function Hoja_Nueva_Consulta(Request $request,$id)
+    Public function hoja_nueva_consulta(Request $request,$id)
     {
         //
         $cliente=customer::findorfail($id);
@@ -102,7 +98,7 @@ Class Generator extends Controller
 
     //Procesar plantillas para la carta de agradecimiento
 
-    Public Function Carta_Agracedimiento_Agente(Request $request,$id,$cliente)
+    Public function carta_agracedimiento_agente(Request $request,$id,$cliente)
     {
 
         $agente=agent::findorfail($id);
