@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @mixin \Eloquent
  */
-class document extends Model
+Class Document extends Model
 {
     //
     protected $guarded=[

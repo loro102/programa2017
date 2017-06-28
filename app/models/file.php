@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\models\sort $sort
  * @mixin \Eloquent
  */
-class file extends Model
+Class File extends Model
 {
     protected $guarded = [
         'id',

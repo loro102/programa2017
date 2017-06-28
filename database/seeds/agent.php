@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 
-class agent extends Seeder
+Class Agent extends Seeder
 {
     /**
      * Run the database seeds.

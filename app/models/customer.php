@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\invoice[] $invoice
  * @mixin \Eloquent
  */
-class customer extends Model
+Class Customer extends Model
 {
     //
     protected $guarded = [
@@ -26,7 +26,8 @@ class customer extends Model
     {
         return $this->nombre . ' ' . $this->apellidos;
     }
-    public function Apellidonombre($value)
+
+    Public function Apellidonombre($value)
     {
         return $this->apellidos . ' , ' . $this->nombre;
     }

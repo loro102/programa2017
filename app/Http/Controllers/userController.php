@@ -21,7 +21,6 @@ Class UserController extends Controller
     {
         //
         $user=User::paginate(10);
-        //dd($cliente);
         return view('admin.usuario.index',[
             'users'=> $user
         ]);

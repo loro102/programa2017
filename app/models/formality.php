@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @mixin \Eloquent
  */
-class formality extends Model
+Class Formality extends Model
 {
     //
     protected $guarded = [

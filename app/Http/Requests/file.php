@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class file extends FormRequest
+Class File extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -83,9 +83,7 @@ class file extends FormRequest
             'insurer_id'=>'nullable',
             'processor_id'=>'nullable',
             'phase_id'=>'nullable',
-            'nombre'=>'nullable',
-            'nif'=>'nullable',
-            'fechanacimiento'=>'nullable',
+
                         
         ];
     }

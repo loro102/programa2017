@@ -22,7 +22,6 @@ Class ProfessionalController extends Controller
     {
         //
         $profesional=professional::paginate(10);
-        //dd($cliente);
         return view('professional.index',[
             'profesionales'=> $profesional,
         ]);
@@ -49,7 +48,7 @@ Class ProfessionalController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Http\Requests\profesional $request
      * @return \Illuminate\Http\Response
      */
     public function store(profesional $request)
@@ -102,8 +101,8 @@ Class ProfessionalController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \App\Http\Requests\profesional $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(profesional $request, $id)

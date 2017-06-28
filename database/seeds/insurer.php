@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class insurer extends Seeder
+Class Insurer extends Seeder
 {
     /**
      * Run the database seeds.

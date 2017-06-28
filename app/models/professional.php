@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\models\invoice $invoice
  * @mixin \Eloquent
  */
-class professional extends Model
+Class Professional extends Model
 {
     //
     protected $guarded = [
@@ -21,12 +21,7 @@ class professional extends Model
         'timestamps',
     ];
 
-
-    /*public function file_professional()
-    {
-        return $this->hasMany('App\models\file_professional',professional_id);
-    }*/
-    public function file_professional()
+    public function File_Professional()
     {
         return $this->belongsTo('App\models\file_professional','professional_id');
     }

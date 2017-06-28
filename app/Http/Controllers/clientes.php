@@ -46,7 +46,7 @@ Class Clientes Extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Http\Requests\customer $request
      * @return \Illuminate\Http\Response
      */
     public function store(\App\Http\Requests\customer $request)

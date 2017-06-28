@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
-class invoice extends Seeder
+Class Invoice extends Seeder
 {
     /**
      * Run the database seeds.

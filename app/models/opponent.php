@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\models\processor $processor
  * @mixin \Eloquent
  */
-class opponent extends Model
+Class Opponent extends Model
 {
     //
     protected $guarded = [

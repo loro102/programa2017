@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\models\file $insurer
  * @mixin \Eloquent
  */
-class phase extends Model
+Class Phase extends Model
 {
     //
     protected $guarded = [

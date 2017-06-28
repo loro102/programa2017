@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\models\file $file
  * @mixin \Eloquent
  */
-class sort extends Model
+Class Sort extends Model
 {
     //
     protected $guarded = [

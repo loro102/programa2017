@@ -29,6 +29,7 @@ Class ProcessorController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
@@ -47,7 +48,7 @@ Class ProcessorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Http\Requests\tramicia $request
      * @return \Illuminate\Http\Response
      */
     public function store(tramicia $request)
@@ -92,8 +93,8 @@ Class ProcessorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \App\Http\Requests\tramicia $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(tramicia $request, $id)

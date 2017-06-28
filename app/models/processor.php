@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\insurer[] $insurer
  * @mixin \Eloquent
  */
-class processor extends Model
+Class Processor extends Model
 {
     //
     protected $guarded = [

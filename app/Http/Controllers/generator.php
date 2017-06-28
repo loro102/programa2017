@@ -41,7 +41,7 @@ Class Generator extends Controller
 
     }
 
-    Public Function Hoja_Nueva_Consulta(Request $request,$id)
+    Public function Hoja_Nueva_Consulta(Request $request,$id)
     {
         //
         $cliente=customer::findorfail($id);

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\customer[] $customer
  * @mixin \Eloquent
  */
-class agent extends Model
+Class Agent extends Model
 {
     protected $guarded = [
         'id',

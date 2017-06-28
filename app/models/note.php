@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\User $user
  * @mixin \Eloquent
  */
-class note extends Model
+Class Note extends Model
 {
     //
     protected $guarded = [

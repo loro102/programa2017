@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\models\professional $profesional
  * @mixin \Eloquent
  */
-class invoice extends Model
+Class Invoice extends Model
 {
     //
     protected $guarded = [

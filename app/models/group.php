@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\models\professional $professional
  * @mixin \Eloquent
  */
-class group extends Model
+Class Group extends Model
 {
     //
 
