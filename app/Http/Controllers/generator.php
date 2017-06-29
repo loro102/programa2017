@@ -10,36 +10,34 @@ use App\models\professional;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\TemplateProcessor;
-use function storage_path;
 
 class Generator extends Controller
 {
     public function __construct()
     {
         setlocale(LC_TIME, 'es_ES.utf8');
-        $this->largo=Carbon::now()->formatLocalized('%A %d %B %Y');
-        $this->hoy= Carbon::Now()->format('d-m-Y');
+        $this->largo = Carbon::now()->formatLocalized('%A %d %B %Y');
+        $this->hoy = Carbon::Now()->format('d-m-Y');
         //datos empresa
-        $this->empresa='nombre de empresa';
-        $this->empresa_mercantil='nombre mercantil .SL';
-        $this->empresa_cif='CIF de la empresa';
-        $this->gerente_empresa='Nombre y apellidos del gerente';
-        $this->gerente_nif_empresa='nif del gerente';
-        $this->direccion_empresa='direccion de la empresa';
-        $this->localidad_empresa='localidad de la empresa';
-        $this->email_empresa='E-Mail de la empresa';
-        $this->web_empresa='Página Web de la empresa';
-        $this->telefono1='telefono 1 empresa';
-        $this->telefono2='telefono 2 empresa';
-        $this->fax='fax empresa';
-        $this->movil='telefono movil empresa';
+        $this->empresa = 'nombre de empresa';
+        $this->empresa_mercantil = 'nombre mercantil .SL';
+        $this->empresa_cif = 'CIF de la empresa';
+        $this->gerente_empresa = 'Nombre y apellidos del gerente';
+        $this->gerente_nif_empresa = 'nif del gerente';
+        $this->direccion_empresa = 'direccion de la empresa';
+        $this->localidad_empresa = 'localidad de la empresa';
+        $this->email_empresa = 'E-Mail de la empresa';
+        $this->web_empresa = 'Página Web de la empresa';
+        $this->telefono1 = 'telefono 1 empresa';
+        $this->telefono2 = 'telefono 2 empresa';
+        $this->fax = 'fax empresa';
+        $this->movil = 'telefono movil empresa';
         $this->middleware('auth');
     }
 
     public function Hoja_Nueva_Consulta(request $request, $id)
     {
-        //
-        $cliente=customer::findorfail($id);
+        $cliente = customer::findorfail($id);
         //clonar plantilla
         $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/RJ030_Hoja_consulta.docx'));
         //reemplazar tags por valores
@@ -73,14 +71,13 @@ class Generator extends Controller
         $templateProcessor->setValue('hoy', $this->hoy);
         $templateProcessor->setValue('hoy_largo', $this->largo);
 
-
          //guardar en carpeta de cliente
         $templateProcessor->saveAs(storage_path('app/storage/temp/RJ030_Hoja_consulta.docx'));
 
         //descarga el documento automaticamente
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
-        header("Content-Disposition: attachment; filename=RJ030_Hoja_consulta.docx");
+        header('Content-Disposition: attachment; filename=RJ030_Hoja_consulta.docx');
         header('Content-Transfer-Encoding: binary');
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -98,8 +95,8 @@ class Generator extends Controller
 
     public function Carta_Agracedimiento_Agente(request $request, $id, $cliente)
     {
-        $agente=agent::findorfail($id);
-        $agente_cliente=customer::findorfail($cliente);
+        $agente = agent::findorfail($id);
+        $agente_cliente = customer::findorfail($cliente);
         //clonar plantilla
         $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/AgentesAgradecimiento.docx'));
         //reemplazar tags por valores
@@ -134,15 +131,13 @@ class Generator extends Controller
         $templateProcessor->setValue('hoy', $this->hoy);
         $templateProcessor->setValue('hoy_largo', $this->largo);
 
-
-
         //guardar en carpeta de cliente
         $templateProcessor->saveAs(storage_path('app/storage/temp/Hoja_agradecimiento_cliente.docx'));
 
         //descarga el documento automaticamente
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
-        header("Content-Disposition: attachment; filename=Hoja_agradecimiento_cliente.docx");
+        header('Content-Disposition: attachment; filename=Hoja_agradecimiento_cliente.docx');
         header('Content-Transfer-Encoding: binary');
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -193,14 +188,13 @@ class Generator extends Controller
         $templateProcessor->setValue('hoy', $this->hoy);
         $templateProcessor->setValue('hoy_largo', $this->largo);
 
-
         //guardar en carpeta de cliente
         $templateProcessor->saveAs(storage_path('app/storage/temp/contrato_prestacion_servicios.docx'));
 
         //descarga el documento automaticamente
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
-        header("Content-Disposition: attachment; filename=contrato_prestacion_servicios.docx");
+        header('Content-Disposition: attachment; filename=contrato_prestacion_servicios.docx');
         header('Content-Transfer-Encoding: binary');
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -211,6 +205,7 @@ class Generator extends Controller
        // exit;
         return redirect()->action('filesController@show', ['id'=>$file->id]);
     }
+
     //Generación de contrato de prestación de servicios a representado
     public function Contrato_Prestacion_Servicios_Representados(Request $request, $file_id)
     {
@@ -252,14 +247,13 @@ class Generator extends Controller
         $templateProcessor->setValue('hoy', $this->hoy);
         $templateProcessor->setValue('hoy_largo', $this->largo);
 
-
         //guardar en carpeta de cliente
         $templateProcessor->saveAs(storage_path('app/storage/temp/contrato_prestacion_servicios_representado.docx'));
 
         //descarga el documento automaticamente
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
-        header("Content-Disposition: attachment; filename=contrato_prestacion_servicios_representado.docx");
+        header('Content-Disposition: attachment; filename=contrato_prestacion_servicios_representado.docx');
         header('Content-Transfer-Encoding: binary');
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -275,13 +269,13 @@ class Generator extends Controller
     public function contrato_asuncion_direccion_tecnica(Request $request, $file_id, $profesional_id)
     {
         $file = file::findorfail($file_id);
-        $profesional=professional::findorfail($profesional_id);
+        $profesional = professional::findorfail($profesional_id);
         //clonar plantilla
         if (empty($file->nombre)) {
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/asuncion_direccion_tecnica.docx'));
         } else {
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/asuncion_direccion_tecnica_representado.docx'));
-        };
+        }
         //reemplazar tags por valores
         $templateProcessor->setValue('cliente.id', htmlspecialchars($file->customer_id));
         $templateProcessor->setValue('cliente.nombre', htmlspecialchars($file->customer->getFullNameAttribute($file->customer_id)));
@@ -320,14 +314,13 @@ class Generator extends Controller
         $templateProcessor->setValue('hoy', $this->hoy);
         $templateProcessor->setValue('hoy_largo', $this->largo);
 
-
         //guardar en carpeta de cliente
         $templateProcessor->saveAs(storage_path('app/storage/temp/asuncion_direccion_tecnica.docx'));
 
         //descarga el documento automaticamente
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
-        header("Content-Disposition: attachment; filename=asuncion_direccion_tecnica.docx");
+        header('Content-Disposition: attachment; filename=asuncion_direccion_tecnica.docx');
         header('Content-Transfer-Encoding: binary');
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -343,13 +336,13 @@ class Generator extends Controller
     public function Autorización_Servicio_Profesionales(request $request, $file_id, $profesional_id)
     {
         $file = file::findorfail($file_id);
-        $profesional=professional::findorfail($profesional_id);
+        $profesional = professional::findorfail($profesional_id);
         //clonar plantilla
         if (empty($file->nombre)) {
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/autorización_servicio_profesionales.docx'));
         } else {
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/autorización_servicio_profesionales_representado.docx'));
-        };
+        }
 
         //reemplazar tags por valores
         $templateProcessor->setValue('cliente.id', htmlspecialchars($file->customer_id));
@@ -397,14 +390,13 @@ class Generator extends Controller
         $templateProcessor->setValue('hoy', $this->hoy);
         $templateProcessor->setValue('hoy_largo', $this->largo);
 
-
         //guardar en carpeta de cliente
         $templateProcessor->saveAs(storage_path('app/storage/temp/autorización_servicio_profesionales.docx'));
 
         //descarga el documento automaticamente
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
-        header("Content-Disposition: attachment; filename=autorización_servicio_profesionales.docx");
+        header('Content-Disposition: attachment; filename=autorización_servicio_profesionales.docx');
         header('Content-Transfer-Encoding: binary');
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -420,14 +412,14 @@ class Generator extends Controller
     public function Designacion_Abogado(Request $request, $file_id, $profesional_id)
     {
         $file = file::findorfail($file_id);
-        $profesional=professional::findorfail($profesional_id);
-        $aseguradora=insurer::findorfail($file->insurer_id);
+        $profesional = professional::findorfail($profesional_id);
+        $aseguradora = insurer::findorfail($file->insurer_id);
         //clonar plantilla
         if (empty($file->nombre)) {
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/designacion_abogados.docx'));
         } else {
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/designacion_abogados_representado.docx'));
-        };
+        }
 
         //reemplazar tags por valores
         $templateProcessor->setValue('cliente.id', htmlspecialchars($file->customer_id));
@@ -485,14 +477,13 @@ class Generator extends Controller
         $templateProcessor->setValue('hoy', $this->hoy);
         $templateProcessor->setValue('hoy_largo', $this->largo);
 
-
         //guardar en carpeta de cliente
         $templateProcessor->saveAs(storage_path('app/storage/temp/designacion_abogado.docx'));
 
         //descarga el documento automaticamente
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
-        header("Content-Disposition: attachment; filename=designacion_abogado.docx");
+        header('Content-Disposition: attachment; filename=designacion_abogado.docx');
         header('Content-Transfer-Encoding: binary');
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -503,19 +494,20 @@ class Generator extends Controller
         //exit;
         return redirect()->action('filesController@show', ['id'=>$file->id]);
     }
+
      //Generacion de RAJ
     public function ReciboAsisteciaJuridica(Request $request, $file_id, $profesional_id)
     {
         $file = file::findorfail($file_id);
-        $profesional=professional::findorfail($profesional_id);
-        $aseguradora=insurer::findorfail($file->insurer_id);
+        $profesional = professional::findorfail($profesional_id);
+        $aseguradora = insurer::findorfail($file->insurer_id);
 
         //clonar plantilla
         if (empty($file->nombre)) {
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/designacion_abogados.docx'));
         } else {
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/designacion_abogados_representado.docx'));
-        };
+        }
 
         //reemplazar tags por valores
         $templateProcessor->setValue('cliente.id', htmlspecialchars($file->customer_id));
@@ -573,14 +565,13 @@ class Generator extends Controller
         $templateProcessor->setValue('hoy', $this->hoy);
         $templateProcessor->setValue('hoy_largo', $this->largo);
 
-
         //guardar en carpeta de cliente
         $templateProcessor->saveAs(storage_path('app/storage/temp/designacion_abogado.docx'));
 
         //descarga el documento automaticamente
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
-        header("Content-Disposition: attachment; filename=designacion_abogado.docx");
+        header('Content-Disposition: attachment; filename=designacion_abogado.docx');
         header('Content-Transfer-Encoding: binary');
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -591,6 +582,7 @@ class Generator extends Controller
         //exit;
         return redirect()->action('filesController@show', ['id'=>$file->id]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -598,7 +590,7 @@ class Generator extends Controller
      */
     public function index()
     {
-        $cliente=customer::findorfail(9);
+        $cliente = customer::findorfail(9);
         echo date('H:i:s'), ' Creating new TemplateProcessor instance...';
         $templateProcessor = new TemplateProcessor('storage/Sample_07.docx');
 // Variables on different parts of document
@@ -633,7 +625,6 @@ class Generator extends Controller
         $templateProcessor->setValue('rowNumber#10', htmlspecialchars('10'));
 
 // Table with a spanned cell
-        
 
         $templateProcessor->setValue('userId#1', htmlspecialchars('1'));
         $templateProcessor->setValue('cliente.nombre', htmlspecialchars($cliente->nombre));
@@ -664,62 +655,61 @@ class Generator extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
     }
 }
