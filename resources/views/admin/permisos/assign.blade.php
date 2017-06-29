@@ -20,24 +20,23 @@
                     <td class="col-md-3">{{$permiso->slug}}</td>
                     <td class="col-md-5">{{$permiso->description}}</td>
 
-                    <td class="col-md-1"><div class="form-group">
+                    <td class="col-md-1">
+                        <div class="form-group">
                     <td class="col-md-2">{{link_to_action('permisosController@assign','añadir',['id'=> $permiso->id,],[])}}</td>
-                            {!! Form::Open(['action'=>['permisosController@assign',$permiso->id],'class'=>'form-inline','method'=>'POST','id'=>'permiso']) !!}
-                            {!! Form::hidden($permiso->id, '0', ['id' => $permiso->id]) !!}
-                            {!! Form::checkbox($permiso->id, '1', null,  ['id' => $permiso->id]) !!}
-                            {!! Form::submit('Asignar permisos', ['class' => 'form-control btn btn-primary btn-block']) !!}
-                            {!! Form::Close() !!}
-                    </div></td>
-    </div>
-
-
-
+                    <td>
+                        {!! Form::Open(['action'=>['permisosController@assign',$permiso->id],'class'=>'form-inline','method'=>'POST','id'=>'permiso']) !!}
+                        {!! Form::hidden($permiso->id, '0', ['id' => $permiso->id]) !!}
+                        {!! Form::checkbox($permiso->id, '1', null,  ['id' => $permiso->id]) !!}
+                        {!! Form::submit('Asignar permisos', ['class' => 'form-control btn btn-primary btn-block']) !!}
+                        {!! Form::Close() !!}
+                    </td>
                 </tr>
-            @empty
-                <tr>
-                <td class="danger" colspan="12">No hay permisos introducidos</td>
-                </tr>
-            @endforelse
+    @empty
+        <tr>
+            <td class="danger" colspan="12">No hay permisos introducidos</td>
+        </tr>
+        @endforelse
         </table>
-    </div>
-    @endsection
+
+        </div>
+@endsection
