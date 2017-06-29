@@ -35,7 +35,7 @@ class Generator extends Controller
         $this->middleware('auth');
     }
 
-    public function hoja_nueva_consulta(request $request, $id)
+    public function hojanuevaconsulta(request $request, $id)
     {
         $cliente = customer::findorfail($id);
         //clonar plantilla
