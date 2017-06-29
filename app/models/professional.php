@@ -20,7 +20,7 @@ class Professional extends Model
         'timestamps',
     ];
 
-    public function file_professional()
+    public function fileprofessional()
     {
         return $this->belongsTo('App\models\file_professional', 'professional_id');
     }

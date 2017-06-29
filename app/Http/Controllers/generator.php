@@ -150,7 +150,7 @@ class Generator extends Controller
     }
 
     //generador de documentos
-    public function contrato_prestacion_servicios(Request $request, $file_id)
+    public function contratoprestacionservicios(Request $request, $file_id)
     {
         $file = file::findorfail($file_id);
 
@@ -207,7 +207,7 @@ class Generator extends Controller
     }
 
     //Generación de contrato de prestación de servicios a representado
-    public function contrato_prestacion_servicios_representados(Request $request, $file_id)
+    public function contratoprestacionserviciosrepresentados(Request $request, $file_id)
     {
         $file = file::findorfail($file_id);
         //clonar plantilla
@@ -266,7 +266,7 @@ class Generator extends Controller
     }
 
     //Generacion de asunción de dirección técnica
-    public function contrato_asuncion_direccion_tecnica(Request $request, $file_id, $profesional_id)
+    public function contratoasunciondirecciontecnica(Request $request, $file_id, $profesional_id)
     {
         $file = file::findorfail($file_id);
         $profesional = professional::findorfail($profesional_id);
@@ -333,7 +333,7 @@ class Generator extends Controller
     }
 
     //Generacion de autorización y compromiso de pago
-    public function autorización_servicio_profesionales(request $request, $file_id, $profesional_id)
+    public function autorizaciónservicioprofesionales(request $request, $file_id, $profesional_id)
     {
         $file = file::findorfail($file_id);
         $profesional = professional::findorfail($profesional_id);
@@ -409,7 +409,7 @@ class Generator extends Controller
     }
 
     //Generacion de autorización y compromiso de pago
-    public function designacion_abogado(Request $request, $file_id, $profesional_id)
+    public function designacionabogado(Request $request, $file_id, $profesional_id)
     {
         $file = file::findorfail($file_id);
         $profesional = professional::findorfail($profesional_id);
