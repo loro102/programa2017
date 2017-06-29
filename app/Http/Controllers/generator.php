@@ -85,10 +85,7 @@ class Generator extends Controller
         echo file_get_contents(storage_path('app/storage/temp/RJ030_Hoja_consulta.docx'));
         ob_clean();
         flush();
-        //exit;
         return redirect()->action('clientes@show@show', ['id'=>$id]);
-
-        //echo file_get_contents(storage_path('app/storage/cliente/').''.$cliente->id.'/RJ030_Hoja_consulta.docx');
     }
 
     //Procesar plantillas para la carta de agradecimiento
@@ -145,7 +142,6 @@ class Generator extends Controller
         echo file_get_contents(storage_path('app/storage/temp/Hoja_agradecimiento_cliente.docx'));
         ob_clean();
         flush();
-        //exit;
         return redirect()->action('clientes@show@show', ['id'=>$cliente]);
     }
 
@@ -202,7 +198,6 @@ class Generator extends Controller
         echo file_get_contents(storage_path('app/storage/temp/contrato_prestacion_servicios.docx'));
         ob_clean();
         flush();
-       // exit;
         return redirect()->action('filesController@show', ['id'=>$file->id]);
     }
 
@@ -261,7 +256,6 @@ class Generator extends Controller
         echo file_get_contents(storage_path('app/storage/temp/contrato_prestacion_servicios_representado.docx'));
         ob_clean();
         flush();
-       // exit;
         return redirect()->action('filesController@show', ['id'=>$file->id]);
     }
 
@@ -288,15 +282,11 @@ class Generator extends Controller
         $templateProcessor->setValue('cliente.telefono2', htmlspecialchars($file->customer->telefono2));
         $templateProcessor->setValue('cliente.movil', htmlspecialchars($file->customer->movil));
         $templateProcessor->setValue('cliente.email', htmlspecialchars($file->customer->email));
-        //$templateProcessor->setValue('representado.nombre', htmlspecialchars($file->nombre));
-        //$templateProcessor->setValue('representado.fechanacimiento', htmlspecialchars($file->fechanacimiento));
-        //$templateProcessor->setValue('representado.nif', htmlspecialchars($file->nif));
         $templateProcessor->setValue('expediente.fechasuceso', htmlspecialchars($file->fecha_accidente));
         $templateProcessor->setValue('expediente.horasuceso', htmlspecialchars($file->hora_accidente));
         $templateProcessor->setValue('profesional.nombre', htmlspecialchars($profesional->Nombre));
         $templateProcessor->setValue('profesional.nif', htmlspecialchars($profesional->nif));
         $templateProcessor->setValue('profesional.colegiado', htmlspecialchars($profesional->num_colegiado));
-
         $templateProcessor->setValue('empresa.nombre', htmlspecialchars($this->empresa));
         $templateProcessor->setValue('empresa.nombremercantil', htmlspecialchars($this->empresa_mercantil));
         $templateProcessor->setValue('empresa.cif', htmlspecialchars($this->empresa_cif));
@@ -310,7 +300,6 @@ class Generator extends Controller
         $templateProcessor->setValue('empresa.web', htmlspecialchars($this->web_empresa));
         $templateProcessor->setValue('empresa.gerente', htmlspecialchars($this->gerente_empresa));
         $templateProcessor->setValue('empresa.nifgerente', htmlspecialchars($this->gerente_nif_empresa));
-
         $templateProcessor->setValue('hoy', $this->hoy);
         $templateProcessor->setValue('hoy_largo', $this->largo);
 
@@ -328,7 +317,6 @@ class Generator extends Controller
         echo file_get_contents(storage_path('app/storage/temp/asuncion_direccion_tecnica.docx'));
         ob_clean();
         flush();
-        //exit;
         return redirect()->action('filesController@show', ['id'=>$file_id]);
     }
 
@@ -404,7 +392,6 @@ class Generator extends Controller
         echo file_get_contents(storage_path('app/storage/temp/autorización_servicio_profesionales.docx'));
         ob_clean();
         flush();
-        //exit;
         return redirect()->action('filesController@show', ['id'=>$file->id]);
     }
 
@@ -491,7 +478,6 @@ class Generator extends Controller
         echo file_get_contents(storage_path('app/storage/temp/designacion_abogado.docx'));
         ob_clean();
         flush();
-        //exit;
         return redirect()->action('filesController@show', ['id'=>$file->id]);
     }
 
@@ -579,7 +565,6 @@ class Generator extends Controller
         echo file_get_contents(storage_path('app/storage/temp/designacion_abogado.docx'));
         ob_clean();
         flush();
-        //exit;
         return redirect()->action('filesController@show', ['id'=>$file->id]);
     }
 
@@ -643,9 +628,7 @@ class Generator extends Controller
         $templateProcessor->setValue('userPhone#3', htmlspecialchars('+1 428 889 775'));
 
         echo date('H:i:s'), ' Saving the result document...';
-         //dd($disco->put('hola'));
         $templateProcessor->saveAs(storage_path('app/storage/cliente/').''.$cliente->id.'/Sample_07_TemplateCloneRow.docx');
-       // Storage::move('storage/Sample_07_TemplateCloneRow.docx', 'storage/cliente/ejemplo.docx');
     }
 
     /**
