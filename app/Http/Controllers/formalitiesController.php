@@ -114,7 +114,6 @@ Class FormalitiesController extends Controller
             ->select('id','nombre')
         ->get();
         return response()->json($data);
-        //return view('files.create')->with('data',$data);
     }
 
 

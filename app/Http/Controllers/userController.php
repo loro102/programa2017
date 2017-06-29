@@ -34,9 +34,6 @@ Class UserController extends Controller
     public function create()
     {
         //
-        //$agente=new User;
-        //return view('admin.usuario.register',['agente'=>$agente]);
-
     }
 
     /**
@@ -48,10 +45,7 @@ Class UserController extends Controller
     public function store(Request $request)
     {
         //
-        //User::create($request->input());
 
-        //dd($request->input());
-       // return redirect('usuario')->with('message','Se ha añadido un nuevo usuario');
     }
 
     /**
@@ -66,7 +60,6 @@ Class UserController extends Controller
         $user=User::findorFail($id);
         $Rol=Role::all()->pluck('slug','id')->prepend('Seleccione Rol','');
         $roles=$user->getRoles();
-        //dd($user);
         return view('admin.usuario.show',[
             'user'=> $user,
             'select'=>$Rol,

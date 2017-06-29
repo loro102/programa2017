@@ -14,9 +14,7 @@ use App\models\processor;
 use App\models\professional;
 use App\models\sort;
 
-//use App\User;
-//use Illuminate\Http\Request;
-//use App\models\customer;
+
 
 Class FilesController extends Controller
 {
@@ -76,10 +74,6 @@ Class FilesController extends Controller
         //
         $file = new file;
         $file->fill($request->except(['formalidad', 'formalities_id']))->save();
-        //$files=file::Where('customer_id', $request->customer_id)->get();
-
-        //Storage::makeDirectory('storage/cliente/'.$request->customer_id.'/'.$files->last()->id);
-
         return redirect()->action('clientes@show', ['id' => $request->customer_id])->with('message', 'Se ha añadido un nuevo expediente');
     }
 
@@ -102,9 +96,6 @@ Class FilesController extends Controller
         */
 
         $consulta = file::find($id);
-        //$contrario=$consulta->opponent;
-        //dd($consulta->opponent);
-
         /*
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -168,8 +159,7 @@ Class FilesController extends Controller
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 */
-        //$documentos= Storage::disk('cliente')->Files($consulta->customer_id.'/'.$consulta->id);
-        //Storage::disk('cliente')->url($documentos);
+
 
         $documentos=document::where('file_id',$id);
 

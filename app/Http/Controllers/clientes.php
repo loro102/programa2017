@@ -53,8 +53,6 @@ Class Clientes Extends Controller
     {
         //Crea un nuevo registro para el cliente
         customer::create($request->input());
-        //$cliente=customer::all();
-        //Storage::makeDirectory('storage/cliente/'.$cliente->last()->id);
         return redirect('cliente')->with('message', 'Se ha añadido un nuevo cliente');
     }
 
