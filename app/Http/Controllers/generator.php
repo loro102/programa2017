@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use PhpOffice\PhpWord\TemplateProcessor;
 use function storage_path;
 
-Class Generator extends Controller
+class Generator extends Controller
 {
     public function __construct()
     {
@@ -34,10 +34,9 @@ Class Generator extends Controller
         $this->fax='fax empresa';
         $this->movil='telefono movil empresa';
         $this->middleware('auth');
-
     }
 
-    public function hoja_nueva_consulta(Request $request,$id)
+    public function hoja_nueva_consulta(request $request, $id)
     {
         //
         $cliente=customer::findorfail($id);
@@ -72,7 +71,7 @@ Class Generator extends Controller
         $templateProcessor->setValue('empresa.nifgerente', htmlspecialchars($this->gerente_nif_empresa));
 
         $templateProcessor->setValue('hoy', $this->hoy);
-        $templateProcessor->setValue('hoy_largo',$this->largo );
+        $templateProcessor->setValue('hoy_largo', $this->largo);
 
 
          //guardar en carpeta de cliente
@@ -90,17 +89,15 @@ Class Generator extends Controller
         ob_clean();
         flush();
         //exit;
-        return redirect()->action('clientes@show@show',['id'=>$id]);
+        return redirect()->action('clientes@show@show', ['id'=>$id]);
 
         //echo file_get_contents(storage_path('app/storage/cliente/').''.$cliente->id.'/RJ030_Hoja_consulta.docx');
-
     }
 
     //Procesar plantillas para la carta de agradecimiento
 
-    public function carta_agracedimiento_agente(Request $request,$id,$cliente)
+    public function carta_agracedimiento_agente(request $request, $id, $cliente)
     {
-
         $agente=agent::findorfail($id);
         $agente_cliente=customer::findorfail($cliente);
         //clonar plantilla
@@ -135,7 +132,7 @@ Class Generator extends Controller
         $templateProcessor->setValue('empresa.nifgerente', htmlspecialchars($this->gerente_nif_empresa));
 
         $templateProcessor->setValue('hoy', $this->hoy);
-        $templateProcessor->setValue('hoy_largo',$this->largo );
+        $templateProcessor->setValue('hoy_largo', $this->largo);
 
 
 
@@ -154,12 +151,11 @@ Class Generator extends Controller
         ob_clean();
         flush();
         //exit;
-        return redirect()->action('clientes@show@show',['id'=>$cliente]);
-        
+        return redirect()->action('clientes@show@show', ['id'=>$cliente]);
     }
 
     //generador de documentos
-    public Function Contrato_Prestacion_Servicios(Request $request,$file_id)
+    public function contrato_prestacion_servicios(Request $request, $file_id)
     {
         $file = file::findorfail($file_id);
 
@@ -195,7 +191,7 @@ Class Generator extends Controller
         $templateProcessor->setValue('empresa.nifgerente', htmlspecialchars($this->gerente_nif_empresa));
 
         $templateProcessor->setValue('hoy', $this->hoy);
-        $templateProcessor->setValue('hoy_largo',$this->largo );
+        $templateProcessor->setValue('hoy_largo', $this->largo);
 
 
         //guardar en carpeta de cliente
@@ -213,11 +209,10 @@ Class Generator extends Controller
         ob_clean();
         flush();
        // exit;
-        return redirect()->action('filesController@show',['id'=>$file->id]);
-
+        return redirect()->action('filesController@show', ['id'=>$file->id]);
     }
     //Generación de contrato de prestación de servicios a representado
-    public function Contrato_Prestacion_Servicios_Representados(Request $request,$file_id)
+    public function contrato_prestacion_servicios_representados(Request $request, $file_id)
     {
         $file = file::findorfail($file_id);
         //clonar plantilla
@@ -255,7 +250,7 @@ Class Generator extends Controller
         $templateProcessor->setValue('empresa.nifgerente', htmlspecialchars($this->gerente_nif_empresa));
 
         $templateProcessor->setValue('hoy', $this->hoy);
-        $templateProcessor->setValue('hoy_largo',$this->largo );
+        $templateProcessor->setValue('hoy_largo', $this->largo);
 
 
         //guardar en carpeta de cliente
@@ -273,21 +268,18 @@ Class Generator extends Controller
         ob_clean();
         flush();
        // exit;
-        return redirect()->action('filesController@show',['id'=>$file->id]);
-
+        return redirect()->action('filesController@show', ['id'=>$file->id]);
     }
 
     //Generacion de asunción de dirección técnica
-    public function Contrato_Asuncion_Direccion_Tecnica(Request $request,$file_id,$profesional_id)
+    public function contrato_asuncion_direccion_tecnica(Request $request, $file_id, $profesional_id)
     {
         $file = file::findorfail($file_id);
         $profesional=professional::findorfail($profesional_id);
         //clonar plantilla
-        if (empty($file->nombre)){
+        if (empty($file->nombre)) {
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/asuncion_direccion_tecnica.docx'));
-        }
-        else
-        {
+        } else {
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/asuncion_direccion_tecnica_representado.docx'));
         };
         //reemplazar tags por valores
@@ -326,7 +318,7 @@ Class Generator extends Controller
         $templateProcessor->setValue('empresa.nifgerente', htmlspecialchars($this->gerente_nif_empresa));
 
         $templateProcessor->setValue('hoy', $this->hoy);
-        $templateProcessor->setValue('hoy_largo',$this->largo );
+        $templateProcessor->setValue('hoy_largo', $this->largo);
 
 
         //guardar en carpeta de cliente
@@ -344,22 +336,18 @@ Class Generator extends Controller
         ob_clean();
         flush();
         //exit;
-        return redirect()->action('filesController@show',['id'=>$file_id]);
-
+        return redirect()->action('filesController@show', ['id'=>$file_id]);
     }
 
     //Generacion de autorización y compromiso de pago
-    public function Autorización_Servicio_Profesionales(Request $request,$file_id,$profesional_id)
+    public function Autorización_Servicio_Profesionales(Request $request, $file_id, $profesional_id)
     {
-
         $file = file::findorfail($file_id);
         $profesional=professional::findorfail($profesional_id);
         //clonar plantilla
-        if (empty($file->nombre)){
+        if (empty($file->nombre)) {
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/autorización_servicio_profesionales.docx'));
-        }
-        else
-        {
+        } else {
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/autorización_servicio_profesionales_representado.docx'));
         };
 
@@ -407,7 +395,7 @@ Class Generator extends Controller
         $templateProcessor->setValue('empresa.gerente', htmlspecialchars($this->gerente_empresa));
         $templateProcessor->setValue('empresa.nifgerente', htmlspecialchars($this->gerente_nif_empresa));
         $templateProcessor->setValue('hoy', $this->hoy);
-        $templateProcessor->setValue('hoy_largo',$this->largo );
+        $templateProcessor->setValue('hoy_largo', $this->largo);
 
 
         //guardar en carpeta de cliente
@@ -425,22 +413,19 @@ Class Generator extends Controller
         ob_clean();
         flush();
         //exit;
-        return redirect()->action('filesController@show',['id'=>$file->id]);
-
+        return redirect()->action('filesController@show', ['id'=>$file->id]);
     }
 
     //Generacion de autorización y compromiso de pago
-    public function Designacion_Abogado(Request $request,$file_id,$profesional_id)
+    public function Designacion_Abogado(Request $request, $file_id, $profesional_id)
     {
         $file = file::findorfail($file_id);
         $profesional=professional::findorfail($profesional_id);
         $aseguradora=insurer::findorfail($file->insurer_id);
         //clonar plantilla
-        if (empty($file->nombre)){
+        if (empty($file->nombre)) {
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/designacion_abogados.docx'));
-        }
-        else
-        {
+        } else {
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/designacion_abogados_representado.docx'));
         };
 
@@ -498,7 +483,7 @@ Class Generator extends Controller
         $templateProcessor->setValue('empresa.nifgerente', htmlspecialchars($this->gerente_nif_empresa));
 
         $templateProcessor->setValue('hoy', $this->hoy);
-        $templateProcessor->setValue('hoy_largo',$this->largo );
+        $templateProcessor->setValue('hoy_largo', $this->largo);
 
 
         //guardar en carpeta de cliente
@@ -516,22 +501,19 @@ Class Generator extends Controller
         ob_clean();
         flush();
         //exit;
-        return redirect()->action('filesController@show',['id'=>$file->id]);
-
+        return redirect()->action('filesController@show', ['id'=>$file->id]);
     }
      //Generacion de RAJ
-    public function ReciboAsisteciaJuridica(Request $request,$file_id,$profesional_id)
+    public function ReciboAsisteciaJuridica(Request $request, $file_id, $profesional_id)
     {
         $file = file::findorfail($file_id);
         $profesional=professional::findorfail($profesional_id);
         $aseguradora=insurer::findorfail($file->insurer_id);
 
         //clonar plantilla
-        if (empty($file->nombre)){
+        if (empty($file->nombre)) {
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/designacion_abogados.docx'));
-        }
-        else
-        {
+        } else {
             $templateProcessor = new TemplateProcessor(storage_path('app/storage/documentos/designacion_abogados_representado.docx'));
         };
 
@@ -589,7 +571,7 @@ Class Generator extends Controller
         $templateProcessor->setValue('empresa.nifgerente', htmlspecialchars($this->gerente_nif_empresa));
 
         $templateProcessor->setValue('hoy', $this->hoy);
-        $templateProcessor->setValue('hoy_largo',$this->largo );
+        $templateProcessor->setValue('hoy_largo', $this->largo);
 
 
         //guardar en carpeta de cliente
@@ -607,8 +589,7 @@ Class Generator extends Controller
         ob_clean();
         flush();
         //exit;
-        return redirect()->action('filesController@show',['id'=>$file->id]);
-
+        return redirect()->action('filesController@show', ['id'=>$file->id]);
     }
     /**
      * Display a listing of the resource.
@@ -674,7 +655,6 @@ Class Generator extends Controller
          //dd($disco->put('hola'));
         $templateProcessor->saveAs(storage_path('app/storage/cliente/').''.$cliente->id.'/Sample_07_TemplateCloneRow.docx');
        // Storage::move('storage/Sample_07_TemplateCloneRow.docx', 'storage/cliente/ejemplo.docx');
-
     }
 
     /**
