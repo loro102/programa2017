@@ -36,7 +36,7 @@ class Generator extends Controller
         $this->middleware('auth');
     }
 
-    public function hoja_nueva_consulta(request $request, $id)
+    public function Hoja_Nueva_Consulta(request $request, $id)
     {
         //
         $cliente=customer::findorfail($id);
@@ -96,7 +96,7 @@ class Generator extends Controller
 
     //Procesar plantillas para la carta de agradecimiento
 
-    public function carta_agracedimiento_agente(request $request, $id, $cliente)
+    public function Carta_Agracedimiento_Agente(request $request, $id, $cliente)
     {
         $agente=agent::findorfail($id);
         $agente_cliente=customer::findorfail($cliente);
@@ -155,7 +155,7 @@ class Generator extends Controller
     }
 
     //generador de documentos
-    public function contrato_prestacion_servicios(Request $request, $file_id)
+    public function Contrato_Prestacion_Servicios(Request $request, $file_id)
     {
         $file = file::findorfail($file_id);
 
@@ -212,7 +212,7 @@ class Generator extends Controller
         return redirect()->action('filesController@show', ['id'=>$file->id]);
     }
     //Generación de contrato de prestación de servicios a representado
-    public function contrato_prestacion_servicios_representados(Request $request, $file_id)
+    public function Contrato_Prestacion_Servicios_Representados(Request $request, $file_id)
     {
         $file = file::findorfail($file_id);
         //clonar plantilla
@@ -340,7 +340,7 @@ class Generator extends Controller
     }
 
     //Generacion de autorización y compromiso de pago
-    public function Autorización_Servicio_Profesionales(Request $request, $file_id, $profesional_id)
+    public function Autorización_Servicio_Profesionales(request $request, $file_id, $profesional_id)
     {
         $file = file::findorfail($file_id);
         $profesional=professional::findorfail($profesional_id);
