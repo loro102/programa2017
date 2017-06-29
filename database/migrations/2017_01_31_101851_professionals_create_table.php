@@ -16,7 +16,6 @@ class ProfessionalsCreateTable extends Migration
         Schema::create('professionals', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('group_id')->unsigned();
-            //$table->foreign('group_id')->references('id')->on('groups');
             $table->string('Nombre')->nullable();
             $table->string('num_colegiado')->nullable();
             $table->string('nif')->nullable();

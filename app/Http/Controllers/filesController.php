@@ -46,7 +46,6 @@ Class FilesController extends Controller
     public function create()
     {
         $expediente = new file;
-        //$cliente=customer::all()->pluck('fullname','id')->prepend('Ninguno','');
         $sort = sort::all()->pluck('nombre', 'id');
         $categoria = formality::all()->unique('categoria')->pluck('categoria', 'categoria')->prepend('Ninguno', '1');
         $abogado = professional::where('group_id', 1)->where('activo', true)->pluck('Nombre', 'id');
@@ -54,10 +53,6 @@ Class FilesController extends Controller
         $processor = processor::where('insurer_id', 1)->pluck('nombre', 'id');
         $formalidad = formality::findorfail(1)->pluck('nombre', 'id');
         $fase = phase::all()->pluck('nombre', 'id');
-        //$abogado=professional::all()->pluck('nombre','id')->prepend('Ninguno','');
-
-        //$client=$cliente->pluck('fullname','id');
-        //dd($cliente);
         return view('files.create', [
             'expediente' => $expediente,
             'processor' => $processor,
@@ -79,7 +74,6 @@ Class FilesController extends Controller
     public function store(\App\Http\Requests\file $request)
     {
         //
-        //dd($request);
         $file = new file;
         $file->fill($request->except(['formalidad', 'formalities_id']))->save();
         //$files=file::Where('customer_id', $request->customer_id)->get();
@@ -145,7 +139,6 @@ Class FilesController extends Controller
         $factura = invoice::where('file_id', $id)->where('honorario', false)->get();
         //obtener todos los honorarios
         $honorario = invoice::where('file_id', $id)->where('honorario', true)->get();
-        //dd($factura);
 
         //array con los totales calculados
         $total = collect([
@@ -165,9 +158,6 @@ Class FilesController extends Controller
         $beneficio3 = round(($factsxhonorarios->sum('cuantia_factura') + (($factsxhonorarios->sum('cuantia_factura') * 21) / 100)), 2);
 
         $beneficio = $beneficio1 + $beneficio2 + $beneficio3;
-        //dd($beneficio1,$beneficio2,$beneficio3,$beneficio);
-
-        //dd($facturas);
 
         /*
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -181,7 +171,6 @@ Class FilesController extends Controller
         //$documentos= Storage::disk('cliente')->Files($consulta->customer_id.'/'.$consulta->id);
         //Storage::disk('cliente')->url($documentos);
 
-        //dd($url);
         $documentos=document::where('file_id',$id);
 
         /*
@@ -217,33 +206,24 @@ Class FilesController extends Controller
     {
         //
         $expediente = file::findorFail($id);
-
-        //$cliente=customer::all()->pluck('fullname','id')->prepend('Ninguno','');
         $sort = sort::all()->pluck('nombre', 'id')->prepend('Ninguno', '0');
         //Recogiendo datos de los select de formalidad
         $categoria = formality::all()->unique('categoria')->pluck('categoria', 'categoria')->prepend('Ninguno', '');
-        //$a=formality::findorfail($expediente->formality_id);
         $procedimiento = formality::all()->pluck('nombre', 'id');
         //recogiendo datos de aseguradora
         $aseguradora = insurer::all()->pluck('nombre', 'id');
         $tramiciasel = processor::all()->pluck('nombre', 'id');
         $tramicia = processor::findorfail($expediente->processor_id);
-        //$abogado=professional::all()->pluck('nombre','id')->prepend('Ninguno','');
         $fase = phase::all()->pluck('nombre', 'id');
         $abogado = professional::where('group_id', 1)->pluck('Nombre', 'id');
-
-        //$client=$cliente->pluck('fullname','id');
-        //dd($abogado);
         return view('files.edit', [
             'expediente' => $expediente,
-            //'cliente'=>$cliente,
             'sort' => $sort,
             'categoria' => $categoria,
             'aseguradora' => $aseguradora,
             'procedimiento' => $procedimiento,
             'abogado' => $abogado,
             'fase' => $fase,
-            //'cat'=>$a,
             'tramicia' => $tramicia,
             'tramiciasel' => $tramiciasel,
 

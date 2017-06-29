@@ -46,8 +46,6 @@ Class PermisosController extends Controller
     {
         //
         Permission::create($request->input());
-
-        //dd($request->input());
         return redirect('permisos')->with('message','Se ha añadido un nuevo permiso');
     }
 
@@ -121,7 +119,6 @@ Class PermisosController extends Controller
     public function revoke(Request $request)
     {
         //
-        //dd($request) ;
         $role = Role::find($request->role);
         $role->revokePermission($request->permiso);
         $role->save();;

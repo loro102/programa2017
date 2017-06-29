@@ -27,7 +27,7 @@ Class Customer extends Model
         return $this->nombre . ' ' . $this->apellidos;
     }
 
-    public function Apellidonombre($value)
+    public function apellidonombre($value)
     {
         return $this->apellidos . ' , ' . $this->nombre;
     }

@@ -37,7 +37,6 @@ Class ProcessorController extends Controller
 
         //
         $data=$request->aseguradora;
-        //dd($data);
         $tramitador=new processor;
         return view('processor.create',[
             'tramitador'=>$tramitador,
@@ -55,7 +54,6 @@ Class ProcessorController extends Controller
     {
         //
         $data=$request->input('insurer_id');
-        //dd($data);
         processor::create($request->input());
 
         return redirect()->action('processorController@show',['id'=>$data])->with('message','Se ha añadido un nuevo tramitador');
@@ -126,8 +124,6 @@ Class ProcessorController extends Controller
         //
         $data=processor::where('insurer_id',$id)
             ->get();
-        //dd($data);
         return response()->json($data);
-        //return view('files.create')->with('data',$data);
     }
 }

@@ -7,7 +7,7 @@ use App\models\group;
 use App\models\professional;
 use Illuminate\Http\Request;
 
-class File_professionalController extends Controller
+Class File_professionalController extends Controller
 {
     public function __construct()
     {
@@ -22,7 +22,7 @@ class File_professionalController extends Controller
     {
         //
         $profcli=file_professional::paginate(10);
-        return view('formalities.index',['formalities'=>$formalities]);
+        return view('formalities.index',['formalities'=>$profcli]);
     }
 
     /**

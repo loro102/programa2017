@@ -17,8 +17,6 @@ class CustomersCreateTable extends Migration
             $table->increments('id');
             $table->string('nombre',255);
             $table->string('apellidos',255);
-            //$table->integer('agent_id')->unsigned();
-            //$table->foreign('agent_id')->references('id')->on('agents');
             $table->string('nif')->unique();
             $table->string('direccion',255)->nullable();
             $table->string('localidad',255)->nullable();

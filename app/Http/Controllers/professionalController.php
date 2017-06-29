@@ -37,8 +37,6 @@ Class ProfessionalController extends Controller
         //
         $profesional=new professional;
         $grupo=group::all()->pluck('nombre','id')->prepend('Seleccione grupo profesional');
-        //$agente=agent::orderBy('nombre','asc')->pluck('nombre','id');
-
         return view('professional.create',[
             'profesional'=>$profesional,
             'grupo'=>$grupo
@@ -55,8 +53,6 @@ Class ProfessionalController extends Controller
     {
         //
         professional::create($request->input());
-
-        //dd($request->input());
         return redirect('profesionals')->with('message','Se ha añadido un nuevo profesional');
     }
 
@@ -70,14 +66,8 @@ Class ProfessionalController extends Controller
     {
         //
         $profesional=professional::findorFail($id);
-        //$agente=customer::findorfail($id)->agent;
-        //$expedientes=file::where('customer_id',$id)->get();
-        //$expedientes=$cliente->files()->get();
-        //dd($expedientes);
         return view('professional.show',[
             'profesional'=> $profesional,
-            //'agente'=>$agente,
-            //'expedientes'=>$expedientes
         ]);
     }
 
@@ -132,8 +122,6 @@ Class ProfessionalController extends Controller
         $data=professional::where('group_id',$id)
             ->select('id','Nombre')
             ->get();
-        //dd($data);
         return response()->json($data);
-        //return view('files.create')->with('data',$data);
     }
 }

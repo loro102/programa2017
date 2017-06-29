@@ -53,8 +53,6 @@ Class OpponentController extends Controller
         //
         $file=$request->input('file_id');
         opponent::create($request->except('insurer_id'));
-
-        //dd($request->input());
         return redirect()->action('opponentController@create',['file'=>$file])->with('message','Contrario agregado correctamente');
     }
 
@@ -73,7 +71,6 @@ Class OpponentController extends Controller
         return view('opponent.show',[
             'contrario'=>$contrario,
             'aseguradora'=>$aseguradora
-            //'aseguradora'=>$aseguradora,
         ]);
 
     }

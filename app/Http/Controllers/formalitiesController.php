@@ -47,8 +47,6 @@ Class FormalitiesController extends Controller
     {
         //
         formality::create($request->input());
-
-        //dd($request->input());
         return redirect('formality')->with('message','Se ha añadido un nuevo procedimiento');
     }
 
@@ -115,7 +113,6 @@ Class FormalitiesController extends Controller
         $data=formality::where('categoria',$id)
             ->select('id','nombre')
         ->get();
-        //dd($data);
         return response()->json($data);
         //return view('files.create')->with('data',$data);
     }

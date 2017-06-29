@@ -45,8 +45,6 @@ Class SortController extends Controller
     {
         //
         sort::create($request->input());
-
-        //dd($request->input());
         return redirect('sort')->with('message','Se ha añadido una nueva clase de expediente');
     }
 

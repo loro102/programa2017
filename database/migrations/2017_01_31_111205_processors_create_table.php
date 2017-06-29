@@ -15,8 +15,6 @@ class ProcessorsCreateTable extends Migration
     {
         Schema::create('processors', function (Blueprint $table) {
             $table->increments('id');
-            //$table->integer('insurer_id')->unsigned();
-            //$table->foreign('insurer_id')->references('id')->on('insurers');
             $table->string('nombre')->nullable();
             $table->string('telefono')->nullable();
             $table->string('telefono2')->nullable();

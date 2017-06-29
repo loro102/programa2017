@@ -39,9 +39,6 @@ Class InvoicesController extends Controller
 
         $this->middleware('auth');
 
-        //$dt = Carbon::parse();
-        //$this->largo = largo;
-
     }
 
 
@@ -63,9 +60,7 @@ Class InvoicesController extends Controller
                 'indemnizacion'=>$factura->sum('cuantia_indemnizacion'),
             ]
         );
-        //$total=$total->toArray();
         $beneficio=$factura->sum('cuantia_factura')-$factura->sum('cuantia_empresa');
-        //dd($total->toArray());
         return view('invoices.index',[
             'facturas'=>$factura,
             'total'=>$total,
@@ -107,7 +102,6 @@ Class InvoicesController extends Controller
         $invoice=new invoice;
         $invoice->fill($request->except('grupo'))->save();
 
-        //dd($request->input());
         return redirect()->action('filesController@show',['file'=>$request->input('file_id').'#facturas'])->with('message','Factura agregada correctamente');
     }
 
@@ -129,16 +123,8 @@ Class InvoicesController extends Controller
                 'indemnizacion'=>$factura->sum('cuantia_indemnizacion'),
             ]
         );
-        //$comision=$factura->where('emitirfactcomision',1)->get();
-        //$total=$total->toArray();
         $beneficio=$factura->sum('cuantia_factura')-$factura->sum('cuantia_empresa');
-        //$agente=customer::findorfail($id)->agent;
-        //$expedientes=file::where('customer_id',$id)->get();
-        //$expedientes=$cliente->files()->get();
-        //dd($comision);
         return view('invoices.show',[
-            //'cliente'=> $factura,
-            //'agente'=>$agente,
             'facturas'=>$factura,
             'total'=>$total,
             'beneficio'=>$beneficio,
@@ -181,8 +167,6 @@ Class InvoicesController extends Controller
         $factura=invoice::findorFail($id);
         $factura->fill($request->except('grupo'))->save();
         return redirect()->action('filesController@show',['id'=>$factura->file_id.'#facturas'])->with('message','Factura actualizada');
-        //return redirect()->action('invoicesController@edit',['id'=>$id])->with('message','Factura actualizada');
-
     }
 
     /**

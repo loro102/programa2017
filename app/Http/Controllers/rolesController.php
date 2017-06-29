@@ -49,8 +49,6 @@ Class RolesController extends Controller
     {
         //
         Role::create($request->input());
-
-        //dd($request->input());
         return redirect('role')->with('message','Se ha añadido un nuevo rol');
     }
 
@@ -66,7 +64,6 @@ Class RolesController extends Controller
         $role=Role::findorFail($id);
         $permiso=Permission::all()->pluck('slug','id')->prepend('Seleccione permiso','');
         $permissions=$role->getPermissions();
-        //dd($permissions);
         return view('admin.roles.show',[
             'role'=>$role,
             'select'=>$permiso,
@@ -120,7 +117,6 @@ Class RolesController extends Controller
     public function assign(Request $request)
     {
         //
-        //dd($request);
         $role = User::find($request->user);
         $role->assignRole($request->role);
         $role->save();;
@@ -129,7 +125,6 @@ Class RolesController extends Controller
     public function revoke(Request $request)
     {
         //
-        //dd($request) ;
         $role = User::find($request->user);
         $role->revokeRole($request->role);
         $role->save();;
