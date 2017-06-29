@@ -470,7 +470,7 @@
                 <div role="tabpanel" class="tab-pane panel-primary" id="profesionales">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            {{ link_to_action('file_professionalController@create','Asignar un profesional',['file'=> $expediente->id,'prof'=>0],['class' => 'btn btn-sm btn-primary']) }}
+                            {{ link_to_action('FileprofessionalController@create','Asignar un profesional',['file'=> $expediente->id,'prof'=>0],['class' => 'btn btn-sm btn-primary']) }}
                             <table class="table-bordered table-striped table-hover col-md-12">
                                 <tr>
                                     <th class="col-md-7">Profesional</th>

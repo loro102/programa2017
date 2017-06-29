@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\models\document;
-use App\models\file;
-use App\models\file_professional;
+use App\models\File;
+use App\models\Fileprofessional;
 use App\models\formality;
 use App\models\insurer;
 use App\models\invoice;
@@ -31,7 +31,7 @@ Class FilesController extends Controller
     public function index()
     {
         //
-        $expediente = file::paginate(10);
+        $expediente = File::paginate(10);
 
         return view('files.index', ['expedientes' => $expediente]);
     }
@@ -66,10 +66,10 @@ Class FilesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\file $request
+     * @param  \App\Http\Requests\File $request
      * @return \Illuminate\Http\Response
      */
-    public function store(\App\Http\Requests\file $request)
+    public function store(\App\Http\Requests\File $request)
     {
         //
         $file = new file;
@@ -95,7 +95,7 @@ Class FilesController extends Controller
         ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         */
 
-        $consulta = file::find($id);
+        $consulta = File::find($id);
         /*
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -105,7 +105,7 @@ Class FilesController extends Controller
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
        */
-        $prof = file_professional::where('file_id', $id)->get();
+        $prof = Fileprofessional::where('file_id', $id)->get();
 
         /*
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -195,7 +195,7 @@ Class FilesController extends Controller
     public function edit($id)
     {
         //
-        $expediente = file::findorFail($id);
+        $expediente = File::findorFail($id);
         $sort = sort::all()->pluck('nombre', 'id')->prepend('Ninguno', '0');
         //Recogiendo datos de los select de formalidad
         $categoria = formality::all()->unique('categoria')->pluck('categoria', 'categoria')->prepend('Ninguno', '');
