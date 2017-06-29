@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \App\models\professional $professional
  * @mixin \Eloquent
  */
-class file_professional extends Model
+class fileprofessional extends Model
 {
     protected $guarded = [
         'id',

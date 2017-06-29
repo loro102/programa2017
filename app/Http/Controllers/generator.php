@@ -333,7 +333,7 @@ class Generator extends Controller
     }
 
     //Generacion de autorización y compromiso de pago
-    public function autorizaciónservicioprofesionales(request $request, $file_id, $profesional_id)
+    public function autorizacionservicioprofesionales(request $request, $file_id, $profesional_id)
     {
         $file = file::findorfail($file_id);
         $profesional = professional::findorfail($profesional_id);
