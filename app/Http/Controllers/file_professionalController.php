@@ -7,7 +7,7 @@ use App\models\group;
 use App\models\professional;
 use Illuminate\Http\Request;
 
-class File_professionalController extends Controller
+class file_professionalController extends Controller
 {
     public function __construct()
     {

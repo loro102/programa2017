@@ -35,7 +35,7 @@ class Generator extends Controller
         $this->middleware('auth');
     }
 
-    public function Hoja_Nueva_Consulta(request $request, $id)
+    public function hoja_nueva_consulta(request $request, $id)
     {
         $cliente = customer::findorfail($id);
         //clonar plantilla
@@ -93,7 +93,7 @@ class Generator extends Controller
 
     //Procesar plantillas para la carta de agradecimiento
 
-    public function Carta_Agracedimiento_Agente(request $request, $id, $cliente)
+    public function carta_agracedimiento_agente(request $request, $id, $cliente)
     {
         $agente = agent::findorfail($id);
         $agente_cliente = customer::findorfail($cliente);
@@ -150,7 +150,7 @@ class Generator extends Controller
     }
 
     //generador de documentos
-    public function Contrato_Prestacion_Servicios(Request $request, $file_id)
+    public function contrato_prestacion_servicios(Request $request, $file_id)
     {
         $file = file::findorfail($file_id);
 
@@ -207,7 +207,7 @@ class Generator extends Controller
     }
 
     //Generación de contrato de prestación de servicios a representado
-    public function Contrato_Prestacion_Servicios_Representados(Request $request, $file_id)
+    public function contrato_prestacion_servicios_representados(Request $request, $file_id)
     {
         $file = file::findorfail($file_id);
         //clonar plantilla
@@ -333,7 +333,7 @@ class Generator extends Controller
     }
 
     //Generacion de autorización y compromiso de pago
-    public function Autorización_Servicio_Profesionales(request $request, $file_id, $profesional_id)
+    public function autorización_servicio_profesionales(request $request, $file_id, $profesional_id)
     {
         $file = file::findorfail($file_id);
         $profesional = professional::findorfail($profesional_id);
@@ -409,7 +409,7 @@ class Generator extends Controller
     }
 
     //Generacion de autorización y compromiso de pago
-    public function Designacion_Abogado(Request $request, $file_id, $profesional_id)
+    public function designacion_abogado(Request $request, $file_id, $profesional_id)
     {
         $file = file::findorfail($file_id);
         $profesional = professional::findorfail($profesional_id);
@@ -496,7 +496,7 @@ class Generator extends Controller
     }
 
      //Generacion de RAJ
-    public function ReciboAsisteciaJuridica(Request $request, $file_id, $profesional_id)
+    public function reciboasisteciajuridica(Request $request, $file_id, $profesional_id)
     {
         $file = file::findorfail($file_id);
         $profesional = professional::findorfail($profesional_id);
