@@ -93,7 +93,7 @@ class Generator extends Controller
 
     //Procesar plantillas para la carta de agradecimiento
 
-    public function carta_agracedimiento_agente(request $request, $id, $cliente)
+    public function cartaagracedimientoagente(request $request, $id, $cliente)
     {
         $agente = agent::findorfail($id);
         $agente_cliente = customer::findorfail($cliente);
