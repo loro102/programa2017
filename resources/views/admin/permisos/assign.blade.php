@@ -11,7 +11,7 @@
                 <th class="col-md-3">Nombre</th>
                 <th class="col-md-3">Slug</th>
                 <th class="col-md-5">Descripción</th>
-                <th class="col-md-1">Asignar</th>
+                <th class="col-md-1">Asignar permiso</th>
             </tr>
 
             @forelse($permisos as $permiso)
