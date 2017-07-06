@@ -43,7 +43,7 @@ Class FilesController extends Controller
      */
     public function create()
     {
-        $expediente = new file;
+        $expediente = new File;
         $sort = sort::all()->pluck('nombre', 'id');
         $categoria = formality::all()->unique('categoria')->pluck('categoria', 'categoria')->prepend('Ninguno', '1');
         $abogado = professional::where('group_id', 1)->where('activo', true)->pluck('Nombre', 'id');
@@ -72,7 +72,7 @@ Class FilesController extends Controller
     public function store(\App\Http\Requests\File $request)
     {
         //
-        $file = new file;
+        $file = new File;
         $file->fill($request->except(['formalidad', 'formalities_id']))->save();
         return redirect()->action('clientes@show', ['id' => $request->customer_id])->with('message', 'Se ha añadido un nuevo expediente');
     }
@@ -127,9 +127,19 @@ Class FilesController extends Controller
         $facturas = invoice::where('file_id', $id)->where('emitirfactcomision', false)->where('emitirfactporhonorarios', false)->get();
 
         //obtener todas las facturas
-        $factura = invoice::where('file_id', $id)->where('honorario', false)->get();
-        //obtener todos los honorarios
-        $honorario = invoice::where('file_id', $id)->where('honorario', true)->get();
+        //$x = invoice::where('file_id', $id)->where('honorario', false)->get();
+
+
+        //Obtengo las id que estan dentro del grupo de honorario y filtro las facturas y los honorios
+        $hon=professional::where('group_id',2)->get();
+
+        //obtener todos los honorarios del expediente
+        $honorario = invoice::where('file_id', $id)->whereIn('professional_id', $hon)->get();
+        //obtener todas las facturas del expediente
+        $factura = invoice::where('file_id', $id)->whereNotIn('professional_id', $hon)->get();
+
+
+
 
         //array con los totales calculados
         $total = collect([
@@ -161,7 +171,7 @@ Class FilesController extends Controller
 */
 
 
-        $documentos=document::where('file_id',$id);
+        $documentos=Document::where('file_id',$id)->get();
 
         /*
        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

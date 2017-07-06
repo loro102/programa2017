@@ -77,8 +77,8 @@ Class InvoicesController extends Controller
     {
         //
         $factura=new invoice;
-        $sector=group::all()->pluck('nombre','id')->prepend('Seleccione sector');
-        $profesional=professional::orderBy('nombre','asc')->pluck('nombre','id');
+        $sector=Group::all()->pluck('nombre','id')->prepend('Seleccione sector');
+        $profesional=Professional::orderBy('Nombre','asc')->pluck('Nombre','id');
         $metodos=$this->metodos->pluck('nombre','id');
 
         return view('invoices.create',[
@@ -142,7 +142,7 @@ Class InvoicesController extends Controller
         //
         $factura=invoice::findorFail($id);
         $sector=group::all()->pluck('nombre','id');
-        $profesional=professional::orderBy('nombre','asc')->pluck('nombre','id');
+        $profesional=professional::orderBy('Nombre','asc')->pluck('Nombre','id');
         $metodos=$this->metodos->pluck('nombre','id');
         $sector_id=$factura->profesional->group_id;
         return view('invoices.edit',[

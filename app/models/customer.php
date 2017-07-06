@@ -38,12 +38,12 @@ Class Customer extends Model
     }
     public function files()
     {
-        return $this->hasMany('App\models\file');
+        return $this->hasMany('App\models\File');
     }
 
     public function file()
     {
-        return $this->belongsToMany('App\models\file');
+        return $this->belongsToMany('App\models\File');
     }
     public function invoice()
     {

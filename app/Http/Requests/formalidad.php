@@ -26,13 +26,13 @@ Class Formalidad extends FormRequest
         return [
             //
             'nombre'=>'required',
-            'formalidad'=>'required'
+            'categoria'=>'required'
         ];
     }
     public function attributes()
     {
         return [
-            'formalidad'=>'categoria',
+            'categoria'=>'categoria',
         ];
     }
 }

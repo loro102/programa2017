@@ -4,7 +4,7 @@
     <div class="container">
         @include('partials.flash')
         <p>
-            {{ link_to_action('professionalController@create','Añadir un nuevo profesional',[],['class' => 'btn btn-sm btn-primary']) }}
+            {{ link_to_action('ProfessionalController@create','Añadir un nuevo profesional',[],['class' => 'btn btn-sm btn-primary']) }}
         </p>
         <table class="table-bordered table-striped table-hover col-md-12">
             <tr>
@@ -18,7 +18,7 @@
             </tr>
             @forelse($profesionales as $profesional)
                 <tr>
-                    <td class="col-md-2">{{link_to_action('professionalController@show',$profesional->Nombre,['id'=> $profesional->id],[])}}</td>
+                    <td class="col-md-2">{{link_to_action('ProfessionalController@show',$profesional->Nombre,['id'=> $profesional->id],[])}}</td>
                     <td class="col-md-3">{{$profesional->group->nombre}}</td>
                     <td class="col-md-1">{{$profesional->especialidad}}</td>
                     <td class="col-md-1">{{$profesional->localidad}}</td>

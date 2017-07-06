@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * App\models\professional.
  *
  * @property \App\models\file $file
- * @property \App\models\file_professional $fileProfessional
+ * @property \App\models\Fileprofessional $fileProfessional
  * @property \App\models\group $group
  * @property \App\models\invoice $invoice
  * @mixin \Eloquent
@@ -22,7 +22,7 @@ class Professional extends Model
 
     public function fileprofessional()
     {
-        return $this->belongsTo('App\models\file_professional', 'professional_id');
+        return $this->belongsTo('App\models\Fileprofessional', 'professional_id');
     }
 
     public function invoice()

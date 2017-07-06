@@ -22,7 +22,7 @@ class DocumentsCreateTable extends Migration
             $table->string('destinatario')->nullable();
             $table->string('asunto')->nullable();
             $table->text('contenido')->nullable();
-            $table->unsigned('file_id')->nullable();
+            $table->integer('file_id')->unsigned();
             $table->foreign('file_id')->references('id')->on('files');
             $table->timestamps();
         });

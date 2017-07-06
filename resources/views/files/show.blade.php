@@ -587,8 +587,8 @@
                                             </button>
 
                                             <!-- Modal de lista de tramitadores-->
-                                            <div class="modal fade " id="{{$factura->id}}" tabindex="-1" role="dialog"
-                                                 aria-labelledby="{{$factura->id}}">
+                                            <div class="modal fade " id="{{$honorario->id}}" tabindex="-1" role="dialog"
+                                                 aria-labelledby="{{$honorario->id}}">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -601,7 +601,7 @@
                                                         <div class="modal-body">
                                                             <div class="embed-responsive embed-responsive-4by3">
                                                                 <iframe class="embed-responsive-item"
-                                                                        src="/invoices/{{$factura->id}}/edit"></iframe>
+                                                                        src="/invoices/{{$honorario->id}}/edit"></iframe>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
@@ -730,6 +730,7 @@
                                         <div class="form-group">
                                             {!! Form::label('contenido', 'Contenido:', ['class' => 'control-label']) !!}
                                             {!! Form::textarea('contenido',null,['class' => 'form-control input-lg','rows'=>'6']) !!}
+                                            {!! Form::hidden('file_id', $expediente->id , ['class' => 'form-control']) !!}
                                         </div>
                                     </div>
                                     <div class="row">

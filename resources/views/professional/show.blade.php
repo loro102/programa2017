@@ -8,9 +8,9 @@
         @endif
         <p>
             <span class="pull-right">
-                {!! Form::open(['method'=>'DELETE','route'=>['professionals.destroy',$profesional->id]],['class'=>'form-inline']) !!}
+                {!! Form::open(['method'=>'DELETE','route'=>['Professionals.destroy',$profesional->id]],['class'=>'form-inline']) !!}
                 {!! Form::submit('Borrar profesional', array('class' => 'btn btn-sm btn-danger pull-right ','id'=>'deletebtn', 'onclick' => 'return confirm("¿Estas seguro de querer eliminar este profesional?");')) !!}
-                {{ link_to_action('professionalController@edit','Editar profesional',['id'=>$profesional->id],['class'=>'btn btn-sm btn-warning pull-right ']) }}
+                {{ link_to_action('ProfessionalController@edit','Editar profesional',['id'=>$profesional->id],['class'=>'btn btn-sm btn-warning pull-right ']) }}
                 {!! Form::close()!!}
             </span>
         </p>

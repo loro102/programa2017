@@ -21,7 +21,7 @@ Class ProfessionalController extends Controller
     public function index()
     {
         //
-        $profesional=professional::paginate(10);
+        $profesional=Professional::paginate(10);
         return view('professional.index',[
             'profesionales'=> $profesional,
         ]);
@@ -35,8 +35,8 @@ Class ProfessionalController extends Controller
     public function create()
     {
         //
-        $profesional=new professional;
-        $grupo=group::all()->pluck('nombre','id')->prepend('Seleccione grupo profesional');
+        $profesional=new Professional;
+        $grupo=Group::all()->pluck('nombre','id')->prepend('Seleccione grupo profesional');
         return view('professional.create',[
             'profesional'=>$profesional,
             'grupo'=>$grupo
@@ -52,8 +52,8 @@ Class ProfessionalController extends Controller
     public function store(profesional $request)
     {
         //
-        professional::create($request->input());
-        return redirect('profesionals')->with('message','Se ha añadido un nuevo profesional');
+        Professional::create($request->input());
+        return redirect('professionals')->with('message','Se ha añadido un nuevo profesional');
     }
 
     /**
@@ -65,7 +65,7 @@ Class ProfessionalController extends Controller
     public function show($id)
     {
         //
-        $profesional=professional::findorFail($id);
+        $profesional=Professional::findorFail($id);
         return view('professional.show',[
             'profesional'=> $profesional,
         ]);
@@ -80,8 +80,8 @@ Class ProfessionalController extends Controller
     public function edit($id)
     {
         //
-        $profesional=professional::findorFail($id);
-        $grupo=group::all()->pluck('nombre','id')->prepend('Seleccione grupo profesional');
+        $profesional=Professional::findorFail($id);
+        $grupo=Group::all()->pluck('nombre','id')->prepend('Seleccione grupo profesional');
                 return view('professional.edit',[
             'profesional'=>$profesional,
             'grupo'=>$grupo
@@ -98,7 +98,7 @@ Class ProfessionalController extends Controller
     public function update(profesional $request, $id)
     {
         //
-        $profesional=professional::findorFail($id);
+        $profesional=Professional::findorFail($id);
         $profesional->fill($request->all())->save();
         return redirect()->action('professionalController@show',['id'=>$id])->with('message','Profesional actualizado');
     }
@@ -112,14 +112,14 @@ Class ProfessionalController extends Controller
     public function destroy($id)
     {
         //
-        professional::destroy($id);
+        Professional::destroy($id);
         return redirect('cliente')->with('message','Profesional eliminado');
     }
 
     public function getprofessional(Request $request,$id)
     {
         //
-        $data=professional::where('group_id',$id)
+        $data=Professional::where('group_id',$id)
             ->select('id','Nombre')
             ->get();
         return response()->json($data);
