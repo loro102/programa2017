@@ -126,10 +126,6 @@ Class FilesController extends Controller
         //Obtener el resto de las facturas
         $facturas = invoice::where('file_id', $id)->where('emitirfactcomision', false)->where('emitirfactporhonorarios', false)->get();
 
-        //obtener todas las facturas
-        //$x = invoice::where('file_id', $id)->where('honorario', false)->get();
-
-
         //Obtengo las id que estan dentro del grupo de honorario y filtro las facturas y los honorios
         $hon=professional::where('group_id',2)->get();
 
