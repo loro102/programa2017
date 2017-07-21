@@ -167,6 +167,8 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+        Laravel\Scout\ScoutServiceProvider::class,
+        TeamTNT\Scout\TNTSearchScoutServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -182,6 +184,8 @@ return [
         Intervention\Validation\ValidationServiceProvider::class,
         Pixelpeter\IsoCodesValidation\IsoCodesValidationServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+
+
 
     ],
 

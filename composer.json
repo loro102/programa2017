@@ -9,17 +9,19 @@
         "barryvdh/laravel-debugbar": "v2.3.2",
         "barryvdh/laravel-ide-helper": "v2.4.0",
         "caffeinated/shinobi": "v3.0.8",
+        "fzaninotto/faker": "~1.4",
         "intervention/validation": "1.1.10",
         "laravel/framework": "5.4.*",
+        "laravel/scout": "^3.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "5.4.x-dev",
+        "mockery/mockery": "0.9.*",
         "phpoffice/common": "0.2.5",
         "phpoffice/phpexcel": "1.8.1",
         "phpoffice/phpword": "0.12.0",
+        "phpunit/phpunit": "~5.0",
         "pixelpeter/laravel5-isocodes-validation": "v1.2.0",
-        "fzaninotto/faker": "~1.4",
-        "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~5.0"
+        "teamtnt/laravel-scout-tntsearch-driver": "^3.0"
     },
     "require-dev": {
 
@@ -50,7 +52,6 @@
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-
             "php artisan optimize"
         ]
     },
