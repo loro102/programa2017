@@ -1,6 +1,6 @@
 <template>
     <div class="col-md-12">
-        <h1 clas="text-center text-muted">
+        <h1 class="text-center text-muted">
             Buscador
         </h1>
         <div class="well">
@@ -32,12 +32,12 @@
             </div>
             <div class="row list-group">
                 <div v-if="!searching">
-                    <div class="well col-xs-10 col-xs-offset-1" v-for="cliente in customer"></div>
+                    <div class="well col-xs-10 col-xs-offset-1" v-for="customer in customer"></div>
                     <h1>{{cliente.nombre}}</h1>
 
                 </div>
                 <div class="pull-rigth">
-                    <v-paginator v-if="customers"
+                    <v-paginator v-if="customer"
                                  :options="options"
                                  :ressource_url="resource_url"
                                  v-on:update="updateResource"
@@ -47,6 +47,7 @@
                     <div v-else class="text-center">nanai</div>
                 </div>
             </div>
+    </div>
     </div>
 </template>
 
@@ -61,7 +62,7 @@
         },
         data(){
             return{
-                customers:[],
+                customer:[],
                 searching:false,
                 error:false,
                 query:'',
