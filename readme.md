@@ -1,3 +1,5 @@
+<img src=https://insight.sensiolabs.com/projects/7b982cd1-1750-4bd2-b742-6aa265150617/big.png/>
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
