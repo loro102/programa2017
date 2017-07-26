@@ -18,4 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/search', 'Api\SearchController@search');
+Route::get('/searchcli', 'Api\SearchController@cliente');
+Route::get('/searchexp', 'Api\SearchController@expediente');
+Route::get('/searchop', 'Api\SearchController@oponente');

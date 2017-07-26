@@ -3,6 +3,7 @@
 namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 /**
  * App\models\file
@@ -17,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 Class File extends Model
 {
+    use Searchable;
     protected $guarded = [
         'id',
         'timestamps',
@@ -52,6 +54,11 @@ Class File extends Model
     public function professional()
     {
         return $this->hasOne('App\models\professional','id','solicitor_id');
+    }
+
+    public function searchableAs()
+    {
+        return 'file_index';
     }
 
 

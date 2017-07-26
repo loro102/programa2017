@@ -3,6 +3,7 @@
 namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 /**
  * App\models\opponent
@@ -14,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 Class Opponent extends Model
 {
     //
+    use Searchable;
     protected $guarded = [
         'id',
         'timestamps',
@@ -25,6 +27,11 @@ Class Opponent extends Model
     public function processor()
     {
         return $this->hasOne('App\models\processor','id','processor_id');
+    }
+
+    public function searchableAs()
+    {
+        return 'opponent_index';
     }
     
 

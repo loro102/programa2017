@@ -6,6 +6,10 @@
  */
 
 require('./bootstrap');
+import Vue from 'vue';
+import VueResource from 'vue-resource';
+
+Vue.use(VueResource);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

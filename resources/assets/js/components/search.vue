@@ -28,15 +28,26 @@
 
         <div class="row list-group">
             <div v-if="!searching">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Nif</th>
+                    </tr>
 
-                <div class="well col-xs-10 col-xs-offset-1" v-for="resultado in resultados">
-                    <h1>{{ resultado.nombre }}</h1>
-                    <p>{{ resultado.apellidos }}</p>
-                    <div>
+                    </thead>
+                    <tbody>
+                    <tr v-for="resultado in resultados">
+                        <td>{{ resultado.apellidos }} {{ resultado.nombre }}</td>
+                        <td>{{ resultado.nif }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div>
                         <span class="label label-success">
                         </span>
                     </div>
-                </div>
 
                 <div class="clearfix"></div>
                 <hr/>
@@ -91,7 +102,7 @@
                 this.resultados = [];
                 this.searching = true;
 
-                this.resource_url = 'http://localhost/api/search?query=' + this.query;
+                this.resource_url = 'http://localhost/api/searchcli?query=' + this.query;
 
                 this.$http.get(this.resource_url).then((response) => {
                     if (response.body.error) {
