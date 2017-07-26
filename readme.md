@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-<a href="https://packagist.org/packages/laravel/framework"><a href="https://packagist.org/packages/laravel/framework"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://insight.sensiolabs.com/projects/7b982cd1-1750-4bd2-b742-6aa265150617/big.png"></a>
 </p>
 
 ## About Laravel
