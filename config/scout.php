@@ -67,9 +67,8 @@ return [
             'max_expansions' => 50,
             'distance' => 2
         ],
-        'asYouType' => false,
+        'resultados' => false,
         'searchBoolean' => env('TNTSEARCH_BOOLEAN', false),
-        'customer_index'=>false
     ],
 
 ];

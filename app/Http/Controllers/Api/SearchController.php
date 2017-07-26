@@ -13,9 +13,9 @@ class SearchController extends Controller
     {
         $error = ['No se ha encontrado resultados'];
         if ($request->has('query')) {
-            $resultados = customer::search($request->get('query'));
+            $resultados = customer::search($request->get('query'))->paginate(25);
 
-            return $resultados->count() ? $resultados : error;
+            return $resultados->count() ? $resultados : $error;
         }
 
         return $error;
