@@ -55,7 +55,7 @@ Class Customer extends Model
         return $this->hasMany('App\models\invoice');
     }
 
-    public function SearchableAs()
+    public function searchableAs()
     {
         return 'customer_index';
     }
