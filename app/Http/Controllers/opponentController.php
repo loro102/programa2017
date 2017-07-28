@@ -105,7 +105,7 @@ Class OpponentController extends Controller
     {
         //
         $contrario=opponent::findorFail($id);
-        $contrario->fill($request->all())->save();
+        $contrario->fill($request->except(['insurer_id']))->save();
         return redirect()->action('opponentController@show',['id'=>$contrario->id])->with('message','Tramitador actualizado');
     }
 

@@ -15,9 +15,18 @@ class SearchController extends Controller
     {
         $error = ['No se ha encontrado resultados'];
         if ($request->has('query')) {
-            $resultados = customer::search($request->get('query'))->paginate(25);
+            $resultados = customer::search($request->get('query'))->paginate(1);
+            $resultado2 = File::search($request->get('query'))->paginate(25);
+            $resultado3 = Opponent::search($request->get('query'))->paginate(25);
+            if ($resultados->count()) {
+                return $resultados->count() ? $resultados : $error;//,$resultado2->count() ? $resultado2 : $error];
+            }
+            if ($resultado2->count()) {
+                return $resultado2->count() ? $resultado2 : $error;//,$resultado2->count() ? $resultado2 : $error];
+            }
 
-            return $resultados->count() ? $resultados : $error;
+            return $resultado3->count() ? $resultado3 : $error;
+
         }
 
         return $error;
@@ -27,7 +36,7 @@ class SearchController extends Controller
     {
         $error = ['No se ha encontrado resultados'];
         if ($request->has('query')) {
-            $resultados = customer::search($request->get('query'))->paginate(25);
+            $resultados = File::search($request->get('query'))->paginate(25);
 
             return $resultados->count() ? $resultados : $error;
         }
@@ -39,7 +48,7 @@ class SearchController extends Controller
     {
         $error = ['No se ha encontrado resultados'];
         if ($request->has('query')) {
-            $resultados = customer::search($request->get('query'))->paginate(25);
+            $resultados = Opponent::search($request->get('query'))->paginate(25);
             return $resultados->count() ? $resultados : $error;
         }
 

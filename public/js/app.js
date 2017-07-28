@@ -10973,7 +10973,6 @@ module.exports = __webpack_require__(45);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 // CONCATENATED MODULE: ./node_modules/vue-resource/dist/vue-resource.es2015.js
 /*!
@@ -43678,56 +43677,165 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+
     components: {
+
         VPaginator: __WEBPACK_IMPORTED_MODULE_1_vuejs_paginator___default.a
-    },
-    data: function data() {
-        return {
-            resultados: [],
-            searching: false,
-            error: false,
-            query: '',
-            options: {
-                remote_current_page: 'current_page',
-                remote_last_page: 'last_page',
-                remote_next_page_url: 'next_page_url',
-                remote_prev_page_url: 'prev_page_url',
-                next_button_text: 'Siguiente',
-                previous_button_text: 'Anterior'
-            },
-            resource_url: ''
-        };
+
     },
 
-    methods: {
-        search: function search() {
+            data: function data() {
+
+                return {
+
+                    resultados: [],
+
+                    searching: false,
+
+                    error: false,
+
+                    query: '',
+
+                    options: {
+
+                        remote_current_page: 'current_page',
+
+                        remote_last_page: 'last_page',
+
+                        remote_next_page_url: 'next_page_url',
+
+                        remote_prev_page_url: 'prev_page_url',
+
+                        next_button_text: 'Siguiente',
+
+                        previous_button_text: 'Anterior'
+
+                    },
+
+                    resource_url: ''
+
+                };
+    },
+
+
+            methods: {
+
+                search: function search() {
             var _this = this;
 
             this.error = '';
-            this.resultados = [];
-            this.searching = true;
+
+                    this.resultados = [];
+
+                    this.searching = true;
 
             this.resource_url = 'http://localhost/api/searchcli?query=' + this.query;
 
             this.$http.get(this.resource_url).then(function (response) {
+
                 if (response.body.error) {
+
                     _this.error = response.body.error;
                 } else {
+
                     __WEBPACK_IMPORTED_MODULE_0_vue___default.a.set([], 'resultados', response.body);
                 }
+
                 _this.searching = false;
+
                 _this.query = '';
             });
         },
-        updateResource: function updateResource(data) {
-            this.resultados = data;
+
+                updateResource: function updateResource(data) {
+
+                    this.resultados = data;
         }
-    }
-});
+
+            }
+
+        });
 
 /***/ }),
 /* 43 */
@@ -43976,7 +44084,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-md-12"
   }, [_c('h1', {
     staticClass: "text-center text-muted"
-  }, [_vm._v("\n        Buscador\n    ")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n\n        Buscador\n\n    ")]), _vm._v(" "), _c('div', {
     staticClass: "well"
   }, [_c('div', {
     staticClass: "form-group"
@@ -44015,7 +44123,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.search
     }
-  }, [_vm._v("\n                        Buscar!\n                    ")]) : _c('button', {
+  }, [_vm._v("\n\n                        Buscar!\n\n                    ")]) : _c('button', {
     staticClass: "btn btn-default",
     attrs: {
       "type": "button",
@@ -44025,7 +44133,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "alert alert-danger"
   }, [_c('span', {
     staticClass: "glyphicon glyphicon-exclamation-sign"
-  }, [_vm._v("\n            " + _vm._s(_vm.error) + "\n        ")])]) : _vm._e(), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n\n            " + _vm._s(_vm.error) + "\n\n        ")])]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "row list-group"
   }, [(!_vm.searching) ? _c('div', [_c('table', {
     staticClass: "table table-striped"
