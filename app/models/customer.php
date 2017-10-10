@@ -59,6 +59,4 @@ Class Customer extends Model
     {
         return 'customer_index';
     }
-
-
 }

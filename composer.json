@@ -15,6 +15,7 @@
         "laravel/scout": "^3.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "5.4.x-dev",
+      "maatwebsite/excel": "2.1.20",
         "mockery/mockery": "0.9.*",
         "phpoffice/common": "0.2.5",
         "phpoffice/phpexcel": "1.8.1",

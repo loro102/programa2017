@@ -61,3 +61,6 @@ Route::get('/asunciondirecciontecnica/{file_id}/{profesional_id}','generator@con
 Route::get('/autorizacionycompromisodepago/{file_id}/{profesional_id}','generator@autorización_servicio_profesionales');
 Route::get('/designacionabogado/{file_id}/{profesional_id}','generator@designacion_abogado');
 Route::get('/reciboasistenciajuridica/{file_id}/{profesional_id}','generator@reciboasisteciajuridica');
+
+//procesamiento de excel a base de datos
+Route::get('/importar', 'importar@importController');

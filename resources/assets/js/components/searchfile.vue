@@ -4,25 +4,20 @@
 
         <h1 class="text-center text-muted">
 
-            Buscador
+            Expedientes
 
         </h1>
 
 
         <div class="well">
 
-            <div class="form-group form-inline">
+            <div class="form-group">
 
                 <div class="input-group">
 
                     <div class="icon-addon">
 
                         <input type="text" placeholder="¿Que estas buscando?" class="form-control" v-model="query">
-                        <select placeholder="¿Que estas buscando?" class="form-control" v-model="select">
-                            <option value="1">Cliente</option>
-                            <option value="2">Expediente</option>
-                            <option value="3">Contrario</option>
-                        </select>
 
                     </div>
 
@@ -166,8 +161,6 @@
 
                 query: '',
 
-                select: '1',
-
                 options: {
 
                     remote_current_page: 'current_page',
@@ -201,7 +194,7 @@
                 this.searching = true;
 
 
-                this.resource_url = 'http://localhost/api/searchcli?query=' + this.query + '&select=' + this.select;
+                this.resource_url = 'http://localhost/api/searchcli?query=' + this.query;
 
 
                 this.$http.get(this.resource_url).then((response) => {

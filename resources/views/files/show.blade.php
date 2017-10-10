@@ -658,6 +658,152 @@
 
                             <div>Aqui va la calculadora que esta pendiente</div>
                             <div>
+                                {!! Form::Model($notas,['action'=>'noteController@store','class'=>'horizontal']) !!}
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        {!! Form::label('','Muy Grave',['class'=>'control-label']) !!}
+                                        {!! Form::label('dias','Dias:',['class'=>'control-label']) !!}
+                                        {!! Form::text('dias',null,['class' => 'form-control input-lg']) !!}
+                                        {!! Form::label('valor','Valor:',['class'=>'control-label']) !!}
+                                        {!! Form::text('valor',null,['class' => 'form-control input-lg']) !!}
+                                        {!! Form::label('resultado','Resultado:',['class'=>'control-label']) !!}
+                                        {!! Form::text('resultado',null,['class' => 'form-control input-lg','rows'=>'6']) !!}
+
+                                        {!! Form::hidden('file_id', $expediente->id) !!}
+                                    </div>
+                                    <div class="form-group">
+                                        {!! Form::label('', 'Nota:', ['class' => 'control-label']) !!}
+                                        {!! Form::textarea('nota',null,['class' => 'form-control input-lg','rows'=>'6']) !!}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        {!! Form::submit('Nueva nota', ['class' => 'btn btn-md btn-success']) !!}
+                                    </div>
+                                </div>
+                                {!! Form::Close() !!}
+                                <div class="table table-bordered">
+                                    <table>
+                                        <tr>
+                                            <td class="col-md-1">Muy grave</td>
+                                            <td class="col-md-1">dias:</td>
+                                            <td class="col-md-1">valor:</td>
+                                            <td class="col-md-1">resultado:</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-1">grave</td>
+                                            <td class="col-md-1">dias:</td>
+                                            <td class="col-md-1">valor:</td>
+                                            <td class="col-md-1">resultado:</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-1">Moderado</td>
+                                            <td class="col-md-1">dias:</td>
+                                            <td class="col-md-1">valor:</td>
+                                            <td class="col-md-1">resultado:</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="col-md-1">Basico</td>
+                                            <td class="col-md-1">dias:</td>
+                                            <td class="col-md-1">valor:</td>
+                                            <td class="col-md-1">resultado:</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-1">Perjuicio personal por intervenciones:</td>
+                                            <td class="col-md-1">cantidad:</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-1">Secuelas Concurrentes</td>
+                                            <td class="col-md-1">secuelas</td>
+                                            <td class="col-md-1">cantidad:</td>
+                                            <td class="col-md-1">resultado:</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-1">Secuelas intergravitatorias</td>
+                                            <td class="col-md-1">Porcentaje:</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-1">Secuelas agravatorias</td>
+                                            <td class="col-md-1">cantidad:</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-1">Secuelas este grado:</td>
+                                            <td class="col-md-1">cantidad:</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-1">Perjuicio por pérdida de calidad de vida por secuela
+                                            </td>
+                                            <td class="col-md-1">tipo:</td>
+                                            <td class="col-md-1">cantidad:</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-1">Daño moral complementario por perjuicio psico-fisico
+                                            </td>
+                                            <td class="col-md-1">cantidad:</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-1">Daño mora complementario por perjuicio estético</td>
+                                            <td class="col-md-1">cantidad:</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-1">Perjuicio moral por pérdida de calidad de vida de
+                                                familiares
+                                            </td>
+                                            <td class="col-md-1">cantidad:</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-1">Pérdida de feto a consecuencia de accidente</td>
+                                            <td class="col-md-1">cantidad:</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-1">Gastos previsibles de asistencia sanitaria futura</td>
+                                            <td class="col-md-1">cantidad:</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-1">Necesidad de rehabilitación domiciliaria y ambulatoria
+                                                tras la estabilización
+                                            </td>
+                                            <td class="col-md-1">cantidad:</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-1">Necesidad de prótesis y ortresis tras la
+                                                estabilización
+                                            </td>
+                                            <td class="col-md-1">cantidad:</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-1">Necesidad de ayudas técnicas o productos de apoyo para
+                                                la autonomía personal en caso de pérdida muy grave o grave tras la
+                                                estabilización
+                                            </td>
+                                            <td class="col-md-1">cantidad:</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-1">Pérdida de autonomía que afecta a la movilidad tras la
+                                                estabilización
+                                            </td>
+                                            <td class="col-md-1">cantidad:</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-1">Necesidad de una tercera persona tras la
+                                                estabilización
+                                            </td>
+                                            <td class="col-md-1">cantidad:</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-1">Incapacidad para realizar su trabajo o actividad
+                                                profesional tras la estabilización
+                                            </td>
+                                            <td class="col-md-1">cantidad:</td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+                            </div>
+                            <div>
                                 <table class="table-bordered table-striped table-hover col-md-12">
                                     <tr>
                                         <th class="col-md-2">Fecha</th>
