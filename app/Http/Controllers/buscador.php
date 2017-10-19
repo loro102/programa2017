@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\models\customer;
-use App\models\agent;
+use App\models\File;
+use App\models\Opponent;
 
 Class Buscador Extends Controller
 {
