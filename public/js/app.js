@@ -10680,10 +10680,10 @@ g = (function() {
 
         try {
             // This works if eval is allowed (see CSP)
-            g = g || Function("return this")() || (1,eval)("this");
+            g = g || Function("return this")() || (1, eval)("this");
 } catch(e) {
             // This works if the window reference is available
-            if(typeof window === "object")
+            if (typeof window === "object")
                 g = window;
 }
 
@@ -10694,7 +10694,8 @@ g = (function() {
         module.exports = g;
 
 
-        /***/ }),
+        /***/
+    }),
     /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11237,6 +11238,7 @@ module.exports = Cancel;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+        Object.defineProperty(__webpack_exports__, "__esModule", {value: true});
 
 // CONCATENATED MODULE: ./node_modules/vue-resource/dist/vue-resource.es2015.js
 /*!
@@ -44590,7 +44592,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [(!_vm.searching) ? _c('div', [_c('table', {
     staticClass: "table table-striped"
   }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.resultados), function(resultado) {
-    return _c('tr', [_c('td', [_vm._v(_vm._s(resultado.apellidos) + " " + _vm._s(resultado.nombre))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(resultado.nif))])])
+      return _c('tr', [_c('td', [_c('a', {
+          attrs: {
+              "href": "../cliente/{{ resultado.id }"
+          }
+      }, [_vm._v(_vm._s(resultado.apellidos) + " {{ resultado.nombre }")]), _vm._v("}")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(resultado.nif))])])
   }))]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('div', {
     staticClass: "clearfix"
   }), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', {

@@ -74,7 +74,9 @@
 
                     <tr v-for="resultado in resultados">
 
-                        <td>{{ resultado.apellidos }} {{ resultado.nombre }}</td>
+                        <td><a href="../cliente/{{ resultado.id }">{{ resultado.apellidos }} {{ resultado.nombre
+                        }</a>}
+                        </td>
 
                         <td>{{ resultado.nif }}</td>
 
