@@ -8,7 +8,7 @@ use App\models\File;
 use App\models\Opponent;
 use Illuminate\Http\Request;
 
-class SearchController extends Controller
+class Searchcontroller extends Controller
 {
     //
     public function cliente(Request $request)
