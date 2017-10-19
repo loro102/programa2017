@@ -16,17 +16,17 @@ Class Buscador Extends Controller
             if ($request->has('select')) {
                 $select = $request->select;
                 if ($select == 1) {
-                    $resultados = customer::search($request->get('query'))->paginate(25);
+                    $resultados = customer::search($request->get('query')));
 
                     return $resultados->count() ? $resultados : $error;//,$resultado2->count() ? $resultado2 : $error];
                 }
                 if ($select == 2) {
-                    $resultado2 = File::search($request->get('query'))->paginate(25);
+                    $resultado2 = File::search($request->get('query'));
 
                     return $resultado2->count() ? $resultado2 : $error;//,$resultado2->count() ? $resultado2 : $error];
                 }
                 if ($select == 3) {
-                    $resultado3 = Opponent::search($request->get('query'))->paginate(25);
+                    $resultado3 = Opponent::search($request->get('query'));
 
                     return $resultado3->count() ? $resultado3 : $error;//,$resultado2->count() ? $resultado2 : $error];
                 }
@@ -40,7 +40,7 @@ Class Buscador Extends Controller
     {
         $error = ['No se ha encontrado resultados'];
         if ($request->has('query')) {
-            $resultados = File::search($request->get('query'))->paginate(25);
+            $resultados = File::search($request->get('query'));
 
             return $resultados->count() ? $resultados : $error;
         }
@@ -52,7 +52,7 @@ Class Buscador Extends Controller
     {
         $error = ['No se ha encontrado resultados'];
         if ($request->has('query')) {
-            $resultados = Opponent::search($request->get('query'))->paginate(25);
+            $resultados = Opponent::search($request->get('query'));
 
             return $resultados->count() ? $resultados : $error;
         }
