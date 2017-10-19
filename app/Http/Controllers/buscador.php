@@ -16,7 +16,7 @@ Class Buscador Extends Controller
             if ($request->has('select')) {
                 $select = $request->select;
                 if ($select == 1) {
-                    $resultados = customer::search($request->get('query')));
+                    $resultados = customer::search($request->get('query'));
 
                     return $resultados->count() ? $resultados : $error;//,$resultado2->count() ? $resultado2 : $error];
                 }
