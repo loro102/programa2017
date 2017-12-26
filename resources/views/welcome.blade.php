@@ -86,6 +86,7 @@
     @yield('content')
 </div>
 <div class="content">
+
     <div class="jumbotron center-block">
         <h1 class="text-center">Rumbo Jurídico</h1>
     </div>

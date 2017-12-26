@@ -14,7 +14,7 @@
     use App\Http\Controllers\permisosController;
 
     Route::get('/', function () {
-    return view('welcome');
+        return view('welcomes');
 });
 
 Auth::routes();
@@ -63,4 +63,11 @@ Route::get('/designacionabogado/{file_id}/{profesional_id}','generator@designaci
 Route::get('/reciboasistenciajuridica/{file_id}/{profesional_id}','generator@reciboasisteciajuridica');
 
 //procesamiento de excel a base de datos
-Route::get('/importar', 'importar@importController');
+//Route::get('/importar', 'importar@importController');
+
+//Busquedas
+Route::get('/searchc', 'buscador@clientes');
+Route::get('/searchcdata', 'buscador@clientedata');
+Route::get('/searchex', 'buscador@prueba');
+Route::get('/searchsiniestro', 'buscador@trafico');
+Route::get('/searchsin', 'buscador@filtrar');

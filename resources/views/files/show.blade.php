@@ -7,7 +7,7 @@
             <div class="panel-heading">Datos del Cliente</div>
             <div class="panel-body">
                 <div class="col-md-6">
-                    <strong>Cliente:</strong> {{$expediente->customer->getFullNameAttribute($expediente->customer->id)}}
+                    <strong>Cliente:</strong> {{link_to_action('clientes@show',$expediente->customer->getFullNameAttribute($expediente->customer->id),['id'=> $expediente->customer->id],[])}}
                 </div>
                 <div class="col-md-3"><strong>Nif:</strong> {{$expediente->customer->nif}}</div>
                 <div class="col-md-3"><strong>Fecha de
@@ -540,7 +540,7 @@
                                         <td class="col-md-2">{{link_to_action('invoicesController@edit',Carbon\Carbon::parse($factura->fechafact)->format('d-m-Y'),['id'=> $factura->id],[])}}</td>
                                         <td class="col-md-3">{{link_to_action('invoicesController@edit',$factura->numfactura,['id'=> $factura->id],[])}}</td>
                                         <td class="col-md-1">{{link_to_action('invoicesController@edit',$factura->file->customer->getFullNameAttribute($factura->file->customer->id),['id'=> $factura->id],[])}}</td>
-                                        <td class="col-md-1">{{link_to_action('invoicesController@edit',$factura->profesional->Nombre,['id'=> $factura->id],[])}}</td>
+                                        <td class="col-md-1">{{link_to_action('invoicesController@edit',$factura->professional->Nombre,['id'=> $factura->id],[])}}</td>
                                         <td class="col-md-1">{{link_to_action('invoicesController@edit',$factura->descripcion,['id'=> $factura->id],[])}}</td>
                                         <td class="col-md-1">{{link_to_action('invoicesController@edit',$factura->cuantia_cliente,['id'=> $factura->id],[])}}
                                             <span class="glyphicon glyphicon glyphicon-eur" aria-hidden="true"></span>
@@ -569,7 +569,7 @@
                                         <td class="col-md-2">{{link_to_action('invoicesController@edit',Carbon\Carbon::parse($honorario->fechafact)->format('d-m-Y'),['id'=> $honorario->id],[])}}</td>
                                         <td class="col-md-3">{{link_to_action('invoicesController@edit',$honorario->numfactura,['id'=> $honorario->id],[])}}</td>
                                         <td class="col-md-1">{{link_to_action('invoicesController@edit',$honorario->file->customer->getFullNameAttribute($honorario->file->customer->id),['id'=> $honorario->id],[])}}</td>
-                                        <td class="col-md-1">{{link_to_action('invoicesController@edit',$honorario->profesional->Nombre,['id'=> $honorario->id],[])}}</td>
+                                        <td class="col-md-1">{{link_to_action('invoicesController@edit',$honorario->professional->Nombre,['id'=> $honorario->id],[])}}</td>
                                         <td class="col-md-1">{{link_to_action('invoicesController@edit',$honorario->descripcion,['id'=> $honorario->id],[])}}</td>
                                         <td class="col-md-1">{{link_to_action('invoicesController@edit',$honorario->cuantia_cliente,['id'=> $honorario->id],[])}}
                                             <span class="glyphicon glyphicon glyphicon-eur" aria-hidden="true"></span>
@@ -656,7 +656,7 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
 
-                            <div>Aqui va la calculadora que esta pendiente</div>
+                            <div>Calculadora pendiente de terminar</div>
                             <div>
                                 {!! Form::Model($notas,['action'=>'noteController@store','class'=>'form-inline']) !!}
                                 <fieldset>
@@ -989,7 +989,7 @@
                                 <div class="row">
                                     <fieldset>
                                         <div class="form-group">
-                                            {!! Form::submit('Nueva nota', ['class' => 'btn btn-md btn-success']) !!}
+                                            {!! Form::submit('Calcular indemnización', ['class' => 'btn btn-md btn-success']) !!}
                                         </div>
                                     </fieldset>
                                 </div>
@@ -1012,7 +1012,7 @@
                                         <tr>
                                             <td class="col-md-2">{{Carbon\Carbon::parse($factura->fechafact)->format('d-m-Y')}}</td>
                                             <td class="col-md-3">{{$factura->numfactura}}</td>
-                                            <td class="col-md-1">{{$factura->profesional->Nombre}}</td>
+                                            <td class="col-md-1">{{$factura->professional->Nombre}}</td>
                                             <td class="col-md-1">{{$factura->descripcion}}</td>
                                             <td class="col-md-1">{{$factura->cuantia_factura}} <span
                                                         class="glyphicon glyphicon glyphicon-eur"

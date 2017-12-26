@@ -18,6 +18,13 @@ use Laravel\Scout\Searchable;
 Class Customer extends Model
 {
     Use Searchable;
+    public $resultados = true;
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
 
     //
     protected $guarded = [
@@ -25,10 +32,16 @@ Class Customer extends Model
         'timestamps',
     ];
 
-    public function getFullNameAttribute($value)
+    public function nombrecompleto($value)
     {
         return $this->nombre.' '.$this->apellidos;
     }
+
+    public function getfullnameattribute($value)
+    {
+        return $this->nombre . ' ' . $this->apellidos;
+    }
+
 
     public function apellidonombre($value)
     {
@@ -55,8 +68,29 @@ Class Customer extends Model
         return $this->hasMany('App\models\invoice');
     }
 
-    public function searchableAs()
+    /*  public function searchableAs()
+      {
+          return 'customer_index';
+      }*/
+    public function toSearchableArray()
     {
-        return 'customer_index';
+
+        return [
+            'id' => $this->id,
+            'nombre' => $this->nombre,
+            'apellidos' => $this->apellidos,
+            'nif' => $this->nif,
+
+        ];
     }
+
+
+    /*public function  Scopeclientes($buscar ,$tip)
+    {
+
+        $clientes=$this->search($buscar);
+        $expediente=$this->file->search($buscar);
+        $oponente=$this->file->opponent->($buscar);
+        return $this->search($buscar);
+    }*/
 }

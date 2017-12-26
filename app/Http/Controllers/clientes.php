@@ -21,7 +21,8 @@ Class Clientes Extends Controller
      */
     public function index()
     {
-        $cliente = customer::all();
+        $cliente = customer::all('id', 'nombre', 'apellidos', 'nif')->chunk(30);
+        //dd($cliente);
         return view('clientes.index', [
             'clientes'=> $cliente
         ]);

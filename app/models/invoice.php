@@ -24,10 +24,11 @@ Class Invoice extends Model
         return $this->belongsTo('App\models\professional','id');
     }*/
     //Obtener datos
-    public function profesional()
+    public function professional()
     {
-        return $this->hasOne('App\models\professional','id','professional_id');
+        return $this->hasone('App\models\professional', 'id', 'professional_id');
     }
+
     public function file()
     {
         return $this->HasOne('App\models\file','id','file_id');

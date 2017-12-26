@@ -100,7 +100,10 @@ Class InvoicesController extends Controller
     {
         //
         $invoice=new invoice;
-        $invoice->fill($request->except('grupo'))->save();
+        if ($request->except('grupo')) {
+            $invoice->fill($request->except('grupo'))->save();
+        }
+
 
         return redirect()->action('filesController@show',['file'=>$request->input('file_id').'#facturas'])->with('message','Factura agregada correctamente');
     }

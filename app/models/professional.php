@@ -27,8 +27,9 @@ class Professional extends Model
 
     public function invoice()
     {
-        return $this->belongsTo('App\models\invoice', 'id', 'professional_id');
+        return $this->hasmany('App\models\invoice', 'professional_id', 'id');
     }
+
 
     public function group()
     {

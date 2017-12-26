@@ -121,20 +121,28 @@ Class FilesController extends Controller
         $factxcomision = invoice::where('file_id', $id)->where('emitirfactcomision', true)->get();
 
         //Obtener facturas por honorarios
-        $factsxhonorarios = invoice::where('file_id', $id)->where('emitirfactporhonorarios', true)->get();
+        $factsxhonorarios = invoice::where('file_id', $id)->where('honorario', true)->get();
 
         //Obtener el resto de las facturas
-        $facturas = invoice::where('file_id', $id)->where('emitirfactcomision', false)->where('emitirfactporhonorarios', false)->get();
+        $facturas = invoice::where('file_id', $id)
+            ->where('emitirfactcomision', false)
+            ->where('honorario', false)
+            ->where('cuantia_empresa', '!=', 0)
+            ->get();
 
         //Obtengo las id que estan dentro del grupo de honorario y filtro las facturas y los honorios
         $hon=professional::where('group_id',2)->get();
 
         //obtener todos los honorarios del expediente
-        $honorario = invoice::where('file_id', $id)->whereIn('professional_id', $hon)->get();
+        $honorario = invoice::where('file_id', $id)
+            ->whereIn('professional_id', $hon)
+            ->get();
         //obtener todas las facturas del expediente
-        $factura = invoice::where('file_id', $id)->whereNotIn('professional_id', $hon)->get();
+        $factura = invoice::where('file_id', $id)
+            ->whereNotIn('professional_id', $hon)
+            ->get();
 
-
+        //dd($factura);
 
 
         //array con los totales calculados

@@ -122,12 +122,12 @@
                     <div class="form-group">
                         {!! Form::label('emitirfactcomision', 'Emitir factura por comision', ['class' => 'control-label']) !!}
                         {!! Form::hidden('emitirfactcomision', '0', []) !!}
-                        {!! Form::checkbox('emitirfactcomision', '1', null,  ['class' => 'form-control']) !!}
+                        {!! Form::checkbox('emitirfactcomision', '1',null ,  ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('sinoriginal', 'Falta la factura original', ['class' => 'control-label']) !!}
                         {!! Form::hidden('sinoriginal', '0', []) !!}
-                        {!! Form::checkbox('sinoriginal', '1', null,  ['class' => 'form-control']) !!}
+                        {!! Form::checkbox('sinoriginal', '1',null,  ['class' => 'form-control']) !!}
                     </div>
 
                 </div>

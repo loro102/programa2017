@@ -56,6 +56,8 @@ Class AgenteController extends Controller
     public function show($id)
     {
         $agente = agent::findorFail($id);
+        //$cliente = $agente->with('customers')->get;
+
         return view('agentes.show', [
             'agente' => $agente,
         ]);

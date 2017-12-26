@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\profesional;
 use App\models\group;
+use App\models\Invoice;
 use App\models\professional;
 use Illuminate\Http\Request;
 
@@ -66,6 +67,9 @@ Class ProfessionalController extends Controller
     {
         //
         $profesional=Professional::findorFail($id);
+        //$factura=Invoice::where('professional_id',$id)->get();
+        //$total_factura=$factura->cuantia_factura->sum();
+        //dd($total_factura);
         return view('professional.show',[
             'profesional'=> $profesional,
         ]);

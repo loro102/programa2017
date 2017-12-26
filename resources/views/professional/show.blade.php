@@ -8,7 +8,7 @@
         @endif
         <p>
             <span class="pull-right">
-                {!! Form::open(['method'=>'DELETE','route'=>['Professionals.destroy',$profesional->id]],['class'=>'form-inline']) !!}
+                {!! Form::open(['method'=>'DELETE','route'=>['professionals.destroy',$profesional->id]],['class'=>'form-inline']) !!}
                 {!! Form::submit('Borrar profesional', array('class' => 'btn btn-sm btn-danger pull-right ','id'=>'deletebtn', 'onclick' => 'return confirm("¿Estas seguro de querer eliminar este profesional?");')) !!}
                 {{ link_to_action('ProfessionalController@edit','Editar profesional',['id'=>$profesional->id],['class'=>'btn btn-sm btn-warning pull-right ']) }}
                 {!! Form::close()!!}
@@ -50,6 +50,55 @@
                 <div class="col-md-12 well"><strong>Acuerdo de pago:</strong>{{ $profesional->acuerdo_pago }}</div>
 
                 <div class="col-md-12 well"><strong>Notas:</strong>{{ $profesional->notas }}</div>
+
+                <div>
+                    <table class="table table-striped table-condensed table-hover">
+                        <tr class="info">
+                            <th>Fecha Factura</th>
+                            <th>Cliente</th>
+                            <th>Importe</th>
+                            <th>Importe Empresa</th>
+                        </tr>
+                        @php
+                            //dd($profesional->invoice);
+                        @endphp
+                        @foreach($profesional->invoice()->orderBy('fechafact','Desc')->get() as $i )
+
+                            @if($i->estadopago == 1)
+                                <tr class="danger">
+                            @elseif($i->estadopago > 1 and $i->sinoriginal==False)
+                                <tr class="success">
+                            @elseif($i->estadopago > 1 and $i->sinoriginal==True)
+                                <tr class="warning">
+                            @else
+                                <tr>
+                                    @endif
+                                    <td>{{Carbon\Carbon::parse($i->fechafact)->format('d-m-Y')}}</td>
+                                    <td>{{ link_to_action('filesController@show',$i->file->customer->fullname,['id'=> $i->file->id],[])}}</td>
+                                    <td>{{$i->cuantia_factura}}<span class="glyphicon glyphicon-eur"
+                                                                     aria-hidden="true"></span></td>
+                                    <td>{{$i->cuantia_empresa}}<span class="glyphicon glyphicon-eur"
+                                                                     aria-hidden="true"></span></td>
+                                </tr>
+                                @endforeach
+                                <tr class="info">
+                                    <td colspan="2"></td>
+                                    <td colrow="2">Total factura:{!! $profesional->invoice()->sum('cuantia_factura') !!}
+                                        <span class="glyphicon glyphicon-eur" aria-hidden="true"></span></td>
+                                    <td>Total empresa:{!! $profesional->invoice()->sum('cuantia_empresa') !!}<span
+                                                class="glyphicon glyphicon-eur" aria-hidden="true"></span></td>
+                                </tr>
+                                <tr class="info">
+                                    <td colspan="2"></td>
+                                    <td colspan="2">
+                                        Beneficio:{!! $profesional->invoice()->sum('cuantia_factura') - $profesional->invoice()->sum('cuantia_empresa') !!}
+                                        <span class="glyphicon glyphicon-eur" aria-hidden="true"></span></td>
+                                </tr>
+                    </table>
+
+
+                </div>
+            </div>
             </div>
 
         </div>

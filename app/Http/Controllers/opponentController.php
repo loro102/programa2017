@@ -118,5 +118,8 @@ Class OpponentController extends Controller
     public function destroy($id)
     {
         //
+        $contrario = opponent::findorfail($id);
+        opponent::destroy($id);
+        return redirect()->action('filesController@show', ['id' => $contrario->file_id . '#expediente'])->with('message', 'el contrario con el nombre ' . $contrario->nombre . ' ha sido eliminado');
     }
 }
