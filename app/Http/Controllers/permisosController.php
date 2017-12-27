@@ -6,7 +6,7 @@ use Caffeinated\Shinobi\Models\Role;
 use Illuminate\Http\Request;
 use Caffeinated\Shinobi\Models\Permission;
 
-class permisosController extends Controller
+Class PermisosController extends Controller
 {
     public function __construct()
     {
@@ -46,8 +46,6 @@ class permisosController extends Controller
     {
         //
         Permission::create($request->input());
-
-        //dd($request->input());
         return redirect('permisos')->with('message','Se ha añadido un nuevo permiso');
     }
 
@@ -121,7 +119,6 @@ class permisosController extends Controller
     public function revoke(Request $request)
     {
         //
-        //dd($request) ;
         $role = Role::find($request->role);
         $role->revokePermission($request->permiso);
         $role->save();;

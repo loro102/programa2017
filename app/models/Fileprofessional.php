@@ -4,9 +4,14 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class file_professional extends Model
+/**
+ * App\models\file_professional.
+ *
+ * @property \App\models\professional $professional
+ * @mixin \Eloquent
+ */
+class Fileprofessional extends Model
 {
-    //
     protected $guarded = [
         'id',
         'timestamps',
@@ -21,6 +26,4 @@ class file_professional extends Model
     {
         return $this->hasMany('App\models\professional');
     }*/
-
-
 }

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class group extends Seeder
+Class Group extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,28 +16,31 @@ class group extends Seeder
             'nombre' => 'Abogados',
         ]);
         DB::table('groups')->insert([
-                                        'nombre' => 'Médicos',
-                                    ]);
+            'nombre' => 'Honorarios',
+        ]);
         DB::table('groups')->insert([
-                                        'nombre' => 'Fisioterapia',
-                                    ]);
+            'nombre' => 'Médicos',
+        ]);
         DB::table('groups')->insert([
-                                        'nombre' => 'Clínica/Hospital',
-                                    ]);
+            'nombre' => 'Fisioterapia',
+        ]);
         DB::table('groups')->insert([
-                                        'nombre' => 'Perito Ingeniero',
-                                    ]);
+            'nombre' => 'Clínica/Hospital',
+        ]);
         DB::table('groups')->insert([
-                                        'nombre' => 'Perito Médico',
-                                    ]);
+            'nombre' => 'Perito Ingeniero',
+        ]);
         DB::table('groups')->insert([
-                                        'nombre' => 'Procurador',
-                                    ]);
+            'nombre' => 'Perito Médico',
+        ]);
         DB::table('groups')->insert([
-                                        'nombre' => 'Taxi',
-                                    ]);
+            'nombre' => 'Procurador',
+        ]);
         DB::table('groups')->insert([
-                                        'nombre' => 'Ambulancia',
-                                    ]);
+            'nombre' => 'Taxi',
+        ]);
+        DB::table('groups')->insert([
+            'nombre' => 'Ambulancia',
+        ]);
     }
 }

@@ -14,7 +14,7 @@
     use App\Http\Controllers\permisosController;
 
     Route::get('/', function () {
-    return view('welcome');
+        return view('welcomes');
 });
 
 Auth::routes();
@@ -28,11 +28,12 @@ Route::resource('/insurers','insurersController');
 Route::resource('/processor','processorController');
 Route::resource('/roles','rolesController');
 Route::resource('/invoices','invoicesController');
-Route::resource('/professionals','professionalController');
-Route::resource('/filepro','file_professionalController');
+Route::resource('/professionals','ProfessionalController');
+Route::resource('/filepro','FileprofessionalController');
 Route::resource('/note','noteController');
 Route::resource('/opponent','opponentController');
 Route::resource('/generator','generator');
+Route::resource('/documentos','documentController');
 
 //Pantalla de Administración
 Route::resource('/usuario','userController');
@@ -60,3 +61,13 @@ Route::get('/asunciondirecciontecnica/{file_id}/{profesional_id}','generator@con
 Route::get('/autorizacionycompromisodepago/{file_id}/{profesional_id}','generator@autorización_servicio_profesionales');
 Route::get('/designacionabogado/{file_id}/{profesional_id}','generator@designacion_abogado');
 Route::get('/reciboasistenciajuridica/{file_id}/{profesional_id}','generator@reciboasisteciajuridica');
+
+//procesamiento de excel a base de datos
+//Route::get('/importar', 'importar@importController');
+
+//Busquedas
+Route::get('/searchc', 'buscador@clientes');
+Route::get('/searchcdata', 'buscador@clientedata');
+Route::get('/searchex', 'buscador@prueba');
+Route::get('/searchsiniestro', 'buscador@trafico');
+Route::get('/searchsin', 'buscador@filtrar');

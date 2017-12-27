@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class phases extends Seeder
+Class Phases extends Seeder
 {
     /**
      * Run the database seeds.

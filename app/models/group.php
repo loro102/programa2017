@@ -4,7 +4,13 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class group extends Model
+/**
+ * App\models\group
+ *
+ * @property-read \App\models\professional $professional
+ * @mixin \Eloquent
+ */
+Class Group extends Model
 {
     //
 

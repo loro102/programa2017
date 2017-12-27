@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class formalidad extends FormRequest
+Class Formalidad extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,13 +26,13 @@ class formalidad extends FormRequest
         return [
             //
             'nombre'=>'required',
-            'formalidad'=>'required'
+            'categoria'=>'required'
         ];
     }
     public function attributes()
     {
         return [
-            'formalidad'=>'categoria',
+            'categoria'=>'categoria',
         ];
     }
 }

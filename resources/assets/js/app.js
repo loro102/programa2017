@@ -6,6 +6,10 @@
  */
 
 require('./bootstrap');
+import Vue from 'vue';
+import VueResource from 'vue-resource';
+
+Vue.use(VueResource);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -14,6 +18,8 @@ require('./bootstrap');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('Searchcliente', require('./components/search.vue'));
+Vue.component('Searchfile', require('./components/searchfile.vue'));
 
 const app = new Vue({
     el: '#app'

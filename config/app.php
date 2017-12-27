@@ -102,8 +102,7 @@ return [
     | will not be safe. Please do this before deploying an application!
     |
     */
-
-    'key' => env('APP_KEY'),
+    'key' => env('APP_KEY', ' base64:mkQTn8bE+lvVgJmTJVyHD06u3+k2MSrYFuom3PJen5E= '),
 
     'cipher' => 'AES-256-CBC',
 
@@ -167,6 +166,8 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+        Laravel\Scout\ScoutServiceProvider::class,
+        TeamTNT\Scout\TNTSearchScoutServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -182,6 +183,7 @@ return [
         Intervention\Validation\ValidationServiceProvider::class,
         Pixelpeter\IsoCodesValidation\IsoCodesValidationServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -235,7 +237,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Shinobi' => Caffeinated\Shinobi\Facades\Shinobi::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
-
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

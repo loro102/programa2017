@@ -21,7 +21,6 @@ class FilesCreateTable extends Migration
             $table->string('nombre')->nullable();
             $table->string('nif')->nullable();
             $table->date('fechanacimiento')->nullable();
-            //$table->foreign('solicitor_id')->references('id')->on('users');
             //Datos expediente
             $table->date('fechaapertura');
             $table->date('fechacierre')->nullable();
@@ -30,8 +29,6 @@ class FilesCreateTable extends Migration
             $table->date('fechallegadatalon')->nullable();
             $table->date('fechaarchivo')->nullable();
             $table->integer('caso_tipo')->nullable();
-            //$table->integer('sort_file_id')->unsigned();
-            //$table->foreign('sort_file_id')->references('id')->on('sort_files');
             //otros datos
             $table->date('fecha_accidente')->nullable();
             $table->time('hora_accidente')->nullable();
@@ -59,8 +56,6 @@ class FilesCreateTable extends Migration
             $table->date('fechaofertamotivada')->nullable();
             $table->date('fecharespuestamotivada')->nullable();
             $table->boolean('respuestamotivadaaceptada')->nullable();
-            //$table->integer('formality_id')->unsigned()->nullable();
-            //$table->foreign('formality_id')->reference('id')->on('formalities');
             $table->string('numero_procedimiento')->nullable();
             $table->string('diligencias_previas')->nullable();
             $table->date('fecha_denuncia')->nullable();
@@ -75,8 +70,6 @@ class FilesCreateTable extends Migration
             $table->string('tomador')->nullable();
             $table->string('numero_poliza')->nullable();
             $table->string('ref_expediente')->nullable();
-            //$table->integer('insurer_id')->nullable();
-            //$table->foreign('insurer_id')->references('id')->on('insurers');
             $table->date('fechapoliza')->nullable();
             $table->date('finfechapoliza')->nullable();
             $table->text('descripcion')->nullable();

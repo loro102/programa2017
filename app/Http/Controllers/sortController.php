@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\models\sort;
 use Illuminate\Http\Request;
 
-class sortController extends Controller
+Class SortController extends Controller
 {
     public function __construct()
     {
@@ -45,8 +45,6 @@ class sortController extends Controller
     {
         //
         sort::create($request->input());
-
-        //dd($request->input());
         return redirect('sort')->with('message','Se ha añadido una nueva clase de expediente');
     }
 

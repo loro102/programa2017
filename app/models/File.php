@@ -3,9 +3,22 @@
 namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
-class file extends Model
+/**
+ * App\models\file
+ *
+ * @property-read \App\models\customer $customer
+ * @property-read \App\models\insurer $insurer
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\opponent[] $opponent
+ * @property-read \App\models\phase $phase
+ * @property-read \App\models\professional $professional
+ * @property-read \App\models\sort $sort
+ * @mixin \Eloquent
+ */
+Class File extends Model
 {
+    use Searchable;
     protected $guarded = [
         'id',
         'timestamps',
@@ -41,6 +54,11 @@ class file extends Model
     public function professional()
     {
         return $this->hasOne('App\models\professional','id','solicitor_id');
+    }
+
+    public function searchableAs()
+    {
+        return 'file_index';
     }
 
 

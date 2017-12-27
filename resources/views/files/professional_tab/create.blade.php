@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     @include('partials.flash')
-    {!! Form::Model($prof,['action'=>'file_professionalController@store','class'=>'form-inline']) !!}
+    {!! Form::Model($prof,['action'=>'FileprofessionalController@store','class'=>'form-inline']) !!}
     <div class="row">
         <div class="form-group">
             {!! Form::hidden('file_id', Request::get('file')) !!}

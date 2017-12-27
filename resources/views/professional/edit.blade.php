@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        {!! Form::Model($profesional,['route'=>['professionals.update',$profesional->id],'class'=>'form-inline','method'=>'PUT','id'=>'profesional']) !!}
+        {!! Form::Model($profesional,['route'=>['Professionals.update',$profesional->id],'class'=>'form-inline','method'=>'PUT','id'=>'profesional']) !!}
         <div class="row">
             <div class="form-group">
                 {!! Form::label('nombre', 'Nombre:', ['class' => 'control-label']) !!}

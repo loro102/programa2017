@@ -4,7 +4,13 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class insurer extends Model
+/**
+ * App\models\insurer
+ *
+ * @property-read \App\models\file $file
+ * @mixin \Eloquent
+ */
+Class Insurer extends Model
 {
     //
     protected $guarded = [

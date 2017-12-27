@@ -6,7 +6,7 @@ use App\Http\Requests\formalidad;
 use App\models\formality;
 use Illuminate\Http\Request;
 
-class formalitiesController extends Controller
+Class FormalitiesController extends Controller
 {
     public function __construct()
     {
@@ -40,15 +40,13 @@ class formalitiesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Http\Requests\formalidad $request
      * @return \Illuminate\Http\Response
      */
     public function store(formalidad $request)
     {
         //
         formality::create($request->input());
-
-        //dd($request->input());
         return redirect('formality')->with('message','Se ha añadido un nuevo procedimiento');
     }
 
@@ -83,8 +81,8 @@ class formalitiesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \App\Http\Requests\formalidad $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(formalidad $request, $id)
@@ -115,9 +113,7 @@ class formalitiesController extends Controller
         $data=formality::where('categoria',$id)
             ->select('id','nombre')
         ->get();
-        //dd($data);
         return response()->json($data);
-        //return view('files.create')->with('data',$data);
     }
 
 

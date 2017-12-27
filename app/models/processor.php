@@ -4,7 +4,13 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class processor extends Model
+/**
+ * App\models\processor
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\insurer[] $insurer
+ * @mixin \Eloquent
+ */
+Class Processor extends Model
 {
     //
     protected $guarded = [

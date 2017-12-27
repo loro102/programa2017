@@ -7,7 +7,7 @@ use App\models\opponent;
 use App\models\processor;
 use Illuminate\Http\Request;
 
-class opponentController extends Controller
+Class OpponentController extends Controller
 {
     public function __construct()
     {
@@ -53,8 +53,6 @@ class opponentController extends Controller
         //
         $file=$request->input('file_id');
         opponent::create($request->except('insurer_id'));
-
-        //dd($request->input());
         return redirect()->action('opponentController@create',['file'=>$file])->with('message','Contrario agregado correctamente');
     }
 
@@ -73,7 +71,6 @@ class opponentController extends Controller
         return view('opponent.show',[
             'contrario'=>$contrario,
             'aseguradora'=>$aseguradora
-            //'aseguradora'=>$aseguradora,
         ]);
 
     }
@@ -108,7 +105,7 @@ class opponentController extends Controller
     {
         //
         $contrario=opponent::findorFail($id);
-        $contrario->fill($request->all())->save();
+        $contrario->fill($request->except(['insurer_id']))->save();
         return redirect()->action('opponentController@show',['id'=>$contrario->id])->with('message','Tramitador actualizado');
     }
 
@@ -121,5 +118,8 @@ class opponentController extends Controller
     public function destroy($id)
     {
         //
+        $contrario = opponent::findorfail($id);
+        opponent::destroy($id);
+        return redirect()->action('filesController@show', ['id' => $contrario->file_id . '#expediente'])->with('message', 'el contrario con el nombre ' . $contrario->nombre . ' ha sido eliminado');
     }
 }

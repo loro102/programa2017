@@ -46,7 +46,7 @@
                     {!! Form::textarea('descripcion', '', ['class' => 'form-control','rows'=>'4']) !!}
                 </div>
                 @if(Request::get('prof')!=0)
-                    {!! Form::hidden('professional_id',Request::get('id'), ['class' => 'form-control']) !!}
+                    {!! Form::hidden('professional_id',Request::get('prof'), ['class' => 'form-control']) !!}
                 @else
                     <div class="form-group">
                         {!! Form::label('grupo', 'Sector:', ['class' => 'control-label']) !!}

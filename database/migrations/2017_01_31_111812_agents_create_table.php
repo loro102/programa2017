@@ -29,7 +29,6 @@ class AgentsCreateTable extends Migration
             $table->string('fax')->nullable();
             $table->string('email')->nullable();
             $table->integer('commercial_id')->unsigned();
-            //$table->foreign('commercial_id')->references('id')->on('commercials');
             $table->text('notas')->nullable();
             $table->boolean('placa')->nullable();
             $table->boolean('pegatina')->nullable();

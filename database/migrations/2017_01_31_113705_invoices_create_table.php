@@ -21,8 +21,6 @@ class InvoicesCreateTable extends Migration
             $table->boolean('honorario')->default(false);
             $table->integer('professional_id')->unsigned();
             $table->foreign('professional_id')->references('id')->on('professionals');
-            //$table->integer('group_id')->unsigned();
-            //$table->foreign('group_id')->references('id')->on('groups');
             $table->date('fechasupl')->nullable();
             $table->date('fechacontrafact')->nullable();
             $table->string('numfactura')->nullable();

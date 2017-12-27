@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-//use App\models\file;
+
 use Illuminate\Http\Request;
 use App\models\customer;
 use App\models\agent;
-use Illuminate\Support\Facades\Storage;
 
-class clientes extends Controller
+
+Class Clientes Extends Controller
 {
     public function __construct()
     {
@@ -21,10 +21,9 @@ class clientes extends Controller
      */
     public function index()
     {
-        //
-        $cliente=customer::paginate(10);
+        $cliente = customer::all('id', 'nombre', 'apellidos', 'nif')->chunk(30);
         //dd($cliente);
-        return view('clientes.index',[
+        return view('clientes.index', [
             'clientes'=> $cliente
         ]);
     }
@@ -38,31 +37,24 @@ class clientes extends Controller
     {
         //Crea un nuevo registro en la tabla de customers
         $cliente=new customer;
-        $agente=agent::orderBy('nombre','asc')->pluck('nombre','id');
-
-        return view('clientes.create',[
+        $agente=agent::orderBy('nombre', 'asc')->pluck('nombre', 'id');
+        return view('clientes.create', [
             'cliente'=>$cliente,
             'agente'=>$agente
         ]);
-
-
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Http\Requests\customer $request
      * @return \Illuminate\Http\Response
      */
     public function store(\App\Http\Requests\customer $request)
     {
         //Crea un nuevo registro para el cliente
         customer::create($request->input());
-        $cliente=customer::all();
-        //Storage::makeDirectory('storage/cliente/'.$cliente->last()->id);
-
-        //dd($request->input());
-        return redirect('cliente')->with('message','Se ha añadido un nuevo cliente');
+        return redirect('cliente')->with('message', 'Se ha añadido un nuevo cliente');
     }
 
     /**
@@ -73,16 +65,11 @@ class clientes extends Controller
      */
     public function show($id)
     {
-        //
         $cliente=customer::findorFail($id);
-        //$agente=customer::findorfail($id)->agent;
-        //$expedientes=file::where('customer_id',$id)->get();
-        $expedientestraf=$cliente->files()->where('sort_id',1)->get();
-        $expedientesotros=$cliente->files()->where('sort_id','!=',1)->get();
-        //dd($expedientes);
-        return view('clientes.show',[
+        $expedientestraf=$cliente->files()->where('sort_id', 1)->get();
+        $expedientesotros=$cliente->files()->where('sort_id', '!=', 1)->get();
+        return view('clientes.show', [
             'cliente'=> $cliente,
-            //'agente'=>$agente,
             'expedientestraf'=>$expedientestraf,
             'expedientes'=>$expedientesotros
         ]);
@@ -96,10 +83,9 @@ class clientes extends Controller
      */
     public function edit($id)
     {
-        //
         $cliente=customer::findorFail($id);
-        $agente=agent::orderBy('nombre','asc')->pluck('nombre','id');
-        return view('clientes.edit',[
+        $agente=agent::orderBy('nombre', 'asc')->pluck('nombre', 'id');
+        return view('clientes.edit', [
             'cliente'=>$cliente,
             'agente'=>$agente
         ]);
@@ -114,10 +100,9 @@ class clientes extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $cliente=customer::findorFail($id);
         $cliente->fill($request->all())->save();
-        return redirect()->action('clientes@show',['id'=>$id])->with('message','Cliente actualizado');
+        return redirect()->action('clientes@show', ['id'=>$id])->with('message', 'Cliente actualizado');
     }
 
     /**
@@ -128,8 +113,7 @@ class clientes extends Controller
      */
     public function destroy($id)
     {
-        //
         customer::destroy($id);
-        return redirect('cliente')->with('message','Cliente eliminado');
+        return redirect('cliente')->with('message', 'Cliente eliminado');
     }
 }

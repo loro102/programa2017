@@ -11,7 +11,8 @@
                 <th class="col-md-8">nombre</th>
                 <th class="col-md-4">DNI/NIF</th>
             </tr>
-            @forelse($clientes as $cliente)
+            @foreach ($clientes as $chunk)
+                @forelse($chunk as $cliente)
                 <tr>
                     <td class="col-md-8">{{link_to_action('clientes@show',$cliente->Apellidonombre($cliente->id),['id'=> $cliente->id],[])}}</td>
                     <td class="col-md-4">{{link_to_action('clientes@show',$cliente->nif,['id'=> $cliente->id],[])}}</td>
@@ -21,6 +22,7 @@
                 <td class="col-md-12 danger">No hay clientes introducidos</td>
                 </tr>
             @endforelse
+            @endforeach
         </table>
     </div>
     @endsection

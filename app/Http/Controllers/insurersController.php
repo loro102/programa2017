@@ -7,7 +7,7 @@ use App\models\processor;
 use Illuminate\Http\Request;
 use App\Http\Requests\aseguradora;
 
-class insurersController extends Controller
+Class InsurersController extends Controller
 {
     public function __construct()
     {
@@ -42,13 +42,12 @@ class insurersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Http\Requests\aseguradora $request
      * @return \Illuminate\Http\Response
      */
     public function store(aseguradora $request)
     {
         //
-        //dd($request->input());
         insurer::create($request->input());
 
         return redirect('insurers')->with('message','Se ha añadido una nueva compañia de seguros');
@@ -81,8 +80,8 @@ class insurersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \App\Http\Requests\aseguradora $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(aseguradora $request, $id)

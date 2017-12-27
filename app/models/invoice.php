@@ -5,7 +5,14 @@ namespace App\models;
 use Illuminate\Database\Eloquent\Model;
 
 
-class invoice extends Model
+/**
+ * App\models\invoice
+ *
+ * @property-read \App\models\file $file
+ * @property-read \App\models\professional $profesional
+ * @mixin \Eloquent
+ */
+Class Invoice extends Model
 {
     //
     protected $guarded = [
@@ -17,10 +24,11 @@ class invoice extends Model
         return $this->belongsTo('App\models\professional','id');
     }*/
     //Obtener datos
-    public function profesional()
+    public function professional()
     {
-        return $this->hasOne('App\models\professional','id','professional_id');
+        return $this->hasone('App\models\professional', 'id', 'professional_id');
     }
+
     public function file()
     {
         return $this->HasOne('App\models\file','id','file_id');

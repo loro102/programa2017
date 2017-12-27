@@ -48,10 +48,10 @@
                     @forelse($expedientestraf as $expedientetraf)
                     <tr>
                         <td class="col-md-2">{{link_to_action('filesController@show',Carbon\Carbon::parse($expedientetraf->fechaapertura)->format('d-m-Y'),['id'=> $expedientetraf->id],[])}}</td>
-                        <td class="col-md-2">{{$expedientetraf->phase->nombre}}</td>
-                        <td class="col-md-2">{{Carbon\Carbon::parse($expedientetraf->fecha_accidente)->format('d-m-Y')}} {{$expedientetraf->hora_accidente}}</td>
-                        <td class="col-md-2">{{$expedientetraf->lugar}}</td>
-                        <td class="col-md-4">{{$expedientetraf->desarrollo_suceso}}</td>
+                        <td class="col-md-2">{{link_to_action('filesController@show',$expedientetraf->phase->nombre,['id'=> $expedientetraf->id],[])}}</td>
+                        <td class="col-md-2">{{link_to_action('filesController@show',Carbon\Carbon::parse($expedientetraf->fecha_accidente)->format('d-m-Y'),['id'=> $expedientetraf->id],[])}} {{$expedientetraf->hora_accidente}}</td>
+                        <td class="col-md-2">{{link_to_action('filesController@show',$expedientetraf->lugar,['id'=> $expedientetraf->id],[])}}</td>
+                        <td class="col-md-4">{{link_to_action('filesController@show',$expedientetraf->desarrollo_suceso,['id'=> $expedientetraf->id],[])}}</td>
                     </tr>
                         @empty
                         <tr>
@@ -64,17 +64,19 @@
                     <tr>
                         <th class="col-md-1">Fecha de apertura</th>
                         <th class="col-md-1">Fase</th>
+                        <th class="col-md-1">Fecha Cierre</th>
                         <th class="col-md-1">Fecha de suceso</th>
                         <th class="col-md-2">Clasificación</th>
                         <th class="col-md-6">Descripcion del expediente</th>
                     </tr>
                     @forelse($expedientes as $expediente)
                         <tr>
-                            <td class="col-md-2">{{$expediente->fechaapertura}}</td>
-                            <td class="col-md-2">{{$expediente->fechacierre}}</td>
-                            <td class="col-md-2">{{$expediente->fecha_accidente}} {{$expediente->hora}}</td>
-                            <td class="col-md-2">{{$expediente->sort->nombre}}</td>
-                            <td class="col-md-4">{{$expediente->descripcion_expediente}}</td>
+                            <td class="col-md-2">{{link_to_action('filesController@show',Carbon\Carbon::parse($expedientetraf->fechaapertura)->format('d-m-Y'),['id'=> $expediente->id],[])}}</td>
+                            <td class="col-md-2">{{link_to_action('filesController@show',$expedientetraf->phase->nombre,['id'=> $expediente->id],[])}}</td>
+                            <td class="col-md-2">{{link_to_action('filesController@show',Carbon\Carbon::parse($expedientetraf->fechacierre)->format('d-m-Y'),['id'=> $expediente->id],[])}}</td>
+                            <td class="col-md-2">{{link_to_action('filesController@show',Carbon\Carbon::parse($expedientetraf->fecha_accidente)->format('d-m-Y'),['id'=> $expediente->id],[])}} {{$expediente->hora}}</td>
+                            <td class="col-md-2">{{link_to_action('filesController@show',$expediente->caso_tipo,['id'=> $expediente->id],[])}}</td>
+                            <td class="col-md-4">{{link_to_action('filesController@show',$expediente->descripcion_expediente,['id'=> $expediente->id],[])}}</td>
                         </tr>
                     @empty
                         <tr>

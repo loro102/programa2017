@@ -4,7 +4,13 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class sort extends Model
+/**
+ * App\models\sort
+ *
+ * @property-read \App\models\file $file
+ * @mixin \Eloquent
+ */
+Class Sort extends Model
 {
     //
     protected $guarded = [

@@ -6,7 +6,7 @@ use Caffeinated\Shinobi\Models\Role;
 use Illuminate\Http\Request;
 use App\User;
 
-class userController extends Controller
+Class UserController extends Controller
 {
     public function __construct()
     {
@@ -21,7 +21,6 @@ class userController extends Controller
     {
         //
         $user=User::paginate(10);
-        //dd($cliente);
         return view('admin.usuario.index',[
             'users'=> $user
         ]);
@@ -35,9 +34,6 @@ class userController extends Controller
     public function create()
     {
         //
-        //$agente=new User;
-        //return view('admin.usuario.register',['agente'=>$agente]);
-
     }
 
     /**
@@ -49,10 +45,7 @@ class userController extends Controller
     public function store(Request $request)
     {
         //
-        //User::create($request->input());
 
-        //dd($request->input());
-       // return redirect('usuario')->with('message','Se ha añadido un nuevo usuario');
     }
 
     /**
@@ -67,7 +60,6 @@ class userController extends Controller
         $user=User::findorFail($id);
         $Rol=Role::all()->pluck('slug','id')->prepend('Seleccione Rol','');
         $roles=$user->getRoles();
-        //dd($user);
         return view('admin.usuario.show',[
             'user'=> $user,
             'select'=>$Rol,

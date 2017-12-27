@@ -4,7 +4,12 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class formality extends Model
+/**
+ * App\models\formality
+ *
+ * @mixin \Eloquent
+ */
+Class Formality extends Model
 {
     //
     protected $guarded = [

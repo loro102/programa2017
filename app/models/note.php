@@ -4,7 +4,13 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class note extends Model
+/**
+ * App\models\note
+ *
+ * @property-read \App\User $user
+ * @mixin \Eloquent
+ */
+Class Note extends Model
 {
     //
     protected $guarded = [

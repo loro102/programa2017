@@ -4,7 +4,13 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class agent extends Model
+/**
+ * App\models\agent
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\models\customer[] $customer
+ * @mixin \Eloquent
+ */
+Class Agent extends Model
 {
     protected $guarded = [
         'id',

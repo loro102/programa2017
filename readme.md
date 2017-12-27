@@ -1,3 +1,5 @@
+
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
@@ -5,6 +7,8 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+<a href="https://insight.sensiolabs.com/projects/7b982cd1-1750-4bd2-b742-6aa265150617/analyses/60"><img src="https://insight.sensiolabs.com/projects/7b982cd1-1750-4bd2-b742-6aa265150617/small.png"></a>
+
 </p>
 
 ## About Laravel

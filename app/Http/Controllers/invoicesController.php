@@ -9,7 +9,7 @@ use App\models\professional;
 use Illuminate\Http\Request;
 
 
-class invoicesController extends Controller
+Class InvoicesController extends Controller
 {
     public function __construct()
     {
@@ -39,9 +39,6 @@ class invoicesController extends Controller
 
         $this->middleware('auth');
 
-        //$dt = Carbon::parse();
-        //$this->largo = largo;
-
     }
 
 
@@ -63,9 +60,7 @@ class invoicesController extends Controller
                 'indemnizacion'=>$factura->sum('cuantia_indemnizacion'),
             ]
         );
-        //$total=$total->toArray();
         $beneficio=$factura->sum('cuantia_factura')-$factura->sum('cuantia_empresa');
-        //dd($total->toArray());
         return view('invoices.index',[
             'facturas'=>$factura,
             'total'=>$total,
@@ -82,8 +77,8 @@ class invoicesController extends Controller
     {
         //
         $factura=new invoice;
-        $sector=group::all()->pluck('nombre','id')->prepend('Seleccione sector');
-        $profesional=professional::orderBy('nombre','asc')->pluck('nombre','id');
+        $sector=Group::all()->pluck('nombre','id')->prepend('Seleccione sector');
+        $profesional=Professional::orderBy('Nombre','asc')->pluck('Nombre','id');
         $metodos=$this->metodos->pluck('nombre','id');
 
         return view('invoices.create',[
@@ -98,16 +93,18 @@ class invoicesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Http\Requests\invoices $request
      * @return \Illuminate\Http\Response
      */
     public function store(invoices $request)
     {
         //
         $invoice=new invoice;
-        $invoice->fill($request->except('grupo'))->save();
+        if ($request->except('grupo')) {
+            $invoice->fill($request->except('grupo'))->save();
+        }
 
-        //dd($request->input());
+
         return redirect()->action('filesController@show',['file'=>$request->input('file_id').'#facturas'])->with('message','Factura agregada correctamente');
     }
 
@@ -129,16 +126,8 @@ class invoicesController extends Controller
                 'indemnizacion'=>$factura->sum('cuantia_indemnizacion'),
             ]
         );
-        //$comision=$factura->where('emitirfactcomision',1)->get();
-        //$total=$total->toArray();
         $beneficio=$factura->sum('cuantia_factura')-$factura->sum('cuantia_empresa');
-        //$agente=customer::findorfail($id)->agent;
-        //$expedientes=file::where('customer_id',$id)->get();
-        //$expedientes=$cliente->files()->get();
-        //dd($comision);
         return view('invoices.show',[
-            //'cliente'=> $factura,
-            //'agente'=>$agente,
             'facturas'=>$factura,
             'total'=>$total,
             'beneficio'=>$beneficio,
@@ -156,7 +145,7 @@ class invoicesController extends Controller
         //
         $factura=invoice::findorFail($id);
         $sector=group::all()->pluck('nombre','id');
-        $profesional=professional::orderBy('nombre','asc')->pluck('nombre','id');
+        $profesional=professional::orderBy('Nombre','asc')->pluck('Nombre','id');
         $metodos=$this->metodos->pluck('nombre','id');
         $sector_id=$factura->profesional->group_id;
         return view('invoices.edit',[
@@ -181,8 +170,6 @@ class invoicesController extends Controller
         $factura=invoice::findorFail($id);
         $factura->fill($request->except('grupo'))->save();
         return redirect()->action('filesController@show',['id'=>$factura->file_id.'#facturas'])->with('message','Factura actualizada');
-        //return redirect()->action('invoicesController@edit',['id'=>$id])->with('message','Factura actualizada');
-
     }
 
     /**

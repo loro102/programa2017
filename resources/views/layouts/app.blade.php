@@ -35,7 +35,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}">
                         {{ config('app.name', 'Rumbo Jurídico') }}
                     </a>
                 </div>
@@ -48,17 +48,19 @@
                         <li><a href="{{ url('/agente') }}">Agente</a></li>
                         @endrole()
                         @role('abogado','direccion','admin')
-                        <li><a href="{{ url('/formality') }}">Formalidad</a></li>
+                        <li><a href="{{ url('/formality') }}">Procedimientos</a></li>
                         @endrole()
                         <li><a href="{{ url('/insurers') }}">Aseguradoras</a></li>
                         @role('admin','direccion')
                         <li><a href="{{ url('/professionals') }}">Profesionales</a></li>
-                        @endrole()
+
                         <li><a href="{{ url('/sort') }}">Clases de expediente</a></li>
+                        @endrole()
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
+
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ url('/login') }}">Login</a></li>
@@ -89,14 +91,16 @@
             </div>
         </nav>
 
-        @yield('content')
-    </div>
+        <div class="container">
+            @yield('content')
+        </div>
 
+    </div>
+    <!-- ./Scripts dinámicos -->
     <!-- Scripts -->
     <script src="/js/app.js"></script>
     <script src="/js/jquery-3.1.1.min.js"></script>
     <script src="/js/dropdown.js"></script>
     <script src="/js/funciones.js"></script>
-
 </body>
 </html>

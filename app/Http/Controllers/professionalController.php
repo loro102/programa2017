@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\profesional;
 use App\models\group;
+use App\models\Invoice;
 use App\models\professional;
 use Illuminate\Http\Request;
 
-class professionalController extends Controller
+Class ProfessionalController extends Controller
 {
     public function __construct()
     {
@@ -21,8 +22,7 @@ class professionalController extends Controller
     public function index()
     {
         //
-        $profesional=professional::paginate(10);
-        //dd($cliente);
+        $profesional=Professional::paginate(10);
         return view('professional.index',[
             'profesionales'=> $profesional,
         ]);
@@ -36,10 +36,8 @@ class professionalController extends Controller
     public function create()
     {
         //
-        $profesional=new professional;
-        $grupo=group::all()->pluck('nombre','id')->prepend('Seleccione grupo profesional');
-        //$agente=agent::orderBy('nombre','asc')->pluck('nombre','id');
-
+        $profesional=new Professional;
+        $grupo=Group::all()->pluck('nombre','id')->prepend('Seleccione grupo profesional');
         return view('professional.create',[
             'profesional'=>$profesional,
             'grupo'=>$grupo
@@ -49,16 +47,14 @@ class professionalController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Http\Requests\profesional $request
      * @return \Illuminate\Http\Response
      */
     public function store(profesional $request)
     {
         //
-        professional::create($request->input());
-
-        //dd($request->input());
-        return redirect('profesionals')->with('message','Se ha añadido un nuevo profesional');
+        Professional::create($request->input());
+        return redirect('professionals')->with('message','Se ha añadido un nuevo profesional');
     }
 
     /**
@@ -70,15 +66,12 @@ class professionalController extends Controller
     public function show($id)
     {
         //
-        $profesional=professional::findorFail($id);
-        //$agente=customer::findorfail($id)->agent;
-        //$expedientes=file::where('customer_id',$id)->get();
-        //$expedientes=$cliente->files()->get();
-        //dd($expedientes);
+        $profesional=Professional::findorFail($id);
+        //$factura=Invoice::where('professional_id',$id)->get();
+        //$total_factura=$factura->cuantia_factura->sum();
+        //dd($total_factura);
         return view('professional.show',[
             'profesional'=> $profesional,
-            //'agente'=>$agente,
-            //'expedientes'=>$expedientes
         ]);
     }
 
@@ -91,8 +84,8 @@ class professionalController extends Controller
     public function edit($id)
     {
         //
-        $profesional=professional::findorFail($id);
-        $grupo=group::all()->pluck('nombre','id')->prepend('Seleccione grupo profesional');
+        $profesional=Professional::findorFail($id);
+        $grupo=Group::all()->pluck('nombre','id')->prepend('Seleccione grupo profesional');
                 return view('professional.edit',[
             'profesional'=>$profesional,
             'grupo'=>$grupo
@@ -102,14 +95,14 @@ class professionalController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \App\Http\Requests\profesional $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(profesional $request, $id)
     {
         //
-        $profesional=professional::findorFail($id);
+        $profesional=Professional::findorFail($id);
         $profesional->fill($request->all())->save();
         return redirect()->action('professionalController@show',['id'=>$id])->with('message','Profesional actualizado');
     }
@@ -123,18 +116,16 @@ class professionalController extends Controller
     public function destroy($id)
     {
         //
-        professional::destroy($id);
+        Professional::destroy($id);
         return redirect('cliente')->with('message','Profesional eliminado');
     }
 
     public function getprofessional(Request $request,$id)
     {
         //
-        $data=professional::where('group_id',$id)
+        $data=Professional::where('group_id',$id)
             ->select('id','Nombre')
             ->get();
-        //dd($data);
         return response()->json($data);
-        //return view('files.create')->with('data',$data);
     }
 }

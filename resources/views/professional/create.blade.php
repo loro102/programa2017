@@ -11,7 +11,7 @@
             </ul>
         </div>
     @endif
-    {!! Form::Model($profesional,['action'=>'professionalController@store','class'=>'form-inline']) !!}
+    {!! Form::Model($profesional,['action'=>'ProfessionalController@store','class'=>'form-inline']) !!}
     <div class="row">
         <div class="form-group">
             {!! Form::label('nombre', 'Nombre:', ['class' => 'control-label']) !!}
@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('group_id', 'Grupo:', ['class' => 'control-label']) !!}
-            {!! Form::select('group_id', $grupo,'', ['class' => 'form-control']) !!}
+            {!! Form::select('group_id', $grupo,1, ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('especialidad', 'Especialidad:', ['class' => 'control-label']) !!}

@@ -8,7 +8,7 @@ use App\Http\Requests\tramicia;
 use App\models\processor;
 use Illuminate\Http\Request;
 
-class processorController extends Controller
+Class ProcessorController extends Controller
 {
     public function __construct()
     {
@@ -29,6 +29,7 @@ class processorController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
@@ -36,7 +37,6 @@ class processorController extends Controller
 
         //
         $data=$request->aseguradora;
-        //dd($data);
         $tramitador=new processor;
         return view('processor.create',[
             'tramitador'=>$tramitador,
@@ -47,14 +47,13 @@ class processorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Http\Requests\tramicia $request
      * @return \Illuminate\Http\Response
      */
     public function store(tramicia $request)
     {
         //
         $data=$request->input('insurer_id');
-        //dd($data);
         processor::create($request->input());
 
         return redirect()->action('processorController@show',['id'=>$data])->with('message','Se ha añadido un nuevo tramitador');
@@ -92,8 +91,8 @@ class processorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \App\Http\Requests\tramicia $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(tramicia $request, $id)
@@ -125,8 +124,6 @@ class processorController extends Controller
         //
         $data=processor::where('insurer_id',$id)
             ->get();
-        //dd($data);
         return response()->json($data);
-        //return view('files.create')->with('data',$data);
     }
 }
